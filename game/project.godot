@@ -30,6 +30,11 @@ window/size/height=800
 window/size/test_width=1280
 window/size/test_height=800
 
+[layer_names]
+
+2d_physics/layer_2="ships"
+2d_physics/layer_3="shooter"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
