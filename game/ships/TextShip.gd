@@ -11,9 +11,12 @@ onready var sprite: Sprite = $Sprite
 onready var label: Label = $Sprite/Label
 
 
-func _ready():
-	pass # Replace with function body.
 
+func _ready():
+	$AnimationPlayer.play("appear")
+	yield($AnimationPlayer, "animation_finished")
+	
+	
 
 func setCurrentText(text: String) -> void:
 	currentText = text

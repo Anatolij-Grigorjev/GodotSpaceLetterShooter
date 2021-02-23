@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "HorizontalWaveMove",
+"language": "GDScript",
+"path": "res://ships/moves/HorizontalWaveMove.gd"
+}, {
 "base": "Node2D",
 "class": "TextShip",
 "language": "GDScript",
 "path": "res://ships/TextShip.gd"
 } ]
 _global_script_class_icons={
+"HorizontalWaveMove": "",
 "TextShip": ""
 }
 
@@ -26,9 +32,9 @@ config/icon="res://icon.png"
 [display]
 
 window/size/width=1280
-window/size/height=800
+window/size/height=720
 window/size/test_width=1280
-window/size/test_height=800
+window/size/test_height=720
 
 [layer_names]
 
