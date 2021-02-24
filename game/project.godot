@@ -10,9 +10,9 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
-"class": "HorizontalWaveMove",
+"class": "PathGenerator",
 "language": "GDScript",
-"path": "res://ships/moves/HorizontalWaveMove.gd"
+"path": "res://ships/PathGenerator.gd"
 }, {
 "base": "Node2D",
 "class": "TextShip",
@@ -20,7 +20,7 @@ _global_script_classes=[ {
 "path": "res://ships/TextShip.gd"
 } ]
 _global_script_class_icons={
-"HorizontalWaveMove": "",
+"PathGenerator": "",
 "TextShip": ""
 }
 
