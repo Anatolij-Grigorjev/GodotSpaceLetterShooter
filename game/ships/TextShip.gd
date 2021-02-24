@@ -15,7 +15,7 @@ onready var label: Label = $Sprite/Label
 func _ready():
 	$AnimationPlayer.play("appear")
 	yield($AnimationPlayer, "animation_finished")
-	
+	$HorizontalWaveMove.enabled = true
 	
 
 func setCurrentText(text: String) -> void:
