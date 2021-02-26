@@ -11,11 +11,16 @@ onready var sprite: Sprite = $Sprite
 onready var label: Label = $Sprite/Label
 
 
+var path: Array
+var lastPathPointIdx: int = 0
+
 
 func _ready():
 	$AnimationPlayer.play("appear")
 	yield($AnimationPlayer, "animation_finished")
-	yield(get_tree(), "idle_frame")
+	path = $PathGenerator.generatePathSegments(position)
+	lastPathPointIdx = 0
+
 	
 
 func setCurrentText(text: String) -> void:
