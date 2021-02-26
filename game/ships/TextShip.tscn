@@ -63,3 +63,5 @@ anims/appear = SubResource( 3 )
 
 [node name="PathGenerator" type="Node" parent="."]
 script = ExtResource( 3 )
+
+[node name="PathMover" type="Tween" parent="."]
