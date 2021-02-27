@@ -13,6 +13,7 @@ export(float) var pathPointIdleSeconds: float = 0.5
 onready var sprite: Sprite = $Sprite
 onready var label: Label = $Sprite/Label
 onready var pathMover: Tween = $PathMover
+onready var anim: AnimationPlayer = $AnimationPlayer
 
 
 var path: Array = []
@@ -21,14 +22,26 @@ var remainingPointIdleTime: float = 0.0
 
 
 func _ready():
-	$AnimationPlayer.play("appear")
-	yield($AnimationPlayer, "animation_finished")
+	anim.play("appear")
+	yield(anim, "animation_finished")
 	path = $PathGenerator.generatePathSegments(position)
 	lastPathPointIdx = 0
 	remainingPointIdleTime = pathPointIdleSeconds
 	
+
+func hitCharacter() -> void:
+	pathMover.stop_all()
+	if (currentText.length() > 1):
+		setCurrentText(currentText.substr(1))
+		anim.play("hit")
+		yield(anim, "animation_finished")
+		pathMover.resume_all()
+	else:
+		anim.play("die")
+	
 	
 func _process(delta: float):
+	
 	#moving between path points
 	if pathMover.is_active():
 		return
@@ -53,7 +66,10 @@ func _process(delta: float):
 		startPoint, endPoint,  
 		moveTime, Tween.TRANS_SINE, Tween.EASE_OUT
 	)
-	pathMover.start()
+	if (not anim.is_playing()):
+		pathMover.start()
+
+
 
 
 func setCurrentText(text: String) -> void:
