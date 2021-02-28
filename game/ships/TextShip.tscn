@@ -110,6 +110,7 @@ tracks/1/keys = {
 
 [node name="TextShip" type="Node2D"]
 script = ExtResource( 2 )
+currentText = "TEST"
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -126,7 +127,7 @@ margin_bottom = -78.6595
 custom_styles/normal = SubResource( 1 )
 custom_colors/font_color = Color( 0.945098, 1, 0, 1 )
 custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
-text = "test"
+text = "TEST"
 align = 1
 valign = 1
 clip_text = true

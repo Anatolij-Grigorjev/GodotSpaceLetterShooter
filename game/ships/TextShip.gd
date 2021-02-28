@@ -24,7 +24,7 @@ var remainingPointIdleTime: float = 0.0
 func _ready():
 	anim.play("appear")
 	yield(anim, "animation_finished")
-	path = $PathGenerator.generatePathSegments(position)
+	path = ($PathGenerator as PathGenerator).generatePathSegments(position)
 	lastPathPointIdx = 0
 	remainingPointIdleTime = pathPointIdleSeconds
 	
@@ -37,7 +37,12 @@ func hitCharacter() -> void:
 		yield(anim, "animation_finished")
 		pathMover.resume_all()
 	else:
+		setCurrentText("")
 		anim.play("die")
+	
+
+func nextLetterIs(letter: String) -> bool:
+	return currentText.begins_with(letter)
 	
 	
 func _process(delta: float):
@@ -73,10 +78,10 @@ func _process(delta: float):
 
 
 func setCurrentText(text: String) -> void:
-	currentText = text
+	currentText = text.to_upper()
 	if ($Sprite/Label):
 		var label = $Sprite/Label
-		label.text = text
+		label.text = currentText
 
 func getCurrentText() -> String:
 	if ($Sprite/Label):
