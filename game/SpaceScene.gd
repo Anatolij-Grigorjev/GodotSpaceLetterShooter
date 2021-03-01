@@ -4,14 +4,16 @@ Scene where text ships descend while player types
 and bottom ship shoots the descenders based on text
 """
 
+signal letterTyped(letter)
+
 onready var textShipsList: Node2D = $TextShips
 onready var shooter = $ShooterShip
+onready var playerInput = $CanvasLayer/PlayerInput
 
 
 func _ready():
-	#prepare ships
-	pass # Replace with function body.
-
+	#TODO: configure new ships
+	connect("letterTyped", playerInput, "setTypedLetter")
 
 
 func _process(delta: float):
@@ -26,7 +28,7 @@ func _input(event: InputEvent) -> void:
 	var keyCharCode: String = OS.get_scancode_string(keyEvent.scancode)
 	if (keyCharCode.length() > 1):
 		return
-	$CanvasLayer/PlayerInput/Panel/Label.text += keyCharCode
+	emit_signal("letterTyped", keyCharCode)
 	var textShipWithLetter: TextShip = _findShipWithNextTextLetter(keyCharCode)
 	if (is_instance_valid(textShipWithLetter)):
 		textShipWithLetter.hitCharacter()
