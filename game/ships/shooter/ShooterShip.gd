@@ -3,6 +3,10 @@ extends Node2D
 Controller for ship that shoots projectiles 
 while player is typing for the illusion of a dogfight
 """
+enum Side {
+	LEFT = -1,
+	RIGHT = 1
+}
 
 export(PackedScene) var projectileScene: PackedScene
 
@@ -14,8 +18,12 @@ func _ready():
 	pass # Replace with function body.
 	
 	
-func faceTextShip(letter: String, ship: TextShip) -> void:
-	rotation = global_position.angle_to(ship.global_position)
+func faceAndShootTextShip(letter: String, ship: TextShip) -> void:
+	var distanceToShip: float = (ship.global_position - global_position).length()
+	var verticalDiff: float = global_position.y - ship.global_position.y
+	var angleToShip = acos(verticalDiff / distanceToShip)
+	var shipSide: int = Side.LEFT if global_position.x > ship.global_position.x else Side.RIGHT
+	rotation = angleToShip * shipSide
 	anim.play("shoot")
 	fireShot(ship)
 

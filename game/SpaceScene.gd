@@ -15,7 +15,7 @@ onready var playerInput = $CanvasLayer/PlayerInput
 func _ready():
 	#TODO: configure new ships
 	connect("letterTyped", playerInput, "setTypedLetter")
-	connect("letterMatchedShip", shooter, "faceTextShip")
+	connect("letterMatchedShip", shooter, "faceAndShootTextShip")
 
 func _process(delta: float):
 	pass

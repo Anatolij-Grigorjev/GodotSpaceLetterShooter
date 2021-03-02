@@ -15,15 +15,19 @@ script = ExtResource( 4 )
 
 [node name="TextShip" parent="TextShips" instance=ExtResource( 1 )]
 position = Vector2( 116.635, 98.6915 )
+scale = Vector2( 1, 1 )
 
 [node name="TextShip2" parent="TextShips" instance=ExtResource( 1 )]
 position = Vector2( 1035.56, 158.827 )
+scale = Vector2( 1, 1 )
 
 [node name="TextShip3" parent="TextShips" instance=ExtResource( 1 )]
 position = Vector2( 672.897, 208.918 )
+scale = Vector2( 1, 1 )
 
 [node name="TextShip4" parent="TextShips" instance=ExtResource( 1 )]
 position = Vector2( 253.778, 266.595 )
+scale = Vector2( 1, 1 )
 
 [node name="ShooterShip" parent="." instance=ExtResource( 3 )]
 position = Vector2( 620.347, 654.806 )
