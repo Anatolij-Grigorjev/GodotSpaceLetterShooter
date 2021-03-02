@@ -19,10 +19,12 @@ func _ready():
 	
 	
 func faceAndShootTextShip(letter: String, ship: TextShip) -> void:
-	var distanceToShip: float = (ship.global_position - global_position).length()
-	var verticalDiff: float = global_position.y - ship.global_position.y
+	var myPosition: Vector2 = global_position; var shipPosition: Vector2 = ship.global_position
+	
+	var distanceToShip: float = (shipPosition - myPosition).length()
+	var verticalDiff: float = myPosition.y - shipPosition.y
 	var angleToShip = acos(verticalDiff / distanceToShip)
-	var shipSide: int = Side.LEFT if global_position.x > ship.global_position.x else Side.RIGHT
+	var shipSide: int = Side.LEFT if myPosition.x > shipPosition.x else Side.RIGHT
 	rotation = angleToShip * shipSide
 	anim.play("shoot")
 	fireShot(letter, ship)
