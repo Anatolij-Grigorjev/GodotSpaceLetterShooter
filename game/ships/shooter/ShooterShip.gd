@@ -25,11 +25,12 @@ func faceAndShootTextShip(letter: String, ship: TextShip) -> void:
 	var shipSide: int = Side.LEFT if global_position.x > ship.global_position.x else Side.RIGHT
 	rotation = angleToShip * shipSide
 	anim.play("shoot")
-	fireShot(ship)
+	fireShot(letter, ship)
 
 
-func fireShot(ship: TextShip) -> void:
+func fireShot(letter: String, ship: TextShip) -> void:
 	var projectile = projectileScene.instance()
 	projectile.global_position = shotPosition.global_position
 	projectile.fireDirection = global_position.direction_to(ship.global_position)
 	get_parent().add_child(projectile)
+	projectile.label.text = letter
