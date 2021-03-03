@@ -13,6 +13,8 @@ export(PackedScene) var projectileScene: PackedScene
 onready var shotPosition: Position2D = $Sprite/ShotPosition
 onready var anim: AnimationPlayer = $AnimationPlayer
 
+var currentParticlesLaunch: int = 0
+
 
 func _ready():
 	pass # Replace with function body.
@@ -36,3 +38,9 @@ func fireShot(letter: String, ship: TextShip) -> void:
 	projectile.fireDirection = global_position.direction_to(ship.global_position)
 	get_parent().add_child(projectile)
 	projectile.label.text = letter
+
+
+func _fireReadyParticles() -> void:
+	var particleLaunchers: Array = $Sprite/ShotPosition/ParticlesBattery.get_children()
+	(particleLaunchers[currentParticlesLaunch] as CPUParticles2D).emitting = true
+	currentParticlesLaunch = (currentParticlesLaunch + 1) % particleLaunchers.size()
