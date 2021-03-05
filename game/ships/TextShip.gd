@@ -100,6 +100,8 @@ func _on_Area2D_area_entered(area: Area2D):
 			_fireRandomPosParticles($HitParticles)
 			hitCharacter()
 		else:
+			yield(anim, "animation_finished")
+			anim.play("miss")
 			_fireRandomPosParticles($MissParticles)
 	pass # Replace with function body.
 
