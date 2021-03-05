@@ -46,6 +46,9 @@ func nextLetterIs(letter: String) -> bool:
 	
 	
 func _process(delta: float):
+	#required not to have endless console Nil logs
+	if (not is_instance_valid(pathMover)):
+		return
 	
 	#moving between path points
 	if pathMover.is_active():
@@ -88,3 +91,28 @@ func getCurrentText() -> String:
 		return $Sprite/Label.text
 	else:
 		return currentText
+
+
+func _on_Area2D_area_entered(area: Area2D):
+	var areaOwner: Node2D = area.get_parent()
+	if (areaOwner.is_in_group("projectile")):
+		if (_projectileHitText(areaOwner)):
+			_fireRandomPosParticles($HitParticles)
+			hitCharacter()
+		else:
+			_fireRandomPosParticles($MissParticles)
+	pass # Replace with function body.
+
+	
+func _fireRandomPosParticles(particles: Particles2D) -> void:
+	var randomPosition: Vector2 = Vector2(
+		rand_range(-1, 1),
+		rand_range(-1, 1)
+	) * 25
+	particles.position = randomPosition
+	particles.emitting = true
+	
+	
+func _projectileHitText(projectile: Node2D) -> bool:
+	var payload: String = projectile.label.text
+	return nextLetterIs(payload)

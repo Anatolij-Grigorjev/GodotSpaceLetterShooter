@@ -33,7 +33,6 @@ func _input(event: InputEvent) -> void:
 	var textShipWithLetter: TextShip = _findShipWithNextTextLetter(keyCharCode)
 	if (is_instance_valid(textShipWithLetter)):
 		emit_signal("letterMatchedShip", keyCharCode, textShipWithLetter)
-		textShipWithLetter.hitCharacter()
 	
 
 func _isKeyJustPressed(keyEvent: InputEventKey) -> bool:
