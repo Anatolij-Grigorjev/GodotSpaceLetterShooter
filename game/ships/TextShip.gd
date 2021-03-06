@@ -85,7 +85,8 @@ func setCurrentText(text: String) -> void:
 	if ($Sprite/Label):
 		var label = $Sprite/Label
 		label.text = currentText
-
+		
+		
 func getCurrentText() -> String:
 	if ($Sprite/Label):
 		return $Sprite/Label.text
@@ -97,13 +98,17 @@ func _on_Area2D_area_entered(area: Area2D):
 	var areaOwner: Node2D = area.get_parent()
 	if (areaOwner.is_in_group("projectile")):
 		if (_projectileHitText(areaOwner)):
-			_fireRandomPosParticles($HitParticles)
 			hitCharacter()
 		else:
-			yield(anim, "animation_finished")
+			if (anim.is_playing() and anim.current_animation == "hit"):
+				return
 			anim.play("miss")
-			_fireRandomPosParticles($MissParticles)
-	pass # Replace with function body.
+			
+			
+func _fireHitParticles():
+	_fireRandomPosParticles($HitParticles)
+func _fireMissParticles():
+	_fireRandomPosParticles($MissParticles)
 
 	
 func _fireRandomPosParticles(particles: Particles2D) -> void:

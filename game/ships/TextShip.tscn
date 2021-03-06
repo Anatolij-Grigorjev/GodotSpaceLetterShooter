@@ -206,6 +206,20 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 12.8093, 8.15138 ), Vector2( 18.6318, -4.65794 ), Vector2( 2.32903, -8.15139 ), Vector2( -11.6448, 2.9112 ), Vector2( -6.40461, 17.4673 ), Vector2( 0, 0 ) ]
 }
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_fireHitParticles"
+} ]
+}
 
 [sub_resource type="Animation" id=15]
 resource_name = "miss"
@@ -222,6 +236,20 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 12.8093, 8.15138 ), Vector2( 18.6318, -4.65794 ), Vector2( 2.32903, -8.15139 ), Vector2( -11.6448, 2.9112 ), Vector2( -6.40461, 17.4673 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_fireMissParticles"
+} ]
 }
 
 [sub_resource type="Curve" id=4]

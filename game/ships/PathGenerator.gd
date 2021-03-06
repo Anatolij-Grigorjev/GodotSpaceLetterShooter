@@ -14,17 +14,21 @@ export(float) var minHeightStep: float =  15.5
 export(float) var maxHeightStep: float = 25.6
 export(Vector2) var pathBoundsHorizMargins: Vector2 = Vector2(50, 50)
 
-var screenHorizBounds: Vector2 = Vector2(
-	pathBoundsHorizMargins.x, 
-	OS.window_size.x - pathBoundsHorizMargins.y
-)
-var screenVertBound: float = OS.window_size.y
-var segmentWidth: float = (
-	screenHorizBounds.y - screenHorizBounds.x) / widthSegmentsNum
+
+var screenHorizBounds: Vector2
+var screenVertBound: float
+var segmentWidth: float
 
 
 func _ready():
-	pass # Replace with function body.
+	#vars initialized in ready to use editor values
+	screenHorizBounds = Vector2(
+		pathBoundsHorizMargins.x, 
+		OS.window_size.x - pathBoundsHorizMargins.y
+	)
+	screenVertBound = OS.window_size.y
+	segmentWidth = (
+		screenHorizBounds.y - screenHorizBounds.x) / widthSegmentsNum
 	
 
 func generatePathSegments(startPoint: Vector2) -> Array:

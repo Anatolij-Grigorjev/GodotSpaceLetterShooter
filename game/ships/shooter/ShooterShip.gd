@@ -26,6 +26,8 @@ func faceAndShootTextShip(letter: String, ship: TextShip) -> void:
 	var angleToShip = acos(verticalDiff / distanceToShip)
 	var shipSide: int = Side.LEFT if myPosition.x > shipPosition.x else Side.RIGHT
 	rotation = angleToShip * shipSide
+	if (anim.is_playing()):
+		return
 	anim.play("shoot")
 	fireShot(letter, ship)
 

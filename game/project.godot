@@ -54,6 +54,13 @@ debug2={
 2d_physics/layer_2="ships"
 2d_physics/layer_3="shooter"
 
+[network]
+
+limits/debugger_stdout/max_chars_per_second=32000
+limits/debugger_stdout/max_messages_per_frame=60
+limits/debugger_stdout/max_errors_per_second=150
+limits/debugger_stdout/max_warnings_per_second=150
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
