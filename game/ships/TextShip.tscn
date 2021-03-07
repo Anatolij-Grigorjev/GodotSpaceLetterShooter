@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://ships/enemy_ship_1w_v1.png" type="Texture" id=1]
 [ext_resource path="res://ships/TextShip.gd" type="Script" id=2]
 [ext_resource path="res://ships/PathGenerator.gd" type="Script" id=3]
+[ext_resource path="res://ParticlesBattery.gd" type="Script" id=4]
 
 [sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0, 0, 0, 1 )
@@ -33,7 +34,7 @@ orbit_velocity_random = 0.5
 scale_curve = SubResource( 13 )
 color = Color( 0.839216, 0.960784, 0.0313726, 1 )
 
-[sub_resource type="ParticlesMaterial" id=14]
+[sub_resource type="ParticlesMaterial" id=18]
 emission_shape = 2
 emission_box_extents = Vector3( 10, 10, 1 )
 flag_disable_z = true
@@ -47,6 +48,38 @@ angular_velocity_random = 0.5
 orbit_velocity = 0.5
 orbit_velocity_random = 0.5
 scale_curve = SubResource( 13 )
+color = Color( 0.839216, 0.960784, 0.0313726, 1 )
+
+[sub_resource type="Gradient" id=15]
+offsets = PoolRealArray( 0.514815, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.172549, 0, 0.733333, 1 )
+
+[sub_resource type="GradientTexture" id=16]
+gradient = SubResource( 15 )
+
+[sub_resource type="ParticlesMaterial" id=14]
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 75.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 450.0
+initial_velocity_random = 0.5
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 13 )
+color_ramp = SubResource( 16 )
+
+[sub_resource type="ParticlesMaterial" id=19]
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 75.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 450.0
+initial_velocity_random = 0.5
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 13 )
+color_ramp = SubResource( 16 )
 
 [sub_resource type="Animation" id=8]
 resource_name = "appear"
@@ -207,7 +240,7 @@ tracks/1/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 12.8093, 8.15138 ), Vector2( 18.6318, -4.65794 ), Vector2( 2.32903, -8.15139 ), Vector2( -11.6448, 2.9112 ), Vector2( -6.40461, 17.4673 ), Vector2( 0, 0 ) ]
 }
 tracks/2/type = "method"
-tracks/2/path = NodePath(".")
+tracks/2/path = NodePath("HitParticlesBattery")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -217,12 +250,11 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
-"method": "_fireHitParticles"
+"method": "fireNextParticleSystem"
 } ]
 }
 
-[sub_resource type="Animation" id=15]
-resource_name = "miss"
+[sub_resource type="Animation" id=17]
 length = 0.3
 step = 0.05
 tracks/0/type = "value"
@@ -249,6 +281,20 @@ tracks/1/keys = {
 "values": [ {
 "args": [  ],
 "method": "_fireMissParticles"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("MissParticlesBattery")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "fireNextParticleSystem"
 } ]
 }
 
@@ -292,7 +338,10 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 7 )
 
-[node name="HitParticles" type="Particles2D" parent="."]
+[node name="HitParticlesBattery" type="Node2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="HitParticles" type="Particles2D" parent="HitParticlesBattery"]
 emitting = false
 amount = 100
 lifetime = 0.3
@@ -305,7 +354,23 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="MissParticles" type="Particles2D" parent="."]
+[node name="HitParticles2" type="Particles2D" parent="HitParticlesBattery"]
+emitting = false
+amount = 100
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.9
+randomness = 0.5
+fixed_fps = 60
+process_material = SubResource( 18 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="MissParticlesBattery" type="Node2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="MissParticles" type="Particles2D" parent="MissParticlesBattery"]
 emitting = false
 amount = 60
 lifetime = 0.3
@@ -318,11 +383,24 @@ __meta__ = {
 "_editor_description_": ""
 }
 
+[node name="MissParticles2" type="Particles2D" parent="MissParticlesBattery"]
+emitting = false
+amount = 60
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.9
+randomness = 0.5
+fixed_fps = 60
+process_material = SubResource( 19 )
+__meta__ = {
+"_editor_description_": ""
+}
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/appear = SubResource( 8 )
 anims/die = SubResource( 9 )
 anims/hit = SubResource( 10 )
-anims/miss = SubResource( 15 )
+anims/miss = SubResource( 17 )
 
 [node name="PathGenerator" type="Node" parent="."]
 script = ExtResource( 3 )

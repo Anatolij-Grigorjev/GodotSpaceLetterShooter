@@ -103,21 +103,6 @@ func _on_Area2D_area_entered(area: Area2D):
 			if (anim.is_playing() and anim.current_animation == "hit"):
 				return
 			anim.play("miss")
-			
-			
-func _fireHitParticles():
-	_fireRandomPosParticles($HitParticles)
-func _fireMissParticles():
-	_fireRandomPosParticles($MissParticles)
-
-	
-func _fireRandomPosParticles(particles: Particles2D) -> void:
-	var randomPosition: Vector2 = Vector2(
-		rand_range(-1, 1),
-		rand_range(-1, 1)
-	) * 25
-	particles.position = randomPosition
-	particles.emitting = true
 	
 	
 func _projectileHitText(projectile: Node2D) -> bool:
