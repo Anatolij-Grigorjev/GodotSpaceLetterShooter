@@ -95,6 +95,8 @@ func getCurrentText() -> String:
 
 
 func _on_Area2D_area_entered(area: Area2D):
+	if (anim.is_playing() and anim.current_animation == "die"):
+		return
 	var areaOwner: Node2D = area.get_parent()
 	if (areaOwner.is_in_group("projectile")):
 		if (_projectileHitText(areaOwner)):
