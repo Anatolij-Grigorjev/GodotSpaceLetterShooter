@@ -27,6 +27,8 @@ func _ready():
 	path = ($PathGenerator as PathGenerator).generatePathSegments(position)
 	lastPathPointIdx = 0
 	remainingPointIdleTime = pathPointIdleSeconds
+	$HitParticlesBattery.connect("activeParticlesSet", self, "_repositionParticleSystem")
+	$MissParticlesBattery.connect("activeParticlesSet", self, "_repositionParticleSystem")
 	
 
 func hitCharacter() -> void:
@@ -110,3 +112,11 @@ func _on_Area2D_area_entered(area: Area2D):
 func _projectileHitText(projectile: Node2D) -> bool:
 	var payload: String = projectile.label.text
 	return nextLetterIs(payload)
+	
+
+func _repositionParticleSystem(particles: Particles2D) -> void:
+	var randomPosition: Vector2 = Vector2(
+		rand_range(-1, 1),
+		rand_range(-1, 1)
+	) * 40
+	particles.position = randomPosition
