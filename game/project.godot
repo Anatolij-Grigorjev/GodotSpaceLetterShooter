@@ -19,6 +19,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ships/PathGenerator.gd"
 }, {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://fsm/State.gd"
+}, {
+"base": "Node",
+"class": "StateMachine",
+"language": "GDScript",
+"path": "res://fsm/StateMachine.gd"
+}, {
 "base": "Node2D",
 "class": "TextShip",
 "language": "GDScript",
@@ -27,6 +37,8 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "ParticlesBattery": "",
 "PathGenerator": "",
+"State": "",
+"StateMachine": "",
 "TextShip": ""
 }
 
