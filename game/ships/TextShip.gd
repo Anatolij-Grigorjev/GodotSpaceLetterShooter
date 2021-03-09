@@ -27,8 +27,8 @@ func _ready():
 	path = ($PathGenerator as PathGenerator).generatePathSegments(position)
 	lastPathPointIdx = 0
 	remainingPointIdleTime = pathPointIdleSeconds
-	$HitParticlesBattery.connect("activeParticlesSet", self, "_repositionParticleSystem")
-	$MissParticlesBattery.connect("activeParticlesSet", self, "_repositionParticleSystem")
+	$HitParticlesBattery.connect("activeParticlesWillEmit", self, "_repositionParticleSystem")
+	$MissParticlesBattery.connect("activeParticlesWillEmit", self, "_repositionParticleSystem")
 	
 
 func hitCharacter() -> void:

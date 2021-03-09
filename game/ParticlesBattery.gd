@@ -7,7 +7,8 @@ other in a rolling selection fashion
 Can be used to always have a system available in cases where 
 one system is still recharging while another can be fired
 """
-signal activeParticlesSet(activeParticlesNode)
+signal activeParticlesWillEmit(activeParticles)
+signal activeParticlesEmitted(activeParticles)
 
 onready var particleSystems: Array = []
 
@@ -20,8 +21,6 @@ func _ready():
 	currentSystemIdx = 0
 	particleSystems = _filterParticleSystemsChildren()
 	numSystems = particleSystems.size()
-	if (numSystems > 0):
-		call_deferred("_emitActiveParticles")
 
 
 func _filterParticleSystemsChildren() -> Array:
@@ -38,10 +37,8 @@ func fireNextParticleSystem() -> void:
 		return
 		
 	var particles: Particles2D = particleSystems[currentSystemIdx]
+	emit_signal("activeParticlesWillEmit", particles)
 	particles.emitting = true
+	emit_signal("activeParticlesEmitted", particles)
 	currentSystemIdx = (currentSystemIdx + 1) % numSystems
-	_emitActiveParticles()
 	
-	
-func _emitActiveParticles() -> void:
-	emit_signal("activeParticlesSet", particleSystems[currentSystemIdx])
