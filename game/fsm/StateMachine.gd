@@ -38,10 +38,10 @@ func _process(delta: float) -> void:
 			setState(nextState)
 	
 
-func setState(next_state: String):
+func setState(nextState: String):
 	previousState = state
-	state = next_state
-	emit_signal("state_changed", previousState, next_state)
+	state = nextState
+	emit_signal("stateChanged", previousState, nextState)
 	
 	if (previousState != NO_STATE):
 		_exitState(previousState, state)
@@ -54,12 +54,12 @@ func getState(state_name: String) -> State:
 	return stateNodes[state_name]
 		
 		
-func _enterState(next_state: String, prev_state: String):
-	getState(prev_state).enter_state(next_state)
+func _enterState(nextState: String, prev_state: String):
+	getState(prev_state).enterState(nextState)
 	
 
-func _exitState(prev_state: String, next_state: String):
-	getState(prev_state).exit_state(next_state)
+func _exitState(prev_state: String, nextState: String):
+	getState(prev_state).exitState(nextState)
 
 
 func _processState(delta: float):

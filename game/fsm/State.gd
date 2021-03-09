@@ -23,17 +23,17 @@ func processState(delta: float):
 	pass
 	
 	
-func enterState(prev_state: String):
+func enterState(prevState: String):
 	isActive = true
 	
 	
-func exitState(next_state: String):
+func exitState(nextState: String):
 	isActive = false
 		
 		
-func setFsm(set_fsm):
-	fsm = set_fsm
+func setFsm(newFsm):
+	fsm = newFsm
 
 
-func setEntity(set_entity: Node):
-	entity = set_entity
+func setEntity(newEntity: Node):
+	entity = newEntity
