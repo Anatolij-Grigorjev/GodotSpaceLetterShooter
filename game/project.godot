@@ -9,6 +9,16 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "State",
+"class": "AnimationState",
+"language": "GDScript",
+"path": "res://ships/AnimationState.gd"
+}, {
+"base": "State",
+"class": "DescendingState",
+"language": "GDScript",
+"path": "res://ships/DescendingState.gd"
+}, {
 "base": "Node2D",
 "class": "ParticlesBattery",
 "language": "GDScript",
@@ -33,13 +43,21 @@ _global_script_classes=[ {
 "class": "TextShip",
 "language": "GDScript",
 "path": "res://ships/TextShip.gd"
+}, {
+"base": "StateMachine",
+"class": "TextShipStateMachine",
+"language": "GDScript",
+"path": "res://TextShipStateMachine.gd"
 } ]
 _global_script_class_icons={
+"AnimationState": "",
+"DescendingState": "",
 "ParticlesBattery": "",
 "PathGenerator": "",
 "State": "",
 "StateMachine": "",
-"TextShip": ""
+"TextShip": "",
+"TextShipStateMachine": ""
 }
 
 [application]

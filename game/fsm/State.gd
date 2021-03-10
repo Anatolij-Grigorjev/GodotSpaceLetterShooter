@@ -9,7 +9,7 @@ turns off physics by default to get processed ONLY via FSM
 # type should be derived from StateMachine, 
 # not explicit due to cyclic type loading
 var fsm setget setFsm
-var entity: Node setget setEntity
+var entity: Node2D setget setEntity
 var isActive: bool = false
 
 
@@ -35,5 +35,5 @@ func setFsm(newFsm):
 	fsm = newFsm
 
 
-func setEntity(newEntity: Node):
+func setEntity(newEntity: Node2D):
 	entity = newEntity
