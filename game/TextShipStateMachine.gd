@@ -11,6 +11,10 @@ func _ready():
 
 
 func _getNextState(delta: float) -> String:
+	#cache projectile
+	#states extend animation state?
+	#miss state
+	#hit state
 	match (state):
 		"Appearing":
 			var appearingState = getState(state)

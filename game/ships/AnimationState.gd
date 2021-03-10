@@ -14,19 +14,6 @@ var animationFinished: bool = false
 
 func _ready():
 	animator.connect("animation_finished", self, "_animatorFinishedAnimation")
-
-
-func processState(delta: float):
-	pass
-	
-	
-func enterState(prevState: String):
-	pass
-	
-	
-func exitState(nextState: String):
-	pass
-
 	
 func _animatorFinishedAnimation(animationName: String) -> void:
 	animationFinished = animationName == self.animationName
