@@ -8,12 +8,18 @@ export(NodePath) var animatorPath: NodePath
 export(String) var animationName: String
 
 
-var animator: AnimationPlayer = get_node(animatorPath) as AnimationPlayer
+onready var animator: AnimationPlayer = get_node(animatorPath) as AnimationPlayer
 var animationFinished: bool = false
 
 
 func _ready():
 	animator.connect("animation_finished", self, "_animatorFinishedAnimation")
+	
+
+func enterState(prevState: String):
+	.enterState(prevState)
+	animator.play(animationName)
+	
 	
 func _animatorFinishedAnimation(animationName: String) -> void:
 	animationFinished = animationName == self.animationName

@@ -17,12 +17,12 @@ var lastPathPointIdx: int = 0
 var remainingPointIdleTime: float = 0.0
 
 var pathOver: bool = false
+var collideProjectileState: String = StateMachine.NO_STATE
+
 
 
 func _ready():
-	path = pathGenerator.generatePathSegments(entity.position)
-	lastPathPointIdx = 0
-	remainingPointIdleTime = pathPointIdleSeconds
+	call_deferred("_generatePath")
 	
 	
 func processState(delta: float):
@@ -57,8 +57,31 @@ func processState(delta: float):
 	
 	
 func enterState(prevState: String):
+	.enterState(prevState)
+#	collideProjectileState = StateMachine.NO_STATE
 	pathMover.resume_all()
 	
 	
 func exitState(nextState: String):
+	.exitState(nextState)
+	collideProjectileState = StateMachine.NO_STATE
 	pathMover.stop_all()
+	
+	
+func _generatePath() -> void:
+	path = pathGenerator.generatePathSegments(entity.position)
+	lastPathPointIdx = 0
+	remainingPointIdleTime = pathPointIdleSeconds
+	
+	
+func _on_Area2D_area_entered(area: Area2D):
+	var areaOwner: Node2D = area.get_parent()
+	if (areaOwner.is_in_group("projectile")):
+		var collideProjectile = areaOwner
+		if (entity.projectileHitText(collideProjectile)):
+			if (entity.currentText.length() > 1):
+				collideProjectileState = "Hit"
+			else: 
+				collideProjectileState = "Die"
+		else:
+			collideProjectileState = "Miss"

@@ -1,9 +1,13 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://ships/enemy_ship_1w_v1.png" type="Texture" id=1]
 [ext_resource path="res://ships/TextShip.gd" type="Script" id=2]
-[ext_resource path="res://ships/PathGenerator.gd" type="Script" id=3]
 [ext_resource path="res://ParticlesBattery.gd" type="Script" id=4]
+[ext_resource path="res://ships/AnimationState.gd" type="Script" id=5]
+[ext_resource path="res://TextShipStateMachine.gd" type="Script" id=6]
+[ext_resource path="res://ships/DescendingState.tscn" type="PackedScene" id=7]
+[ext_resource path="res://ships/HitState.gd" type="Script" id=8]
+[ext_resource path="res://ships/DieState.gd" type="Script" id=9]
 
 [sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0, 0, 0, 1 )
@@ -319,7 +323,35 @@ _data = [ Vector2( 0, 4 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.389741 ), 0.0, 0.0, 0, 
 [node name="TextShip" type="Node2D"]
 script = ExtResource( 2 )
 currentText = "TEST"
-speed = 250.0
+
+[node name="TextShipStateMachine" type="Node" parent="."]
+script = ExtResource( 6 )
+
+[node name="Appearing" type="Node" parent="TextShipStateMachine"]
+script = ExtResource( 5 )
+animatorPath = NodePath("../../AnimationPlayer")
+animationName = "appear"
+
+[node name="Descending" parent="TextShipStateMachine" instance=ExtResource( 7 )]
+
+[node name="PathGenerator" parent="TextShipStateMachine/Descending" index="0"]
+widthSegmentsNum = 5
+pathBoundsHorizMargins = Vector2( 250, 250 )
+
+[node name="Hit" type="Node" parent="TextShipStateMachine"]
+script = ExtResource( 8 )
+animatorPath = NodePath("../../AnimationPlayer")
+animationName = "hit"
+
+[node name="Miss" type="Node" parent="TextShipStateMachine"]
+script = ExtResource( 5 )
+animatorPath = NodePath("../../AnimationPlayer")
+animationName = "miss"
+
+[node name="Die" type="Node" parent="TextShipStateMachine"]
+script = ExtResource( 9 )
+animatorPath = NodePath("../../AnimationPlayer")
+animationName = "die"
 
 [node name="Sprite" type="Sprite" parent="."]
 rotation = 6.28319
@@ -415,13 +447,6 @@ anims/appear = SubResource( 8 )
 anims/die = SubResource( 9 )
 anims/hit = SubResource( 10 )
 anims/miss = SubResource( 17 )
-
-[node name="PathGenerator" type="Node" parent="."]
-script = ExtResource( 3 )
-widthSegmentsNum = 4
-pathBoundsHorizMargins = Vector2( 200, 50 )
-
-[node name="PathMover" type="Tween" parent="."]
 
 [node name="ExplosionsBattery" type="Node2D" parent="."]
 
@@ -519,4 +544,6 @@ color = Color( 0.819608, 0.0666667, 0.0666667, 1 )
 __meta__ = {
 "_editor_description_": ""
 }
-[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="area_entered" from="Area2D" to="TextShipStateMachine/Descending" method="_on_Area2D_area_entered"]
+
+[editable path="TextShipStateMachine/Descending"]

@@ -54,12 +54,12 @@ func getState(state_name: String) -> State:
 	return stateNodes[state_name]
 		
 		
-func _enterState(nextState: String, prev_state: String):
-	getState(prev_state).enterState(nextState)
+func _enterState(nextState: String, prevState: String):
+	getState(nextState).enterState(prevState)
 	
 
-func _exitState(prev_state: String, nextState: String):
-	getState(prev_state).exitState(nextState)
+func _exitState(prevState: String, nextState: String):
+	getState(prevState).exitState(nextState)
 
 
 func _processState(delta: float):
