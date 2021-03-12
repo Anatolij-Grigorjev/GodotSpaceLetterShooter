@@ -17,7 +17,9 @@ position = Vector2( 640, 500 )
 scale = Vector2( 100, 50 )
 texture = ExtResource( 6 )
 
-[node name="Stars" parent="." instance=ExtResource( 2 )]
+[node name="Stars" parent="BG" instance=ExtResource( 2 )]
+position = Vector2( -6.4, -10 )
+scale = Vector2( 0.01, 0.02 )
 
 [node name="TextShips" type="Node2D" parent="."]
 

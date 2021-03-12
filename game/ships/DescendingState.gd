@@ -17,7 +17,7 @@ var lastPathPointIdx: int = 0
 var remainingPointIdleTime: float = 0.0
 
 var pathOver: bool = false
-var collideProjectileState: String = StateMachine.NO_STATE
+var afterCollideEntityState: String = StateMachine.NO_STATE
 
 
 
@@ -58,13 +58,13 @@ func processState(delta: float):
 	
 func enterState(prevState: String):
 	.enterState(prevState)
-#	collideProjectileState = StateMachine.NO_STATE
+#	afterCollideEntityState = StateMachine.NO_STATE
 	pathMover.resume_all()
 	
 	
 func exitState(nextState: String):
 	.exitState(nextState)
-	collideProjectileState = StateMachine.NO_STATE
+	afterCollideEntityState = StateMachine.NO_STATE
 	pathMover.stop_all()
 	
 	
@@ -80,8 +80,12 @@ func _on_Area2D_area_entered(area: Area2D):
 		var collideProjectile = areaOwner
 		if (entity.projectileHitText(collideProjectile)):
 			if (entity.currentText.length() > 1):
-				collideProjectileState = "Hit"
+				afterCollideEntityState = "Hit"
 			else: 
-				collideProjectileState = "Die"
+				afterCollideEntityState = "Die"
 		else:
-			collideProjectileState = "Miss"
+			afterCollideEntityState = "Miss"
+		return
+	if (areaOwner.is_in_group("shooter")):
+		afterCollideEntityState = "CollideShip"
+	

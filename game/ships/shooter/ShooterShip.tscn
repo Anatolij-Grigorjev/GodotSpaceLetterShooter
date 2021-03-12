@@ -103,7 +103,9 @@ tracks/3/keys = {
 } ]
 }
 
-[node name="ShooterShip" type="Node2D"]
+[node name="ShooterShip" type="Node2D" groups=[
+"shooter",
+]]
 script = ExtResource( 2 )
 projectileScene = ExtResource( 3 )
 

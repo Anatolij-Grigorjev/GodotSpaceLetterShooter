@@ -16,6 +16,14 @@ func _ready():
 	#TODO: configure new ships
 	connect("letterTyped", playerInput, "setTypedLetter")
 	connect("letterMatchedShip", shooter, "faceAndShootTextShip")
+	call_deferred("_registerShipsCollisionHandler")
+	
+
+func _registerShipsCollisionHandler() -> void:
+	for node in $TextShips.get_children():
+		var ship: TextShip = node as TextShip
+		ship.connect("textShipCollidedShooter", self, "_finishStageCollided")
+
 
 func _process(delta: float):
 	pass
@@ -45,3 +53,8 @@ func _findShipWithNextTextLetter(letter: String) -> TextShip:
 		if (textShip.nextLetterIs(letter)):
 			return textShip
 	return null
+	
+	
+func _finishStageCollided():
+	get_tree().quit()
+	

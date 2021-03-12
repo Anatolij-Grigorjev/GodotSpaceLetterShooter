@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://ships/enemy_ship_1w_v1.png" type="Texture" id=1]
 [ext_resource path="res://ships/TextShip.gd" type="Script" id=2]
@@ -98,6 +98,49 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 2.63902, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=20]
+resource_name = "collide_ship"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 0.25 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.172549, 0, 0.733333, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite/Label:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.25 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ":)" ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "textShipCollidedShooter" ],
+"method": "emit_signal"
+} ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -353,6 +396,11 @@ script = ExtResource( 9 )
 animatorPath = NodePath("../../AnimationPlayer")
 animationName = "die"
 
+[node name="CollideShip" type="Node" parent="TextShipStateMachine"]
+script = ExtResource( 5 )
+animatorPath = NodePath("../../AnimationPlayer")
+animationName = "collide_ship"
+
 [node name="Sprite" type="Sprite" parent="."]
 rotation = 6.28319
 texture = ExtResource( 1 )
@@ -362,10 +410,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -112.556
-margin_top = -92.6595
-margin_right = -32.5557
-margin_bottom = -78.6595
+margin_left = -112.783
+margin_top = -92.8866
+margin_right = -32.7828
+margin_bottom = -78.8866
 custom_styles/normal = SubResource( 6 )
 custom_colors/font_color = Color( 0.945098, 1, 0, 1 )
 custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
@@ -444,6 +492,7 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/appear = SubResource( 8 )
+anims/collide_ship = SubResource( 20 )
 anims/die = SubResource( 9 )
 anims/hit = SubResource( 10 )
 anims/miss = SubResource( 17 )
