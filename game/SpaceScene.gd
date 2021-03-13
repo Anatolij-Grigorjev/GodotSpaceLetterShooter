@@ -3,8 +3,14 @@ extends Node2D
 Scene where text ships descend while player types 
 and bottom ship shoots the descenders based on text
 """
+const TextShipScn = preload("res://ships/TextShip.tscn")
+
+
 signal letterTyped(letter)
 signal letterMatchedShip(letter, ship)
+
+
+export(String, FILE, "*.txt") var wordsCorpusFilePath: String
 
 
 onready var textShipsList: Node2D = $TextShips
@@ -13,10 +19,34 @@ onready var playerInput = $CanvasLayer/PlayerInput
 
 
 func _ready():
-	#TODO: configure new ships
 	connect("letterTyped", playerInput, "setTypedLetter")
 	connect("letterMatchedShip", shooter, "faceAndShootTextShip")
-	call_deferred("_registerShipsCollisionHandler")
+	call_deferred("_prepareTextShips")
+	
+	
+func _prepareTextShips() -> void:
+	var fileText: String = _readFileText(wordsCorpusFilePath)
+	var placementOriginX := 100
+	for word in fileText.split("\n", false):
+		var textShip = TextShipScn.instance()
+		$TextShips.add_child(textShip)
+		textShip.currentText = word
+		textShip.position = Vector2(
+			placementOriginX + rand_range(0, 100.0),
+			rand_range(-50, 50)
+		)
+		placementOriginX = textShip.position.x + rand_range(100, 200)
+		_registerShipsCollisionHandler()
+
+	
+	
+func _readFileText(filePath: String) -> String:
+	var file = File.new()
+	file.open(filePath, File.READ)
+	var content = file.get_as_text()
+	file.close()
+	return content
+
 
 
 func _registerShipsCollisionHandler() -> void:

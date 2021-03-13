@@ -4,7 +4,8 @@
 [ext_resource path="res://ships/shooter/ShooterShip.gd" type="Script" id=2]
 [ext_resource path="res://ships/shooter/Projectile.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ships/shooter/shot_spark.png" type="Texture" id=4]
-[ext_resource path="res://ParticlesBattery.gd" type="Script" id=5]
+[ext_resource path="res://utils/ParticlesBattery.gd" type="Script" id=5]
+
 
 [sub_resource type="Gradient" id=15]
 offsets = PoolRealArray( 0.514815, 1 )

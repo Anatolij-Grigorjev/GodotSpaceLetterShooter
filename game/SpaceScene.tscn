@@ -1,6 +1,5 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://ships/TextShip.tscn" type="PackedScene" id=1]
 [ext_resource path="res://stars/Stars.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ships/shooter/ShooterShip.tscn" type="PackedScene" id=3]
 [ext_resource path="res://SpaceScene.gd" type="Script" id=4]
@@ -9,6 +8,7 @@
 
 [node name="SpaceScene" type="Node2D"]
 script = ExtResource( 4 )
+wordsCorpusFilePath = "res://corpus.txt"
 
 [node name="BG" type="Sprite" parent="."]
 self_modulate = Color( 0, 0, 0, 1 )
@@ -22,18 +22,6 @@ position = Vector2( -6.4, -10 )
 scale = Vector2( 0.01, 0.02 )
 
 [node name="TextShips" type="Node2D" parent="."]
-
-[node name="TextShip" parent="TextShips" instance=ExtResource( 1 )]
-position = Vector2( 116.635, 98.6915 )
-
-[node name="TextShip2" parent="TextShips" instance=ExtResource( 1 )]
-position = Vector2( 1035.56, 158.827 )
-
-[node name="TextShip3" parent="TextShips" instance=ExtResource( 1 )]
-position = Vector2( 672.897, 208.918 )
-
-[node name="TextShip4" parent="TextShips" instance=ExtResource( 1 )]
-position = Vector2( 253.778, 266.595 )
 
 [node name="ShooterShip" parent="." instance=ExtResource( 3 )]
 position = Vector2( 620.347, 654.806 )

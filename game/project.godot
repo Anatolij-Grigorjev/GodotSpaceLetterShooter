@@ -32,7 +32,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "ParticlesBattery",
 "language": "GDScript",
-"path": "res://ParticlesBattery.gd"
+"path": "res://utils/ParticlesBattery.gd"
 }, {
 "base": "Node",
 "class": "PathGenerator",
@@ -57,7 +57,7 @@ _global_script_classes=[ {
 "base": "StateMachine",
 "class": "TextShipStateMachine",
 "language": "GDScript",
-"path": "res://TextShipStateMachine.gd"
+"path": "res://ships/TextShipStateMachine.gd"
 } ]
 _global_script_class_icons={
 "AnimationState": "",
