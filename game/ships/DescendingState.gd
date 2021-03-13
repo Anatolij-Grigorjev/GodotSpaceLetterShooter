@@ -4,11 +4,10 @@ class_name DescendingState
 State for a txtship to descend according to a path
 created by its PathGenerator
 """
-
-export(float) var speed: float = 450
 export(float) var pathPointIdleSeconds: float = 0.5
+export(NodePath) var pathGeneratorPath: NodePath
 
-onready var pathGenerator = $PathGenerator
+onready var pathGenerator: PathGenerator = get_node(pathGeneratorPath)
 onready var pathMover: Tween = $PathMover
 
 
@@ -18,7 +17,6 @@ var remainingPointIdleTime: float = 0.0
 
 var pathOver: bool = false
 var afterCollideEntityState: String = StateMachine.NO_STATE
-
 
 
 func _ready():
@@ -47,7 +45,7 @@ func processState(delta: float):
 	lastPathPointIdx += 1
 	var endPoint = path[lastPathPointIdx]
 	remainingPointIdleTime = pathPointIdleSeconds
-	var moveTime = endPoint.distance_to(startPoint) / speed
+	var moveTime = endPoint.distance_to(startPoint) / entity.speed
 	pathMover.interpolate_property(
 		entity, "position", 
 		startPoint, endPoint,  

@@ -1,7 +1,8 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://ships/enemy_ship_1w_v1.png" type="Texture" id=1]
 [ext_resource path="res://ships/TextShip.gd" type="Script" id=2]
+[ext_resource path="res://ships/PathGenerator.gd" type="Script" id=3]
 [ext_resource path="res://ParticlesBattery.gd" type="Script" id=4]
 [ext_resource path="res://ships/AnimationState.gd" type="Script" id=5]
 [ext_resource path="res://TextShipStateMachine.gd" type="Script" id=6]
@@ -376,10 +377,7 @@ animatorPath = NodePath("../../AnimationPlayer")
 animationName = "appear"
 
 [node name="Descending" parent="TextShipStateMachine" instance=ExtResource( 7 )]
-
-[node name="PathGenerator" parent="TextShipStateMachine/Descending" index="0"]
-widthSegmentsNum = 5
-pathBoundsHorizMargins = Vector2( 250, 250 )
+pathGeneratorPath = NodePath("../../PathGenerator")
 
 [node name="Hit" type="Node" parent="TextShipStateMachine"]
 script = ExtResource( 8 )
@@ -593,6 +591,11 @@ color = Color( 0.819608, 0.0666667, 0.0666667, 1 )
 __meta__ = {
 "_editor_description_": ""
 }
+
+[node name="PathGenerator" type="Node" parent="."]
+script = ExtResource( 3 )
+widthSegmentsNum = 5
+pathBoundsHorizMargins = Vector2( 150, 150 )
 [connection signal="area_entered" from="Area2D" to="TextShipStateMachine/Descending" method="_on_Area2D_area_entered"]
 
 [editable path="TextShipStateMachine/Descending"]

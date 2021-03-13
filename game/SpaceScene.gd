@@ -17,7 +17,7 @@ func _ready():
 	connect("letterTyped", playerInput, "setTypedLetter")
 	connect("letterMatchedShip", shooter, "faceAndShootTextShip")
 	call_deferred("_registerShipsCollisionHandler")
-	
+
 
 func _registerShipsCollisionHandler() -> void:
 	for node in $TextShips.get_children():
