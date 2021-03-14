@@ -58,6 +58,11 @@ _global_script_classes=[ {
 "class": "TextShipStateMachine",
 "language": "GDScript",
 "path": "res://ships/TextShipStateMachine.gd"
+}, {
+"base": "Node",
+"class": "WordsProvider",
+"language": "GDScript",
+"path": "res://utils/WordsProvider.gd"
 } ]
 _global_script_class_icons={
 "AnimationState": "",
@@ -69,7 +74,8 @@ _global_script_class_icons={
 "State": "",
 "StateMachine": "",
 "TextShip": "",
-"TextShipStateMachine": ""
+"TextShipStateMachine": "",
+"WordsProvider": ""
 }
 
 [application]

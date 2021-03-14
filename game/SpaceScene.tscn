@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
+[ext_resource path="res://utils/WordsProvider.gd" type="Script" id=1]
 [ext_resource path="res://stars/Stars.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ships/shooter/ShooterShip.tscn" type="PackedScene" id=3]
 [ext_resource path="res://SpaceScene.gd" type="Script" id=4]
@@ -8,7 +9,6 @@
 
 [node name="SpaceScene" type="Node2D"]
 script = ExtResource( 4 )
-wordsCorpusFilePath = "res://corpus.txt"
 
 [node name="BG" type="Sprite" parent="."]
 self_modulate = Color( 0, 0, 0, 1 )
@@ -35,3 +35,7 @@ margin_left = -250.0
 margin_top = -250.0
 margin_right = -150.0
 margin_bottom = -150.0
+
+[node name="WordsProvider" type="Node" parent="."]
+script = ExtResource( 1 )
+filePath = "res://corpus.txt"
