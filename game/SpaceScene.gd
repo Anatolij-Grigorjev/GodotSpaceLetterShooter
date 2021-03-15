@@ -36,7 +36,6 @@ func _prepareTextShips() -> void:
 		$TextShips.add_child(textShip)
 		textShip.currentText = shipWords[idx]
 		textShip.position = shipPositions[idx]
-		print("Ship '%s' at %s" % [shipWords[idx], shipPositions[idx]])
 	_registerShipsCollisionHandler()
 
 

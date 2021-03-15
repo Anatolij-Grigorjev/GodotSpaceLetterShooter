@@ -31,7 +31,7 @@ func _ready():
 		screenHorizBounds.y - screenHorizBounds.x) / widthSegmentsNum
 		
 	if (printDebug):
-		print("===========PATH-GENERATOR-[%s.%s]=" % [owner.name, name])
+		print("===========[%s.%s]===========" % [owner.name, name])
 		print("Allowed screen horizontal bounds: %s" % screenHorizBounds)
 		print("Allowed screen vertical bounds: %s" % screenVertBound)
 		print("Segments: %s, width/seg: %s" % [widthSegmentsNum, segmentWidth])
