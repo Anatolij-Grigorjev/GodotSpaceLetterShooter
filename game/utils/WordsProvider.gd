@@ -9,6 +9,7 @@ export(String, FILE, "*.txt") var filePath: String
 var words: Array = []
 
 func _ready():
+	randomize()
 	var fileText := _readFileText(filePath)
 	words = fileText.split("\n", false)
 	words.shuffle()

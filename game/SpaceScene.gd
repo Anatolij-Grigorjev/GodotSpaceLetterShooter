@@ -11,6 +11,7 @@ signal letterMatchedShip(letter, ship)
 export(int) var numShips: int = 5
 
 onready var wordsProvider: WordsProvider = $WordsProvider
+onready var positionsProdiver: PathGenerator = $PathGenerator
 onready var textShipsList: Node2D = $TextShips
 onready var shooter = $ShooterShip
 onready var playerInput = $CanvasLayer/PlayerInput
@@ -24,21 +25,18 @@ func _ready():
 	
 func _prepareTextShips() -> void:
 	var windowWidth: int = OS.window_size.x
-	var placementOriginX := 100
-	for word in wordsProvider.takeWords(numShips):
+	var shipWords: Array = wordsProvider.takeWords(numShips)
+	var shipsStartPos: Vector2 = Vector2(
+		rand_range(100, 125),
+		rand_range(25, 75)
+	)
+	var shipPositions: Array = positionsProdiver.generatePathSegments(shipsStartPos)
+	for idx in range(0, numShips):
 		var textShip := TextShipScn.instance()
 		$TextShips.add_child(textShip)
-		textShip.currentText = word
-		textShip.position = Vector2(
-			placementOriginX + rand_range(-50, 50),
-			rand_range(0, 100)
-		)
-		#flip next ship position to be at either screen edge, 
-		#slowly decreasing variance towards center
-		placementOriginX = (
-			windowWidth - 
-			(textShip.position.x + rand_range(100, 200) * (-sign(textShip.position.x - windowWidth / 2)))
-		)
+		textShip.currentText = shipWords[idx]
+		textShip.position = shipPositions[idx]
+		print("Ship '%s' at %s" % [shipWords[idx], shipPositions[idx]])
 	_registerShipsCollisionHandler()
 
 

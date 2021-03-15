@@ -13,7 +13,7 @@ export(int, 100) var minSegmentsBetweenPoints: int = 1
 export(float) var minHeightStep: float =  15.5
 export(float) var maxHeightStep: float = 25.6
 export(Vector2) var pathBoundsHorizMargins: Vector2 = Vector2(50, 50)
-
+export(bool) var printDebug: bool = false
 
 var screenHorizBounds: Vector2
 var screenVertBound: float
@@ -29,7 +29,15 @@ func _ready():
 	screenVertBound = OS.window_size.y
 	segmentWidth = (
 		screenHorizBounds.y - screenHorizBounds.x) / widthSegmentsNum
-	
+		
+	if (printDebug):
+		print("===========PATH-GENERATOR-[%s.%s]=" % [owner.name, name])
+		print("Allowed screen horizontal bounds: %s" % screenHorizBounds)
+		print("Allowed screen vertical bounds: %s" % screenVertBound)
+		print("Segments: %s, width/seg: %s" % [widthSegmentsNum, segmentWidth])
+		print("Segements: %s" % [range(screenHorizBounds.x, screenHorizBounds.y + 1, segmentWidth)])
+		print("====================================================")
+		
 
 func generatePathSegments(startPoint: Vector2) -> Array:
 	
