@@ -12,8 +12,8 @@ __meta__ = {
 
 [node name="Panel" type="Panel" parent="."]
 self_modulate = Color( 1, 1, 1, 0.568627 )
-margin_right = 100.0
-margin_bottom = 100.0
+margin_right = 193.0
+margin_bottom = 77.0
 
 [node name="Label" type="Label" parent="Panel"]
 anchor_right = 0.5

@@ -4,6 +4,8 @@ class_name TextShipStateMachine
 FSM for actions of a descending ship with text
 """
 
+var hitChars: int = 1
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	call_deferred("setState", "Appearing")

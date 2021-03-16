@@ -4,7 +4,7 @@ Controller for non-homing forward facing projectile
 """
 
 
-export(float) var speed: float = 750.6
+export(float) var speed: float = 1050.77
 export(float) var angularVelocity: float = 6
 
 var fireDirection: Vector2 = Vector2.ZERO

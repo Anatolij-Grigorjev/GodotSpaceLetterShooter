@@ -8,17 +8,25 @@ enum Side {
 	RIGHT = 1
 }
 
+signal shotFired
+
 export(PackedScene) var projectileScene: PackedScene
 
 onready var shotPosition: Position2D = $Sprite/ShotPosition
 onready var anim: AnimationPlayer = $AnimationPlayer
 
+var chamber: String = ""
+
 
 func _ready():
-	pass # Replace with function body.
+	emptyChamber()
 	
 	
-func faceAndShootTextShip(letter: String, ship: TextShip) -> void:
+func chamberLetter(letter: String):
+	chamber += letter
+	
+	
+func faceShip(ship: TextShip) -> void:
 	var myPosition: Vector2 = global_position; var shipPosition: Vector2 = ship.global_position
 	
 	var distanceToShip: float = (shipPosition - myPosition).length()
@@ -26,15 +34,20 @@ func faceAndShootTextShip(letter: String, ship: TextShip) -> void:
 	var angleToShip = acos(verticalDiff / distanceToShip)
 	var shipSide: int = Side.LEFT if myPosition.x > shipPosition.x else Side.RIGHT
 	rotation = angleToShip * shipSide
-	if (anim.is_playing()):
-		return
+
+
+func fireChambered(ship: TextShip) -> void:
 	anim.play("shoot")
-	fireShot(letter, ship)
-
-
-func fireShot(letter: String, ship: TextShip) -> void:
 	var projectile = projectileScene.instance()
 	projectile.global_position = shotPosition.global_position
 	projectile.fireDirection = global_position.direction_to(ship.global_position)
+	# speed boost based on text size
+	projectile.speed *= (1 + chamber.length() / 10)
 	get_parent().add_child(projectile)
-	projectile.label.text = letter
+	projectile.label.text = chamber
+	emptyChamber()
+	
+	
+func emptyChamber():
+	chamber = ""
+	emit_signal("shotFired")

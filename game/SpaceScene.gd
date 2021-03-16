@@ -6,7 +6,6 @@ and bottom ship shoots the descenders based on text
 const TextShipScn = preload("res://ships/TextShip.tscn")
 
 signal letterTyped(letter)
-signal letterMatchedShip(letter, ship)
 
 export(int, 5) var numShips: int = 1
 
@@ -18,8 +17,9 @@ onready var playerInput = $CanvasLayer/PlayerInput
 
 
 func _ready():
-	connect("letterTyped", playerInput, "setTypedLetter")
-	connect("letterMatchedShip", shooter, "faceAndShootTextShip")
+	connect("letterTyped", playerInput, "addTypedLetter")
+	connect("letterTyped", shooter, "chamberLetter")
+	shooter.connect("shotFired", playerInput, "clearText")
 	_prepareTextShips()
 	
 	
@@ -56,22 +56,33 @@ func _input(event: InputEvent) -> void:
 	if (not _isKeyJustPressed(keyEvent)):
 		return
 	var keyCharCode: String = OS.get_scancode_string(keyEvent.scancode)
-	if (keyCharCode.length() > 1):
+	
+	var firePressed: bool = false
+	if (keyCharCode == "Space"):
+		firePressed = true
+	elif (keyCharCode.length() > 1):
 		return
-	emit_signal("letterTyped", keyCharCode)
-	var textShipWithLetter: TextShip = _findShipWithNextTextLetter(keyCharCode)
+	else:
+		emit_signal("letterTyped", keyCharCode)
+
+	var textShipWithLetter: TextShip = _findShipWithNextText(shooter.chamber)
 	if (is_instance_valid(textShipWithLetter)):
-		emit_signal("letterMatchedShip", keyCharCode, textShipWithLetter)
+		shooter.faceShip(textShipWithLetter)
+	if (firePressed):
+		if (is_instance_valid(textShipWithLetter)):
+			shooter.fireChambered(textShipWithLetter)
+		else:
+			shooter.emptyChamber()
 	
 
 func _isKeyJustPressed(keyEvent: InputEventKey) -> bool:
 	return not keyEvent.echo and keyEvent.pressed
 	
 
-func _findShipWithNextTextLetter(letter: String) -> TextShip:
+func _findShipWithNextText(text: String) -> TextShip:
 	for node in textShipsList.get_children():
 		var textShip: TextShip = node as TextShip
-		if (textShip.nextLetterIs(letter)):
+		if (textShip.nextTextIs(text)):
 			return textShip
 	return null
 	

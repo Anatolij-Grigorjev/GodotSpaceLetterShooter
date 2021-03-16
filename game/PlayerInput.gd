@@ -7,8 +7,12 @@ while shoot-typing
 onready var label: Label = $Panel/Label
 
 func _ready():
-	pass # Replace with function body.
+	clearText()
 
 
-func setTypedLetter(letter: String) -> void:
-	label.text = letter
+func addTypedLetter(letter: String) -> void:
+	label.text += letter
+	
+
+func clearText():
+	label.text = ""

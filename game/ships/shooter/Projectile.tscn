@@ -14,16 +14,22 @@ script = ExtResource( 2 )
 texture = ExtResource( 1 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = -21.0
-margin_top = -17.7764
-margin_right = 1.0
-margin_bottom = 2.22357
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -45.0244
+margin_top = -13.4238
+margin_right = 0.975586
+margin_bottom = 0.576202
 rect_scale = Vector2( 2, 2 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0.839216, 0.960784, 0.0313726, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-text = "T"
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "TENNIS"
 align = 1
 valign = 1
+uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
 }

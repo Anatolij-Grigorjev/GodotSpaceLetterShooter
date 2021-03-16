@@ -20,12 +20,12 @@ func _ready():
 	$MissParticlesBattery.connect("activeParticlesWillEmit", self, "_repositionParticleSystem")
 	
 
-func hitCharacter() -> void:
-	setCurrentText(currentText.substr(1))
+func hitCharacter(numChars: int) -> void:
+	setCurrentText(currentText.substr(numChars))
 	
 
-func nextLetterIs(letter: String) -> bool:
-	return currentText.begins_with(letter)
+func nextTextIs(text: String) -> bool:
+	return currentText.begins_with(text)
 	
 	
 func _process(delta: float):
@@ -48,7 +48,7 @@ func getCurrentText() -> String:
 	
 func projectileHitText(projectile: Node2D) -> bool:
 	var payload: String = projectile.label.text
-	return nextLetterIs(payload)
+	return nextTextIs(payload)
 	
 
 func _repositionParticleSystem(particles: Particles2D) -> void:

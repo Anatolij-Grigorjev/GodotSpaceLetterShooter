@@ -77,7 +77,9 @@ func _on_Area2D_area_entered(area: Area2D):
 	if (areaOwner.is_in_group("projectile")):
 		var collideProjectile = areaOwner
 		if (entity.projectileHitText(collideProjectile)):
-			if (entity.currentText.length() > 1):
+			var payload: String = collideProjectile.label.text
+			if (entity.currentText.length() > payload.length()):
+				fsm.hitChars = payload.length()
 				afterCollideEntityState = "Hit"
 			else: 
 				afterCollideEntityState = "Die"
