@@ -8,7 +8,7 @@ const TextShipScn = preload("res://ships/TextShip.tscn")
 signal letterTyped(letter)
 signal letterMatchedShip(letter, ship)
 
-export(int) var numShips: int = 5
+export(int, 5) var numShips: int = 1
 
 onready var wordsProvider: WordsProvider = $WordsProvider
 onready var positionsProdiver: PathGenerator = $PathGenerator
@@ -31,7 +31,7 @@ func _prepareTextShips() -> void:
 		rand_range(25, 75)
 	)
 	var shipPositions: Array = positionsProdiver.generatePathSegments(shipsStartPos)
-	for idx in range(0, numShips):
+	for idx in range(numShips):
 		var textShip := TextShipScn.instance()
 		$TextShips.add_child(textShip)
 		textShip.currentText = shipWords[idx]
