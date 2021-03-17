@@ -72,7 +72,7 @@ func _input(event: InputEvent) -> void:
 		if (is_instance_valid(textShipWithLetter)):
 			shooter.fireChambered(textShipWithLetter)
 		else:
-			shooter.emptyChamber()
+			shooter.missFire()
 	
 
 func _isKeyJustPressed(keyEvent: InputEventKey) -> bool:

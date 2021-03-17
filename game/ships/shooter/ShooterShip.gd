@@ -48,6 +48,11 @@ func fireChambered(ship: TextShip) -> void:
 	emptyChamber()
 	
 	
+func missFire():
+	anim.play("jam")
+	emptyChamber()
+	
+	
 func emptyChamber():
 	chamber = ""
 	emit_signal("shotFired")

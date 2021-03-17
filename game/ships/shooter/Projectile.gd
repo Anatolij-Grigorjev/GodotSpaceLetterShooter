@@ -25,4 +25,8 @@ func _process(delta):
 
 
 func _on_Area2D_area_entered(area: Area2D):
+	$AnimationPlayer.play("collide")
+
+
+func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()

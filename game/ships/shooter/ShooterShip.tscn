@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://ships/shooter/shooting_ship.png" type="Texture" id=1]
 [ext_resource path="res://ships/shooter/ShooterShip.gd" type="Script" id=2]
@@ -6,22 +6,21 @@
 [ext_resource path="res://ships/shooter/shot_spark.png" type="Texture" id=4]
 [ext_resource path="res://utils/ParticlesBattery.gd" type="Script" id=5]
 
-
-[sub_resource type="Gradient" id=15]
+[sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0.514815, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 0.172549, 0, 0.733333, 1 )
 
-[sub_resource type="GradientTexture" id=16]
-gradient = SubResource( 15 )
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
 
-[sub_resource type="Curve" id=12]
+[sub_resource type="Curve" id=3]
 max_value = 4.0
 _data = [ Vector2( 0, 4 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=13]
-curve = SubResource( 12 )
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
 
-[sub_resource type="ParticlesMaterial" id=14]
+[sub_resource type="ParticlesMaterial" id=5]
 flag_disable_z = true
 direction = Vector3( 0, -1, 0 )
 spread = 75.0
@@ -30,10 +29,10 @@ initial_velocity = 450.0
 initial_velocity_random = 0.5
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-scale_curve = SubResource( 13 )
-color_ramp = SubResource( 16 )
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
 
-[sub_resource type="ParticlesMaterial" id=17]
+[sub_resource type="ParticlesMaterial" id=6]
 flag_disable_z = true
 direction = Vector3( 0, -1, 0 )
 spread = 75.0
@@ -42,15 +41,31 @@ initial_velocity = 450.0
 initial_velocity_random = 0.5
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-scale_curve = SubResource( 13 )
-color_ramp = SubResource( 16 )
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="CapsuleShape2D" id=7]
 radius = 30.7267
 height = 23.2579
 
-[sub_resource type="Animation" id=2]
-resource_name = "shoot"
+[sub_resource type="Animation" id=8]
+resource_name = "jam"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4 ),
+"transitions": PoolRealArray( 0.217638, 3.73213, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 25.2488 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=9]
 length = 0.4
 step = 0.05
 tracks/0/type = "value"
@@ -134,7 +149,7 @@ one_shot = true
 explosiveness = 0.9
 randomness = 0.5
 fixed_fps = 60
-process_material = SubResource( 14 )
+process_material = SubResource( 5 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -148,7 +163,7 @@ one_shot = true
 explosiveness = 0.9
 randomness = 0.5
 fixed_fps = 60
-process_material = SubResource( 17 )
+process_material = SubResource( 6 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -158,7 +173,8 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 1 )
+shape = SubResource( 7 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/shoot = SubResource( 2 )
+anims/jam = SubResource( 8 )
+anims/shoot = SubResource( 9 )
