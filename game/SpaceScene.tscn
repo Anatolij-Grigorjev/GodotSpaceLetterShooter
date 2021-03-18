@@ -9,6 +9,7 @@
 [ext_resource path="res://ships/PathGenerator.gd" type="Script" id=7]
 
 [node name="SpaceScene" type="Node2D"]
+position = Vector2( 0, -17.8588 )
 script = ExtResource( 4 )
 numShips = 3
 

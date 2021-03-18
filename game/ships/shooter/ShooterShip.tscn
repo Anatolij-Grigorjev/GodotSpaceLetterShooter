@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://ships/shooter/shooting_ship.png" type="Texture" id=1]
 [ext_resource path="res://ships/shooter/ShooterShip.gd" type="Script" id=2]
@@ -43,6 +43,31 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale_curve = SubResource( 4 )
 color_ramp = SubResource( 2 )
+
+[sub_resource type="Gradient" id=21]
+offsets = PoolRealArray( 0.52963, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.172549, 0, 0.733333, 1 )
+
+[sub_resource type="GradientTexture" id=22]
+gradient = SubResource( 21 )
+
+[sub_resource type="Curve" id=18]
+max_value = 2.0
+_data = [ Vector2( 0, 2 ), 0.0, 0.0, 0, 0, Vector2( 0.908805, 0.340044 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=19]
+curve = SubResource( 18 )
+
+[sub_resource type="ParticlesMaterial" id=20]
+emission_shape = 2
+emission_box_extents = Vector3( 12, 1, 1 )
+flag_disable_z = true
+spread = 100.0
+gravity = Vector3( 0, 300, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 19 )
+color_ramp = SubResource( 22 )
 
 [sub_resource type="CapsuleShape2D" id=7]
 radius = 30.7267
@@ -164,6 +189,15 @@ explosiveness = 0.9
 randomness = 0.5
 fixed_fps = 60
 process_material = SubResource( 6 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Thruster" type="Particles2D" parent="Sprite"]
+show_behind_parent = true
+position = Vector2( 0, 35 )
+amount = 100
+process_material = SubResource( 20 )
 __meta__ = {
 "_editor_description_": ""
 }

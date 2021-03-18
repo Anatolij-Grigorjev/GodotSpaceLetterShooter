@@ -37,6 +37,7 @@ func processState(delta: float):
 		return
 	#waiting at a point
 	if remainingPointIdleTime > 0:
+		entity.disableThrusters()
 		remainingPointIdleTime -= delta
 		return
 	
@@ -52,11 +53,12 @@ func processState(delta: float):
 		moveTime, Tween.TRANS_SINE, Tween.EASE_OUT
 	)
 	pathMover.start()
+	_enableDirectionThruster(startPoint, endPoint)
+		
 	
 	
 func enterState(prevState: String):
 	.enterState(prevState)
-#	afterCollideEntityState = StateMachine.NO_STATE
 	pathMover.resume_all()
 	
 	
@@ -64,6 +66,7 @@ func exitState(nextState: String):
 	.exitState(nextState)
 	afterCollideEntityState = StateMachine.NO_STATE
 	pathMover.stop_all()
+	entity.disableThrusters()
 	
 	
 func _generatePath() -> void:
@@ -89,3 +92,10 @@ func _on_Area2D_area_entered(area: Area2D):
 	if (areaOwner.is_in_group("shooter")):
 		afterCollideEntityState = "CollideShip"
 	
+	
+func _enableDirectionThruster(startPoint: Vector2, endPoint: Vector2):
+	var thruster = (
+		entity.thrusterLeft if (startPoint.x < endPoint.x) 
+		else entity.thrusterRight
+	)
+	thruster.emitting = true

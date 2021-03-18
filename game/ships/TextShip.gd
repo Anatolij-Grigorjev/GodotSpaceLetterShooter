@@ -13,6 +13,8 @@ export(float) var speed: float = 450
 onready var sprite: Sprite = $Sprite
 onready var label: Label = $Sprite/Label
 onready var anim: AnimationPlayer = $AnimationPlayer
+onready var thrusterLeft: Particles2D = $Thrusters/ThrusterLeft
+onready var thrusterRight: Particles2D = $Thrusters/ThrusterRight
 
 
 func _ready():
@@ -57,3 +59,8 @@ func _repositionParticleSystem(particles: Particles2D) -> void:
 		rand_range(-1, 1)
 	) * 40
 	particles.position = randomPosition
+	
+	
+func disableThrusters():
+	thrusterLeft.emitting = false
+	thrusterRight.emitting = false
