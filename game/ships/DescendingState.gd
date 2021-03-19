@@ -37,7 +37,6 @@ func processState(delta: float):
 		return
 	#waiting at a point
 	if remainingPointIdleTime > 0:
-		entity.disableThrusters()
 		remainingPointIdleTime -= delta
 		return
 	

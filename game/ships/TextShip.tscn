@@ -21,8 +21,7 @@ curve = SubResource( 18 )
 emission_shape = 2
 emission_box_extents = Vector3( 10, 1, 1 )
 flag_disable_z = true
-spread = 90.0
-gravity = Vector3( 0, 250, 0 )
+gravity = Vector3( 0, 600, 0 )
 orbit_velocity = 0.25
 orbit_velocity_random = 0.0
 scale_curve = SubResource( 19 )
@@ -32,8 +31,7 @@ color = Color( 0.839216, 0.960784, 0.0313726, 1 )
 emission_shape = 2
 emission_box_extents = Vector3( 10, 1, 1 )
 flag_disable_z = true
-spread = 90.0
-gravity = Vector3( 0, 250, 0 )
+gravity = Vector3( 0, 600, 0 )
 orbit_velocity = -0.25
 orbit_velocity_random = 0.0
 scale_curve = SubResource( 19 )
@@ -431,14 +429,18 @@ animationName = "collide_ship"
 position = Vector2( -44.5938, -38.5573 )
 rotation = 2.35619
 emitting = false
-amount = 25
+amount = 88
+lifetime = 0.5
+one_shot = true
 process_material = SubResource( 17 )
 
 [node name="ThrusterRight" type="Particles2D" parent="Thrusters"]
 position = Vector2( 47.8775, -39.1629 )
 rotation = -2.26893
 emitting = false
-amount = 25
+amount = 88
+lifetime = 0.5
+one_shot = true
 process_material = SubResource( 20 )
 
 [node name="Sprite" type="Sprite" parent="."]
