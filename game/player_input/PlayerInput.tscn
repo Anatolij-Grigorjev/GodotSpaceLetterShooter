@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://PlayerInput.gd" type="Script" id=1]
+[ext_resource path="res://player_input/PlayerInput.gd" type="Script" id=1]
 
 [node name="PlayerInput" type="Control"]
 anchor_right = 1.0
@@ -27,3 +27,5 @@ clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

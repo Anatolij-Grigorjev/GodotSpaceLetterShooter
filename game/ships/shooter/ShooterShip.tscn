@@ -1,10 +1,12 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://ships/shooter/shooting_ship.png" type="Texture" id=1]
 [ext_resource path="res://ships/shooter/ShooterShip.gd" type="Script" id=2]
 [ext_resource path="res://ships/shooter/Projectile.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ships/shooter/shot_spark.png" type="Texture" id=4]
 [ext_resource path="res://utils/ParticlesBattery.gd" type="Script" id=5]
+[ext_resource path="res://ships/shooter/shot_miss.wav" type="AudioStream" id=6]
+[ext_resource path="res://ships/shooter/shot_hit.wav" type="AudioStream" id=7]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0.514815, 1 )
@@ -44,21 +46,21 @@ orbit_velocity_random = 0.0
 scale_curve = SubResource( 4 )
 color_ramp = SubResource( 2 )
 
-[sub_resource type="Gradient" id=21]
+[sub_resource type="Gradient" id=7]
 offsets = PoolRealArray( 0.52963, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 0.172549, 0, 0.733333, 1 )
 
-[sub_resource type="GradientTexture" id=22]
-gradient = SubResource( 21 )
+[sub_resource type="GradientTexture" id=8]
+gradient = SubResource( 7 )
 
-[sub_resource type="Curve" id=18]
+[sub_resource type="Curve" id=9]
 max_value = 2.0
 _data = [ Vector2( 0, 2 ), 0.0, 0.0, 0, 0, Vector2( 0.908805, 0.340044 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=19]
-curve = SubResource( 18 )
+[sub_resource type="CurveTexture" id=10]
+curve = SubResource( 9 )
 
-[sub_resource type="ParticlesMaterial" id=20]
+[sub_resource type="ParticlesMaterial" id=11]
 emission_shape = 2
 emission_box_extents = Vector3( 12, 1, 1 )
 flag_disable_z = true
@@ -66,15 +68,14 @@ spread = 100.0
 gravity = Vector3( 0, 300, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-scale_curve = SubResource( 19 )
-color_ramp = SubResource( 22 )
+scale_curve = SubResource( 10 )
+color_ramp = SubResource( 8 )
 
-[sub_resource type="CapsuleShape2D" id=7]
+[sub_resource type="CapsuleShape2D" id=12]
 radius = 30.7267
 height = 23.2579
 
-[sub_resource type="Animation" id=8]
-resource_name = "jam"
+[sub_resource type="Animation" id=13]
 length = 0.4
 step = 0.05
 tracks/0/type = "value"
@@ -89,8 +90,22 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 0, 25.2488 ), Vector2( 0, 0 ) ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath("Sprite/ShotPosition/ShotMiss")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=14]
 length = 0.4
 step = 0.05
 tracks/0/type = "value"
@@ -143,6 +158,20 @@ tracks/3/keys = {
 "method": "fireNextParticleSystem"
 } ]
 }
+tracks/4/type = "method"
+tracks/4/path = NodePath("Sprite/ShotPosition/ShotHit")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
 
 [node name="ShooterShip" type="Node2D" groups=[
 "shooter",
@@ -161,6 +190,14 @@ visible = false
 position = Vector2( 0, -50 )
 texture = ExtResource( 4 )
 hframes = 4
+
+[node name="ShotHit" type="AudioStreamPlayer2D" parent="Sprite/ShotPosition"]
+position = Vector2( -0.0644836, 40.013 )
+stream = ExtResource( 7 )
+
+[node name="ShotMiss" type="AudioStreamPlayer2D" parent="Sprite/ShotPosition"]
+position = Vector2( -0.0644836, 40.013 )
+stream = ExtResource( 6 )
 
 [node name="ParticlesBattery" type="Node2D" parent="Sprite"]
 script = ExtResource( 5 )
@@ -197,7 +234,7 @@ __meta__ = {
 show_behind_parent = true
 position = Vector2( 0, 35 )
 amount = 100
-process_material = SubResource( 20 )
+process_material = SubResource( 11 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -207,8 +244,8 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 7 )
+shape = SubResource( 12 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/jam = SubResource( 8 )
-anims/shoot = SubResource( 9 )
+anims/jam = SubResource( 13 )
+anims/shoot = SubResource( 14 )
