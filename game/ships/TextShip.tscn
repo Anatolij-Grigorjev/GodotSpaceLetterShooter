@@ -1,119 +1,48 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://ships/enemy_ship_horiz.png" type="Texture" id=1]
 [ext_resource path="res://ships/TextShip.gd" type="Script" id=2]
 [ext_resource path="res://ships/PathGenerator.gd" type="Script" id=3]
-[ext_resource path="res://utils/ParticlesBattery.gd" type="Script" id=4]
 [ext_resource path="res://ships/AnimationState.gd" type="Script" id=5]
 [ext_resource path="res://ships/TextShipStateMachine.gd" type="Script" id=6]
 [ext_resource path="res://ships/DescendingState.tscn" type="PackedScene" id=7]
 [ext_resource path="res://ships/HitState.gd" type="Script" id=8]
 [ext_resource path="res://ships/DieState.gd" type="Script" id=9]
 
-[sub_resource type="Curve" id=18]
+[sub_resource type="Curve" id=7]
 max_value = 2.0
 _data = [ Vector2( 0, 2 ), 0.0, 0.0, 0, 0, Vector2( 0.908805, 0.340044 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=19]
-curve = SubResource( 18 )
+[sub_resource type="CurveTexture" id=8]
+curve = SubResource( 7 )
 
-[sub_resource type="ParticlesMaterial" id=17]
+[sub_resource type="ParticlesMaterial" id=9]
 emission_shape = 2
 emission_box_extents = Vector3( 10, 1, 1 )
 flag_disable_z = true
 gravity = Vector3( 0, 600, 0 )
 orbit_velocity = 0.25
 orbit_velocity_random = 0.0
-scale_curve = SubResource( 19 )
+scale_curve = SubResource( 8 )
 color = Color( 0.839216, 0.960784, 0.0313726, 1 )
 
-[sub_resource type="ParticlesMaterial" id=20]
+[sub_resource type="ParticlesMaterial" id=10]
 emission_shape = 2
 emission_box_extents = Vector3( 10, 1, 1 )
 flag_disable_z = true
 gravity = Vector3( 0, 600, 0 )
 orbit_velocity = -0.25
 orbit_velocity_random = 0.0
-scale_curve = SubResource( 19 )
+scale_curve = SubResource( 8 )
 color = Color( 0.839216, 0.960784, 0.0313726, 1 )
 
-[sub_resource type="StyleBoxFlat" id=1]
+[sub_resource type="StyleBoxFlat" id=11]
 bg_color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=12]
 radius = 58.4998
 
-[sub_resource type="Curve" id=3]
-max_value = 4.0
-_data = [ Vector2( 0, 4 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=4]
-curve = SubResource( 3 )
-
-[sub_resource type="ParticlesMaterial" id=5]
-emission_shape = 2
-emission_box_extents = Vector3( 10, 10, 1 )
-flag_disable_z = true
-direction = Vector3( 0, 0, 0 )
-spread = 180.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 250.0
-initial_velocity_random = 0.5
-angular_velocity = 45.0
-angular_velocity_random = 0.5
-orbit_velocity = 0.5
-orbit_velocity_random = 0.5
-scale_curve = SubResource( 4 )
-color = Color( 0.839216, 0.960784, 0.0313726, 1 )
-
-[sub_resource type="ParticlesMaterial" id=6]
-emission_shape = 2
-emission_box_extents = Vector3( 10, 10, 1 )
-flag_disable_z = true
-direction = Vector3( 0, 0, 0 )
-spread = 180.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 250.0
-initial_velocity_random = 0.5
-angular_velocity = 45.0
-angular_velocity_random = 0.5
-orbit_velocity = 0.5
-orbit_velocity_random = 0.5
-scale_curve = SubResource( 4 )
-color = Color( 0.839216, 0.960784, 0.0313726, 1 )
-
-[sub_resource type="Gradient" id=7]
-offsets = PoolRealArray( 0.514815, 1 )
-colors = PoolColorArray( 1, 1, 1, 1, 0.172549, 0, 0.733333, 1 )
-
-[sub_resource type="GradientTexture" id=8]
-gradient = SubResource( 7 )
-
-[sub_resource type="ParticlesMaterial" id=9]
-flag_disable_z = true
-direction = Vector3( 0, -1, 0 )
-spread = 75.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 450.0
-initial_velocity_random = 0.5
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-scale_curve = SubResource( 4 )
-color_ramp = SubResource( 8 )
-
-[sub_resource type="ParticlesMaterial" id=10]
-flag_disable_z = true
-direction = Vector3( 0, -1, 0 )
-spread = 75.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 450.0
-initial_velocity_random = 0.5
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-scale_curve = SubResource( 4 )
-color_ramp = SubResource( 8 )
-
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=18]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:scale")
 tracks/0/interp = 2
@@ -127,8 +56,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=12]
-resource_name = "collide_ship"
+[sub_resource type="Animation" id=19]
 length = 0.5
 step = 0.05
 tracks/0/type = "value"
@@ -170,7 +98,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=20]
 length = 1.5
 step = 0.05
 tracks/0/type = "value"
@@ -283,22 +211,8 @@ tracks/8/keys = {
 "update": 0,
 "values": [ 0.0, 360.0 ]
 }
-tracks/9/type = "method"
-tracks/9/path = NodePath("HitParticlesBattery")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "fireNextParticleSystem"
-} ]
-}
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=21]
 length = 0.3
 step = 0.05
 tracks/0/type = "value"
@@ -325,22 +239,8 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 12.8093, 8.15138 ), Vector2( 18.6318, -4.65794 ), Vector2( 2.32903, -8.15139 ), Vector2( -11.6448, 2.9112 ), Vector2( -6.40461, 17.4673 ), Vector2( 0, 0 ) ]
 }
-tracks/2/type = "method"
-tracks/2/path = NodePath("HitParticlesBattery")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "fireNextParticleSystem"
-} ]
-}
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=22]
 length = 0.3
 step = 0.05
 tracks/0/type = "value"
@@ -355,36 +255,8 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 12.8093, 8.15138 ), Vector2( 18.6318, -4.65794 ), Vector2( 2.32903, -8.15139 ), Vector2( -11.6448, 2.9112 ), Vector2( -6.40461, 17.4673 ), Vector2( 0, 0 ) ]
 }
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "_fireMissParticles"
-} ]
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath("MissParticlesBattery")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "fireNextParticleSystem"
-} ]
-}
 
-[sub_resource type="Curve" id=16]
+[sub_resource type="Curve" id=23]
 max_value = 4.0
 _data = [ Vector2( 0, 4 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.389741 ), 0.0, 0.0, 0, 0 ]
 
@@ -432,7 +304,7 @@ emitting = false
 amount = 88
 lifetime = 0.5
 one_shot = true
-process_material = SubResource( 17 )
+process_material = SubResource( 9 )
 
 [node name="ThrusterRight" type="Particles2D" parent="Thrusters"]
 position = Vector2( 47.8775, -39.1629 )
@@ -441,7 +313,7 @@ emitting = false
 amount = 88
 lifetime = 0.5
 one_shot = true
-process_material = SubResource( 20 )
+process_material = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="."]
 rotation = 6.28319
@@ -456,7 +328,7 @@ margin_left = -112.783
 margin_top = -92.8866
 margin_right = -32.7828
 margin_bottom = -78.8866
-custom_styles/normal = SubResource( 1 )
+custom_styles/normal = SubResource( 11 )
 custom_colors/font_color = Color( 0.945098, 1, 0, 1 )
 custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
 text = "TEST"
@@ -473,72 +345,14 @@ collision_layer = 2
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 2 )
-
-[node name="HitParticlesBattery" type="Node2D" parent="."]
-script = ExtResource( 4 )
-
-[node name="HitParticles" type="Particles2D" parent="HitParticlesBattery"]
-emitting = false
-amount = 100
-lifetime = 0.3
-one_shot = true
-explosiveness = 0.9
-randomness = 0.5
-fixed_fps = 60
-process_material = SubResource( 5 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="HitParticles2" type="Particles2D" parent="HitParticlesBattery"]
-emitting = false
-amount = 100
-lifetime = 0.3
-one_shot = true
-explosiveness = 0.9
-randomness = 0.5
-fixed_fps = 60
-process_material = SubResource( 6 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="MissParticlesBattery" type="Node2D" parent="."]
-script = ExtResource( 4 )
-
-[node name="MissParticles" type="Particles2D" parent="MissParticlesBattery"]
-emitting = false
-amount = 60
-lifetime = 0.3
-one_shot = true
-explosiveness = 0.9
-randomness = 0.5
-fixed_fps = 60
-process_material = SubResource( 9 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="MissParticles2" type="Particles2D" parent="MissParticlesBattery"]
-emitting = false
-amount = 60
-lifetime = 0.3
-one_shot = true
-explosiveness = 0.9
-randomness = 0.5
-fixed_fps = 60
-process_material = SubResource( 10 )
-__meta__ = {
-"_editor_description_": ""
-}
+shape = SubResource( 12 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/appear = SubResource( 11 )
-anims/collide_ship = SubResource( 12 )
-anims/die = SubResource( 13 )
-anims/hit = SubResource( 14 )
-anims/miss = SubResource( 15 )
+anims/appear = SubResource( 18 )
+anims/collide_ship = SubResource( 19 )
+anims/die = SubResource( 20 )
+anims/hit = SubResource( 21 )
+anims/miss = SubResource( 22 )
 
 [node name="ExplosionsBattery" type="Node2D" parent="."]
 
@@ -559,7 +373,7 @@ initial_velocity_random = 0.5
 angular_velocity = 45.0
 angular_velocity_random = 0.5
 orbit_velocity_random = 0.5
-scale_amount_curve = SubResource( 16 )
+scale_amount_curve = SubResource( 23 )
 color = Color( 0.819608, 0.0666667, 0.0666667, 1 )
 __meta__ = {
 "_editor_description_": ""
@@ -583,7 +397,7 @@ initial_velocity_random = 0.5
 angular_velocity = 45.0
 angular_velocity_random = 0.5
 orbit_velocity_random = 0.5
-scale_amount_curve = SubResource( 16 )
+scale_amount_curve = SubResource( 23 )
 color = Color( 0.819608, 0.0666667, 0.0666667, 1 )
 __meta__ = {
 "_editor_description_": ""
@@ -607,7 +421,7 @@ initial_velocity_random = 0.5
 angular_velocity = 45.0
 angular_velocity_random = 0.5
 orbit_velocity_random = 0.5
-scale_amount_curve = SubResource( 16 )
+scale_amount_curve = SubResource( 23 )
 color = Color( 0.819608, 0.0666667, 0.0666667, 1 )
 __meta__ = {
 "_editor_description_": ""
@@ -631,7 +445,7 @@ initial_velocity_random = 0.5
 angular_velocity = 45.0
 angular_velocity_random = 0.5
 orbit_velocity_random = 0.5
-scale_amount_curve = SubResource( 16 )
+scale_amount_curve = SubResource( 23 )
 color = Color( 0.819608, 0.0666667, 0.0666667, 1 )
 __meta__ = {
 "_editor_description_": ""

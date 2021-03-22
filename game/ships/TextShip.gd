@@ -18,8 +18,7 @@ onready var thrusterRight: Particles2D = $Thrusters/ThrusterRight
 
 
 func _ready():
-	$HitParticlesBattery.connect("activeParticlesWillEmit", self, "_repositionParticleSystem")
-	$MissParticlesBattery.connect("activeParticlesWillEmit", self, "_repositionParticleSystem")
+	pass
 	
 
 func hitCharacter(numChars: int) -> void:
