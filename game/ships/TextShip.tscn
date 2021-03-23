@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://ships/enemy_ship_horiz.png" type="Texture" id=1]
 [ext_resource path="res://ships/TextShip.gd" type="Script" id=2]
 [ext_resource path="res://ships/PathGenerator.gd" type="Script" id=3]
+[ext_resource path="res://ships/explode_ship.wav" type="AudioStream" id=4]
 [ext_resource path="res://ships/AnimationState.gd" type="Script" id=5]
 [ext_resource path="res://ships/TextShipStateMachine.gd" type="Script" id=6]
 [ext_resource path="res://ships/DescendingState.tscn" type="PackedScene" id=7]
@@ -146,7 +147,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0.9 ),
+"times": PoolRealArray( 0.95 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
@@ -194,7 +195,7 @@ tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 1, 1.2 ),
+"times": PoolRealArray( 0.8, 1 ),
 "transitions": PoolRealArray( 1, 0.164939 ),
 "update": 0,
 "values": [ Vector2( 1, 1 ), Vector2( 0, 0 ) ]
@@ -206,10 +207,46 @@ tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"times": PoolRealArray( 1, 1.2 ),
+"times": PoolRealArray( 0.8, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0.0, 360.0 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("ExplosionsBattery/AudioStreamPlayer:playing")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0.15, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("ExplosionsBattery/AudioStreamPlayer2:playing")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("ExplosionsBattery/AudioStreamPlayer3:playing")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=21]
@@ -316,7 +353,6 @@ one_shot = true
 process_material = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="."]
-rotation = 6.28319
 texture = ExtResource( 1 )
 
 [node name="Label" type="Label" parent="Sprite"]
@@ -450,6 +486,15 @@ color = Color( 0.819608, 0.0666667, 0.0666667, 1 )
 __meta__ = {
 "_editor_description_": ""
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ExplosionsBattery"]
+stream = ExtResource( 4 )
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="ExplosionsBattery"]
+stream = ExtResource( 4 )
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="ExplosionsBattery"]
+stream = ExtResource( 4 )
 
 [node name="PathGenerator" type="Node" parent="."]
 script = ExtResource( 3 )
