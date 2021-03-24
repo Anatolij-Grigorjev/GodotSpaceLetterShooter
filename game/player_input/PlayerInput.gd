@@ -5,7 +5,7 @@ while shoot-typing
 """
 
 onready var label: Label = $Panel/Label
-onready var audioPlayer: RandomAudioPlayer = $RandomAudioPlayer
+onready var audioPlayer: RandomAudioPlayer = $RandomTypingSound
 
 
 func _ready():

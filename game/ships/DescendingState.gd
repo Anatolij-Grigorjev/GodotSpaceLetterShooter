@@ -30,6 +30,8 @@ func processState(delta: float):
 	#moving between path points
 	if pathMover.is_active():
 		return
+		
+	entity.thrustersAudio.playing = false
 	
 	#path over
 	if (lastPathPointIdx >= path.size() - 1):
@@ -98,3 +100,4 @@ func _enableDirectionThruster(startPoint: Vector2, endPoint: Vector2):
 		else entity.thrusterRight
 	)
 	thruster.emitting = true
+	entity.thrustersAudio.playing = true

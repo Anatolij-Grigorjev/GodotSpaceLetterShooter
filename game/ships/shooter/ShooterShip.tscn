@@ -190,6 +190,7 @@ visible = false
 position = Vector2( 0, -50 )
 texture = ExtResource( 4 )
 hframes = 4
+frame = 3
 
 [node name="ShotHit" type="AudioStreamPlayer2D" parent="Sprite/ShotPosition"]
 position = Vector2( -0.0644836, 40.013 )

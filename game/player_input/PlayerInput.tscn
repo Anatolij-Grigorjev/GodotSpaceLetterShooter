@@ -34,6 +34,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RandomAudioPlayer" type="AudioStreamPlayer" parent="."]
+[node name="RandomTypingSound" type="AudioStreamPlayer" parent="."]
 script = ExtResource( 2 )
 soundsList = [ ExtResource( 6 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 7 ) ]

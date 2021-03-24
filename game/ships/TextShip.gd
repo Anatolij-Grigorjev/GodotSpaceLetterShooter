@@ -15,6 +15,7 @@ onready var label: Label = $Sprite/Label
 onready var anim: AnimationPlayer = $AnimationPlayer
 onready var thrusterLeft: Particles2D = $Thrusters/ThrusterLeft
 onready var thrusterRight: Particles2D = $Thrusters/ThrusterRight
+onready var thrustersAudio: AudioStreamPlayer = $Thrusters/AudioStreamPlayer
 
 
 func _ready():
@@ -61,5 +62,6 @@ func _repositionParticleSystem(particles: Particles2D) -> void:
 	
 	
 func disableThrusters():
+	thrustersAudio.playing = false
 	thrusterLeft.emitting = false
 	thrusterRight.emitting = false
