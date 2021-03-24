@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ships/PathGenerator.gd"
 }, {
+"base": "AudioStreamPlayer",
+"class": "RandomAudioPlayer",
+"language": "GDScript",
+"path": "res://utils/RandomAudioPlayer.gd"
+}, {
 "base": "Node",
 "class": "State",
 "language": "GDScript",
@@ -71,6 +76,7 @@ _global_script_class_icons={
 "HitState": "",
 "ParticlesBattery": "",
 "PathGenerator": "",
+"RandomAudioPlayer": "",
 "State": "",
 "StateMachine": "",
 "TextShip": "",
