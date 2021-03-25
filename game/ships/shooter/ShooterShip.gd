@@ -19,6 +19,7 @@ var chamber: String = ""
 
 
 func _ready():
+	
 	emptyChamber()
 	
 	

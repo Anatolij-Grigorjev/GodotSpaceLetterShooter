@@ -240,6 +240,9 @@ __meta__ = {
 "_editor_description_": ""
 }
 
+[node name="ThrusterSound" type="AudioStreamPlayer2D" parent="Sprite"]
+autoplay = true
+
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 2

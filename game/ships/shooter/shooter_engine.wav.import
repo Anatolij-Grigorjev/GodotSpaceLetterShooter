@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/shooter_engine.wav-ab46d9fd83c9aca8917164a173ad48ad.sample"
+
+[deps]
+
+source_file="res://ships/shooter/shooter_engine.wav"
+dest_files=[ "res://.import/shooter_engine.wav-ab46d9fd83c9aca8917164a173ad48ad.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0
