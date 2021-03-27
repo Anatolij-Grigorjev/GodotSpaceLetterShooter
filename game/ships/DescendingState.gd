@@ -4,19 +4,17 @@ class_name DescendingState
 State for a txtship to descend according to a path
 created by its PathGenerator
 """
-export(float) var pathPointIdleSeconds: float = 0.5
-
 onready var pathMover: Tween = $PathMover
 
 var descendPath: Array = [] setget setNewPath
 var lastPathPointIdx: int = 0
-var remainingPointIdleTime: float = 0.0
 
+var segmentOver: bool = false
 var pathOver: bool = false
 
 
 func _ready():
-	call_deferred("_generatePath")
+	pass
 	
 	
 func processState(delta: float):
@@ -27,21 +25,35 @@ func processState(delta: float):
 	if pathMover.is_active():
 		return
 	
+	#pathMover no longer active
+	segmentOver = true
+	
 	#path over
 	if (lastPathPointIdx >= descendPath.size() - 1):
 		pathOver = true
 		return
-		
-	#waiting at a point
-	if remainingPointIdleTime > 0:
-		remainingPointIdleTime -= delta
-		return
 	
-	#wait at idle point over
+	
+func enterState(prevState: String):
+	.enterState(prevState)
+	if (segmentOver and not pathOver):
+		_startNextPathSegment()
+	else:
+		segmentOver = false
+		pathMover.resume_all()
+	
+	
+func exitState(nextState: String):
+	.exitState(nextState)
+	pathMover.stop_all()
+	entity.disableThrusters()
+	
+	
+func _startNextPathSegment():
+	segmentOver = false
 	var startPoint = descendPath[lastPathPointIdx]
 	lastPathPointIdx += 1
 	var endPoint = descendPath[lastPathPointIdx]
-	remainingPointIdleTime = pathPointIdleSeconds
 	var moveTime = endPoint.distance_to(startPoint) / entity.speed
 	pathMover.interpolate_property(
 		entity, "position", 
@@ -50,18 +62,6 @@ func processState(delta: float):
 	)
 	pathMover.start()
 	_enableDirectionThruster(startPoint, endPoint)
-		
-	
-	
-func enterState(prevState: String):
-	.enterState(prevState)
-	pathMover.resume_all()
-	
-	
-func exitState(nextState: String):
-	.exitState(nextState)
-	pathMover.stop_all()
-	entity.disableThrusters()
 	
 	
 func _enableDirectionThruster(startPoint: Vector2, endPoint: Vector2):
@@ -83,4 +83,3 @@ func _playThrustersAudio():
 func setNewPath(path: Array):
 	descendPath = path
 	lastPathPointIdx = 0
-	remainingPointIdleTime = pathPointIdleSeconds

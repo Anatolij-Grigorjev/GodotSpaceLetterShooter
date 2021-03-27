@@ -11,7 +11,7 @@ onready var pathGenerator: PathGenerator = $PathGenerator
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	_generateDescendPath()
+	call_deferred("_generateDescendPath")
 	call_deferred("setState", "Appearing")
 
 
@@ -31,6 +31,8 @@ func _getNextState(delta: float) -> String:
 				return NO_STATE
 		"Descending":
 			var descendingState = getState(state)
+			if (descendingState.segmentOver):
+				return "Idling"
 			return NO_STATE
 		"Idling":
 			var idlingState = getState(state)
