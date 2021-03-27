@@ -7,8 +7,11 @@ FSM for actions of a descending ship with text
 var hitChars: int = 1
 var collisionNextState: String = NO_STATE
 
+onready var pathGenerator: PathGenerator = $PathGenerator
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	_generateDescendPath()
 	call_deferred("setState", "Appearing")
 
 
@@ -72,3 +75,8 @@ func _on_Area2D_area_entered(area: Area2D):
 		return
 	if (areaOwner.is_in_group("shooter")):
 		collisionNextState = "CollideShip"
+
+
+func _generateDescendPath():
+	var path = pathGenerator.generatePathSegments(entity.position)
+	getState("Descending").descendPath = path

@@ -312,7 +312,6 @@ animatorPath = NodePath("../../AnimationPlayer")
 animationName = "appear"
 
 [node name="Descending" parent="TextShipStateMachine" instance=ExtResource( 7 )]
-pathGeneratorPath = NodePath("../../PathGenerator")
 
 [node name="Idling" parent="TextShipStateMachine" instance=ExtResource( 11 )]
 
@@ -335,6 +334,11 @@ animationName = "die"
 script = ExtResource( 5 )
 animatorPath = NodePath("../../AnimationPlayer")
 animationName = "collide_ship"
+
+[node name="PathGenerator" type="Node" parent="TextShipStateMachine"]
+script = ExtResource( 3 )
+widthSegmentsNum = 5
+pathBoundsHorizMargins = Vector2( 150, 150 )
 
 [node name="Thrusters" type="Node2D" parent="."]
 
@@ -502,11 +506,6 @@ stream = ExtResource( 4 )
 
 [node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="ExplosionsBattery"]
 stream = ExtResource( 4 )
-
-[node name="PathGenerator" type="Node" parent="."]
-script = ExtResource( 3 )
-widthSegmentsNum = 5
-pathBoundsHorizMargins = Vector2( 150, 150 )
 [connection signal="area_entered" from="Area2D" to="TextShipStateMachine" method="_on_Area2D_area_entered"]
 
 [editable path="TextShipStateMachine/Descending"]

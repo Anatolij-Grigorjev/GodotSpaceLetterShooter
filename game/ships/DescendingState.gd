@@ -5,13 +5,10 @@ State for a txtship to descend according to a path
 created by its PathGenerator
 """
 export(float) var pathPointIdleSeconds: float = 0.5
-export(NodePath) var pathGeneratorPath: NodePath
 
-onready var pathGenerator: PathGenerator = get_node(pathGeneratorPath)
 onready var pathMover: Tween = $PathMover
 
-
-var path: Array = []
+var descendPath: Array = [] setget setNewPath
 var lastPathPointIdx: int = 0
 var remainingPointIdleTime: float = 0.0
 
@@ -31,7 +28,7 @@ func processState(delta: float):
 		return
 	
 	#path over
-	if (lastPathPointIdx >= path.size() - 1):
+	if (lastPathPointIdx >= descendPath.size() - 1):
 		pathOver = true
 		return
 		
@@ -41,9 +38,9 @@ func processState(delta: float):
 		return
 	
 	#wait at idle point over
-	var startPoint = path[lastPathPointIdx]
+	var startPoint = descendPath[lastPathPointIdx]
 	lastPathPointIdx += 1
-	var endPoint = path[lastPathPointIdx]
+	var endPoint = descendPath[lastPathPointIdx]
 	remainingPointIdleTime = pathPointIdleSeconds
 	var moveTime = endPoint.distance_to(startPoint) / entity.speed
 	pathMover.interpolate_property(
@@ -67,12 +64,6 @@ func exitState(nextState: String):
 	entity.disableThrusters()
 	
 	
-func _generatePath() -> void:
-	path = pathGenerator.generatePathSegments(entity.position)
-	lastPathPointIdx = 0
-	remainingPointIdleTime = pathPointIdleSeconds
-	
-	
 func _enableDirectionThruster(startPoint: Vector2, endPoint: Vector2):
 	var thruster = (
 		entity.thrusterLeft if (startPoint.x < endPoint.x) 
@@ -88,3 +79,8 @@ func _playThrustersAudio():
 	audioPlayer.volume_db = 1 + rand_range(-0.05, 0.05)
 	audioPlayer.playing = true
 	
+
+func setNewPath(path: Array):
+	descendPath = path
+	lastPathPointIdx = 0
+	remainingPointIdleTime = pathPointIdleSeconds
