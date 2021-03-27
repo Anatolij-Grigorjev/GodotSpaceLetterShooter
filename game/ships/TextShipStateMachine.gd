@@ -22,6 +22,12 @@ func _getNextState(delta: float) -> String:
 		"Descending":
 			var descendingState = getState(state)
 			return descendingState.afterCollideEntityState
+		"Idling":
+			var idlingState = getState(state)
+			if (idlingState.idlingOver):
+				return "Descending"
+			else:
+				return NO_STATE
 		"Hit":
 			var hitState = getState(state)
 			if (hitState.animationFinished):

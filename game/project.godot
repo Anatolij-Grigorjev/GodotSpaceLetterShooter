@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ships/HitState.gd"
 }, {
+"base": "State",
+"class": "IdlingState",
+"language": "GDScript",
+"path": "res://ships/IdlingState.gd"
+}, {
 "base": "Node2D",
 "class": "ParticlesBattery",
 "language": "GDScript",
@@ -74,6 +79,7 @@ _global_script_class_icons={
 "DescendingState": "",
 "DieState": "",
 "HitState": "",
+"IdlingState": "",
 "ParticlesBattery": "",
 "PathGenerator": "",
 "RandomAudioPlayer": "",

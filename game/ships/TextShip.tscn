@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://ships/enemy_ship_horiz.png" type="Texture" id=1]
 [ext_resource path="res://ships/TextShip.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://ships/HitState.gd" type="Script" id=8]
 [ext_resource path="res://ships/DieState.gd" type="Script" id=9]
 [ext_resource path="res://ships/ship_fly.wav" type="AudioStream" id=10]
+[ext_resource path="res://ships/IdlingState.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Curve" id=7]
 max_value = 2.0
@@ -312,6 +313,8 @@ animationName = "appear"
 
 [node name="Descending" parent="TextShipStateMachine" instance=ExtResource( 7 )]
 pathGeneratorPath = NodePath("../../PathGenerator")
+
+[node name="Idling" parent="TextShipStateMachine" instance=ExtResource( 11 )]
 
 [node name="Hit" type="Node" parent="TextShipStateMachine"]
 script = ExtResource( 8 )
