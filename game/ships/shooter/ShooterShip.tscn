@@ -220,6 +220,7 @@ script = ExtResource( 2 )
 projectileScene = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, 200 )
 texture = ExtResource( 1 )
 
 [node name="ShotPosition" type="Position2D" parent="Sprite"]
@@ -274,6 +275,7 @@ __meta__ = {
 [node name="Thruster" type="Particles2D" parent="Sprite"]
 show_behind_parent = true
 position = Vector2( 0, 35 )
+emitting = false
 amount = 100
 process_material = SubResource( 11 )
 __meta__ = {

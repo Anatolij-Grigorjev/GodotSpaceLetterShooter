@@ -5,6 +5,7 @@ FSM for actions of a descending ship with text
 """
 
 var hitChars: int = 1
+var collisionNextState: String = NO_STATE
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,6 +13,12 @@ func _ready():
 
 
 func _getNextState(delta: float) -> String:
+	
+	if (collisionNextState != NO_STATE):
+		var nextState = collisionNextState
+		collisionNextState = NO_STATE
+		return nextState
+	
 	match (state):
 		"Appearing":
 			var appearingState = getState(state)
@@ -21,7 +28,7 @@ func _getNextState(delta: float) -> String:
 				return NO_STATE
 		"Descending":
 			var descendingState = getState(state)
-			return descendingState.afterCollideEntityState
+			return NO_STATE
 		"Idling":
 			var idlingState = getState(state)
 			if (idlingState.idlingOver):
@@ -47,3 +54,21 @@ func _getNextState(delta: float) -> String:
 		_: 
 			breakpoint
 			return NO_STATE
+
+
+func _on_Area2D_area_entered(area: Area2D):
+	var areaOwner: Node2D = area.get_parent()
+	if (areaOwner.is_in_group("projectile")):
+		var collideProjectile = areaOwner
+		if (entity.projectileHitText(collideProjectile)):
+			var payload: String = collideProjectile.label.text
+			if (entity.currentText.length() > payload.length()):
+				hitChars = payload.length()
+				collisionNextState = "Hit"
+			else: 
+				collisionNextState = "Die"
+		else:
+			collisionNextState = "Miss"
+		return
+	if (areaOwner.is_in_group("shooter")):
+		collisionNextState = "CollideShip"

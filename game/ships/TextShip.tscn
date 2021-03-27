@@ -507,6 +507,6 @@ stream = ExtResource( 4 )
 script = ExtResource( 3 )
 widthSegmentsNum = 5
 pathBoundsHorizMargins = Vector2( 150, 150 )
-[connection signal="area_entered" from="Area2D" to="TextShipStateMachine/Descending" method="_on_Area2D_area_entered"]
+[connection signal="area_entered" from="Area2D" to="TextShipStateMachine" method="_on_Area2D_area_entered"]
 
 [editable path="TextShipStateMachine/Descending"]

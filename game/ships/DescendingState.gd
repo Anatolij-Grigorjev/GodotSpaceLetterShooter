@@ -16,7 +16,6 @@ var lastPathPointIdx: int = 0
 var remainingPointIdleTime: float = 0.0
 
 var pathOver: bool = false
-var afterCollideEntityState: String = StateMachine.NO_STATE
 
 
 func _ready():
@@ -64,7 +63,6 @@ func enterState(prevState: String):
 	
 func exitState(nextState: String):
 	.exitState(nextState)
-	afterCollideEntityState = StateMachine.NO_STATE
 	pathMover.stop_all()
 	entity.disableThrusters()
 	
@@ -73,24 +71,6 @@ func _generatePath() -> void:
 	path = pathGenerator.generatePathSegments(entity.position)
 	lastPathPointIdx = 0
 	remainingPointIdleTime = pathPointIdleSeconds
-	
-	
-func _on_Area2D_area_entered(area: Area2D):
-	var areaOwner: Node2D = area.get_parent()
-	if (areaOwner.is_in_group("projectile")):
-		var collideProjectile = areaOwner
-		if (entity.projectileHitText(collideProjectile)):
-			var payload: String = collideProjectile.label.text
-			if (entity.currentText.length() > payload.length()):
-				fsm.hitChars = payload.length()
-				afterCollideEntityState = "Hit"
-			else: 
-				afterCollideEntityState = "Die"
-		else:
-			afterCollideEntityState = "Miss"
-		return
-	if (areaOwner.is_in_group("shooter")):
-		afterCollideEntityState = "CollideShip"
 	
 	
 func _enableDirectionThruster(startPoint: Vector2, endPoint: Vector2):
