@@ -64,6 +64,8 @@ func _getNextState(delta: float) -> String:
 func _on_Area2D_area_entered(area: Area2D):
 	var areaOwner: Node2D = area.get_parent()
 	if (areaOwner.is_in_group("projectile")):
+		if (entity.bubble.bubbleHit):
+			return
 		var collideProjectile = areaOwner
 		if (entity.projectileHitText(collideProjectile)):
 			var payload: String = collideProjectile.label.text

@@ -10,6 +10,8 @@ export(float) var idleTime: float = 1.6
 var remainingIdleTime: float = 0.0
 var idlingOver: bool = false
 
+var idleInBubble: bool = false
+
 
 func processState(delta: float):
 	if (idlingOver):
@@ -28,9 +30,12 @@ func enterState(prevState: String):
 	.enterState(prevState)
 	remainingIdleTime = idleTime
 	idlingOver = false
-#	entity.bubble.anim.play("show")
+	idleInBubble = randi() % 2 == 1
+	if (idleInBubble):
+		entity.bubble.anim.play("show")
 	
 	
 func exitState(nextState: String):
 	.exitState(nextState)
-#	entity.bubble.anim.play("hide")
+	if (idleInBubble):
+		entity.bubble.anim.play("hide")

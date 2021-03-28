@@ -28,7 +28,7 @@ func _prepareTextShips() -> void:
 	var shipWords: Array = wordsProvider.takeWords(numShips)
 	var shipsStartPos: Vector2 = Vector2(
 		rand_range(100, 125),
-		rand_range(25, 75)
+		rand_range(50, 100)
 	)
 	var shipPositions: Array = positionsProdiver.generatePathSegments(shipsStartPos)
 	for idx in range(numShips):

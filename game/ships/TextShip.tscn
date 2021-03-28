@@ -389,7 +389,6 @@ __meta__ = {
 
 [node name="ShipBubble" parent="Sprite" instance=ExtResource( 12 )]
 position = Vector2( 0.758209, -12.5102 )
-scale = Vector2( 1, 1 )
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2( -1.13544, -12.2627 )

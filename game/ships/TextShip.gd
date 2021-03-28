@@ -20,7 +20,7 @@ onready var thrustersAudio: AudioStreamPlayer = $Thrusters/AudioStreamPlayer
 
 
 func _ready():
-	bubble.anim.play("show")
+	bubble.anim.play("hide")
 	pass
 	
 
