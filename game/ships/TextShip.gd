@@ -12,6 +12,7 @@ export(float) var speed: float = 450
 
 onready var sprite: Sprite = $Sprite
 onready var label: Label = $Sprite/Label
+onready var bubble = $Sprite/ShipBubble
 onready var anim: AnimationPlayer = $AnimationPlayer
 onready var thrusterLeft: Particles2D = $Thrusters/ThrusterLeft
 onready var thrusterRight: Particles2D = $Thrusters/ThrusterRight
@@ -19,6 +20,7 @@ onready var thrustersAudio: AudioStreamPlayer = $Thrusters/AudioStreamPlayer
 
 
 func _ready():
+	bubble.anim.play("show")
 	pass
 	
 

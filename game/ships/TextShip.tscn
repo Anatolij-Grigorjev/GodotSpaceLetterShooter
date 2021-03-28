@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://ships/enemy_ship_horiz.png" type="Texture" id=1]
 [ext_resource path="res://ships/TextShip.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://ships/DieState.gd" type="Script" id=9]
 [ext_resource path="res://ships/ship_fly.wav" type="AudioStream" id=10]
 [ext_resource path="res://ships/IdlingState.tscn" type="PackedScene" id=11]
+[ext_resource path="res://ships/ShipBubble.tscn" type="PackedScene" id=12]
 
 [sub_resource type="Curve" id=7]
 max_value = 2.0
@@ -43,7 +44,7 @@ color = Color( 0.839216, 0.960784, 0.0313726, 1 )
 bg_color = Color( 0, 0, 0, 1 )
 
 [sub_resource type="CircleShape2D" id=12]
-radius = 58.4998
+radius = 55.0
 
 [sub_resource type="Animation" id=18]
 tracks/0/type = "value"
@@ -385,6 +386,10 @@ clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ShipBubble" parent="Sprite" instance=ExtResource( 12 )]
+position = Vector2( 0.758209, -12.5102 )
+scale = Vector2( 1, 1 )
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2( -1.13544, -12.2627 )
