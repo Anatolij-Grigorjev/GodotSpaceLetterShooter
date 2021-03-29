@@ -8,6 +8,7 @@ signal textShipCollidedShooter
 
 export(String) var currentText: String = "test" setget setCurrentText, getCurrentText
 export(float) var speed: float = 450
+export(int, 0, 100) var bubbleChancePrc: int = 30
 
 
 onready var sprite: Sprite = $Sprite
@@ -52,7 +53,7 @@ func getCurrentText() -> String:
 	
 func projectileHitText(projectile: Node2D) -> bool:
 	var payload: String = projectile.label.text
-	return nextTextIs(payload)
+	return not payload.empty() and nextTextIs(payload)
 	
 
 func _repositionParticleSystem(particles: Particles2D) -> void:
