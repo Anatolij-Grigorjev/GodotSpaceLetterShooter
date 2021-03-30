@@ -25,7 +25,11 @@ func _process(delta):
 
 
 func _on_Area2D_area_entered(area: Area2D):
-	$AnimationPlayer.play("collide")
+	var areaOwner: Node2D = area.get_parent()
+	if (areaOwner.is_in_group("bubble")):
+		fireDirection = fireDirection.bounce(fireDirection)
+	else:
+		$AnimationPlayer.play("collide")
 
 
 func _on_VisibilityNotifier2D_screen_exited():

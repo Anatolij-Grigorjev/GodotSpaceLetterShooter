@@ -303,6 +303,7 @@ _data = [ Vector2( 0, 4 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.389741 ), 0.0, 0.0, 0, 
 [node name="TextShip" type="Node2D"]
 script = ExtResource( 2 )
 currentText = "TEST"
+bubbleChancePrc = 50
 
 [node name="TextShipStateMachine" type="Node" parent="."]
 script = ExtResource( 6 )
