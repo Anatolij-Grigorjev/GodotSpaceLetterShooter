@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://ships/enemy_ship_bubble.png" type="Texture" id=1]
 [ext_resource path="res://ships/ShipBubble.gd" type="Script" id=2]
+[ext_resource path="res://ships/hit_bubble.wav" type="AudioStream" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 73.0
@@ -50,6 +51,18 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( -3.79099, -5.68646 ), Vector2( 0.758179, -6.06557 ), Vector2( 10.2356, 0.379089 ), Vector2( -1.52588e-05, 0.379089 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -102,4 +115,7 @@ shape = SubResource( 1 )
 anims/hide = SubResource( 3 )
 anims/hit = SubResource( 4 )
 anims/show = SubResource( 2 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

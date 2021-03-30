@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://utils/WordsProvider.gd" type="Script" id=1]
 [ext_resource path="res://stars/Stars.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://player_input/PlayerInput.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ships/shooter/white_rect.png" type="Texture" id=6]
 [ext_resource path="res://ships/PathGenerator.gd" type="Script" id=7]
+[ext_resource path="res://space_music_bg.wav" type="AudioStream" id=8]
 
 [node name="SpaceScene" type="Node2D"]
 position = Vector2( 0, -17.8588 )
@@ -23,6 +24,11 @@ texture = ExtResource( 6 )
 [node name="Stars" parent="BG" instance=ExtResource( 2 )]
 position = Vector2( -6.4, -10 )
 scale = Vector2( 0.01, 0.02 )
+
+[node name="BGMusic" type="AudioStreamPlayer" parent="BG"]
+stream = ExtResource( 8 )
+volume_db = -10.0
+autoplay = true
 
 [node name="TextShips" type="Node2D" parent="."]
 

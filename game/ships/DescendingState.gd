@@ -74,7 +74,7 @@ func _enableDirectionThruster(startPoint: Vector2, endPoint: Vector2):
 	
 	
 func _playThrustersAudio():
-	var audioPlayer: AudioStreamPlayer = entity.thrustersAudio as AudioStreamPlayer
+	var audioPlayer := entity.thrustersAudio as AudioStreamPlayer2D
 	audioPlayer.pitch_scale = 1 + rand_range(-0.05, 0.05)
 	audioPlayer.volume_db = 1 + rand_range(-0.05, 0.05)
 	audioPlayer.playing = true
