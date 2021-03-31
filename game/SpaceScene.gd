@@ -57,6 +57,8 @@ func _input(event: InputEvent) -> void:
 		return
 	var keyCharCode: String = OS.get_scancode_string(keyEvent.scancode)
 	
+	_checkSpecialCodes(keyCharCode)
+	
 	var firePressed: bool = false
 	if (keyCharCode == "Space"):
 		firePressed = true
@@ -89,4 +91,10 @@ func _findShipWithNextText(text: String) -> TextShip:
 	
 func _finishStageCollided():
 	get_tree().quit()
+	
+
+func _checkSpecialCodes(keyCode: String):
+	if (keyCode == "Escape"):
+		$BG/BGMusic.stream_paused = not $BG/BGMusic.stream_paused
+	
 	
