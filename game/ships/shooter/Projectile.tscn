@@ -2,7 +2,8 @@
 
 [ext_resource path="res://ships/shooter/rect_bullet.png" type="Texture" id=1]
 [ext_resource path="res://ships/shooter/Projectile.gd" type="Script" id=2]
-[ext_resource path="res://ships/hit_ship.wav" type="AudioStream" id=3]
+[ext_resource path="res://ships/text_ship/hit_ship.wav" type="AudioStream" id=3]
+
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 1 )

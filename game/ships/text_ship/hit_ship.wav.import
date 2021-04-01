@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/explode_ship.wav-42d8f0e272af0980c5f9b16488732202.sample"
+path="res://.import/hit_ship.wav-f3e78819e812036e8e02748a27722656.sample"
 
 [deps]
 
-source_file="res://ships/explode_ship.wav"
-dest_files=[ "res://.import/explode_ship.wav-42d8f0e272af0980c5f9b16488732202.sample" ]
+source_file="res://ships/text_ship/hit_ship.wav"
+dest_files=[ "res://.import/hit_ship.wav-f3e78819e812036e8e02748a27722656.sample" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/enemy_ship_1w_v1.png-0aa7d482c381c0573276ba229a10f76a.stex"
+path="res://.import/enemy_ship_1w_v2.png-cfb4bcb5c3d4aecc98ade1590350dbfa.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ships/enemy_ship_1w_v1.png"
-dest_files=[ "res://.import/enemy_ship_1w_v1.png-0aa7d482c381c0573276ba229a10f76a.stex" ]
+source_file="res://ships/text_ship/enemy_ship_1w_v2.png"
+dest_files=[ "res://.import/enemy_ship_1w_v2.png-cfb4bcb5c3d4aecc98ade1590350dbfa.stex" ]
 
 [params]
 

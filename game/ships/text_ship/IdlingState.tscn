@@ -1,6 +1,8 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://ships/IdlingState.gd" type="Script" id=1]
+[ext_resource path="res://ships/text_ship/IdlingState.gd" type="Script" id=1]
+
+
 
 [node name="IdlingState" type="Node"]
 script = ExtResource( 1 )

@@ -3,7 +3,7 @@ extends Node2D
 Scene where text ships descend while player types 
 and bottom ship shoots the descenders based on text
 """
-const TextShipScn = preload("res://ships/TextShip.tscn")
+const TextShipScn = preload("res://ships/text_ship/TextShip.tscn")
 
 signal letterTyped(letter)
 
