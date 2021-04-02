@@ -32,11 +32,17 @@ func _getNextState(delta: float) -> String:
 		"Descending":
 			var descendingState = getState(state)
 			if (descendingState.segmentOver):
-				return "Idling"
+				return _getNextIdlingState()
 			return NO_STATE
 		"Idling":
 			var idlingState = getState(state)
 			if (idlingState.idlingOver):
+				return "Descending"
+			else:
+				return NO_STATE
+		"IdlingBubble":
+			var idlingBubbleState = getState(state)
+			if (idlingBubbleState.idlingOver):
 				return "Descending"
 			else:
 				return NO_STATE
@@ -84,3 +90,26 @@ func _on_Area2D_area_entered(area: Area2D):
 func _generateDescendPath():
 	var path = pathGenerator.generatePathSegments(entity.position)
 	getState("Descending").descendPath = path
+	
+
+func _getNextIdlingState() -> String:
+	var fullShooterDistance: float = abs(G.shooterShip.position.y - entity.startPosition.y)
+	var relativeTravel: float = (
+		abs(entity.startPosition.y - entity.position.y)
+		 / fullShooterDistance
+	)
+	
+	var bubbleChanceModifier: float
+	if (relativeTravel < 0.34):
+		bubbleChanceModifier = 0.67
+	elif (relativeTravel < 0.67):
+		bubbleChanceModifier = 1.0
+	else:
+		bubbleChanceModifier = 1.5
+		
+	var idleBubble: bool = (randi() % 100) < (bubbleChanceModifier * entity.bubbleChancePrc)
+	if (idleBubble):
+		return "IdlingBubble"
+	else:
+		return "Idling"
+	

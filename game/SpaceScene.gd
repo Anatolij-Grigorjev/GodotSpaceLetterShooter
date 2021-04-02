@@ -34,8 +34,7 @@ func _prepareTextShips() -> void:
 	for idx in range(numShips):
 		var textShip := TextShipScn.instance()
 		$TextShips.add_child(textShip)
-		textShip.currentText = shipWords[idx]
-		textShip.position = shipPositions[idx]
+		textShip.prepare(shipWords[idx], shipPositions[idx])
 	_registerShipsCollisionHandler()
 
 
