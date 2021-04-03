@@ -8,10 +8,15 @@ signal textShipCollidedShooter
 
 export(String) var currentText: String = "test" setget setCurrentText, getCurrentText
 export(float) var speed: float = 450
-export(int, 0, 100) var bubbleChancePrc: int = 30
+export(Dictionary) var idlingActionsWeights = {
+	"Idling": 1,
+	"IdlingBubble": 1,
+	"IdlingShoot": 1
+}
 
 
 onready var sprite: Sprite = $Sprite
+onready var projectilePosition: Position2D = $Sprite/Nose/ProjectilePosition
 onready var label: Label = $Sprite/Label
 onready var bubble = $Sprite/ShipBubble
 onready var anim: AnimationPlayer = $AnimationPlayer

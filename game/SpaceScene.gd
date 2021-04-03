@@ -17,6 +17,7 @@ onready var playerInput = $CanvasLayer/PlayerInput
 
 
 func _ready():
+	G.currentScene = self
 	connect("letterTyped", playerInput, "addTypedLetter")
 	connect("letterTyped", shooter, "chamberLetter")
 	shooter.connect("shotFired", playerInput, "clearText")

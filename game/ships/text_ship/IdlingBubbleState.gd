@@ -14,7 +14,6 @@ func processState(delta: float):
 	
 func enterState(prevState: String):
 	.enterState(prevState)
-	idlingOver = false
 	entity.bubble.anim.play("show")
 	remainingIdleTime = idleTimeInBubble
 	

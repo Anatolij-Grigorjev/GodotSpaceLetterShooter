@@ -44,7 +44,7 @@ func fireChambered(ship: TextShip) -> void:
 	projectile.fireDirection = global_position.direction_to(ship.global_position)
 	# speed boost based on text size
 	projectile.speed *= (1 + chamber.length() / 10)
-	get_parent().add_child(projectile)
+	G.currentScene.add_child(projectile)
 	projectile.label.text = chamber
 	emptyChamber()
 	

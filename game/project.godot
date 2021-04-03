@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ships/text_ship/IdlingBubbleState.gd"
 }, {
+"base": "IdlingState",
+"class": "IdlingShootState",
+"language": "GDScript",
+"path": "res://ships/text_ship/IdlingShootState.gd"
+}, {
 "base": "State",
 "class": "IdlingState",
 "language": "GDScript",
@@ -90,6 +95,7 @@ _global_script_class_icons={
 "DieState": "",
 "HitState": "",
 "IdlingBubbleState": "",
+"IdlingShootState": "",
 "IdlingState": "",
 "ParticlesBattery": "",
 "PathGenerator": "",
