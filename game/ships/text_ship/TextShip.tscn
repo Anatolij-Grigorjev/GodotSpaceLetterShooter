@@ -364,15 +364,29 @@ tracks/4/keys = {
 "method": "performShot"
 } ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.7, 1.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [sub_resource type="Curve" id=12]
 max_value = 4.0
 _data = [ Vector2( 0, 4 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.389741 ), 0.0, 0.0, 0, 0 ]
 
-[node name="TextShip" type="Node2D"]
+[node name="TextShip" type="Node2D" groups=[
+"text_ship",
+]]
 script = ExtResource( 4 )
 currentText = "TEST"
-idlingActionsWeights = {
+initialIdlingActionsWeights = {
 "Idling": 1,
 "IdlingBubble": 1,
 "IdlingShoot": 1
@@ -443,6 +457,7 @@ process_material = SubResource( 4 )
 stream = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.56852, 0.56852 )
 texture = ExtResource( 5 )
 
 [node name="Label" type="Label" parent="Sprite"]
@@ -478,7 +493,7 @@ position = Vector2( 0, 45 )
 rotation = 3.14159
 texture = ExtResource( 14 )
 hframes = 4
-frame = 1
+frame = 3
 __meta__ = {
 "_editor_description_": ""
 }

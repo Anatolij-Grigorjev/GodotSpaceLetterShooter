@@ -11,7 +11,6 @@ export(int, 5) var numShips: int = 1
 
 onready var wordsProvider: WordsProvider = $WordsProvider
 onready var positionsProdiver: PathGenerator = $PathGenerator
-onready var textShipsList: Node2D = $TextShips
 onready var shooter = $ShooterShip
 onready var playerInput = $CanvasLayer/PlayerInput
 
@@ -82,7 +81,7 @@ func _isKeyJustPressed(keyEvent: InputEventKey) -> bool:
 	
 
 func _findShipWithNextText(text: String) -> TextShip:
-	for node in textShipsList.get_children():
+	for node in get_tree().get_nodes_in_group("text_ship"):
 		var textShip: TextShip = node as TextShip
 		if (textShip.nextTextIs(text)):
 			return textShip

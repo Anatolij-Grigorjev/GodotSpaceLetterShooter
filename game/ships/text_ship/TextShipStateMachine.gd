@@ -110,7 +110,7 @@ func _getNextIdlingState() -> String:
 		if (remainingUncertainty < 0):
 			nextIdlingState = state
 			break
-	_increaseWeightsExcept(weights, nextIdlingState)
+	_increaseNonZeroWeightsExcept(weights, nextIdlingState)
 	return nextIdlingState
 	
 	
@@ -122,9 +122,10 @@ func _calcChanceOfWeightUnit(weights: Dictionary) -> int:
 	return 100 / int(max(sum, 1))
 	
 	
-func _increaseWeightsExcept(weights: Dictionary, ignoreKey: String):
+func _increaseNonZeroWeightsExcept(weights: Dictionary, ignoreKey: String):
 	for key in weights:
-		if (key == ignoreKey):
+		var weight = weights[key]
+		if (key == ignoreKey or weight == 0):
 			continue
 		else:
 			weights[key] = weights[key] + 1

@@ -4,7 +4,6 @@
 [ext_resource path="res://ships/shooter/Projectile.gd" type="Script" id=2]
 [ext_resource path="res://ships/text_ship/hit_ship.wav" type="AudioStream" id=3]
 
-
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 1 )
 
@@ -100,21 +99,21 @@ tracks/6/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Gradient" id=7]
+[sub_resource type="Gradient" id=4]
 offsets = PoolRealArray( 0.0185185, 0.988889 )
 colors = PoolColorArray( 0.172549, 0, 0.733333, 1, 1, 1, 1, 1 )
 
-[sub_resource type="GradientTexture" id=8]
-gradient = SubResource( 7 )
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
 
-[sub_resource type="Curve" id=4]
+[sub_resource type="Curve" id=6]
 max_value = 4.0
 _data = [ Vector2( 0, 4 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=5]
-curve = SubResource( 4 )
+[sub_resource type="CurveTexture" id=7]
+curve = SubResource( 6 )
 
-[sub_resource type="ParticlesMaterial" id=10]
+[sub_resource type="ParticlesMaterial" id=8]
 emission_shape = 2
 emission_box_extents = Vector3( 10, 10, 1 )
 flag_disable_z = true
@@ -127,23 +126,23 @@ angular_velocity = 45.0
 angular_velocity_random = 0.5
 orbit_velocity = 0.5
 orbit_velocity_random = 0.5
-scale_curve = SubResource( 5 )
-color_ramp = SubResource( 8 )
+scale_curve = SubResource( 7 )
+color_ramp = SubResource( 5 )
 
-[sub_resource type="Gradient" id=12]
+[sub_resource type="Gradient" id=9]
 colors = PoolColorArray( 1, 1, 1, 1, 0.172549, 0, 0.733333, 1 )
 
-[sub_resource type="GradientTexture" id=13]
-gradient = SubResource( 12 )
+[sub_resource type="GradientTexture" id=10]
+gradient = SubResource( 9 )
 
-[sub_resource type="Curve" id=14]
+[sub_resource type="Curve" id=11]
 max_value = 4.0
 _data = [ Vector2( 0, 4 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=15]
-curve = SubResource( 14 )
+[sub_resource type="CurveTexture" id=12]
+curve = SubResource( 11 )
 
-[sub_resource type="ParticlesMaterial" id=11]
+[sub_resource type="ParticlesMaterial" id=13]
 emission_shape = 2
 emission_box_extents = Vector3( 10, 10, 1 )
 flag_disable_z = true
@@ -155,14 +154,13 @@ angular_velocity = 45.0
 angular_velocity_random = 0.5
 orbit_velocity = 0.5
 orbit_velocity_random = 0.5
-scale_curve = SubResource( 15 )
-color_ramp = SubResource( 13 )
+scale_curve = SubResource( 12 )
+color_ramp = SubResource( 10 )
 
 [node name="Projectile" type="Node2D" groups=[
 "projectile",
 ]]
 script = ExtResource( 2 )
-speed = 1050.77
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -207,7 +205,7 @@ one_shot = true
 explosiveness = 0.9
 randomness = 0.5
 fixed_fps = 60
-process_material = SubResource( 10 )
+process_material = SubResource( 8 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -220,7 +218,7 @@ one_shot = true
 explosiveness = 0.9
 randomness = 0.5
 fixed_fps = 60
-process_material = SubResource( 11 )
+process_material = SubResource( 13 )
 __meta__ = {
 "_editor_description_": ""
 }
