@@ -297,3 +297,4 @@ autoplay = "arrive"
 anims/arrive = SubResource( 13 )
 anims/jam = SubResource( 14 )
 anims/shoot = SubResource( 15 )
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

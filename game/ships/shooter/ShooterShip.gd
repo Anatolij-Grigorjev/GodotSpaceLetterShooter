@@ -58,3 +58,9 @@ func missFire():
 func emptyChamber():
 	chamber = ""
 	emit_signal("shotFired")
+
+
+func _on_Area2D_area_entered(area: Area2D):
+	var areaOwner: Node2D = area.get_parent()
+	if (areaOwner.is_in_group("projectile")):
+		emptyChamber()
