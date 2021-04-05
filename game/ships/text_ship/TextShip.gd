@@ -9,9 +9,9 @@ signal textShipCollidedShooter
 export(String) var currentText: String = "test" setget setCurrentText, getCurrentText
 export(float) var speed: float = 450
 export(Dictionary) var initialIdlingActionsWeights = {
-	"Idling": 1,
-	"IdlingBubble": 1,
-	"IdlingShoot": 1
+	"Idling": 1.0,
+	"IdlingBubble": 1.0,
+	"IdlingShoot": 1.0
 }
 
 

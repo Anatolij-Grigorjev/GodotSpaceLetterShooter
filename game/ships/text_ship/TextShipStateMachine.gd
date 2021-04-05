@@ -100,33 +100,33 @@ func _generateDescendPath():
 
 func _getNextIdlingState() -> String:
 	var weights: Dictionary = entity.idlingActionsWeights
-	var randomThrow: int = randi() % 100
-	var remainingUncertainty := randomThrow
-	var weightUnitValue: int = _calcChanceOfWeightUnit(weights)
+	var randomThrow := randi() % 100
+	var remainingUncertainty := float(randomThrow)
+	var weightUnitValue: float = _calcChanceOfWeightUnit(weights)
 	var nextIdlingState = NO_STATE
 	for state in weights:
-		var stateWeight: int = weights[state]
+		var stateWeight: float = weights[state]
 		remainingUncertainty -= (stateWeight * weightUnitValue)
-		if (remainingUncertainty < 0):
+		if (remainingUncertainty < 0.0):
 			nextIdlingState = state
 			break
 	_increaseNonZeroWeightsExcept(weights, nextIdlingState)
 	return nextIdlingState
 	
 	
-func _calcChanceOfWeightUnit(weights: Dictionary) -> int:
+func _calcChanceOfWeightUnit(weights: Dictionary) -> float:
 	var allWeightsArray: Array = weights.values()
-	var sum := 0
+	var sum := 0.0
 	for weight in allWeightsArray:
 		sum += weight
-	return 100 / int(max(sum, 1))
+	return 100.0 / (max(sum, 1.0))
 	
 	
 func _increaseNonZeroWeightsExcept(weights: Dictionary, ignoreKey: String):
 	for key in weights:
 		var weight = weights[key]
-		if (key == ignoreKey or weight == 0):
+		if (key == ignoreKey or weight == 0.0):
 			continue
 		else:
-			weights[key] = weights[key] + 1
+			weights[key] = weights[key] + 1.0
 
