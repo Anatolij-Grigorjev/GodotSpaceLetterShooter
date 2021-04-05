@@ -66,12 +66,12 @@ func _input(event: InputEvent) -> void:
 	else:
 		emit_signal("letterTyped", keyCharCode)
 
-	var textShipWithLetter: TextShip = _findShipWithNextText(shooter.chamber)
-	if (is_instance_valid(textShipWithLetter)):
-		shooter.faceShip(textShipWithLetter)
+	var shootableWithLetter: Node2D = _findShootableWithNextText(shooter.chamber)
+	if (is_instance_valid(shootableWithLetter)):
+		shooter.faceShootable(shootableWithLetter)
 	if (firePressed):
-		if (is_instance_valid(textShipWithLetter)):
-			shooter.fireChambered(textShipWithLetter)
+		if (is_instance_valid(shootableWithLetter)):
+			shooter.fireChambered(shootableWithLetter)
 		else:
 			shooter.missFire()
 	
@@ -80,11 +80,11 @@ func _isKeyJustPressed(keyEvent: InputEventKey) -> bool:
 	return not keyEvent.echo and keyEvent.pressed
 	
 
-func _findShipWithNextText(text: String) -> TextShip:
-	for node in get_tree().get_nodes_in_group("text_ship"):
-		var textShip: TextShip = node as TextShip
-		if (textShip.nextTextIs(text)):
-			return textShip
+func _findShootableWithNextText(text: String) -> Node2D:
+	for node in get_tree().get_nodes_in_group("shootable"):
+		var shootable: Node2D = node as Node2D
+		if (shootable.nextTextIs(text)):
+			return shootable
 	return null
 	
 	

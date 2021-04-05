@@ -34,8 +34,10 @@ func performShot():
 	projectile.global_position = entity.projectilePosition.global_position
 	projectile.fireDirection = entity.global_position.direction_to(G.shooterShip.global_position)
 	projectile.speed = projectileSpeed
+	projectile.add_to_group("shootable")
 	projectile.get_node("Area2D").set_collision_mask_bit(1, false)
 	projectile.get_node("Area2D").set_collision_mask_bit(2, true)
+	projectile.get_node("Area2D").set_collision_layer_bit(1, true)
 	G.currentScene.add_child(projectile)
 	var useNumLetters = randi() % maxShotLength + 1
 	projectile.label.text = entity.currentText.substr(0, useNumLetters)
@@ -45,4 +47,4 @@ func performShot():
 
 func _setCanShootAgain():
 	if (maxShotLength >= entity.currentText.length()):
-		entity.idlingActionsWeights[name] = 0
+		entity.idlingActionsWeights[name] = 0.0

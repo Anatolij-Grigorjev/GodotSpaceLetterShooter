@@ -12,9 +12,10 @@ var fireDirection: Vector2 = Vector2.ZERO
 onready var sprite: Sprite = $Sprite
 onready var label: Label = $Label
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
-	pass # Replace with function body.
+	pass
+	
 
 
 func _process(delta):
@@ -28,9 +29,24 @@ func _on_Area2D_area_entered(area: Area2D):
 	var areaOwner: Node2D = area.get_parent()
 	if (areaOwner.is_in_group("bubble")):
 		fireDirection = fireDirection.bounce(fireDirection)
-	else:
-		$AnimationPlayer.play("collide")
+		return
+	if (areaOwner.is_in_group("projectile")):
+		speed = 0.0
+	$AnimationPlayer.play("collide")
 
 
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
+	
+	
+func nextTextIs(text: String) -> bool:
+	return label.text.begins_with(text)
+	
+	
+func _slowDown():
+	$Tween.interpolate_property(
+		self, 'speed', 
+		null, 0.0, 
+		0.1, Tween.TRANS_EXPO, Tween.EASE_OUT
+	)
+	$Tween.start()
