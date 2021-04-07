@@ -14,6 +14,8 @@ onready var positionsProdiver: PathGenerator = $PathGenerator
 onready var shooter = $ShooterShip
 onready var playerInput = $CanvasLayer/PlayerInput
 
+var currentLiveShips := 0
+
 
 func _ready():
 	G.currentScene = self
@@ -35,14 +37,17 @@ func _prepareTextShips() -> void:
 		var textShip := TextShipScn.instance()
 		$TextShips.add_child(textShip)
 		textShip.prepare(shipWords[idx], shipPositions[idx])
-	_registerShipsCollisionHandler()
+	_registerShipsHandlers()
+	currentLiveShips = numShips
 
 
 
-func _registerShipsCollisionHandler() -> void:
+func _registerShipsHandlers() -> void:
 	for node in $TextShips.get_children():
 		var ship: TextShip = node as TextShip
 		ship.connect("textShipCollidedShooter", self, "_finishStageCollided")
+		ship.connect("textShipDestroyed", self, "_countDestroyedShip")
+		
 
 
 func _process(delta: float):
@@ -91,6 +96,13 @@ func _findShootableWithNextText(text: String) -> Node2D:
 func _finishStageCollided():
 	get_tree().quit()
 	
+	
+func _countDestroyedShip():
+	currentLiveShips -= 1
+	if (currentLiveShips <= 0):
+		yield(get_tree(), "idle_frame")
+		_prepareTextShips()
+		
 
 func _checkSpecialCodes(keyCode: String):
 	if (keyCode == "Escape"):

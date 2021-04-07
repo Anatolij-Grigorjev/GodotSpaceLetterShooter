@@ -7,6 +7,7 @@ last label character was hit
 
 func processState(delta: float):
 	if (animationFinished):
+		entity.emit_signal("textShipDestroyed")
 		entity.queue_free()
 	
 	

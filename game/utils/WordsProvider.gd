@@ -27,4 +27,6 @@ func _readFileText(filePath: String) -> String:
 
 
 func takeWords(numNeeded: int) -> Array:
-	return words.slice(0, numNeeded - 1)
+	var neededWords := words.slice(0, numNeeded - 1)
+	words.shuffle()
+	return neededWords
