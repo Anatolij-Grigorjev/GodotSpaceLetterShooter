@@ -22,10 +22,11 @@ func _ready():
 	connect("letterTyped", playerInput, "addTypedLetter")
 	connect("letterTyped", shooter, "chamberLetter")
 	shooter.connect("shotFired", playerInput, "clearText")
-	_prepareTextShips()
+	var preparedShips := _prepareTextShips()
+	_addShipsToScene(preparedShips)
 	
 	
-func _prepareTextShips() -> void:
+func _prepareTextShips() -> Array:
 	var windowWidth: int = OS.window_size.x
 	var shipWords: Array = wordsProvider.takeWords(numShips)
 	print("Sending in fleet: %s" % [shipWords])
@@ -34,25 +35,30 @@ func _prepareTextShips() -> void:
 		rand_range(50, 100)
 	)
 	var shipPositions: Array = positionsProdiver.generatePathSegments(shipsStartPos)
+	var preparedShips: Array = []
 	for idx in range(numShips):
 		var textShip := TextShipScn.instance()
-		$TextShips.add_child(textShip)
 		textShip.prepare(shipWords[idx], shipPositions[idx])
-	_registerShipsHandlers()
-	currentLiveShips = numShips
+		preparedShips.append(textShip)
+	return preparedShips
+	
+	
+func _addShipsToScene(preparedShips: Array):
+	for textShip in preparedShips:
+		$TextShips.add_child(textShip)
+		_registerShipHandlers(textShip)
+	currentLiveShips = preparedShips.size()
 
 
-
-func _registerShipsHandlers() -> void:
-	for node in $TextShips.get_children():
-		var ship: TextShip = node as TextShip
-		ship.connect("textShipCollidedShooter", self, "_finishStageCollided")
-		ship.connect("textShipDestroyed", self, "_countDestroyedShip")
+func _registerShipHandlers(ship: TextShip) -> void:
+	ship.connect("textShipCollidedShooter", self, "_finishStageCollided")
+	ship.connect("textShipDestroyed", self, "_countDestroyedShip")
 		
 
 
 func _process(delta: float):
 	pass
+	
 	
 func _input(event: InputEvent) -> void:
 	if (not event is InputEventKey):
