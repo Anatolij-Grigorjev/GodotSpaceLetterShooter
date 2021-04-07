@@ -28,6 +28,7 @@ func _ready():
 func _prepareTextShips() -> void:
 	var windowWidth: int = OS.window_size.x
 	var shipWords: Array = wordsProvider.takeWords(numShips)
+	print("Sending in fleet: %s" % [shipWords])
 	var shipsStartPos: Vector2 = Vector2(
 		rand_range(100, 125),
 		rand_range(50, 100)
