@@ -58,6 +58,10 @@ func missFire():
 func emptyChamber():
 	chamber = ""
 	emit_signal("shotFired")
+	
+	
+func roundChambered() -> bool:
+	return not chamber.empty()
 
 
 func _on_Area2D_area_entered(area: Area2D):

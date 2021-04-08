@@ -12,7 +12,7 @@
 [node name="SpaceScene" type="Node2D"]
 position = Vector2( 0, -17.8588 )
 script = ExtResource( 4 )
-numShips = 3
+numShipsFrom = 3
 
 [node name="BG" type="Sprite" parent="."]
 self_modulate = Color( 0, 0, 0, 1 )

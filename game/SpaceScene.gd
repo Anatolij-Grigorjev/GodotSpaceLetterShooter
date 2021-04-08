@@ -7,7 +7,8 @@ const TextShipScn = preload("res://ships/text_ship/TextShip.tscn")
 
 signal letterTyped(letter)
 
-export(int, 5) var numShips: int = 1
+export(int, 5) var numShipsFrom: int = 1
+export(int, 5) var numShipsTo: int = 5
 
 onready var wordsProvider: WordsProvider = $WordsProvider
 onready var positionsProdiver: PathGenerator = $PathGenerator
@@ -28,6 +29,7 @@ func _ready():
 	
 func _prepareTextShips() -> Array:
 	var windowWidth: int = OS.window_size.x
+	var numShips = numShipsFrom + randi() % (numShipsTo - numShipsFrom + 1) 
 	var shipWords: Array = wordsProvider.takeWords(numShips)
 	print("Sending in fleet: %s" % [shipWords])
 	var shipsStartPos: Vector2 = Vector2(
@@ -83,7 +85,7 @@ func _input(event: InputEvent) -> void:
 	if (is_instance_valid(shootableWithLetter)):
 		shooter.faceShootable(shootableWithLetter)
 	if (firePressed):
-		if (is_instance_valid(shootableWithLetter)):
+		if (is_instance_valid(shootableWithLetter) and shooter.roundChambered()):
 			shooter.fireChambered(shootableWithLetter)
 		else:
 			shooter.missFire()
