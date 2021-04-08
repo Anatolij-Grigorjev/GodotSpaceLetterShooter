@@ -46,6 +46,7 @@ func _prepareTextShips() -> Array:
 func _addShipsToScene(preparedShips: Array):
 	for textShip in preparedShips:
 		$TextShips.add_child(textShip)
+		textShip.sprite.scale = Vector2.ZERO
 		_registerShipHandlers(textShip)
 	currentLiveShips = preparedShips.size()
 
@@ -108,7 +109,8 @@ func _countDestroyedShip():
 	currentLiveShips -= 1
 	if (currentLiveShips <= 0):
 		yield(get_tree(), "idle_frame")
-		_prepareTextShips()
+		var preparedShips := _prepareTextShips()
+		_addShipsToScene(preparedShips)
 		
 
 func _checkSpecialCodes(keyCode: String):
