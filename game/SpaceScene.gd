@@ -31,12 +31,13 @@ func _prepareTextShips() -> Array:
 	var windowWidth: int = OS.window_size.x
 	var numShips = numShipsFrom + randi() % (numShipsTo - numShipsFrom + 1) 
 	var shipWords: Array = wordsProvider.takeWords(numShips)
-	print("Sending in fleet: %s" % [shipWords])
 	var shipsStartPos: Vector2 = Vector2(
 		rand_range(100, 125),
 		rand_range(50, 100)
 	)
 	var shipPositions: Array = positionsProdiver.generatePathSegments(shipsStartPos)
+	
+	_printFleetStats(numShips, shipPositions, shipWords)
 	var preparedShips: Array = []
 	for idx in range(numShips):
 		var textShip := TextShipScn.instance()
@@ -58,9 +59,15 @@ func _registerShipHandlers(ship: TextShip) -> void:
 	ship.connect("textShipDestroyed", self, "_countDestroyedShip")
 		
 
-
-func _process(delta: float):
-	pass
+func _printFleetStats(numShips: int, shipPositions: Array, shipWords: Array):
+	print("\n")
+	print("Sending in fleet: %s ships" % numShips)
+	var shipsStartX := []
+	for vectorPos in shipPositions.slice(0, numShips - 1):
+		shipsStartX.append(vectorPos.x)
+	print(Utils.joinToString(shipsStartX, "%10.0d", " "))
+	print(Utils.joinToString(shipWords, "%10s", " "))
+	print("\n")
 	
 	
 func _input(event: InputEvent) -> void:
