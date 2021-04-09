@@ -1,11 +1,77 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://ships/text_ship/enemy_ship_bubble.png" type="Texture" id=1]
 [ext_resource path="res://ships/text_ship/hit_bubble.wav" type="AudioStream" id=2]
 [ext_resource path="res://ships/text_ship/ShipBubble.gd" type="Script" id=3]
+[ext_resource path="res://ships/text_ship/burst_bubble.wav" type="AudioStream" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 73.0
+
+[sub_resource type="Animation" id=5]
+resource_name = "burst"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 6, 7 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 0 ), Vector2( -3.79099, -5.68646 ), Vector2( 0.758179, -6.06557 ), Vector2( 10.2356, 0.379089 ), Vector2( -1.52588e-05, 0.379089 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BurstBubble:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "hide"
@@ -38,7 +104,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2, 3, 0 ]
+"values": [ 4, 1, 2, 3, 0 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:position")
@@ -49,11 +115,11 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( 0, 0 ), Vector2( -3.79099, -5.68646 ), Vector2( 0.758179, -6.06557 ), Vector2( 10.2356, 0.379089 ), Vector2( -1.52588e-05, 0.379089 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/2/path = NodePath("HitBubble:playing")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -92,16 +158,43 @@ tracks/1/keys = {
 "update": 1,
 "values": [ 0 ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [node name="ShipBubble" type="Node2D" groups=[
 "bubble",
 ]]
+scale = Vector2( 1e-05, 1e-05 )
 script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0.45098 )
 texture = ExtResource( 1 )
+vframes = 2
 hframes = 4
+frame = 4
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2
@@ -111,10 +204,14 @@ collision_mask = 0
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/burst = SubResource( 5 )
 anims/hide = SubResource( 2 )
 anims/hit = SubResource( 3 )
 anims/show = SubResource( 4 )
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="HitBubble" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )
+
+[node name="BurstBubble" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
