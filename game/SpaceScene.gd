@@ -78,24 +78,18 @@ func _input(event: InputEvent) -> void:
 		return
 	var keyCharCode: String = OS.get_scancode_string(keyEvent.scancode)
 	
-	_checkSpecialCodes(keyCharCode)
+	var specialCodeToggles := _checkSpecialCodes(keyCharCode)
+	if (specialCodeToggles.toggleBgMusic):
+		$BG/BGMusic.stream_paused = not $BG/BGMusic.stream_paused
 	
-	var firePressed: bool = false
-	if (keyCharCode == "Space"):
-		firePressed = true
-	elif (keyCharCode.length() > 1):
-		return
-	else:
+	if (keyCharCode.length() == 1):
 		emit_signal("letterTyped", keyCharCode)
 
 	var shootableWithLetter: Node2D = _findShootableWithNextText(shooter.chamber)
 	if (is_instance_valid(shootableWithLetter)):
 		shooter.faceShootable(shootableWithLetter)
-	if (firePressed):
-		if (is_instance_valid(shootableWithLetter) and shooter.roundChambered()):
-			shooter.fireChambered(shootableWithLetter)
-		else:
-			shooter.missFire()
+	if (specialCodeToggles.fireChambered):
+		shooter.tryFireAt(shootableWithLetter)
 	
 
 func _isKeyJustPressed(keyEvent: InputEventKey) -> bool:
@@ -103,6 +97,8 @@ func _isKeyJustPressed(keyEvent: InputEventKey) -> bool:
 	
 
 func _findShootableWithNextText(text: String) -> Node2D:
+	if (text.empty()):
+		return null
 	for node in get_tree().get_nodes_in_group("shootable"):
 		var shootable: Node2D = node as Node2D
 		if (shootable.nextTextIs(text)):
@@ -122,8 +118,11 @@ func _countDestroyedShip():
 		_addShipsToScene(preparedShips)
 		
 
-func _checkSpecialCodes(keyCode: String):
-	if (keyCode == "Escape"):
-		$BG/BGMusic.stream_paused = not $BG/BGMusic.stream_paused
+func _checkSpecialCodes(keyCode: String) -> Dictionary:
+	return {
+		'toggleBgMusic': keyCode == "Escape",
+		'fireChambered': keyCode == "Space"
+	}
+	
 	
 	

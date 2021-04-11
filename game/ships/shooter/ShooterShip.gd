@@ -36,6 +36,13 @@ func faceShootable(shootable: Node2D) -> void:
 	var angleToShip = acos(verticalDiff / distanceToShip)
 	var shootSide: int = Side.LEFT if myPosition.x > shootablePosition.x else Side.RIGHT
 	rotation = angleToShip * shootSide
+	
+	
+func tryFireAt(target: Node2D):
+	if (not chamber.empty() and is_instance_valid(target)):
+		fireChambered(target)
+	else:
+		missFire()
 
 
 func fireChambered(shootable: Node2D) -> void:
@@ -58,10 +65,6 @@ func missFire():
 func emptyChamber():
 	chamber = ""
 	emit_signal("shotFired")
-	
-	
-func roundChambered() -> bool:
-	return not chamber.empty()
 
 
 func _on_Area2D_area_entered(area: Area2D):

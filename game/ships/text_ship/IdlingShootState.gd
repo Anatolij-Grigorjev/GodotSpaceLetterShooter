@@ -4,6 +4,7 @@ class_name IdlingShootState
 Hover state where the ship shoots part of its letters out towards
 the bottom ship as a projectile
 """
+signal shotLettersDepleted(lettersLeft)
 const ProjectileScn = preload("res://ships/shooter/Projectile.tscn")
 
 export(float) var projectileSpeed: float = 150
@@ -12,7 +13,7 @@ export(int) var maxShotLength: int = 2
 
 
 func _ready():
-	call_deferred("_setCanShootAgain")
+	call_deferred("_checkCanShootAgain")
 
 
 func processState(delta: float):
@@ -42,9 +43,9 @@ func performShot():
 	var useNumLetters = randi() % maxShotLength + 1
 	projectile.label.text = entity.currentText.substr(0, useNumLetters)
 	entity.currentText = entity.currentText.substr(useNumLetters)
-	_setCanShootAgain()
+	_checkCanShootAgain()
 	
 
-func _setCanShootAgain():
+func _checkCanShootAgain():
 	if (maxShotLength >= entity.currentText.length()):
-		entity.idlingActionsWeights[name] = 0.0
+		emit_signal("shotLettersDepleted", entity.currentText.length())

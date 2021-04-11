@@ -13,6 +13,9 @@ onready var pathGenerator: PathGenerator = $PathGenerator
 func _ready():
 	call_deferred("_generateDescendPath")
 	call_deferred("setState", "Appearing")
+	getState("IdlingShoot").connect("shotLettersDepleted", self, "_onEntityNotEnoughShotLetters")
+	yield(get_tree(), "idle_frame")
+	entity.bubble.connect("bubbleBurst", self, "_onEntityBubbleBurst")
 
 
 func _getNextState(delta: float) -> String:
@@ -96,6 +99,14 @@ func _on_Area2D_area_entered(area: Area2D):
 func _generateDescendPath():
 	var path = pathGenerator.generatePathSegments(entity.position)
 	getState("Descending").descendPath = path
+	
+	
+func _onEntityBubbleBurst():
+	entity.idlingActionsWeights["IdlingBubble"] = 0.0
+	
+
+func _onEntityNotEnoughShotLetters(lettersLeft: int):
+	entity.idlingActionsWeights["IdlingShoot"] = 0.0
 	
 
 func _getNextIdlingState() -> String:

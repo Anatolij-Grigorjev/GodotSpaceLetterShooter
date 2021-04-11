@@ -70,7 +70,6 @@ func exitState(nextState: String):
 	.exitState(nextState)
 
 
-
 func setEntity(newEntity: Node2D):
 	.setEntity(newEntity)
 	for node in stateNodes.values():
