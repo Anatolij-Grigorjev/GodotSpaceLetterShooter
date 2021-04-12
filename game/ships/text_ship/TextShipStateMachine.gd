@@ -3,14 +3,22 @@ class_name TextShipStateMachine
 """
 FSM for actions of a descending ship with text
 """
+export(Dictionary) var initialIdlingActionsWeights = {
+	"Idling": 1.0,
+	"IdlingBubble": 1.0,
+	"IdlingShoot": 1.0
+}
 
 var hitChars: int = 1
 var collisionNextState: String = NO_STATE
 
 onready var pathGenerator: PathGenerator = $PathGenerator
 
+var idlingActionsWeights: WeightedItems
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	idlingActionsWeights = WeightedItems.new(initialIdlingActionsWeights)
 	call_deferred("_generateDescendPath")
 	call_deferred("setState", "Appearing")
 	getState("IdlingShoot").connect("shotLettersDepleted", self, "_onEntityNotEnoughShotLetters")
@@ -100,44 +108,15 @@ func _generateDescendPath():
 	var path = pathGenerator.generatePathSegments(entity.position)
 	getState("Descending").descendPath = path
 	
+
+func _getNextIdlingState() -> String:
+	return idlingActionsWeights.pickRandomWeighted()
+	
 	
 func _onEntityBubbleBurst():
-	entity.idlingActionsWeights["IdlingBubble"] = 0.0
+	idlingActionsWeights.disableItem("IdlingBubble")
 	
 
 func _onEntityNotEnoughShotLetters(lettersLeft: int):
-	entity.idlingActionsWeights["IdlingShoot"] = 0.0
-	
-
-func _getNextIdlingState() -> String:
-	var weights: Dictionary = entity.idlingActionsWeights
-	var randomThrow := randi() % 100
-	var remainingUncertainty := float(randomThrow)
-	var weightUnitValue: float = _calcChanceOfWeightUnit(weights)
-	var nextIdlingState = NO_STATE
-	for state in weights:
-		var stateWeight: float = weights[state]
-		remainingUncertainty -= (stateWeight * weightUnitValue)
-		if (remainingUncertainty < 0.0):
-			nextIdlingState = state
-			break
-	_increaseNonZeroWeightsExcept(weights, nextIdlingState)
-	return nextIdlingState
-	
-	
-func _calcChanceOfWeightUnit(weights: Dictionary) -> float:
-	var allWeightsArray: Array = weights.values()
-	var sum := 0.0
-	for weight in allWeightsArray:
-		sum += weight
-	return 100.0 / (max(sum, 1.0))
-	
-	
-func _increaseNonZeroWeightsExcept(weights: Dictionary, ignoreKey: String):
-	for key in weights:
-		var weight = weights[key]
-		if (key == ignoreKey or weight == 0.0):
-			continue
-		else:
-			weights[key] = weights[key] + 1.0
+	idlingActionsWeights.disableItem("IdlingShoot")
 

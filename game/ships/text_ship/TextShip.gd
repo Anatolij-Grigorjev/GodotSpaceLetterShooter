@@ -9,11 +9,6 @@ signal textShipDestroyed
 
 export(String) var currentText: String = "test" setget setCurrentText, getCurrentText
 export(float) var speed: float = 450
-export(Dictionary) var initialIdlingActionsWeights = {
-	"Idling": 1.0,
-	"IdlingBubble": 1.0,
-	"IdlingShoot": 1.0
-}
 
 
 onready var sprite: Sprite = $Sprite
@@ -27,12 +22,9 @@ onready var thrustersAudio: AudioStreamPlayer = $Thrusters/AudioStreamPlayer2D
 
 
 var startPosition: Vector2
-var idlingActionsWeights: Dictionary
 
 func _ready():
-	idlingActionsWeights = initialIdlingActionsWeights.duplicate(true)
 	bubble.anim.play("hide")
-	pass
 	
 
 func hitCharacter(numChars: int) -> void:

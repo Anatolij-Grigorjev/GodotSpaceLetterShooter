@@ -411,11 +411,6 @@ _data = [ Vector2( 0, 4 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.389741 ), 0.0, 0.0, 0, 
 ]]
 script = ExtResource( 4 )
 currentText = "TEST"
-initialIdlingActionsWeights = {
-"Idling": 1,
-"IdlingBubble": 1,
-"IdlingShoot": 1
-}
 
 [node name="TextShipStateMachine" type="Node" parent="."]
 script = ExtResource( 10 )
