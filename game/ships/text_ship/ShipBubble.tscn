@@ -104,7 +104,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 4, 1, 2, 3, 0 ]
+"values": [ 4, 1, 2, 3, 4 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:position")
@@ -194,7 +194,6 @@ position = Vector2( -1.52588e-05, 0.379089 )
 texture = ExtResource( 1 )
 vframes = 2
 hframes = 4
-frame = 4
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
