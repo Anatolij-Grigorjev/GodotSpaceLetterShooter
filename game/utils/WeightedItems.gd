@@ -3,11 +3,11 @@ class_name WeightedItems
 Textual items data with unequal weights.
 Allows picking an item, which increases the weight of others
 """
-
 const DISABLE_ITEM_WEIGHT = 0.0
 
 var itemWeights: Dictionary = {}
 var weightUnitValue: float = 0.0
+
 
 func _init(initialWeights: Dictionary):
 	if (initialWeights):
@@ -15,13 +15,13 @@ func _init(initialWeights: Dictionary):
 		weightUnitValue = _calcChanceOfWeightUnit()
 	else:
 		itemWeights = {}
-		
-		
+
+
 func disableItem(item: String):
 	itemWeights[item] = DISABLE_ITEM_WEIGHT
 	weightUnitValue = _calcChanceOfWeightUnit()
-		
-		
+
+
 func pickRandomWeighted() -> String:
 	var randomThrow := randi() % 100
 	var remainingUncertainty := float(randomThrow)
