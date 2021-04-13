@@ -7,7 +7,7 @@
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 1 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=14]
 
 [sub_resource type="Animation" id=3]
 resource_name = "collide"
@@ -104,7 +104,7 @@ _data = [ Vector2( 0, 4 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 [sub_resource type="CurveTexture" id=7]
 curve = SubResource( 6 )
 
-[sub_resource type="ParticlesMaterial" id=8]
+[sub_resource type="ParticlesMaterial" id=15]
 emission_shape = 2
 emission_box_extents = Vector3( 10, 10, 1 )
 flag_disable_z = true
@@ -133,7 +133,7 @@ _data = [ Vector2( 0, 4 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 [sub_resource type="CurveTexture" id=12]
 curve = SubResource( 11 )
 
-[sub_resource type="ParticlesMaterial" id=13]
+[sub_resource type="ParticlesMaterial" id=16]
 emission_shape = 2
 emission_box_extents = Vector3( 10, 10, 1 )
 flag_disable_z = true
@@ -150,10 +150,12 @@ color_ramp = SubResource( 10 )
 
 [node name="Projectile" type="Node2D" groups=[
 "projectile",
+"shootable",
 ]]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+self_modulate = Color( 0.819608, 0.0666667, 0.0666667, 1 )
 texture = ExtResource( 1 )
 hframes = 4
 
@@ -177,11 +179,11 @@ __meta__ = {
 }
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
+collision_layer = 2
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 2 )
+shape = SubResource( 14 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 
@@ -196,7 +198,7 @@ one_shot = true
 explosiveness = 0.9
 randomness = 0.5
 fixed_fps = 60
-process_material = SubResource( 8 )
+process_material = SubResource( 15 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -209,7 +211,7 @@ one_shot = true
 explosiveness = 0.9
 randomness = 0.5
 fixed_fps = 60
-process_material = SubResource( 13 )
+process_material = SubResource( 16 )
 __meta__ = {
 "_editor_description_": ""
 }
