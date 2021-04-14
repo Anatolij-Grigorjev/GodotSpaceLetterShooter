@@ -31,7 +31,7 @@ func _ready():
 	_waitAddCreatedShips()
 	
 	
-func _startPrepareTextShips():
+func _startPrepareTextShips() -> void:
 	var numShips = numShipsFrom + randi() % (numShipsTo - numShipsFrom + 1) 
 	shipsBuilderThread.start(shipsFactory, "generateShips", numShips)
 	

@@ -35,8 +35,8 @@ func nextTextIs(text: String) -> bool:
 func prepare(text: String, startPosition: Vector2, shipPath: Array):
 	setCurrentText(text)
 	position = startPosition
-	sprite.scale = Vector2.ZERO
-	fsm.getState("Descending").descendPath = shipPath
+	$Sprite.scale = Vector2.ZERO
+	$TextShipStateMachine/Descending.descendPath = shipPath
 	
 	
 func _process(delta: float):
