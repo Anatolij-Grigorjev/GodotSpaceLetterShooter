@@ -12,14 +12,11 @@ export(Dictionary) var initialIdlingActionsWeights = {
 var hitChars: int = 1
 var collisionNextState: String = NO_STATE
 
-onready var pathGenerator: PathGenerator = $PathGenerator
-
 var idlingActionsWeights: WeightedItems
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	idlingActionsWeights = WeightedItems.new(initialIdlingActionsWeights)
-	call_deferred("_generateDescendPath")
 	call_deferred("setState", "Appearing")
 	getState("IdlingShoot").connect("shotLettersDepleted", self, "_onEntityNotEnoughShotLetters")
 	yield(get_tree(), "idle_frame")
@@ -102,11 +99,6 @@ func _on_Area2D_area_entered(area: Area2D):
 		return
 	if (areaOwner.is_in_group("shooter")):
 		collisionNextState = "CollideShip"
-
-
-func _generateDescendPath():
-	var path = pathGenerator.generatePathSegments(entity.position)
-	getState("Descending").descendPath = path
 	
 
 func _getNextIdlingState() -> String:

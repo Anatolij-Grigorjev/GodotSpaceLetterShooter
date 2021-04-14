@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ships/text_ship/TextShipFactory.gd" type="Script" id=1]
+[ext_resource path="res://ships/text_ship/PathGenerator.gd" type="Script" id=2]
+[ext_resource path="res://utils/WordsProvider.gd" type="Script" id=3]
+
+[node name="TextShipFactory" type="Node"]
+script = ExtResource( 1 )
+printDebug = true
+
+[node name="PathGenerator" type="Node" parent="."]
+script = ExtResource( 2 )
+__meta__ = {
+"_editor_description_": ""
+}
+widthSegmentsNum = 5
+pathBoundsHorizMargins = Vector2( 150, 150 )
+
+[node name="WordsProvider" type="Node" parent="."]
+script = ExtResource( 3 )
+filePath = "res://corpus.txt"

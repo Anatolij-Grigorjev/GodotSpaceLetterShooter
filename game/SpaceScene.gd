@@ -10,46 +10,42 @@ signal letterTyped(letter)
 export(int, 5) var numShipsFrom: int = 1
 export(int, 5) var numShipsTo: int = 5
 
-onready var wordsProvider: WordsProvider = $WordsProvider
-onready var positionsProdiver: PathGenerator = $PathGenerator
+
 onready var shooter = $ShooterShip
 onready var playerInput = $CanvasLayer/PlayerInput
+onready var shipsFactory = $TextShipFactory
+
 
 var currentLiveShips := 0
 
 
+var shipsBuilderThread: Thread
+
 func _ready():
 	G.currentScene = self
+	shipsBuilderThread = Thread.new()
 	connect("letterTyped", playerInput, "addTypedLetter")
 	connect("letterTyped", shooter, "chamberLetter")
 	shooter.connect("shotFired", playerInput, "clearText")
-	var preparedShips := _prepareTextShips()
-	_addShipsToScene(preparedShips)
+	_startPrepareTextShips()
+	_waitAddCreatedShips()
 	
 	
-func _prepareTextShips() -> Array:
-	var windowWidth: int = OS.window_size.x
+func _startPrepareTextShips():
 	var numShips = numShipsFrom + randi() % (numShipsTo - numShipsFrom + 1) 
-	var shipWords: Array = wordsProvider.takeWords(numShips)
-	var shipsStartPos: Vector2 = Vector2(
-		rand_range(100, 125),
-		rand_range(50, 100)
-	)
-	var shipPositions: Array = positionsProdiver.generatePathSegments(shipsStartPos)
+	shipsBuilderThread.start(shipsFactory, "generateShips", numShips)
 	
-	_printFleetStats(numShips, shipPositions, shipWords)
-	var preparedShips: Array = []
-	for idx in range(numShips):
-		var textShip := TextShipScn.instance()
-		textShip.prepare(shipWords[idx], shipPositions[idx])
-		preparedShips.append(textShip)
-	return preparedShips
+	
+func _waitAddCreatedShips():
+	var preparedShips: Array = shipsBuilderThread.wait_to_finish()
+	_addShipsToScene(preparedShips)
+	#start next iteration
+	_startPrepareTextShips()
 	
 	
 func _addShipsToScene(preparedShips: Array):
 	for textShip in preparedShips:
 		$TextShips.add_child(textShip)
-		textShip.sprite.scale = Vector2.ZERO
 		_registerShipHandlers(textShip)
 	currentLiveShips = preparedShips.size()
 
@@ -57,17 +53,6 @@ func _addShipsToScene(preparedShips: Array):
 func _registerShipHandlers(ship: TextShip) -> void:
 	ship.connect("textShipCollidedShooter", self, "_finishStageCollided")
 	ship.connect("textShipDestroyed", self, "_countDestroyedShip")
-		
-
-func _printFleetStats(numShips: int, shipPositions: Array, shipWords: Array):
-	print("\n")
-	print("Sending in fleet: %s ships" % numShips)
-	var shipsStartX := []
-	for vectorPos in shipPositions.slice(0, numShips - 1):
-		shipsStartX.append(vectorPos.x)
-	print(Utils.joinToString(shipsStartX, "%10.0d", " "))
-	print(Utils.joinToString(shipWords, "%10s", " "))
-	print("\n")
 	
 	
 func _input(event: InputEvent) -> void:
@@ -114,8 +99,7 @@ func _countDestroyedShip():
 	currentLiveShips -= 1
 	if (currentLiveShips <= 0):
 		yield(get_tree(), "idle_frame")
-		var preparedShips := _prepareTextShips()
-		_addShipsToScene(preparedShips)
+		_waitAddCreatedShips()
 		
 
 func _checkSpecialCodes(keyCode: String) -> Dictionary:

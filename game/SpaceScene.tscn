@@ -1,12 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://utils/WordsProvider.gd" type="Script" id=1]
+[ext_resource path="res://ships/text_ship/TextShipFactory.tscn" type="PackedScene" id=1]
 [ext_resource path="res://stars/Stars.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ships/shooter/ShooterShip.tscn" type="PackedScene" id=3]
 [ext_resource path="res://SpaceScene.gd" type="Script" id=4]
 [ext_resource path="res://player_input/PlayerInput.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ships/shooter/white_rect.png" type="Texture" id=6]
-[ext_resource path="res://ships/text_ship/PathGenerator.gd" type="Script" id=7]
 [ext_resource path="res://space_music_bg.wav" type="AudioStream" id=8]
 
 [node name="SpaceScene" type="Node2D"]
@@ -28,7 +27,6 @@ scale = Vector2( 0.01, 0.02 )
 [node name="BGMusic" type="AudioStreamPlayer" parent="BG"]
 stream = ExtResource( 8 )
 volume_db = -10.0
-autoplay = true
 
 [node name="TextShips" type="Node2D" parent="."]
 
@@ -45,15 +43,4 @@ margin_top = -250.0
 margin_right = -150.0
 margin_bottom = -150.0
 
-[node name="WordsProvider" type="Node" parent="."]
-script = ExtResource( 1 )
-filePath = "res://corpus.txt"
-
-[node name="PathGenerator" type="Node" parent="."]
-script = ExtResource( 7 )
-widthSegmentsNum = 5
-minSegmentsBetweenPoints = 2
-minHeightStep = -50.0
-maxHeightStep = 50.0
-pathBoundsHorizMargins = Vector2( 100, 100 )
-printDebug = true
+[node name="TextShipFactory" parent="." instance=ExtResource( 1 )]

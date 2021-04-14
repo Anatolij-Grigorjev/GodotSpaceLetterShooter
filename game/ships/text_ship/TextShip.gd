@@ -10,7 +10,7 @@ signal textShipDestroyed
 export(String) var currentText: String = "test" setget setCurrentText, getCurrentText
 export(float) var speed: float = 450
 
-
+onready var fsm: StateMachine = $TextShipStateMachine
 onready var sprite: Sprite = $Sprite
 onready var projectilePosition: Position2D = $Sprite/Nose/ProjectilePosition
 onready var label: Label = $Sprite/Label
@@ -32,9 +32,11 @@ func nextTextIs(text: String) -> bool:
 	return currentText.begins_with(text)
 	
 	
-func prepare(text: String, startPosition: Vector2):
+func prepare(text: String, startPosition: Vector2, shipPath: Array):
 	setCurrentText(text)
 	position = startPosition
+	sprite.scale = Vector2.ZERO
+	fsm.getState("Descending").descendPath = shipPath
 	
 	
 func _process(delta: float):

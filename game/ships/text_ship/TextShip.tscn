@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://ships/text_ship/explode_ship.wav" type="AudioStream" id=1]
 [ext_resource path="res://ships/text_ship/ship_fly.wav" type="AudioStream" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://ships/text_ship/enemy_ship_horiz.png" type="Texture" id=5]
 [ext_resource path="res://ships/text_ship/IdlingState.tscn" type="PackedScene" id=6]
 [ext_resource path="res://fsm/AnimationState.gd" type="Script" id=7]
-[ext_resource path="res://ships/text_ship/PathGenerator.gd" type="Script" id=8]
 [ext_resource path="res://ships/text_ship/DieState.gd" type="Script" id=9]
 [ext_resource path="res://ships/text_ship/TextShipStateMachine.gd" type="Script" id=10]
 [ext_resource path="res://ships/text_ship/HitState.gd" type="Script" id=11]
@@ -447,11 +446,6 @@ animationName = "die"
 script = ExtResource( 7 )
 animatorPath = NodePath("../../AnimationPlayer")
 animationName = "collide_ship"
-
-[node name="PathGenerator" type="Node" parent="TextShipStateMachine"]
-script = ExtResource( 8 )
-widthSegmentsNum = 5
-pathBoundsHorizMargins = Vector2( 150, 150 )
 
 [node name="Thrusters" type="Node2D" parent="."]
 
