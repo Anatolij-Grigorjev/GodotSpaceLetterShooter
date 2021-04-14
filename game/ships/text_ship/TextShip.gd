@@ -20,9 +20,6 @@ onready var thrusterLeft: Particles2D = $Thrusters/ThrusterLeft
 onready var thrusterRight: Particles2D = $Thrusters/ThrusterRight
 onready var thrustersAudio: AudioStreamPlayer = $Thrusters/AudioStreamPlayer2D
 
-
-var startPosition: Vector2
-
 func _ready():
 	bubble.anim.play("hide")
 	
@@ -38,7 +35,6 @@ func nextTextIs(text: String) -> bool:
 func prepare(text: String, startPosition: Vector2):
 	setCurrentText(text)
 	position = startPosition
-	startPosition = startPosition
 	
 	
 func _process(delta: float):
