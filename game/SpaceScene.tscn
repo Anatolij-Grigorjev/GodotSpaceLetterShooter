@@ -27,6 +27,7 @@ scale = Vector2( 0.01, 0.02 )
 [node name="BGMusic" type="AudioStreamPlayer" parent="BG"]
 stream = ExtResource( 8 )
 volume_db = -10.0
+autoplay = true
 
 [node name="TextShips" type="Node2D" parent="."]
 

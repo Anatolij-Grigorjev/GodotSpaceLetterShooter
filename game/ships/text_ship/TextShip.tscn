@@ -405,7 +405,7 @@ max_value = 4.0
 _data = [ Vector2( 0, 4 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.389741 ), 0.0, 0.0, 0, 0 ]
 
 [node name="TextShip" type="Node2D" groups=[
-"shootable",
+"shootable-ship",
 "text_ship",
 ]]
 script = ExtResource( 4 )

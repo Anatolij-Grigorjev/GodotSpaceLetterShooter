@@ -150,7 +150,7 @@ color_ramp = SubResource( 10 )
 
 [node name="Projectile" type="Node2D" groups=[
 "projectile",
-"shootable",
+"shootable-projectile",
 ]]
 script = ExtResource( 2 )
 

@@ -84,10 +84,19 @@ func _isKeyJustPressed(keyEvent: InputEventKey) -> bool:
 func _findShootableWithNextText(text: String) -> Node2D:
 	if (text.empty()):
 		return null
-	for node in get_tree().get_nodes_in_group("shootable"):
-		var shootable: Node2D = node as Node2D
-		if (shootable.nextTextIs(text)):
-			return shootable
+	var foundProjectile := _findWithTextInGroup(text, "shootable-projectile")
+	if (is_instance_valid(foundProjectile)):
+		return foundProjectile
+	var foundShip := _findWithTextInGroup(text, "shootable-ship")
+	if (is_instance_valid(foundShip)):
+		return foundShip
+	return null
+
+
+func _findWithTextInGroup(text: String, group: String) -> Node2D:
+	for node in get_tree().get_nodes_in_group(group):
+		if (node.nextTextIs(text)):
+			return node
 	return null
 	
 	
