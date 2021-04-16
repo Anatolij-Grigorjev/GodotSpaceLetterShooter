@@ -61,14 +61,6 @@ func projectileHitText(projectile: Node2D) -> bool:
 	var payload: String = projectile.label.text
 	return not payload.empty() and nextTextIs(payload)
 	
-
-func _repositionParticleSystem(particles: Particles2D) -> void:
-	var randomPosition: Vector2 = Vector2(
-		rand_range(-1, 1),
-		rand_range(-1, 1)
-	) * 40
-	particles.position = randomPosition
-	
 	
 func disableThrusters():
 	thrustersAudio.playing = false
