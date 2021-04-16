@@ -34,9 +34,16 @@ func _ready():
 	connect("letterTyped", playerInput, "addTypedLetter")
 	connect("letterTyped", shooter, "chamberLetter")
 	shooter.connect("shotFired", playerInput, "clearText")
+	_performSceneIntro()
+	
+	
+func _performSceneIntro():
+	shooter.anim.play("arrive")
+	yield(shooter.anim, "animation_finished")
+	$AnimationPlayer.play("show_title")
+	yield($AnimationPlayer, "animation_finished")
 	_startPrepareTextShips()
 	_waitAddCreatedShips()
-
 
 
 	

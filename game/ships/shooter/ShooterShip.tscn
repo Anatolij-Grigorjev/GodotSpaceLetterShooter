@@ -293,7 +293,6 @@ collision_mask = 2
 shape = SubResource( 12 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "arrive"
 anims/arrive = SubResource( 13 )
 anims/jam = SubResource( 14 )
 anims/shoot = SubResource( 15 )
