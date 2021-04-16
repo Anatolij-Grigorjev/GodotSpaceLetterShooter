@@ -3,12 +3,17 @@ extends Node2D
 Scene where text ships descend while player types 
 and bottom ship shoots the descenders based on text
 """
+signal sceneCleared(sceneName)
+
 const TextShipScn = preload("res://ships/text_ship/TextShip.tscn")
 
 signal letterTyped(letter)
 
-export(int, 5) var numShipsFrom: int = 1
-export(int, 5) var numShipsTo: int = 5
+export(String) var sceneName: String = "Scene 1 - 1"
+
+export(int, 99) var numShipsScene: int = 10
+export(int, 5) var numShipsWaveFrom: int = 1
+export(int, 5) var numShipsWaveTo: int = 5
 
 
 onready var shooter = $ShooterShip
@@ -17,30 +22,39 @@ onready var shipsFactory = $TextShipFactory
 
 
 var currentLiveShips := 0
-
+var remainingSceneShips := 0
 
 var shipsBuilderThread: Thread
 
+
 func _ready():
 	G.currentScene = self
+	remainingSceneShips = numShipsScene
 	shipsBuilderThread = Thread.new()
 	connect("letterTyped", playerInput, "addTypedLetter")
 	connect("letterTyped", shooter, "chamberLetter")
 	shooter.connect("shotFired", playerInput, "clearText")
 	_startPrepareTextShips()
 	_waitAddCreatedShips()
-	
+
+
+
 	
 func _startPrepareTextShips() -> void:
-	var numShips = numShipsFrom + randi() % (numShipsTo - numShipsFrom + 1) 
+	var pickedInWave = numShipsWaveFrom + randi() % (numShipsWaveTo - numShipsWaveFrom + 1) 
+	var numShips = min(pickedInWave, remainingSceneShips)
 	shipsBuilderThread.start(shipsFactory, "generateShips", numShips)
 	
 	
 func _waitAddCreatedShips():
-	var preparedShips: Array = shipsBuilderThread.wait_to_finish()
-	_addShipsToScene(preparedShips)
-	#start next iteration
-	_startPrepareTextShips()
+	if (remainingSceneShips > 0):
+		var preparedShips: Array = shipsBuilderThread.wait_to_finish()
+		_addShipsToScene(preparedShips)
+		remainingSceneShips -= (preparedShips.size())
+		#start next iteration
+		_startPrepareTextShips()
+	else: 
+		emit_signal("sceneCleared", sceneName)
 	
 	
 func _addShipsToScene(preparedShips: Array):

@@ -6,6 +6,8 @@ background thread to make them ready for next wave participation
 const TextShipScn = preload("res://ships/text_ship/TextShip.tscn")
 
 export(bool) var printDebug: bool = false
+export(Vector2) var firstShipStartPos: Vector2 = Vector2(112, 65)
+
 
 onready var pathGenerator: PathGenerator = $PathGenerator
 onready var wordsProvider: WordsProvider = $WordsProvider
@@ -16,13 +18,13 @@ func _ready():
 	
 	
 func generateShips(numShips: int) -> Array:
+	if (numShips <= 0):
+		return []
+		
 	var windowWidth: int = OS.window_size.x
 	
 	var shipWords: Array = wordsProvider.takeWords(numShips)
-	var shipsStartPos: Vector2 = Vector2(
-		rand_range(100, 125),
-		rand_range(50, 100)
-	)
+	var shipsStartPos: Vector2 = firstShipStartPos
 	var shipPositions: Array = pathGenerator.generatePathSegments(shipsStartPos)
 	
 	if (printDebug):
