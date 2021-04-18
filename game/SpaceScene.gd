@@ -34,6 +34,7 @@ func _ready():
 	shipsBuilderThread = Thread.new()
 	connect("letterTyped", playerInput, "addTypedLetter")
 	connect("letterTyped", shooter, "chamberLetter")
+	connect("sceneCleared", shooter, "_on_currentScene_sceneOver")
 	shooter.connect("shotFired", playerInput, "clearText")
 	_performSceneIntro()
 	

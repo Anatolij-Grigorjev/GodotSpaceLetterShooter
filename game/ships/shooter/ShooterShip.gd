@@ -7,7 +7,7 @@ enum Side {
 	LEFT = -1,
 	RIGHT = 1
 }
-
+signal shipLeft
 signal shotFired
 
 export(PackedScene) var projectileScene: PackedScene
@@ -73,6 +73,13 @@ func _on_Area2D_area_entered(area: Area2D):
 	var areaOwner: Node2D = area.get_parent()
 	if (areaOwner.is_in_group("projectile")):
 		emptyChamber()
+		
+		
+func _on_currentScene_sceneOver(sceneName: String):
+	anim.play("leave")
+	yield(anim, "animation_finished")
+	emit_signal("shipLeft")
+	
 		
 		
 func _configureShooterShipProjectile(projectile: Node2D):
