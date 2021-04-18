@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://ships/text_ship/explode_ship.wav" type="AudioStream" id=1]
 [ext_resource path="res://ships/text_ship/ship_fly.wav" type="AudioStream" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://ships/text_ship/enemy_ship_horiz.png" type="Texture" id=5]
 [ext_resource path="res://ships/text_ship/IdlingState.tscn" type="PackedScene" id=6]
 [ext_resource path="res://fsm/AnimationState.gd" type="Script" id=7]
+[ext_resource path="res://ships/Projectile.tscn" type="PackedScene" id=8]
 [ext_resource path="res://ships/text_ship/DieState.gd" type="Script" id=9]
 [ext_resource path="res://ships/text_ship/TextShipStateMachine.gd" type="Script" id=10]
 [ext_resource path="res://ships/text_ship/HitState.gd" type="Script" id=11]
@@ -322,7 +323,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( -12.8323, -14.8655 ), Vector2( -9.43268, -31.9148 ), Vector2( 3.33854, -32.5816 ), Vector2( 17.2273, -20.7114 ), Vector2( 10.3533, -7.97244 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=12]
 resource_name = "shoot"
 length = 1.5
 tracks/0/type = "value"
@@ -400,7 +401,7 @@ tracks/5/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Curve" id=12]
+[sub_resource type="Curve" id=13]
 max_value = 4.0
 _data = [ Vector2( 0, 4 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.389741 ), 0.0, 0.0, 0, 0 ]
 
@@ -426,6 +427,8 @@ animationName = "appear"
 [node name="IdlingBubble" parent="TextShipStateMachine" instance=ExtResource( 13 )]
 
 [node name="IdlingShoot" parent="TextShipStateMachine" instance=ExtResource( 15 )]
+projectileScn = ExtResource( 8 )
+projectileCollisionMask = 4
 
 [node name="Hit" type="Node" parent="TextShipStateMachine"]
 script = ExtResource( 11 )
@@ -537,7 +540,7 @@ anims/collide_ship = SubResource( 8 )
 anims/die = SubResource( 9 )
 anims/hit = SubResource( 10 )
 anims/miss = SubResource( 11 )
-anims/shoot = SubResource( 13 )
+anims/shoot = SubResource( 12 )
 
 [node name="ExplosionsBattery" type="Node2D" parent="."]
 
@@ -558,7 +561,7 @@ initial_velocity_random = 0.5
 angular_velocity = 45.0
 angular_velocity_random = 0.5
 orbit_velocity_random = 0.5
-scale_amount_curve = SubResource( 12 )
+scale_amount_curve = SubResource( 13 )
 color = Color( 0.819608, 0.0666667, 0.0666667, 1 )
 __meta__ = {
 "_editor_description_": ""
@@ -582,7 +585,7 @@ initial_velocity_random = 0.5
 angular_velocity = 45.0
 angular_velocity_random = 0.5
 orbit_velocity_random = 0.5
-scale_amount_curve = SubResource( 12 )
+scale_amount_curve = SubResource( 13 )
 color = Color( 0.819608, 0.0666667, 0.0666667, 1 )
 __meta__ = {
 "_editor_description_": ""
@@ -606,7 +609,7 @@ initial_velocity_random = 0.5
 angular_velocity = 45.0
 angular_velocity_random = 0.5
 orbit_velocity_random = 0.5
-scale_amount_curve = SubResource( 12 )
+scale_amount_curve = SubResource( 13 )
 color = Color( 0.819608, 0.0666667, 0.0666667, 1 )
 __meta__ = {
 "_editor_description_": ""
@@ -630,7 +633,7 @@ initial_velocity_random = 0.5
 angular_velocity = 45.0
 angular_velocity_random = 0.5
 orbit_velocity_random = 0.5
-scale_amount_curve = SubResource( 12 )
+scale_amount_curve = SubResource( 13 )
 color = Color( 0.819608, 0.0666667, 0.0666667, 1 )
 __meta__ = {
 "_editor_description_": ""

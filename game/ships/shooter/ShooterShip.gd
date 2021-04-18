@@ -11,6 +11,7 @@ enum Side {
 signal shotFired
 
 export(PackedScene) var projectileScene: PackedScene
+export(int, LAYERS_2D_PHYSICS) var projectileCollisionMask: int = 0
 
 onready var shotPosition: Position2D = $Sprite/ShotPosition
 onready var anim: AnimationPlayer = $AnimationPlayer
@@ -52,6 +53,7 @@ func fireChambered(shootable: Node2D) -> void:
 	projectile.fireDirection = global_position.direction_to(shootable.global_position)
 	# speed boost based on text size
 	projectile.speed *= (1 + chamber.length() / 10)
+	_configureShooterShipProjectile(projectile)
 	G.currentScene.add_child(projectile)
 	projectile.label.text = chamber
 	emptyChamber()
@@ -71,3 +73,9 @@ func _on_Area2D_area_entered(area: Area2D):
 	var areaOwner: Node2D = area.get_parent()
 	if (areaOwner.is_in_group("projectile")):
 		emptyChamber()
+		
+		
+func _configureShooterShipProjectile(projectile: Node2D):
+	projectile.get_node("Sprite").modulate = Color.lightblue
+	projectile.get_node("Area2D").collision_mask = projectileCollisionMask
+	projectile.get_node("Area2D").collision_layer = 0

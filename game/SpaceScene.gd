@@ -29,6 +29,7 @@ var shipsBuilderThread: Thread
 
 func _ready():
 	G.currentScene = self
+	connect("sceneCleared", self, "_on_sceneCleared")
 	remainingSceneShips = numShipsScene
 	shipsBuilderThread = Thread.new()
 	connect("letterTyped", playerInput, "addTypedLetter")
@@ -139,4 +140,7 @@ func _checkSpecialCodes(keyCode: String) -> Dictionary:
 	}
 	
 	
+func _on_sceneCleared(sceneName: String):
+	print("Cleared scene: %s" % sceneName)
+	print("You are an hero!")
 	

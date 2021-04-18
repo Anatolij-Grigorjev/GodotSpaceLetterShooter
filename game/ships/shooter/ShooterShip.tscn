@@ -2,7 +2,7 @@
 
 [ext_resource path="res://ships/shooter/shooting_ship.png" type="Texture" id=1]
 [ext_resource path="res://ships/shooter/ShooterShip.gd" type="Script" id=2]
-[ext_resource path="res://ships/shooter/Projectile.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ships/Projectile.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ships/shooter/shot_spark.png" type="Texture" id=4]
 [ext_resource path="res://utils/ParticlesBattery.gd" type="Script" id=5]
 [ext_resource path="res://ships/shooter/shot_miss.wav" type="AudioStream" id=6]
@@ -218,6 +218,7 @@ tracks/4/keys = {
 ]]
 script = ExtResource( 2 )
 projectileScene = ExtResource( 3 )
+projectileCollisionMask = 2
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, 200 )

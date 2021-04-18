@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rect_bullet.png-a90bb8a3dad4a701b363a9a679f11157.stex"
+path="res://.import/rect_bullet.png-18ccc0db50a13965488de027ae7340e2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ships/shooter/rect_bullet.png"
-dest_files=[ "res://.import/rect_bullet.png-a90bb8a3dad4a701b363a9a679f11157.stex" ]
+source_file="res://ships/rect_bullet.png"
+dest_files=[ "res://.import/rect_bullet.png-18ccc0db50a13965488de027ae7340e2.stex" ]
 
 [params]
 

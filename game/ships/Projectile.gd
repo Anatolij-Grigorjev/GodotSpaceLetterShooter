@@ -11,6 +11,7 @@ var fireDirection: Vector2 = Vector2.ZERO
 
 onready var sprite: Sprite = $Sprite
 onready var label: Label = $Label
+onready var area: Area2D = $Area2D
 
 
 func _ready():
