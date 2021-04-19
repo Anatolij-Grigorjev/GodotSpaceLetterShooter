@@ -59,6 +59,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://utils/RandomAudioPlayer.gd"
 }, {
+"base": "Reference",
+"class": "SceneStatsData",
+"language": "GDScript",
+"path": "res://SceneStatsData.gd"
+}, {
 "base": "Node",
 "class": "State",
 "language": "GDScript",
@@ -110,6 +115,7 @@ _global_script_class_icons={
 "ParticlesBattery": "",
 "PathGenerator": "",
 "RandomAudioPlayer": "",
+"SceneStatsData": "",
 "State": "",
 "StateMachine": "",
 "StateMachineState": "",

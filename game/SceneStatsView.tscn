@@ -1,0 +1,204 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://SceneStatsView.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxFlat" id=1]
+draw_center = false
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0.839216, 0.960784, 0.0313726, 1 )
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="SceneStatsView" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+self_modulate = Color( 0, 0, 0, 0.682353 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginFrame" type="MarginContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 50.0
+margin_top = 20.0
+margin_right = -50.0
+margin_bottom = -200.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleAndStats" type="VBoxContainer" parent="Panel/MarginFrame"]
+margin_right = 1180.0
+margin_bottom = 500.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Title" type="Label" parent="Panel/MarginFrame/TitleAndStats"]
+margin_right = 1180.0
+margin_bottom = 45.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/normal = SubResource( 1 )
+text = "\"<SCENE NAME>\" STATISTICS:"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="GridContainer" type="GridContainer" parent="Panel/MarginFrame/TitleAndStats"]
+margin_top = 49.0
+margin_right = 1180.0
+margin_bottom = 500.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 10.0
+custom_constants/vseparation = 10
+custom_constants/hseparation = 10
+columns = 2
+
+[node name="ShotsFiredLbl" type="Label" parent="Panel/MarginFrame/TitleAndStats/GridContainer"]
+margin_right = 585.0
+margin_bottom = 66.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "shots fired:"
+valign = 1
+uppercase = true
+
+[node name="ShotsFiredValue" type="Label" parent="Panel/MarginFrame/TitleAndStats/GridContainer"]
+margin_left = 595.0
+margin_right = 1180.0
+margin_bottom = 66.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "0"
+align = 2
+valign = 1
+uppercase = true
+
+[node name="ShieldsBrokenLbl" type="Label" parent="Panel/MarginFrame/TitleAndStats/GridContainer"]
+margin_top = 76.0
+margin_right = 585.0
+margin_bottom = 142.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Shields broken:"
+valign = 1
+uppercase = true
+
+[node name="ShieldsBrokenValue" type="Label" parent="Panel/MarginFrame/TitleAndStats/GridContainer"]
+margin_left = 595.0
+margin_top = 76.0
+margin_right = 1180.0
+margin_bottom = 142.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "0"
+align = 2
+valign = 1
+uppercase = true
+
+[node name="ShipsDestroyedLbl" type="Label" parent="Panel/MarginFrame/TitleAndStats/GridContainer"]
+margin_top = 152.0
+margin_right = 585.0
+margin_bottom = 218.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "ships destroyed:"
+valign = 1
+uppercase = true
+
+[node name="ShipsDestroyedValue" type="Label" parent="Panel/MarginFrame/TitleAndStats/GridContainer"]
+margin_left = 595.0
+margin_top = 152.0
+margin_right = 1180.0
+margin_bottom = 218.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "0"
+align = 2
+valign = 1
+uppercase = true
+
+[node name="ProjectilesDestroyedLbl" type="Label" parent="Panel/MarginFrame/TitleAndStats/GridContainer"]
+margin_top = 228.0
+margin_right = 585.0
+margin_bottom = 294.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "projectiles destroyed:"
+valign = 1
+uppercase = true
+
+[node name="ProjectilesDestroyedValue" type="Label" parent="Panel/MarginFrame/TitleAndStats/GridContainer"]
+margin_left = 595.0
+margin_top = 228.0
+margin_right = 1180.0
+margin_bottom = 294.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "0"
+align = 2
+valign = 1
+uppercase = true
+
+[node name="TotalShipsLettersLbl" type="Label" parent="Panel/MarginFrame/TitleAndStats/GridContainer"]
+margin_top = 304.0
+margin_right = 585.0
+margin_bottom = 370.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Total ships letters:"
+valign = 1
+uppercase = true
+
+[node name="TotalShipsLettersValue" type="Label" parent="Panel/MarginFrame/TitleAndStats/GridContainer"]
+margin_left = 595.0
+margin_top = 304.0
+margin_right = 1180.0
+margin_bottom = 370.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "0/0"
+align = 2
+valign = 1
+uppercase = true
+
+[node name="LongestShipWordLbl" type="Label" parent="Panel/MarginFrame/TitleAndStats/GridContainer"]
+margin_top = 380.0
+margin_right = 585.0
+margin_bottom = 446.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Longest onship word:"
+valign = 1
+uppercase = true
+
+[node name="LogestShipWordValue" type="Label" parent="Panel/MarginFrame/TitleAndStats/GridContainer"]
+margin_left = 595.0
+margin_top = 380.0
+margin_right = 1180.0
+margin_bottom = 446.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "WORD"
+align = 2
+valign = 1
+uppercase = true

@@ -25,17 +25,18 @@ var currentLiveShips := 0
 var remainingSceneShips := 0
 
 var shipsBuilderThread: Thread
+var statsCookerThread: Thread
 
 
 func _ready():
 	G.currentScene = self
-	connect("sceneCleared", self, "_on_sceneCleared")
 	remainingSceneShips = numShipsScene
 	shipsBuilderThread = Thread.new()
 	connect("letterTyped", playerInput, "addTypedLetter")
 	connect("letterTyped", shooter, "chamberLetter")
 	connect("sceneCleared", shooter, "_on_currentScene_sceneOver")
 	shooter.connect("shotFired", playerInput, "clearText")
+	shooter.connect("shipLeft", self, "_on_sceneCleared")
 	_performSceneIntro()
 	
 	
@@ -63,6 +64,8 @@ func _waitAddCreatedShips():
 		#start next iteration
 		_startPrepareTextShips()
 	else: 
+		statsCookerThread = Thread.new()
+		statsCookerThread.start(self, "_buildSceneStats", null)
 		emit_signal("sceneCleared", sceneName)
 	
 	
@@ -140,8 +143,18 @@ func _checkSpecialCodes(keyCode: String) -> Dictionary:
 		'fireChambered': keyCode == "Space"
 	}
 	
+
+func _buildSceneStats(data):
+	var StatsScn: PackedScene = load("res://SceneStatsView.tscn")
+	var statsView = StatsScn.instance()
+	statsView.sceneName = sceneName
+	statsView.setData(G.currentSceneStats)
+	return statsView
 	
-func _on_sceneCleared(sceneName: String):
+	
+func _on_sceneCleared():
+	yield(get_tree().create_timer(0.75), "timeout")
+	var statsView = statsCookerThread.wait_to_finish()
+	$CanvasLayer.add_child(statsView)
 	print("Cleared scene: %s" % sceneName)
 	print("You are an hero!")
-	
