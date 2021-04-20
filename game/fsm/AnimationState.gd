@@ -13,7 +13,7 @@ var animationFinished: bool = false
 
 
 func _ready():
-	animator.connect("animation_finished", self, "_animatorFinishedAnimation")
+	Utils.tryConnect(animator, "animation_finished", self, "_animatorFinishedAnimation")
 	
 
 func enterState(prevState: String):

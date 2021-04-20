@@ -8,7 +8,8 @@ enum Side {
 	RIGHT = 1
 }
 signal shipLeft
-signal shotFired
+signal shotFired(shotWord)
+signal chamberEmptied
 
 export(PackedScene) var projectileScene: PackedScene
 export(int, LAYERS_2D_PHYSICS) var projectileCollisionMask: int = 0
@@ -56,6 +57,7 @@ func fireChambered(shootable: Node2D) -> void:
 	_configureShooterShipProjectile(projectile)
 	G.currentScene.add_child(projectile)
 	projectile.label.text = chamber
+	emit_signal("shotFired", chamber)
 	emptyChamber()
 	
 	
@@ -66,7 +68,7 @@ func missFire():
 	
 func emptyChamber():
 	chamber = ""
-	emit_signal("shotFired")
+	emit_signal("chamberEmptied")
 
 
 func _on_Area2D_area_entered(area: Area2D):

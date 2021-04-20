@@ -5,7 +5,7 @@ class_name TextShip
 Controller for ship with a piece of text in a label in a sprite
 """
 signal textShipCollidedShooter
-signal textShipDestroyed
+signal textShipDestroyed(text)
 
 export(String) var currentText: String = "test" setget setCurrentText, getCurrentText
 export(float) var speed: float = 450

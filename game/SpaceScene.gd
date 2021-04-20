@@ -26,17 +26,17 @@ var remainingSceneShips := 0
 
 var shipsBuilderThread: Thread
 var statsCookerThread: Thread
-
+var disableInput: bool = false
 
 func _ready():
 	G.currentScene = self
 	remainingSceneShips = numShipsScene
 	shipsBuilderThread = Thread.new()
-	connect("letterTyped", playerInput, "addTypedLetter")
-	connect("letterTyped", shooter, "chamberLetter")
-	connect("sceneCleared", shooter, "_on_currentScene_sceneOver")
-	shooter.connect("shotFired", playerInput, "clearText")
-	shooter.connect("shipLeft", self, "_on_sceneCleared")
+	Utils.tryConnect(self, "letterTyped", playerInput, "addTypedLetter")
+	Utils.tryConnect(self, "letterTyped", shooter, "chamberLetter")
+	Utils.tryConnect(self, "sceneCleared", shooter, "_on_currentScene_sceneOver")
+	Utils.tryConnect(shooter, "chamberEmptied", playerInput, "clearText")
+	Utils.tryConnect(shooter, "shipLeft", self, "_on_sceneCleared")
 	_performSceneIntro()
 	
 	
@@ -67,6 +67,7 @@ func _waitAddCreatedShips():
 		statsCookerThread = Thread.new()
 		statsCookerThread.start(self, "_buildSceneStats", null)
 		emit_signal("sceneCleared", sceneName)
+		disableInput = true
 	
 	
 func _addShipsToScene(preparedShips: Array):
@@ -77,11 +78,14 @@ func _addShipsToScene(preparedShips: Array):
 
 
 func _registerShipHandlers(ship: TextShip) -> void:
-	ship.connect("textShipCollidedShooter", self, "_finishStageCollided")
-	ship.connect("textShipDestroyed", self, "_countDestroyedShip")
+	G.connectTextShipStatsSignals(ship)
+	Utils.tryConnect(ship, "textShipCollidedShooter", self, "_finishStageCollided")
+	Utils.tryConnect(ship, "textShipDestroyed", self, "_countDestroyedShip")
 	
 	
 func _input(event: InputEvent) -> void:
+	if (disableInput):
+		return
 	if (not event is InputEventKey):
 		return
 	var keyEvent: InputEventKey = event as InputEventKey
@@ -130,7 +134,7 @@ func _finishStageCollided():
 	get_tree().quit()
 	
 	
-func _countDestroyedShip():
+func _countDestroyedShip(shipText: String):
 	currentLiveShips -= 1
 	if (currentLiveShips <= 0):
 		yield(get_tree(), "idle_frame")

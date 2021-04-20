@@ -55,4 +55,5 @@ func _configureTextShipProjectile(projectile: Node2D):
 	projectile.get_node("Area2D").collision_mask = projectileCollisionMask
 	projectile.get_node("Area2D").collision_layer = entity.get_node("Area2D").collision_layer
 	projectile.add_to_group("shootable-projectile")
+	G.connectProjectileStatsSignals(projectile)
 	

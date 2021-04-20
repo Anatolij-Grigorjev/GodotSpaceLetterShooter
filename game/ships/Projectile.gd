@@ -2,7 +2,7 @@ extends Node2D
 """
 Controller for non-homing forward facing projectile
 """
-
+signal projectileDestroyed(text)
 
 export(float) var speed: float = 1050.77
 export(float) var angularVelocity: float = 6
@@ -33,6 +33,7 @@ func _on_Area2D_area_entered(area: Area2D):
 		return
 	if (areaOwner.is_in_group("projectile")):
 		speed = 0.0
+		emit_signal("projectileDestroyed", label.text)
 	$AnimationPlayer.play("collide")
 
 

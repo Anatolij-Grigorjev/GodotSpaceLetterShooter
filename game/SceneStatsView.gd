@@ -9,10 +9,12 @@ func _ready():
 
 
 func setData(data: SceneStatsData):
-	$Panel/MarginFrame/TitleAndStats/GridContainer/ShotsFiredValue.text = data.totalShotsFired
-	$Panel/MarginFrame/TitleAndStats/GridContainer/ShieldsBrokenValue.text = data.shieldsBroken
-	$Panel/MarginFrame/TitleAndStats/GridContainer/ShipsDestroyedValue.text = data.shipsShot
-	$Panel/MarginFrame/TitleAndStats/GridContainer/ProjectilesDestroyedValue.text = data.projectilesShot
+	print(data)
+	$Panel/MarginFrame/TitleAndStats/GridContainer/LettersTypedValue.text = str(data.totalLettersTyped)
+	$Panel/MarginFrame/TitleAndStats/GridContainer/ShotsFiredValue.text = str(data.totalShotsFired)
+	$Panel/MarginFrame/TitleAndStats/GridContainer/ShieldsBrokenValue.text = str(data.shieldsBroken)
+	$Panel/MarginFrame/TitleAndStats/GridContainer/ShipsDestroyedValue.text = str(data.shipsShot)
+	$Panel/MarginFrame/TitleAndStats/GridContainer/ProjectilesDestroyedValue.text = str(data.projectilesShot)
 	$Panel/MarginFrame/TitleAndStats/GridContainer/TotalShipsLettersValue.text = "%s/%s" % [data.totalShipsLetters, (data.totalShipsLetters + data.totalProjectilesLetters)]
 	$Panel/MarginFrame/TitleAndStats/GridContainer/LongestShipWordValue.text = data.longestShipWord
 	
