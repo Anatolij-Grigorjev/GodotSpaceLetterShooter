@@ -60,4 +60,3 @@ func _on_textShipBubbleBurst():
 	
 func _on_projectileDestroyed(text: String):
 	currentSceneStats.projectilesShot += 1
-	currentSceneStats.totalProjectilesLetters += text.length()

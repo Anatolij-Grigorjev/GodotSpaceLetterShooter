@@ -40,6 +40,7 @@ func performShot():
 	_configureTextShipProjectile(projectile)
 	G.currentScene.add_child(projectile)
 	var useNumLetters = randi() % maxShotLength + 1
+	G.currentSceneStats.totalProjectilesLetters += useNumLetters
 	projectile.label.text = entity.currentText.substr(0, useNumLetters)
 	entity.currentText = entity.currentText.substr(useNumLetters)
 	_checkCanShootAgain()
