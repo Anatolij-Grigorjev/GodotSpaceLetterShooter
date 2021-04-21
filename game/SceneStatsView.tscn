@@ -187,7 +187,7 @@ margin_right = 585.0
 margin_bottom = 380.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "Total ships letters:"
+text = "Total onship letters:"
 valign = 1
 uppercase = true
 
