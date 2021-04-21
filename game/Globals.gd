@@ -27,6 +27,7 @@ func _connectSceneStatsSignals():
 func connectTextShipStatsSignals(textShip: TextShip):
 	Utils.tryConnect(textShip, "textShipDestroyed", self, "_on_textShipShotDown")
 	Utils.tryConnect(textShip.bubble, "bubbleBurst", self, "_on_textShipBubbleBurst")
+	Utils.tryConnect(textShip, "shotFired", self, "_on_textShipShotFired")
 	
 
 func connectProjectileStatsSignals(projectile: Node2D):
@@ -46,8 +47,11 @@ func _connectShooterStatsSignals(shooter: Node2D):
 func _on_playerLetterTyped(letter: String):
 	currentSceneStats.totalLettersTyped += 1
 	
-func _on_shooterShotFired(shotWord: String):
+func _on_shooterShotFired(projectile):
 	currentSceneStats.totalShotsFired += 1
+	
+func _on_textShipShotFired(projectile: Node2D):
+	currentSceneStats.totalProjectilesLetters += projectile.get_node("Label").text.length()
 	
 func _on_textShipShotDown(text: String):
 	currentSceneStats.shipsShot += 1

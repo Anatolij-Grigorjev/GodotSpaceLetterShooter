@@ -8,7 +8,7 @@ enum Side {
 	RIGHT = 1
 }
 signal shipLeft
-signal shotFired(shotWord)
+signal shotFired(projectile)
 signal chamberEmptied
 
 export(PackedScene) var projectileScene: PackedScene
@@ -55,9 +55,8 @@ func fireChambered(shootable: Node2D) -> void:
 	# speed boost based on text size
 	projectile.speed *= (1 + chamber.length() / 10)
 	_configureShooterShipProjectile(projectile)
-	G.currentScene.add_child(projectile)
-	projectile.label.text = chamber
-	emit_signal("shotFired", chamber)
+	projectile.get_node("Label").text = chamber
+	emit_signal("shotFired", projectile)
 	emptyChamber()
 	
 	

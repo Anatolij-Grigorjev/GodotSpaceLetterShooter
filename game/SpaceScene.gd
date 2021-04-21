@@ -37,6 +37,7 @@ func _ready():
 	Utils.tryConnect(self, "sceneCleared", shooter, "_on_currentScene_sceneOver")
 	Utils.tryConnect(shooter, "chamberEmptied", playerInput, "clearText")
 	Utils.tryConnect(shooter, "shipLeft", self, "_on_sceneCleared")
+	Utils.tryConnect(shooter, "shotFired", self, "_on_shipShotFired")
 	_performSceneIntro()
 	
 	
@@ -81,6 +82,7 @@ func _registerShipHandlers(ship: TextShip) -> void:
 	G.connectTextShipStatsSignals(ship)
 	Utils.tryConnect(ship, "textShipCollidedShooter", self, "_finishStageCollided")
 	Utils.tryConnect(ship, "textShipDestroyed", self, "_countDestroyedShip")
+	Utils.tryConnect(ship, "shotFired", self, "_on_shipShotFired")
 	
 	
 func _input(event: InputEvent) -> void:
@@ -128,6 +130,10 @@ func _findWithTextInGroup(text: String, group: String) -> Node2D:
 		if (node.nextTextIs(text)):
 			return node
 	return null
+	
+	
+func _on_shipShotFired(projectile: Node2D):
+	add_child(projectile)
 	
 	
 func _finishStageCollided():

@@ -38,11 +38,10 @@ func performShot():
 	projectile.fireDirection = entity.global_position.direction_to(G.shooterShip.global_position)
 	projectile.speed = projectileSpeed
 	_configureTextShipProjectile(projectile)
-	G.currentScene.add_child(projectile)
 	var useNumLetters = randi() % maxShotLength + 1
-	G.currentSceneStats.totalProjectilesLetters += useNumLetters
-	projectile.label.text = entity.currentText.substr(0, useNumLetters)
+	projectile.get_node("Label").text = entity.currentText.substr(0, useNumLetters)
 	entity.currentText = entity.currentText.substr(useNumLetters)
+	entity.emit_signal("shotFired", projectile)
 	_checkCanShootAgain()
 	
 
@@ -56,5 +55,4 @@ func _configureTextShipProjectile(projectile: Node2D):
 	projectile.get_node("Area2D").collision_mask = projectileCollisionMask
 	projectile.get_node("Area2D").collision_layer = entity.get_node("Area2D").collision_layer
 	projectile.add_to_group("shootable-projectile")
-	G.connectProjectileStatsSignals(projectile)
 	

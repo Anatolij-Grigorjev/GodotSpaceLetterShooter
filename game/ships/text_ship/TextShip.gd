@@ -4,6 +4,7 @@ class_name TextShip
 """
 Controller for ship with a piece of text in a label in a sprite
 """
+signal shotFired(projectile)
 signal textShipCollidedShooter
 signal textShipDestroyed(text)
 
