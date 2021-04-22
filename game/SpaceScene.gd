@@ -26,12 +26,13 @@ var remainingSceneShips := 0
 
 var shipsBuilderThread: Thread
 var statsCookerThread: Thread
-var disableInput: bool = false
+var stageOver: bool = false
 
 func _ready():
 	G.currentScene = self
 	remainingSceneShips = numShipsScene
 	shipsBuilderThread = Thread.new()
+	statsCookerThread = Thread.new()
 	Utils.tryConnect(self, "letterTyped", playerInput, "addTypedLetter")
 	Utils.tryConnect(self, "letterTyped", shooter, "chamberLetter")
 	Utils.tryConnect(self, "sceneCleared", shooter, "_on_currentScene_sceneOver")
@@ -65,10 +66,13 @@ func _waitAddCreatedShips():
 		#start next iteration
 		_startPrepareTextShips()
 	else: 
-		statsCookerThread = Thread.new()
-		statsCookerThread.start(self, "_buildSceneStats", null)
+		_startEndSceneStats()
 		emit_signal("sceneCleared", sceneName)
-		disableInput = true
+	
+
+func _startEndSceneStats():
+	statsCookerThread.start(self, "_buildSceneStats", null)
+	stageOver = true
 	
 	
 func _addShipsToScene(preparedShips: Array):
@@ -80,13 +84,13 @@ func _addShipsToScene(preparedShips: Array):
 
 func _registerShipHandlers(ship: TextShip) -> void:
 	G.connectTextShipStatsSignals(ship)
-	Utils.tryConnect(ship, "textShipCollidedShooter", self, "_finishStageCollided")
+	Utils.tryConnect(ship, "textShipCollidedShooter", self, "_on_shooterCollided")
 	Utils.tryConnect(ship, "textShipDestroyed", self, "_countDestroyedShip")
 	Utils.tryConnect(ship, "shotFired", self, "_on_shipShotFired")
 	
 	
 func _input(event: InputEvent) -> void:
-	if (disableInput):
+	if (stageOver):
 		return
 	if (not event is InputEventKey):
 		return
@@ -138,10 +142,6 @@ func _on_shipShotFired(projectile: Node2D):
 		G.connectProjectileStatsSignals(projectile)
 	
 	
-func _finishStageCollided():
-	get_tree().quit()
-	
-	
 func _countDestroyedShip(shipText: String):
 	currentLiveShips -= 1
 	if (currentLiveShips <= 0):
@@ -165,8 +165,19 @@ func _buildSceneStats(data):
 	
 	
 func _on_sceneCleared():
+	_addStatsViewToCanvas()
+	print("Cleared scene: %s" % sceneName)
+	print("You are an hero!")
+	
+	
+func _addStatsViewToCanvas():
 	yield(get_tree().create_timer(0.75), "timeout")
 	var statsView = statsCookerThread.wait_to_finish()
 	$CanvasLayer.add_child(statsView)
-	print("Cleared scene: %s" % sceneName)
-	print("You are an hero!")
+	
+	
+func _on_shooterCollided():
+	if (not stageOver):
+		_startEndSceneStats()
+		_addStatsViewToCanvas()
+	print("scene: '%s' - :(" % sceneName)

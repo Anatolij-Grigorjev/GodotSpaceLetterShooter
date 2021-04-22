@@ -104,6 +104,18 @@ tracks/2/keys = {
 "method": "emit_signal"
 } ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite/Nose:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=9]
 length = 1.5
@@ -410,7 +422,7 @@ _data = [ Vector2( 0, 4 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.389741 ), 0.0, 0.0, 0, 
 "text_ship",
 ]]
 script = ExtResource( 4 )
-currentText = "TEST"
+currentText = ":)"
 
 [node name="TextShipStateMachine" type="Node" parent="."]
 script = ExtResource( 10 )
@@ -488,7 +500,7 @@ margin_bottom = -78.8866
 custom_styles/normal = SubResource( 5 )
 custom_colors/font_color = Color( 0.945098, 1, 0, 1 )
 custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
-text = "TEST"
+text = ":)"
 align = 1
 valign = 1
 clip_text = true

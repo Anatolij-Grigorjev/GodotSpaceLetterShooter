@@ -19,18 +19,20 @@ static func joinToString(
 
 
 """
-Attempt to connect 'signal' from 'source' to 'method' on 'target'.
+Attempt to connect 'signal' from 'source' to 'method' on 'target', 
+with specified binds.
 NOOP if connection exists. 
-No additonal binds provided, default connect flags.
+default connect flags.
 Returns 'true' if a new signal connection was made, 'false' otherwise
 """
 static func tryConnect(
 	source: Object, sourceSignal: String, 
-	target: Object, method: String
+	target: Object, method: String,
+	binds: Array = []
 ) -> bool:
 	if (source.is_connected(sourceSignal, target, method)):
 		return false
-	var connectError = source.connect(sourceSignal, target, method)
+	var connectError = source.connect(sourceSignal, target, method, binds)
 	if (connectError != OK):
 		print("CONNECT_ERROR: %s emit '%s' -> %s handler '%s': %s" % [
 			source.name, sourceSignal,
