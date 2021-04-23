@@ -5,6 +5,7 @@ export(String) var sceneName: String = "<SCENE NAME>" setget setSceneName
 
 
 func _ready():
+#	setData(SceneStatsData.new("TEST-SCENE"))
 	pass
 
 
@@ -12,6 +13,7 @@ func setData(data: SceneStatsData):
 	print(data)
 	$Panel/MarginFrame/TitleAndStats/GridContainer/LettersTypedValue.text = str(data.totalLettersTyped)
 	$Panel/MarginFrame/TitleAndStats/GridContainer/ShotsFiredValue.text = str(data.totalShotsFired)
+	$Panel/MarginFrame/TitleAndStats/GridContainer/ShotsMissedValue.text = str(data.totalShotsMissed)
 	$Panel/MarginFrame/TitleAndStats/GridContainer/ShieldsBrokenValue.text = str(data.shieldsBroken)
 	$Panel/MarginFrame/TitleAndStats/GridContainer/ShipsDestroyedValue.text = str(data.shipsShot)
 	$Panel/MarginFrame/TitleAndStats/GridContainer/ProjectilesDestroyedValue.text = str(data.projectilesShot)

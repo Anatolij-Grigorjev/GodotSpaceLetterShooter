@@ -6,6 +6,7 @@ Statistics about shooter accomplishments in current scene
 var sceneName: String
 var totalLettersTyped: int
 var totalShotsFired: int
+var totalShotsMissed: int
 var shieldsBroken: int
 var projectilesShot: int
 var shipsShot: int
@@ -17,6 +18,7 @@ func _init(sceneName: String):
 	self.sceneName = sceneName
 	totalLettersTyped = 0
 	totalShotsFired = 0
+	totalShotsMissed = 0
 	shieldsBroken = 0
 	projectilesShot = 0
 	shipsShot = 0
@@ -25,25 +27,8 @@ func _init(sceneName: String):
 	longestShipWord = ""
 	
 	
+func get_class() -> String:
+	return "SceneStatsData"
+	
 func _to_string() -> String:
-	return """
-	 sceneName=%s
-	 totalLettersTyped=%s
-	 totalShotsFired=%s
-	 shieldsBroken=%s
-	 projectilesShot=%s
-	 shipsShot=%s
-	 totalShipsLetters=%s
-	 totalProjectilesLetters=%s
-	 longestShipWord=%s
-""" % [
-	sceneName,
-	totalLettersTyped,
-	totalShotsFired,
-	shieldsBroken,
-	projectilesShot,
-	shipsShot,
-	totalShipsLetters,
-	totalProjectilesLetters,
-	longestShipWord
- ]
+	return Utils.dumpObjectScriptVars(self)

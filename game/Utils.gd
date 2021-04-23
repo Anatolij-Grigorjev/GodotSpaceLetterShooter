@@ -10,13 +10,26 @@ Join elements of an Array as a string  using the
 Each element is stringified using the 'formatter' format string.
 """
 static func joinToString(
-	col: Array, formatter: String = "%s", joiner = ","
+	col: Array, joiner = ",", formatter: String = "%s"
 ) -> String:
 	var stringPool := PoolStringArray()
 	for item in col:
 		stringPool.append(formatter % item)
 	return stringPool.join(joiner)
 
+"""
+Print current values stored in listed object properties,
+one property=value pair per line
+"""
+static func dumpObjectScriptVars(object: Object) -> String:
+	var currentPropValues := ["<%s>" % object.get_class()]
+	for prop in object.get_property_list():
+		if (prop.usage == PROPERTY_USAGE_SCRIPT_VARIABLE):
+			currentPropValues.append("\t%s=%s" % [prop.name, object.get(prop.name)])
+	currentPropValues.append("</%s>" % object.get_class())
+	
+	return joinToString(currentPropValues, "\n")
+	
 
 """
 Attempt to connect 'signal' from 'source' to 'method' on 'target', 

@@ -47,6 +47,6 @@ func _printFleetStats(numShips: int, shipPositions: Array, shipWords: Array):
 	var shipsStartX := []
 	for vectorPos in shipPositions.slice(0, numShips - 1):
 		shipsStartX.append(vectorPos.x)
-	print(Utils.joinToString(shipsStartX, "%10.0d", " "))
-	print(Utils.joinToString(shipWords, "%10s", " "))
+	print(Utils.joinToString(shipsStartX, " ", "%10.0d"))
+	print(Utils.joinToString(shipWords, " ", "%10s"))
 	print("\n")
