@@ -100,8 +100,6 @@ func _input(event: InputEvent) -> void:
 	var keyCharCode: String = OS.get_scancode_string(keyEvent.scancode)
 	
 	var specialCodeToggles := _checkSpecialCodes(keyCharCode)
-	if (specialCodeToggles.toggleBgMusic):
-		$BG/BGMusic.stream_paused = not $BG/BGMusic.stream_paused
 	
 	if (keyCharCode.length() == 1):
 		emit_signal("letterTyped", keyCharCode)
@@ -151,7 +149,6 @@ func _countDestroyedShip(shipText: String):
 
 func _checkSpecialCodes(keyCode: String) -> Dictionary:
 	return {
-		'toggleBgMusic': keyCode == "Escape",
 		'fireChambered': keyCode == "Space"
 	}
 	

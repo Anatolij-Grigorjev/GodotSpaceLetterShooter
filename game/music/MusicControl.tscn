@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://music/icon_music.png" type="Texture" id=1]
+[ext_resource path="res://icon_option_disabled.png" type="Texture" id=2]
+[ext_resource path="res://music/MusicControl.gd" type="Script" id=3]
+
+[node name="MusicControl" type="Control"]
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MusicIcon" type="TextureRect" parent="."]
+margin_right = 50.0
+margin_bottom = 50.0
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DisabledIcon" type="TextureRect" parent="MusicIcon"]
+visible = false
+margin_right = 50.0
+margin_bottom = 50.0
+texture = ExtResource( 2 )
+expand = true
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
