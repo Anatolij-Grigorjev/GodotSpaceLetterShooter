@@ -9,11 +9,6 @@ const TextShipScn = preload("res://ships/text_ship/TextShip.tscn")
 
 signal letterTyped(letter)
 
-export(String) var sceneName: String = "Scene 1 - 1"
-
-export(int, 99) var numShipsScene: int = 10
-export(int, 5) var numShipsWaveFrom: int = 1
-export(int, 5) var numShipsWaveTo: int = 5
 
 
 onready var shooter = $ShooterShip
@@ -23,22 +18,35 @@ onready var shipsFactory = $TextShipFactory
 
 var currentLiveShips := 0
 var remainingSceneShips := 0
+var remainingSceneShipSpecs := {}
+var sceneName: String
 
 var shipsBuilderThread: Thread
 var statsCookerThread: Thread
 var stageOver: bool = false
 
+var specification: SceneSpec
+
+
 func _ready():
 	G.currentScene = self
-	remainingSceneShips = numShipsScene
 	shipsBuilderThread = Thread.new()
 	statsCookerThread = Thread.new()
+	
 	Utils.tryConnect(self, "letterTyped", playerInput, "addTypedLetter")
 	Utils.tryConnect(self, "letterTyped", shooter, "chamberLetter")
 	Utils.tryConnect(self, "sceneCleared", shooter, "_on_currentScene_sceneOver")
 	Utils.tryConnect(shooter, "chamberEmptied", playerInput, "clearText")
 	Utils.tryConnect(shooter, "shipLeft", self, "_on_sceneCleared")
 	Utils.tryConnect(shooter, "shotFired", self, "_on_shipShotFired")
+	
+	specification = SceneSpec.new()
+	sceneName = specification.sceneName
+	$CanvasLayer/SceneTitle.text = specification.sceneName
+	
+	remainingSceneShips = specification.totalShips
+	remainingSceneShipSpecs = specification.allowedShipsTypes.duplicate()
+	
 	_performSceneIntro()
 	
 	
@@ -53,10 +61,24 @@ func _performSceneIntro():
 
 	
 func _startPrepareTextShips() -> void:
-	var pickedInWave = numShipsWaveFrom + randi() % (numShipsWaveTo - numShipsWaveFrom + 1) 
-	var numShips = min(pickedInWave, remainingSceneShips)
-	shipsBuilderThread.start(shipsFactory, "generateShips", numShips)
+	var numShips = _calcNextWaveNumShips()
+	var firstShipStart = Vector2(
+		rand_range(100, 175),
+		rand_range(50, 100)
+	)
+	var nextWaveSpec = SceneWaveSpec.new(numShips, firstShipStart, remainingSceneShipSpecs)
+	for nextWaveShipSpec in nextWaveSpec.shipTypes:
+		remainingSceneShipSpecs[nextWaveShipSpec] -= 1
+	shipsBuilderThread.start(shipsFactory, "generateShips", nextWaveSpec)
 	
+
+
+func _calcNextWaveNumShips() -> int:
+	var numShipsWaveFrom = specification.smallestShipsWave
+	var numShipsWaveTo = specification.largestShipsWave
+	var pickedInWave: int = numShipsWaveFrom + randi() % (numShipsWaveTo - numShipsWaveFrom + 1) 
+	return int(min(pickedInWave, remainingSceneShips))
+
 	
 func _waitAddCreatedShips():
 	if (remainingSceneShips > 0):

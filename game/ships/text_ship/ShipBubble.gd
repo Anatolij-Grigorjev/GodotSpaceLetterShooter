@@ -17,13 +17,19 @@ onready var sprite: Sprite = $Sprite
 var bubbleHit: bool = false
 
 var bubbleMaxHits: int
-var bubbleHitsCurrent: int
+var bubbleHitsCurrent: int = -1
 
 func _ready():
 	bubbleHit = false
 	bubbleMaxHits = bubbleDamageColors.size()
-	bubbleHitsCurrent = 0
+	#no external setting, use default
+	if (bubbleHitsCurrent == -1):
+		bubbleHitsCurrent = bubbleMaxHits
 	_updateBubbleColor()
+	
+	
+func setInitialHitPoints(hitPoints: int):
+	bubbleHitsCurrent = clamp(bubbleMaxHits - hitPoints, 0, bubbleMaxHits)
 
 
 func _on_Area2D_area_entered(area: Area2D):
@@ -52,6 +58,9 @@ func _bubbleHitForAnimation(animName: String):
 			
 
 func _updateBubbleColor():
-	sprite.self_modulate = bubbleDamageColors[bubbleHitsCurrent]
+	if (bubbleHitsCurrent < bubbleDamageColors.size()):
+		sprite.self_modulate = bubbleDamageColors[bubbleHitsCurrent]
+	else:
+		sprite.self_modulate = Color.transparent
 		
 		

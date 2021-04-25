@@ -6,7 +6,6 @@ background thread to make them ready for next wave participation
 const TextShipScn = preload("res://ships/text_ship/TextShip.tscn")
 
 export(bool) var printDebug: bool = false
-export(Vector2) var firstShipStartPos: Vector2 = Vector2(112, 65)
 
 
 onready var pathGenerator: PathGenerator = $PathGenerator
@@ -17,25 +16,30 @@ func _ready():
 	pass
 	
 	
-func generateShips(numShips: int) -> Array:
-	if (numShips <= 0):
+func generateShips(waveSpec: SceneWaveSpec) -> Array:
+	if (waveSpec.numShips <= 0):
 		return []
 		
 	var windowWidth: int = OS.window_size.x
 	
-	var shipWords: Array = wordsProvider.takeWords(numShips)
-	var shipsStartPos: Vector2 = firstShipStartPos
+	var shipWords: Array = wordsProvider.takeWords(waveSpec.numShips)
+	var shipsStartPos: Vector2 = waveSpec.firstShipStartPos
 	var shipPositions: Array = pathGenerator.generatePathSegments(shipsStartPos)
 	
 	if (printDebug):
-		_printFleetStats(numShips, shipPositions, shipWords)
+		_printFleetStats(waveSpec.numShips, shipPositions, shipWords)
 		
 	var preparedShips: Array = []
-	for idx in range(numShips):
+	for idx in range(waveSpec.numShips):
 		var thisShipPosition: Vector2 = shipPositions[idx]
 		var shipPath = pathGenerator.generatePathSegments(thisShipPosition)
 		var textShip := TextShipScn.instance()
-		textShip.prepare(shipWords[idx], thisShipPosition, shipPath)
+		textShip.prepare(
+			shipWords[idx], 
+			thisShipPosition, 
+			shipPath, 
+			waveSpec.shipTypes[idx]
+		)
 		preparedShips.append(textShip)
 	return preparedShips
 

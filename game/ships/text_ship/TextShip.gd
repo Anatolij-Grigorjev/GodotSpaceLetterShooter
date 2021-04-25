@@ -33,11 +33,17 @@ func nextTextIs(text: String) -> bool:
 	return currentText.begins_with(text)
 	
 	
-func prepare(text: String, startPosition: Vector2, shipPath: Array):
+func prepare(text: String, startPosition: Vector2, shipPath: Array, limiters: SceneShipLimits):
 	setCurrentText(text)
 	position = startPosition
 	$Sprite.scale = Vector2.ZERO
 	$TextShipStateMachine/Descending.descendPath = shipPath
+	speed = limiters.shipSpeed
+	$TextShipStateMachine.initialIdlingActionsWeights["IdlingShoot"] = (1 if limiters.canShoot else 0)
+	if limiters.shieldHitPoints <= 0:
+		$TextShipStateMachine.initialIdlingActionsWeights["IdlingBubble"] = 0
+	else:
+		$Sprite/ShipBubble.setInitialHitPoints(limiters.shieldHitPoints)
 	
 	
 func _process(delta: float):
