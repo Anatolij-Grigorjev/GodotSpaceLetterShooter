@@ -16,7 +16,8 @@ var idlingActionsWeights: WeightedItems
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	idlingActionsWeights = WeightedItems.new(initialIdlingActionsWeights)
+	if (not idlingActionsWeights):
+		idlingActionsWeights = WeightedItems.new(initialIdlingActionsWeights)
 	call_deferred("setState", "Appearing")
 	Utils.tryConnect(getState("IdlingShoot"), "shotLettersDepleted", self, "_onEntityNotEnoughShotLetters")
 	yield(get_tree(), "idle_frame")

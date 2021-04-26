@@ -21,8 +21,15 @@ onready var thrusterLeft: Particles2D = $Thrusters/ThrusterLeft
 onready var thrusterRight: Particles2D = $Thrusters/ThrusterRight
 onready var thrustersAudio: AudioStreamPlayer = $Thrusters/AudioStreamPlayer2D
 
+
+var actionWeights := {}
+
 func _ready():
 	bubble.anim.play("hide")
+	#set FSM idling weights
+	for action in actionWeights:
+		fsm.idlingActionsWeights.setItemWeight(action, actionWeights[action])
+	
 	
 
 func hitCharacter(numChars: int) -> void:
@@ -39,11 +46,11 @@ func prepare(text: String, startPosition: Vector2, shipPath: Array, limiters: Sc
 	$Sprite.scale = Vector2.ZERO
 	$TextShipStateMachine/Descending.descendPath = shipPath
 	speed = limiters.shipSpeed
-	$TextShipStateMachine.initialIdlingActionsWeights["IdlingShoot"] = (1 if limiters.canShoot else 0)
-	if limiters.shieldHitPoints <= 0:
-		$TextShipStateMachine.initialIdlingActionsWeights["IdlingBubble"] = 0
-	else:
-		$Sprite/ShipBubble.setInitialHitPoints(limiters.shieldHitPoints)
+	$Sprite/ShipBubble.setInitialHitPoints(limiters.shieldHitPoints)
+	actionWeights = {
+		"IdlingBubble": (1 if limiters.shieldHitPoints > 0 else 0),
+		"IdlingShoot": limiters.shootInclination
+	}
 	
 	
 func _process(delta: float):

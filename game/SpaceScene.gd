@@ -29,6 +29,7 @@ var specification: SceneSpec
 
 
 func _ready():
+	randomize()
 	G.currentScene = self
 	shipsBuilderThread = Thread.new()
 	statsCookerThread = Thread.new()
@@ -40,7 +41,7 @@ func _ready():
 	Utils.tryConnect(shooter, "shipLeft", self, "_on_sceneCleared")
 	Utils.tryConnect(shooter, "shotFired", self, "_on_shipShotFired")
 	
-	specification = SceneSpec.new()
+	specification = _getSceneSpecification()
 	sceneName = specification.sceneName
 	$CanvasLayer/SceneTitle.text = specification.sceneName
 	
@@ -59,6 +60,22 @@ func _performSceneIntro():
 	_waitAddCreatedShips()
 
 
+func _getSceneSpecification() -> SceneSpec:
+	var spec := SceneSpec.new()
+	spec.sceneName = "Scene 1 - 1"
+	spec.totalShips = 10
+	spec.smallestShipsWave = 2
+	spec.largestShipsWave = 4
+	spec.allowedShipsTypes = {
+		#speedster
+		SceneShipLimits.new(566, 0, 0): 5,
+		#tank 
+		SceneShipLimits.new(400.56, 9, 0): 2,
+		#shooter
+		SceneShipLimits.new(450.0, 1, 3): 3
+	}
+	
+	return spec
 	
 func _startPrepareTextShips() -> void:
 	var numShips = _calcNextWaveNumShips()

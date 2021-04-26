@@ -20,6 +20,11 @@ func _init(initialWeights: Dictionary):
 func disableItem(item: String):
 	itemWeights[item] = DISABLE_ITEM_WEIGHT
 	weightUnitValue = _calcChanceOfWeightUnit()
+	
+
+func setItemWeight(item: String, weight: int):
+	itemWeights[item] = weight
+	weightUnitValue = _calcChanceOfWeightUnit()
 
 
 func pickRandomWeighted() -> String:
@@ -60,3 +65,7 @@ func _increaseEnabledItemWeightsExcept(ignoreItem: String):
 
 func _isItemEnabled(item: String) -> bool:
 	return itemWeights[item] != DISABLE_ITEM_WEIGHT
+	
+	
+func _to_string() -> String:
+	return "%s" % itemWeights 

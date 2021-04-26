@@ -27,7 +27,7 @@ func generateShips(waveSpec: SceneWaveSpec) -> Array:
 	var shipPositions: Array = pathGenerator.generatePathSegments(shipsStartPos)
 	
 	if (printDebug):
-		_printFleetStats(waveSpec.numShips, shipPositions, shipWords)
+		_printFleetStats(waveSpec.numShips, shipPositions, shipWords, waveSpec.shipTypes)
 		
 	var preparedShips: Array = []
 	for idx in range(waveSpec.numShips):
@@ -45,7 +45,7 @@ func generateShips(waveSpec: SceneWaveSpec) -> Array:
 
 
 
-func _printFleetStats(numShips: int, shipPositions: Array, shipWords: Array):
+func _printFleetStats(numShips: int, shipPositions: Array, shipWords: Array, shipTypes: Array):
 	print("\n")
 	print("Sending in fleet: %s ships" % numShips)
 	var shipsStartX := []
@@ -53,4 +53,5 @@ func _printFleetStats(numShips: int, shipPositions: Array, shipWords: Array):
 		shipsStartX.append(vectorPos.x)
 	print(Utils.joinToString(shipsStartX, " ", "%10.0d"))
 	print(Utils.joinToString(shipWords, " ", "%10s"))
+	print(Utils.joinToString(shipTypes, " ", "%10s"))
 	print("\n")

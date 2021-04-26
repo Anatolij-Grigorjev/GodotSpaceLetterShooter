@@ -17,19 +17,18 @@ onready var sprite: Sprite = $Sprite
 var bubbleHit: bool = false
 
 var bubbleMaxHits: int
-var bubbleHitsCurrent: int = -1
+# by default full shield is used
+var bubbleHitsCurrent: int = 0
 
 func _ready():
 	bubbleHit = false
 	bubbleMaxHits = bubbleDamageColors.size()
-	#no external setting, use default
-	if (bubbleHitsCurrent == -1):
-		bubbleHitsCurrent = bubbleMaxHits
 	_updateBubbleColor()
 	
 	
 func setInitialHitPoints(hitPoints: int):
-	bubbleHitsCurrent = clamp(bubbleMaxHits - hitPoints, 0, bubbleMaxHits)
+	var maxHits = bubbleDamageColors.size()
+	bubbleHitsCurrent = clamp(maxHits - hitPoints, 0, maxHits)
 
 
 func _on_Area2D_area_entered(area: Area2D):
