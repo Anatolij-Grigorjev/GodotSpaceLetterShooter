@@ -47,7 +47,6 @@ func _ready():
 	
 	remainingSceneShips = specification.totalShips
 	remainingSceneShipSpecs = specification.allowedShipsTypes.duplicate()
-	
 	_performSceneIntro()
 	
 	
@@ -74,8 +73,8 @@ func _getSceneSpecification() -> SceneSpec:
 		#shooter
 		SceneShipLimits.new(450.0, 1, 3): 3
 	}
-	
 	return spec
+	
 	
 func _startPrepareTextShips() -> void:
 	var numShips = _calcNextWaveNumShips()
