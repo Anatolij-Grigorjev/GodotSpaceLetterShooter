@@ -1,12 +1,17 @@
 tool
 extends Control
 
+signal statsViewKeyPressed
+
+
+
 export(String) var sceneName: String = "<SCENE NAME>" setget setSceneName
 
 
 func _ready():
-#	setData(SceneStatsData.new("TEST-SCENE"))
-	pass
+	set_process(false)
+	yield($AnimationPlayer, "animation_finished")
+	set_process(true)
 
 
 func setData(data: SceneStatsData):
@@ -25,3 +30,8 @@ func setSceneName(name: String):
 	if ($Panel/MarginFrame/TitleAndStats/Title):
 		$Panel/MarginFrame/TitleAndStats/Title.text = "\"%s\" STATISTICS:" % name
 	sceneName = name
+
+
+func _process(delta: float):
+	if (Input.is_action_just_released("ui_accept")):
+		emit_signal("statsViewKeyPressed")
