@@ -41,14 +41,18 @@ func _ready():
 	Utils.tryConnect(shooter, "shipLeft", self, "_on_sceneCleared")
 	Utils.tryConnect(shooter, "shotFired", self, "_on_shipShotFired")
 	
-	specification = _getSceneSpecification()
+	_prepareSceneShipsToSpec(_getSceneSpecification())
+	_performSceneIntro()
+	
+
+func _prepareSceneShipsToSpec(spec: SceneSpec):
+	specification = spec
 	sceneName = specification.sceneName
 	$CanvasLayer/SceneTitle.text = specification.sceneName
 	
 	remainingSceneShips = specification.totalShips
 	remainingSceneShipSpecs = specification.allowedShipsTypes.duplicate()
-	_performSceneIntro()
-	
+
 	
 func _performSceneIntro():
 	shooter.anim.play("arrive")
@@ -62,7 +66,7 @@ func _performSceneIntro():
 func _getSceneSpecification() -> SceneSpec:
 	var spec := SceneSpec.new()
 	spec.sceneName = "Scene 1 - 1"
-	spec.totalShips = 10
+	spec.totalShips = 1
 	spec.smallestShipsWave = 2
 	spec.largestShipsWave = 4
 	spec.allowedShipsTypes = {
@@ -98,11 +102,12 @@ func _calcNextWaveNumShips() -> int:
 	
 func _waitAddCreatedShips():
 	if (remainingSceneShips > 0):
-		var preparedShips: Array = shipsBuilderThread.wait_to_finish()
+		var preparedShips = shipsBuilderThread.wait_to_finish()
 		_addShipsToScene(preparedShips)
 		remainingSceneShips -= (preparedShips.size())
-		#start next iteration
-		_startPrepareTextShips()
+		if (remainingSceneShips > 0):
+			#start next iteration
+			_startPrepareTextShips()
 	else: 
 		_startEndSceneStats()
 		emit_signal("sceneCleared", sceneName)
@@ -196,6 +201,7 @@ func _buildSceneStats(data):
 	var statsView = StatsScn.instance()
 	statsView.sceneName = sceneName
 	statsView.setData(G.currentSceneStats)
+	Utils.tryConnect(statsView, "statsViewKeyPressed", self, "_on_statsViewKeyPressed")
 	return statsView
 	
 	
@@ -216,3 +222,12 @@ func _on_shooterCollided():
 		_startEndSceneStats()
 		_addStatsViewToCanvas()
 	print("scene: '%s' - :(" % sceneName)
+	
+	
+func _on_statsViewKeyPressed(statsView: Control):
+	statsView.queue_free()
+	currentLiveShips = 0
+	stageOver = false
+	_prepareSceneShipsToSpec(_getSceneSpecification())
+	_performSceneIntro()
+	

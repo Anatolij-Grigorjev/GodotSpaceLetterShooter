@@ -41,6 +41,8 @@ func generateShips(waveSpec: SceneWaveSpec) -> Array:
 			waveSpec.shipTypes[idx]
 		)
 		preparedShips.append(textShip)
+	if (printDebug):
+		print("Built %s ship(-s)..." % preparedShips.size())
 	return preparedShips
 
 
