@@ -76,7 +76,7 @@ func _on_Area2D_area_entered(area: Area2D):
 		emptyChamber()
 		
 		
-func _on_currentScene_sceneOver(sceneName: String):
+func _on_currentScene_waveOver(waveName: String):
 	anim.play("leave")
 	yield(anim, "animation_finished")
 	emit_signal("shipLeft")

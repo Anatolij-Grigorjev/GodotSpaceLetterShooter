@@ -3,12 +3,15 @@ extends Node2D
 Scene where text ships descend while player types 
 and bottom ship shoots the descenders based on text
 """
-signal sceneCleared(sceneName)
+signal waveCleared(waveName)
+signal clearedAllWaves
+signal letterTyped(letter)
+
 
 const TextShipScn = preload("res://ships/text_ship/TextShip.tscn")
 
-signal letterTyped(letter)
 
+export(int) var totalSceneWaves: int = 5
 
 
 onready var shooter = $ShooterShip
@@ -26,19 +29,21 @@ var statsCookerThread: Thread
 var stageOver: bool = false
 
 var specification: SceneSpec
+var currentWaveNumber: int = 0
 
 
 func _ready():
 	randomize()
 	G.currentScene = self
+	currentWaveNumber = 1
 	shipsBuilderThread = Thread.new()
 	statsCookerThread = Thread.new()
 	
 	Utils.tryConnect(self, "letterTyped", playerInput, "addTypedLetter")
 	Utils.tryConnect(self, "letterTyped", shooter, "chamberLetter")
-	Utils.tryConnect(self, "sceneCleared", shooter, "_on_currentScene_sceneOver")
+	Utils.tryConnect(self, "waveCleared", shooter, "_on_currentScene_waveOver")
 	Utils.tryConnect(shooter, "chamberEmptied", playerInput, "clearText")
-	Utils.tryConnect(shooter, "shipLeft", self, "_on_sceneCleared")
+	Utils.tryConnect(shooter, "shipLeft", self, "_on_waveCleared")
 	Utils.tryConnect(shooter, "shotFired", self, "_on_shipShotFired")
 	
 	_prepareSceneShipsToSpec(_getSceneSpecification())
@@ -65,7 +70,7 @@ func _performSceneIntro():
 
 func _getSceneSpecification() -> SceneSpec:
 	var spec := SceneSpec.new()
-	spec.sceneName = "Scene 1 - 1"
+	spec.sceneName = "Wave %02d" % currentWaveNumber
 	spec.totalShips = 1
 	spec.smallestShipsWave = 2
 	spec.largestShipsWave = 4
@@ -110,7 +115,7 @@ func _waitAddCreatedShips():
 			_startPrepareTextShips()
 	else: 
 		_startEndSceneStats()
-		emit_signal("sceneCleared", sceneName)
+		emit_signal("waveCleared", sceneName)
 	
 
 func _startEndSceneStats():
@@ -205,10 +210,9 @@ func _buildSceneStats(data):
 	return statsView
 	
 	
-func _on_sceneCleared():
+func _on_waveCleared():
 	_addStatsViewToCanvas()
-	print("Cleared scene: %s" % sceneName)
-	print("You are an hero!")
+	print("Cleared wave: %s" % sceneName)
 	
 	
 func _addStatsViewToCanvas():
@@ -226,8 +230,14 @@ func _on_shooterCollided():
 	
 func _on_statsViewKeyPressed(statsView: Control):
 	statsView.queue_free()
-	currentLiveShips = 0
-	stageOver = false
-	_prepareSceneShipsToSpec(_getSceneSpecification())
-	_performSceneIntro()
+	currentWaveNumber += 1
+	if (currentWaveNumber <= totalSceneWaves):
+		currentLiveShips = 0
+		stageOver = false
+		_prepareSceneShipsToSpec(_getSceneSpecification())
+		_performSceneIntro()
+	else:
+		emit_signal("clearedAllWaves")
+		print("You are an hero!")
+		get_tree().quit()
 	
