@@ -46,8 +46,7 @@ func _ready():
 	Utils.tryConnect(shooter, "shipLeft", self, "_on_waveCleared")
 	Utils.tryConnect(shooter, "shotFired", self, "_on_shipShotFired")
 	
-	_prepareSceneShipsToSpec(_getSceneSpecification())
-	_performSceneIntro()
+	_startNextWave()
 	
 
 func _prepareSceneShipsToSpec(spec: SceneSpec):
@@ -59,7 +58,7 @@ func _prepareSceneShipsToSpec(spec: SceneSpec):
 	remainingSceneShipSpecs = specification.allowedShipsTypes.duplicate()
 
 	
-func _performSceneIntro():
+func _performWaveIntro():
 	shooter.anim.play("arrive")
 	yield(shooter.anim, "animation_finished")
 	$AnimationPlayer.play("show_title")
@@ -227,15 +226,19 @@ func _on_shooterCollided():
 		_addStatsViewToCanvas()
 	print("scene: '%s' - :(" % sceneName)
 	
+
+func _startNextWave():
+	currentLiveShips = 0
+	stageOver = false
+	_prepareSceneShipsToSpec(_getSceneSpecification())
+	_performWaveIntro()
+	
 	
 func _on_statsViewKeyPressed(statsView: Control):
 	statsView.queue_free()
 	currentWaveNumber += 1
 	if (currentWaveNumber <= totalSceneWaves):
-		currentLiveShips = 0
-		stageOver = false
-		_prepareSceneShipsToSpec(_getSceneSpecification())
-		_performSceneIntro()
+		_startNextWave()
 	else:
 		emit_signal("clearedAllWaves")
 		print("You are an hero!")
