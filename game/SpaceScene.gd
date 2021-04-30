@@ -28,7 +28,7 @@ var shipsBuilderThread: Thread
 var statsCookerThread: Thread
 var stageOver: bool = false
 
-var specification: SceneSpec
+var cachedSpecification: SceneSpec
 var currentWaveNumber: int = 0
 
 
@@ -49,13 +49,14 @@ func _ready():
 	_startNextWave()
 	
 
-func _prepareSceneShipsToSpec(spec: SceneSpec):
-	specification = spec
-	sceneName = specification.sceneName
-	$CanvasLayer/SceneTitle.text = specification.sceneName
+func _prepareSceneToSpec(spec: SceneSpec):
+	cachedSpecification = spec
+	sceneName = cachedSpecification.sceneName
+	$BG.self_modulate = spec.sceneBgColor
+	$CanvasLayer/SceneTitle.text = cachedSpecification.sceneName
 	
-	remainingSceneShips = specification.totalShips
-	remainingSceneShipSpecs = specification.allowedShipsTypes.duplicate()
+	remainingSceneShips = cachedSpecification.totalShips
+	remainingSceneShipSpecs = cachedSpecification.allowedShipsTypes.duplicate()
 
 	
 func _performWaveIntro():
@@ -65,11 +66,22 @@ func _performWaveIntro():
 	yield($AnimationPlayer, "animation_finished")
 	_startPrepareTextShips()
 	_waitAddCreatedShips()
+	
+	
+func _getNextWaveSpecification() -> SceneSpec:
+	if (not cachedSpecification):
+		return _buildNewSpeceSpec()
+	else:
+		cachedSpecification.sceneName = "Wave %02d" % currentWaveNumber
+		cachedSpecification.sceneBgColor = cachedSpecification.sceneBgColor.darkened(0.25)
+		cachedSpecification.totalShips += 1
+		return cachedSpecification
 
 
-func _getSceneSpecification() -> SceneSpec:
+func _buildNewSpeceSpec() -> SceneSpec:
 	var spec := SceneSpec.new()
 	spec.sceneName = "Wave %02d" % currentWaveNumber
+	spec.sceneBgColor = Color.cornflower
 	spec.totalShips = 1
 	spec.smallestShipsWave = 2
 	spec.largestShipsWave = 4
@@ -98,8 +110,8 @@ func _startPrepareTextShips() -> void:
 
 
 func _calcNextWaveNumShips() -> int:
-	var numShipsWaveFrom = specification.smallestShipsWave
-	var numShipsWaveTo = specification.largestShipsWave
+	var numShipsWaveFrom = cachedSpecification.smallestShipsWave
+	var numShipsWaveTo = cachedSpecification.largestShipsWave
 	var pickedInWave: int = numShipsWaveFrom + randi() % (numShipsWaveTo - numShipsWaveFrom + 1) 
 	return int(min(pickedInWave, remainingSceneShips))
 
@@ -230,7 +242,7 @@ func _on_shooterCollided():
 func _startNextWave():
 	currentLiveShips = 0
 	stageOver = false
-	_prepareSceneShipsToSpec(_getSceneSpecification())
+	_prepareSceneToSpec(_getNextWaveSpecification())
 	_performWaveIntro()
 	
 	

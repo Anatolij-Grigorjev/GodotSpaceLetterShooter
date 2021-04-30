@@ -7,6 +7,7 @@ Parameters describing how to construct a scene:
 """
 
 var sceneName: String
+var sceneBgColor: Color
 var totalShips: int
 var smallestShipsWave: int
 var largestShipsWave: int
@@ -18,6 +19,7 @@ var allowedShipsTypes: Dictionary
 
 func _init():
 	sceneName = "<EMPTY>"
+	sceneBgColor = Color.black
 	totalShips = 0
 	smallestShipsWave = 0
 	largestShipsWave = 0
