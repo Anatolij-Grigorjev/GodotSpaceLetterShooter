@@ -18,6 +18,9 @@ func _process(delta: float):
 
 
 func _setPlaying(shouldBePlaying: bool):
+	if (currentlyPlaying == shouldBePlaying):
+		return
+		
 	currentlyPlaying = shouldBePlaying
 	if (currentlyPlaying and playbackEnabled):
 		player.playing = true
