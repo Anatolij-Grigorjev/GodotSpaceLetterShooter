@@ -5,9 +5,9 @@
 [ext_resource path="res://ships/shooter/ShooterShip.tscn" type="PackedScene" id=3]
 [ext_resource path="res://SpaceScene.gd" type="Script" id=4]
 [ext_resource path="res://player_input/PlayerInput.tscn" type="PackedScene" id=5]
-[ext_resource path="res://ships/shooter/white_rect.png" type="Texture" id=6]
 [ext_resource path="res://music/MusicControl.tscn" type="PackedScene" id=7]
 [ext_resource path="res://space_music_bg.wav" type="AudioStream" id=8]
+[ext_resource path="res://white_rect.png" type="Texture" id=9]
 
 [sub_resource type="Animation" id=1]
 resource_name = "show_title"
@@ -81,11 +81,11 @@ script = ExtResource( 4 )
 show_behind_parent = true
 position = Vector2( 640, 500 )
 scale = Vector2( 100, 50 )
-texture = ExtResource( 6 )
+texture = ExtResource( 9 )
 
 [node name="Darkinator" type="Sprite" parent="BG"]
 self_modulate = Color( 0, 0, 0, 0.729412 )
-texture = ExtResource( 6 )
+texture = ExtResource( 9 )
 __meta__ = {
 "_editor_description_": ""
 }
