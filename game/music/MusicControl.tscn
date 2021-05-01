@@ -10,20 +10,45 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MusicIcon" type="TextureRect" parent="."]
-margin_right = 50.0
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 100.0
 margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MusicIcon" type="TextureRect" parent="HBoxContainer"]
+margin_right = 48.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 texture = ExtResource( 1 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DisabledIcon" type="TextureRect" parent="MusicIcon"]
+[node name="DisabledIcon" type="TextureRect" parent="HBoxContainer/MusicIcon"]
 visible = false
 margin_right = 50.0
 margin_bottom = 50.0
 texture = ExtResource( 2 )
 expand = true
+
+[node name="KeyHint" type="Label" parent="HBoxContainer"]
+margin_left = 52.0
+margin_right = 100.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "ESC"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]

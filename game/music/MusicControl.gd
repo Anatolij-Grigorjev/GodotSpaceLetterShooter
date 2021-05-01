@@ -35,8 +35,8 @@ func _setPlaybackEnabled(enable: bool):
 			$MusicPlayer.playing = false
 		if (not $MusicPlayer.playing and playbackEnabled and currentlyPlaying):
 			$MusicPlayer.playing = true
-	if ($MusicIcon/DisabledIcon):
-		$MusicIcon/DisabledIcon.visible = not playbackEnabled
+	if ($HBoxContainer/MusicIcon/DisabledIcon):
+		$HBoxContainer/MusicIcon/DisabledIcon.visible = not playbackEnabled
 	
 	
 func _setMusic(newMusic: AudioStream):
