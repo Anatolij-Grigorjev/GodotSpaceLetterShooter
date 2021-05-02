@@ -53,7 +53,7 @@ func _prepareSceneToSpec(spec: SceneSpec):
 	cachedSpecification = spec
 	sceneName = cachedSpecification.sceneName
 	$BG.self_modulate = spec.sceneBgColor
-	$CanvasLayer/SceneTitle.text = cachedSpecification.sceneName
+	$CanvasLayer/SceneTitle.text = cachedSpecification.sceneName + ("\nWave %02d" % currentWaveNumber)
 	
 	remainingSceneShips = cachedSpecification.totalShips
 	remainingSceneShipSpecs = cachedSpecification.allowedShipsTypes.duplicate()
@@ -72,7 +72,6 @@ func _getNextWaveSpecification() -> SceneSpec:
 	if (not cachedSpecification):
 		return _buildNewSpeceSpec()
 	else:
-		cachedSpecification.sceneName = "Wave %02d" % currentWaveNumber
 		cachedSpecification.sceneBgColor = cachedSpecification.sceneBgColor.darkened(0.25)
 		cachedSpecification.totalShips += 1
 		return cachedSpecification
@@ -80,7 +79,7 @@ func _getNextWaveSpecification() -> SceneSpec:
 
 func _buildNewSpeceSpec() -> SceneSpec:
 	var spec := SceneSpec.new()
-	spec.sceneName = "Wave %02d" % currentWaveNumber
+	spec.sceneName = "SPACE"
 	spec.sceneBgColor = Color.cornflower
 	spec.totalShips = 1
 	spec.smallestShipsWave = 2
