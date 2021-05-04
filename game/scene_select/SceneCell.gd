@@ -1,21 +1,29 @@
-extends Control
+extends Panel
 """
 Script used to populate info fields on scene selection cell
 using a SceneSpec
 """
 
+onready var anim: AnimationPlayer = $AnimationPlayer
+onready var area: Area2D = $Area2D
+onready var sceneTitle: Label = $OuterMargin/VBoxContainer/SceneTitle
 
-onready var sceneTitle: Label = $Panel/OuterMargin/VBoxContainer/SceneTitle
-onready var panel = $Panel
 
 # ship types
-onready var fastShipsRow = $Panel/OuterMargin/VBoxContainer/ShipRowsContainer/FastShipsRow
-onready var shieldShipsRow = $Panel/OuterMargin/VBoxContainer/ShipRowsContainer/ShiledShipsRow
-onready var shooterShipsRow = $Panel/OuterMargin/VBoxContainer/ShipRowsContainer/ShooterShipsRow
+onready var fastShipsRow = $OuterMargin/VBoxContainer/ShipRowsContainer/FastShipsRow
+onready var shieldShipsRow = $OuterMargin/VBoxContainer/ShipRowsContainer/ShiledShipsRow
+onready var shooterShipsRow = $OuterMargin/VBoxContainer/ShipRowsContainer/ShooterShipsRow
 
 
 func _ready():
-	pass
+	var cellSize = rect_size
+	area.position = Vector2.ZERO
+	var areaCollider: CollisionShape2D = area.get_child(0)
+	areaCollider.shape = RectangleShape2D.new()
+	areaCollider.shape.extents = cellSize / 2
+	area.connect("mouse_entered", self, "_onMouseEnteredArea")
+	area.connect("mouse_exited", self, "_onMouseExitedArea")
+	
 
 
 func setData(sceneSpec: SceneSpec):
@@ -24,7 +32,7 @@ func setData(sceneSpec: SceneSpec):
 		sceneSpec.smallestShipsWave,
 		sceneSpec.largestShipsWave
 	]
-	panel.self_modulate = sceneSpec.sceneBgColor
+	self_modulate = sceneSpec.sceneBgColor
 	var categorizedTypeCountsByRowNode = _categorizeAllowedShipTypes(sceneSpec.allowedShipsTypes)
 	for rowNode in categorizedTypeCountsByRowNode:
 		rowNode.get_node("Qnty").text = str(categorizedTypeCountsByRowNode[rowNode])
@@ -49,3 +57,11 @@ func _categorizeAllowedShipTypes(allowedShipTypes: Dictionary) -> Dictionary:
 		shieldShipsRow: shieldShips,
 		shooterShipsRow: shootShips
 	}
+	
+
+func _onMouseEnteredArea():
+	anim.play("hover")
+	
+	
+func _onMouseExitedArea():
+	anim.play("leave")
