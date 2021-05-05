@@ -3,9 +3,11 @@ extends Panel
 Script used to populate info fields on scene selection cell
 using a SceneSpec
 """
+signal sceneSelected(spec)
+
+const CURSOR_SCENE_SELECTED = preload("res://white_rect.png")
 
 onready var anim: AnimationPlayer = $AnimationPlayer
-onready var area: Area2D = $Area2D
 onready var sceneTitle: Label = $OuterMargin/VBoxContainer/SceneTitle
 
 
@@ -14,19 +16,26 @@ onready var fastShipsRow = $OuterMargin/VBoxContainer/ShipRowsContainer/FastShip
 onready var shieldShipsRow = $OuterMargin/VBoxContainer/ShipRowsContainer/ShiledShipsRow
 onready var shooterShipsRow = $OuterMargin/VBoxContainer/ShipRowsContainer/ShooterShipsRow
 
+var sceneHovered: bool = false
+var sceneSpec: SceneSpec
+
 
 func _ready():
-	var cellSize = rect_size
-	area.position = Vector2.ZERO
-	var areaCollider: CollisionShape2D = area.get_child(0)
-	areaCollider.shape = RectangleShape2D.new()
-	areaCollider.shape.extents = cellSize / 2
-	area.connect("mouse_entered", self, "_onMouseEnteredArea")
-	area.connect("mouse_exited", self, "_onMouseExitedArea")
+	sceneHovered = false
+	Utils.tryConnect($TouchPanel, "mouse_entered", self, "_onMouseEnteredArea")
+	Utils.tryConnect($TouchPanel, "mouse_exited", self, "_onMouseExitedArea")
+	
+	
+func _process(delta):
+	if (not sceneHovered):
+		return
+	if (Input.is_action_just_pressed("ui_accept")):
+		_selectThisScene()
 	
 
 
 func setData(sceneSpec: SceneSpec):
+	self.sceneSpec = sceneSpec
 	sceneTitle.text = "%s\nWaves: %s - %s ship(-s)" % [
 		sceneSpec.sceneName,
 		sceneSpec.smallestShipsWave,
@@ -61,7 +70,17 @@ func _categorizeAllowedShipTypes(allowedShipTypes: Dictionary) -> Dictionary:
 
 func _onMouseEnteredArea():
 	anim.play("hover")
+	sceneHovered = true
+	Input.set_custom_mouse_cursor(CURSOR_SCENE_SELECTED)
+	
 	
 	
 func _onMouseExitedArea():
 	anim.play("leave")
+	sceneHovered = false
+	Input.set_custom_mouse_cursor(null)
+	
+	
+func _selectThisScene():
+	emit_signal("sceneSelected", sceneSpec)
+	set_process(false)
