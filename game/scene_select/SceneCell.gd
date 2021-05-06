@@ -82,5 +82,6 @@ func _onMouseExitedArea():
 	
 	
 func _selectThisScene():
+	anim.play("select")
 	emit_signal("sceneSelected", sceneSpec)
 	set_process(false)
