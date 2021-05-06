@@ -29,13 +29,13 @@ var statsCookerThread: Thread
 var stageOver: bool = false
 
 var cachedSpecification: SceneSpec
-var currentWaveNumber: int = 0
+var nextWaveNumber: int = 0
 
 
 func _ready():
+	
 	randomize()
 	G.currentScene = self
-	currentWaveNumber = 1
 	shipsBuilderThread = Thread.new()
 	statsCookerThread = Thread.new()
 	
@@ -48,15 +48,19 @@ func _ready():
 	
 	_startNextWave()
 	
-
-func _prepareSceneToSpec(spec: SceneSpec):
+	
+func setInitialSceneSpec(spec: SceneSpec):
 	cachedSpecification = spec
 	sceneName = cachedSpecification.sceneName
-	$BG.self_modulate = spec.sceneBgColor
-	$CanvasLayer/SceneTitle.text = cachedSpecification.sceneName + ("\nWave %02d" % currentWaveNumber)
-	
+	nextWaveNumber = 1
 	remainingSceneShips = cachedSpecification.totalShips
 	remainingSceneShipSpecs = cachedSpecification.allowedShipsTypes.duplicate()
+
+
+func _prepareNextSceneWaveFromSpec():
+	$BG.self_modulate = cachedSpecification.sceneBgColor.darkened(0.25)
+	$CanvasLayer/SceneTitle.text = cachedSpecification.sceneName + ("\nWave %02d" % nextWaveNumber)
+	nextWaveNumber += 1
 
 	
 func _performWaveIntro():
@@ -66,33 +70,6 @@ func _performWaveIntro():
 	yield($AnimationPlayer, "animation_finished")
 	_startPrepareTextShips()
 	_waitAddCreatedShips()
-	
-	
-func _getNextWaveSpecification() -> SceneSpec:
-	if (not cachedSpecification):
-		return _buildNewSpeceSpec()
-	else:
-		cachedSpecification.sceneBgColor = cachedSpecification.sceneBgColor.darkened(0.25)
-		cachedSpecification.totalShips += 1
-		return cachedSpecification
-
-
-func _buildNewSpeceSpec() -> SceneSpec:
-	var spec := SceneSpec.new()
-	spec.sceneName = "SPACE"
-	spec.sceneBgColor = Color.cornflower
-	spec.totalShips = 1
-	spec.smallestShipsWave = 2
-	spec.largestShipsWave = 4
-	spec.allowedShipsTypes = {
-		#speedster
-		SceneShipLimits.new(566, 0, 0): 5,
-		#tank 
-		SceneShipLimits.new(400.56, 9, 0): 2,
-		#shooter
-		SceneShipLimits.new(450.0, 1, 3): 3
-	}
-	return spec
 	
 	
 func _startPrepareTextShips() -> void:
@@ -241,14 +218,14 @@ func _on_shooterCollided():
 func _startNextWave():
 	currentLiveShips = 0
 	stageOver = false
-	_prepareSceneToSpec(_getNextWaveSpecification())
+	_prepareNextSceneWaveFromSpec()
 	_performWaveIntro()
 	
 	
 func _on_statsViewKeyPressed(statsView: Control):
 	statsView.queue_free()
-	currentWaveNumber += 1
-	if (currentWaveNumber <= totalSceneWaves):
+	nextWaveNumber += 1
+	if (nextWaveNumber <= totalSceneWaves):
 		_startNextWave()
 	else:
 		emit_signal("clearedAllWaves")

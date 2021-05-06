@@ -38,7 +38,7 @@ func _process(delta):
 
 func setData(sceneSpec: SceneSpec):
 	self.sceneSpec = sceneSpec
-	sceneTitle.text = "%s\nWaves: %s - %s ship(-s)" % [
+	$OuterMargin/VBoxContainer/SceneTitle.text = "%s\nWaves: %s - %s ship(-s)" % [
 		sceneSpec.sceneName,
 		sceneSpec.smallestShipsWave,
 		sceneSpec.largestShipsWave
@@ -64,9 +64,9 @@ func _categorizeAllowedShipTypes(allowedShipTypes: Dictionary) -> Dictionary:
 			fastShips += allowedShipTypes[shipType]
 	
 	return {
-		fastShipsRow: fastShips,
-		shieldShipsRow: shieldShips,
-		shooterShipsRow: shootShips
+		$OuterMargin/VBoxContainer/ShipRowsContainer/FastShipsRow: fastShips,
+		$OuterMargin/VBoxContainer/ShipRowsContainer/ShiledShipsRow: shieldShips,
+		$OuterMargin/VBoxContainer/ShipRowsContainer/ShooterShipsRow: shootShips
 	}
 	
 
@@ -87,5 +87,7 @@ func _onMouseExitedArea():
 	
 func _selectThisScene():
 	anim.play("select")
+	yield(anim, "animation_finished")
+	Input.set_custom_mouse_cursor(null)
 	emit_signal("sceneSelected", sceneSpec)
 	set_process(false)
