@@ -22,6 +22,8 @@ var sceneSpec: SceneSpec
 
 func _ready():
 	sceneHovered = false
+	#center pivot for scale animations
+	rect_pivot_offset = rect_size / 2
 	Utils.tryConnect($TouchPanel, "mouse_entered", self, "_onMouseEnteredArea")
 	Utils.tryConnect($TouchPanel, "mouse_exited", self, "_onMouseExitedArea")
 	
@@ -69,16 +71,18 @@ func _categorizeAllowedShipTypes(allowedShipTypes: Dictionary) -> Dictionary:
 	
 
 func _onMouseEnteredArea():
-	anim.play("hover")
+	if (not anim.is_playing()):
+		anim.play("hover")
 	sceneHovered = true
 	Input.set_custom_mouse_cursor(CURSOR_SCENE_SELECTED)
 	
 	
-	
 func _onMouseExitedArea():
-	anim.play("leave")
+	if (not anim.is_playing()):
+		anim.play("leave")
 	sceneHovered = false
 	Input.set_custom_mouse_cursor(null)
+	
 	
 	
 func _selectThisScene():
