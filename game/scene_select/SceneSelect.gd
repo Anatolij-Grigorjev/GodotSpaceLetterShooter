@@ -31,26 +31,8 @@ func _ready():
 	
 func _buildAvailableScenesData() -> Array:
 	return [
-		_buildNewSpeceSpec()
+		Mock.sceneShiledShips(1)
 	]
-	
-	
-func _buildNewSpeceSpec() -> SceneSpec:
-	var spec := SceneSpec.new()
-	spec.sceneName = "SPACE"
-	spec.sceneBgColor = Color.cornflower
-	spec.totalShips = 10
-	spec.smallestShipsWave = 2
-	spec.largestShipsWave = 4
-	spec.allowedShipsTypes = {
-		#speedster
-		SceneShipLimits.new(566, 0, 0): 5,
-		#tank 
-		SceneShipLimits.new(400.56, 9, 0): 2,
-		#shooter
-		SceneShipLimits.new(450.0, 1, 3): 3
-	}
-	return spec
 	
 	
 func _clearRefSizeCells():

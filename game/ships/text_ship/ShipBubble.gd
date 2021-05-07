@@ -4,11 +4,7 @@ extends Node2D
 signal bubbleBurst
 
 
-export(Array, Color) var bubbleDamageColors = [
-	Color.red,
-	Color.green,
-	Color.blue
-]
+export(Color) var bubbleMaxHitsColor = Color.green
 
 onready var anim: AnimationPlayer = $AnimationPlayer
 onready var sprite: Sprite = $Sprite
@@ -19,16 +15,27 @@ var bubbleHit: bool = false
 var bubbleMaxHits: int
 # by default full shield is used
 var bubbleHitsCurrent: int = 0
+var currentBubbleDamageColor: Color
+var colorChangeCoef: float
 
 func _ready():
 	bubbleHit = false
-	bubbleMaxHits = bubbleDamageColors.size()
+	if (not bubbleMaxHits):
+		_setMaxHitPoints(1)
 	_updateBubbleColor()
 	
 	
+	
 func setInitialHitPoints(hitPoints: int):
-	var maxHits = bubbleDamageColors.size()
-	bubbleHitsCurrent = clamp(maxHits - hitPoints, 0, maxHits)
+	_setMaxHitPoints(hitPoints)
+	
+	
+func _setMaxHitPoints(newMaxHitPoints: int):
+	bubbleMaxHits = newMaxHitPoints
+	bubbleHitsCurrent = 0
+	currentBubbleDamageColor = bubbleMaxHitsColor
+	colorChangeCoef = 1.0 / float(bubbleMaxHits)
+	_updateBubbleColor()
 
 
 func _on_Area2D_area_entered(area: Area2D):
@@ -57,8 +64,8 @@ func _bubbleHitForAnimation(animName: String):
 			
 
 func _updateBubbleColor():
-	if (bubbleHitsCurrent < bubbleDamageColors.size()):
-		sprite.self_modulate = bubbleDamageColors[bubbleHitsCurrent]
+	if (bubbleHitsCurrent < bubbleMaxHits):
+		sprite.self_modulate = bubbleMaxHitsColor.lightened(colorChangeCoef * bubbleHitsCurrent)
 	else:
 		sprite.self_modulate = Color.transparent
 		

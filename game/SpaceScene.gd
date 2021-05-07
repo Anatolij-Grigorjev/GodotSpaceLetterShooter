@@ -49,6 +49,8 @@ func _ready():
 	_startNextWave()
 	
 	
+	
+	
 func setInitialSceneSpec(spec: SceneSpec):
 	cachedSpecification = spec
 	sceneName = cachedSpecification.sceneName
