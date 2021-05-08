@@ -47,8 +47,12 @@ func prepare(text: String, startPosition: Vector2, shipPath: Array, limiters: Sc
 	$TextShipStateMachine/Descending.descendPath = shipPath
 	speed = limiters.shipSpeed
 	$Sprite/ShipBubble.setInitialHitPoints(limiters.shieldHitPoints)
+	
+	var shipHasShield := limiters.shieldHitPoints > 0
+	var shipWillShoot := limiters.shootInclination > 0
 	actionWeights = {
-		"IdlingBubble": (1 if limiters.shieldHitPoints > 0 else 0),
+		"Idling": (1 if shipWillShoot or not shipHasShield else 0),
+		"IdlingBubble": (1 if shipHasShield else 0),
 		"IdlingShoot": limiters.shootInclination
 	}
 	

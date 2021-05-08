@@ -18,7 +18,7 @@ static func sceneShipTypeQuantities(numFastShips: int, numShieldShips: int, numS
 		#speedster
 		SceneShipLimits.new(566, 0, 0): numFastShips,
 		#tank 
-		SceneShipLimits.new(400.56, 9, 0): numShieldShips,
+		SceneShipLimits.new(400.56, 4, 0): numShieldShips,
 		#shooter
 		SceneShipLimits.new(450.0, 1, 3): numShooterShips
 	}

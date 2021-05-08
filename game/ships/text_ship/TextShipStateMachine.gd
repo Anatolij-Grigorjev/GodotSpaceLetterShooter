@@ -108,6 +108,8 @@ func _getNextIdlingState() -> String:
 	
 func _onEntityBubbleBurst():
 	idlingActionsWeights.disableItem("IdlingBubble")
+	if idlingActionsWeights.isItemDisabled("Idling"):
+		idlingActionsWeights.setItemWeight("Idling", 1)
 	
 
 func _onEntityNotEnoughShotLetters(lettersLeft: int):
