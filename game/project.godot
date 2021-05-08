@@ -153,7 +153,7 @@ _global_script_class_icons={
 [application]
 
 config/name="SpaceLetterShooter"
-run/main_scene="res://SpaceScene.tscn"
+run/main_scene="res://scene_select/SceneSelect.tscn"
 config/icon="res://icon.png"
 
 [autoload]
