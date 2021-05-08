@@ -11,9 +11,6 @@ signal letterTyped(letter)
 const TextShipScn = preload("res://ships/text_ship/TextShip.tscn")
 
 
-export(int) var totalSceneWaves: int = 5
-
-
 onready var shooter = $ShooterShip
 onready var playerInput = $CanvasLayer/PlayerInput
 onready var shipsFactory = $TextShipFactory
@@ -226,8 +223,7 @@ func _startNextWave():
 	
 func _on_statsViewKeyPressed(statsView: Control):
 	statsView.queue_free()
-	nextWaveNumber += 1
-	if (nextWaveNumber <= totalSceneWaves):
+	if (remainingSceneShips > 0):
 		_startNextWave()
 	else:
 		emit_signal("clearedAllWaves")
