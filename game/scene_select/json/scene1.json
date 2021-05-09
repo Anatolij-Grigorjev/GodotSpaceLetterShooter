@@ -1,0 +1,31 @@
+{
+	"name": "<NAME>",
+	"bgColor": {
+		"a": 1.0,
+		"b": 0.7,
+		"g": 0.8,
+		"r": 0.4
+	},
+	"minShipsWave": 2,
+	"maxShipsWave": 4,
+	"allowedShipsTypes": [
+		{
+			"speed": 566.0,
+			"shildHP": 0,
+			"shotPriority": 0,
+			"numShips": 5
+		},
+		{
+			"speed": 400.0,
+			"shildHP": 5,
+			"shotPriority": 0,
+			"numShips": 2
+		},
+		{
+			"speed": 450.7,
+			"shildHP": 1,
+			"shotPriority": 5,
+			"numShips": 3
+		}
+	]
+}
