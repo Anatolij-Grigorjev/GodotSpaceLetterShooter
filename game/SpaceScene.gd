@@ -198,7 +198,7 @@ func _buildSceneStats(data):
 	
 func _on_waveCleared():
 	_addStatsViewToCanvas()
-	print("Cleared wave: %s" % sceneName)
+	print("Cleared wave: %s - %s" % [sceneName, nextWaveNumber - 1])
 	
 	
 func _addStatsViewToCanvas():
