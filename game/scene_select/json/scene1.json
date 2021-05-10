@@ -11,19 +11,19 @@
 	"allowedShipsTypes": [
 		{
 			"speed": 566.0,
-			"shildHP": 0,
+			"shieldHP": 0,
 			"shotPriority": 0,
 			"numShips": 5
 		},
 		{
 			"speed": 400.0,
-			"shildHP": 5,
+			"shieldHP": 5,
 			"shotPriority": 0,
 			"numShips": 2
 		},
 		{
 			"speed": 450.7,
-			"shildHP": 1,
+			"shieldHP": 1,
 			"shotPriority": 5,
 			"numShips": 3
 		}

@@ -6,6 +6,7 @@ const SceneCellScn = preload("res://scene_select/SceneCell.tscn")
 
 
 export(int) var minNumberScenes: int = 12
+export(Array, String) var scenePaths: Array = []
 
 
 onready var cellsGrid: GridContainer = $Panel/MarginContainer/SceneCells
@@ -30,9 +31,11 @@ func _ready():
 	
 	
 func _buildAvailableScenesData() -> Array:
-	return [
-		Mock.sceneShiledShips(1)
-	]
+	var loadedScenes := []
+	for path in scenePaths:
+		var sceneJSON = Utils.file2JSON(path)
+		loadedScenes.append(Utils.parseJSONSceneSpec(sceneJSON))
+	return loadedScenes
 	
 	
 func _clearRefSizeCells():

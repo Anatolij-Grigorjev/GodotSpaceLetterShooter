@@ -57,3 +57,70 @@ static func tryConnect(
 			source.name, sourceSignal, target.name, method
 		])
 	return connectError == OK
+
+
+"""
+Get contents of file as a string
+"""
+static func getFileText(filePath: String) -> String:
+	var file: File = File.new()
+	var fileOpenError = file.open(filePath, File.READ)
+	if fileOpenError != OK:
+		print("Error opening file at '%s'! Error code: %s" % [filePath, fileOpenError])
+		breakpoint
+	var fileText: String = file.get_as_text()
+	file.close()
+	return fileText
+
+	
+"""
+Parse the file at path 'filePath' as valid JSON and return the structure
+(list of object)
+"""
+static func file2JSON(filePath: String):
+	var fileText: String = getFileText(filePath)
+	var parseResult: JSONParseResult = JSON.parse(fileText)
+	if parseResult.error != OK:
+		print("Error parsing JSON string!\n%s.\nError code: %s, '%s' on line: %s" % [
+			fileText,
+			parseResult.error,
+			parseResult.error_string,
+			parseResult.error_line
+		])
+		breakpoint
+	return parseResult.result
+	
+	
+"""
+Turn a standard JSON representation of a color 
+into an engine Color object
+"""
+static func parseJSONColor(json: Dictionary) -> Color:
+	return Color(
+		json.r,
+		json.g,
+		json.b,
+		json.a
+	)
+	
+	
+static func parseJSONSceneSpec(sceneSpecJSON: Dictionary) -> SceneSpec:
+	var spec = SceneSpec.new()
+	spec.sceneName = sceneSpecJSON.name
+	spec.sceneBgColor = parseJSONColor(sceneSpecJSON.bgColor)
+	spec.smallestShipsWave = sceneSpecJSON.minShipsWave
+	spec.largestShipsWave = sceneSpecJSON.maxShipsWave
+	for shipTypeBlock in sceneSpecJSON.allowedShipsTypes:
+		var shipType = parseJSONShipLimits(shipTypeBlock)
+		var numShips = shipTypeBlock.numShips
+		spec.allowedShipsTypes[shipType] = numShips
+		spec.totalShips += numShips
+	return spec
+	
+	
+static func parseJSONShipLimits(shipLimitsJSON: Dictionary) -> SceneShipLimits:
+	return SceneShipLimits.new(
+		shipLimitsJSON.speed,
+		shipLimitsJSON.shieldHP,
+		shipLimitsJSON.shotPriority
+	)
