@@ -22,4 +22,5 @@ func _init(totalWaveShips: int, shipsStartPos: Vector2, allowedCountedWaveShipTy
 		for idx in range(allowedCountedWaveShipTypes[shipLimits]):
 			shipTypes.append(shipLimits)
 	shipTypes.shuffle()
-	shipTypes.resize(totalWaveShips)
+	if (totalWaveShips < shipTypes.size()):
+		shipTypes.resize(totalWaveShips)

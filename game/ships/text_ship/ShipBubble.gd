@@ -1,6 +1,8 @@
 extends Node2D
 
 
+const COLOR_CHANGE_COEF = float(1.0 / 5.0)
+
 signal bubbleBurst
 
 
@@ -16,7 +18,7 @@ var bubbleMaxHits: int
 # by default full shield is used
 var bubbleHitsCurrent: int = 0
 var currentBubbleDamageColor: Color
-var colorChangeCoef: float
+
 
 func _ready():
 	bubbleHit = false
@@ -34,7 +36,6 @@ func _setMaxHitPoints(newMaxHitPoints: int):
 	bubbleMaxHits = newMaxHitPoints
 	bubbleHitsCurrent = 0
 	currentBubbleDamageColor = bubbleMaxHitsColor
-	colorChangeCoef = 1.0 / float(bubbleMaxHits)
 	_updateBubbleColor()
 
 
@@ -65,7 +66,8 @@ func _bubbleHitForAnimation(animName: String):
 
 func _updateBubbleColor():
 	if (bubbleHitsCurrent < bubbleMaxHits):
-		sprite.self_modulate = bubbleMaxHitsColor.lightened(colorChangeCoef * bubbleHitsCurrent)
+		var bubbleHitsRemaining = bubbleMaxHits - bubbleHitsCurrent
+		sprite.self_modulate = bubbleMaxHitsColor.lightened(1.0 - (COLOR_CHANGE_COEF * bubbleHitsRemaining))
 	else:
 		sprite.self_modulate = Color.transparent
 		

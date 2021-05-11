@@ -27,6 +27,7 @@ var stageOver: bool = false
 
 var cachedSpecification: SceneSpec
 var nextWaveNumber: int = 0
+var shooterCollided: bool = false
 
 
 func _ready():
@@ -96,9 +97,6 @@ func _waitAddCreatedShips():
 		var preparedShips = shipsBuilderThread.wait_to_finish()
 		_addShipsToScene(preparedShips)
 		remainingSceneShips -= (preparedShips.size())
-		if (remainingSceneShips > 0):
-			#start next iteration
-			_startPrepareTextShips()
 	else: 
 		_startEndSceneStats()
 		emit_signal("waveCleared", sceneName)
@@ -178,7 +176,8 @@ func _countDestroyedShip(shipText: String):
 	currentLiveShips -= 1
 	if (currentLiveShips <= 0):
 		yield(get_tree(), "idle_frame")
-		_waitAddCreatedShips()
+		_startEndSceneStats()
+		emit_signal("waveCleared", sceneName)
 		
 
 func _checkSpecialCodes(keyCode: String) -> Dictionary:
@@ -212,6 +211,8 @@ func _on_shooterCollided():
 		_startEndSceneStats()
 		_addStatsViewToCanvas()
 	print("scene: '%s' - :(" % sceneName)
+	shooterCollided = true
+	
 	
 
 func _startNextWave():
@@ -223,6 +224,8 @@ func _startNextWave():
 	
 func _on_statsViewKeyPressed(statsView: Control):
 	statsView.queue_free()
+	if (shooterCollided):
+		get_tree().quit()
 	if (remainingSceneShips > 0):
 		_startNextWave()
 	else:
