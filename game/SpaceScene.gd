@@ -11,6 +11,9 @@ signal letterTyped(letter)
 const TextShipScn = preload("res://ships/text_ship/TextShip.tscn")
 
 
+export(bool) var showStatsBetweenWaves = true
+
+
 onready var shooter = $ShooterShip
 onready var playerInput = $CanvasLayer/PlayerInput
 onready var shipsFactory = $TextShipFactory
@@ -196,12 +199,16 @@ func _buildSceneStats(data):
 	
 	
 func _on_waveCleared():
-	_addStatsViewToCanvas()
 	print("Cleared wave: %s - %s" % [sceneName, nextWaveNumber - 1])
+	yield(get_tree().create_timer(0.75), "timeout")
+	var wasLastWave := remainingSceneShips <= 0 or shooterCollided
+	if (wasLastWave or showStatsBetweenWaves):
+		_addStatsViewToCanvas()
+	else:
+		_resolvePostWaveStatsActions()
 	
 	
 func _addStatsViewToCanvas():
-	yield(get_tree().create_timer(0.75), "timeout")
 	var statsView = statsCookerThread.wait_to_finish()
 	$CanvasLayer.add_child(statsView)
 	
@@ -224,6 +231,10 @@ func _startNextWave():
 	
 func _on_statsViewKeyPressed(statsView: Control):
 	statsView.queue_free()
+	_resolvePostWaveStatsActions()
+	
+	
+func _resolvePostWaveStatsActions():
 	if (shooterCollided):
 		get_tree().quit()
 	if (remainingSceneShips > 0):
