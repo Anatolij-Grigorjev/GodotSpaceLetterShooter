@@ -92,7 +92,7 @@ static func file2JSON(filePath: String):
 	
 	
 """
-Turn a standard JSON representation of a color 
+Turn standard JSON representation of a color 
 into an engine Color object
 """
 static func parseJSONColor(json: Dictionary) -> Color:
@@ -103,7 +103,11 @@ static func parseJSONColor(json: Dictionary) -> Color:
 		json.a
 	)
 	
-	
+
+"""
+Turn standard JSON representation of a complete ships scene specification
+In an in-game SceneSpec object instance
+"""
 static func parseJSONSceneSpec(sceneSpecJSON: Dictionary) -> SceneSpec:
 	var spec = SceneSpec.new()
 	spec.sceneName = sceneSpecJSON.name
@@ -117,7 +121,11 @@ static func parseJSONSceneSpec(sceneSpecJSON: Dictionary) -> SceneSpec:
 		spec.totalShips += numShips
 	return spec
 	
-	
+
+"""
+Turn standard JSON representation of scene ship type parameters
+into an in-game SceneShipLimits instance
+"""
 static func parseJSONShipLimits(shipLimitsJSON: Dictionary) -> SceneShipLimits:
 	return SceneShipLimits.new(
 		shipLimitsJSON.speed,
