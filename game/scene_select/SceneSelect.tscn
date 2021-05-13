@@ -26,6 +26,7 @@ margin_bottom = -20.0
 [node name="SceneCells" type="GridContainer" parent="Panel/MarginContainer"]
 margin_right = 1240.0
 margin_bottom = 680.0
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/vseparation = 20

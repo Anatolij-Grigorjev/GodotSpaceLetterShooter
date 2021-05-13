@@ -5,7 +5,7 @@
 [ext_resource path="res://scene_select/icon_shoot.png" type="Texture" id=3]
 [ext_resource path="res://scene_select/SceneCell.gd" type="Script" id=4]
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0.419608, 0.419608, 0.415686, 1 )
 border_width_left = 5
 border_width_top = 5
@@ -38,7 +38,7 @@ tracks/0/path = NodePath(".:custom_styles/panel:border_color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 0.329877 ),
@@ -50,12 +50,24 @@ tracks/1/path = NodePath(".:custom_styles/panel:bg_color")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 0.406126 ),
 "update": 0,
 "values": [ Color( 0.419608, 0.419608, 0.415686, 1 ), Color( 0.690196, 0.690196, 0.690196, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ) ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -66,7 +78,7 @@ tracks/0/path = NodePath(".:custom_styles/panel:border_color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 0.329877, 1 ),
@@ -78,12 +90,24 @@ tracks/1/path = NodePath(".:custom_styles/panel:bg_color")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 0.406126, 1 ),
 "update": 0,
 "values": [ Color( 0.690196, 0.690196, 0.690196, 1 ), Color( 0.419608, 0.419608, 0.415686, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -94,7 +118,7 @@ tracks/0/path = NodePath(".:custom_styles/panel:border_color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.25, 0.75, 1 ),
 "transitions": PoolRealArray( 0.435275, 0.329877, 0.25, 1 ),
@@ -106,7 +130,7 @@ tracks/1/path = NodePath(".:custom_styles/panel:bg_color")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0, 0.25, 0.75, 1 ),
 "transitions": PoolRealArray( 0.406126, 0.406126, 0.378929, 1 ),
@@ -123,7 +147,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.25, 0.75, 1 ),
 "transitions": PoolRealArray( 0.25, 1, 0.466516, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 0.9, 0.9 ), Vector2( 0.9, 0.9 ), Vector2( 1, 1 ) ]
+"values": [ Vector2( 1.1, 1.1 ), Vector2( 0.9, 0.9 ), Vector2( 0.9, 0.9 ), Vector2( 1, 1 ) ]
 }
 
 [node name="SceneCell" type="Panel"]
@@ -131,7 +155,7 @@ margin_right = 350.0
 margin_bottom = 350.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 3 )
+custom_styles/panel = SubResource( 7 )
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
