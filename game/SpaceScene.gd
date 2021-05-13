@@ -8,6 +8,7 @@ signal clearedAllWaves
 signal letterTyped(letter)
 
 
+const StatsViewScn = preload("res://scene_stats/SceneStatsView.tscn")
 const TextShipScn = preload("res://ships/text_ship/TextShip.tscn")
 
 
@@ -190,8 +191,7 @@ func _checkSpecialCodes(keyCode: String) -> Dictionary:
 	
 
 func _buildSceneStats(data):
-	var StatsScn: PackedScene = load("res://SceneStatsView.tscn")
-	var statsView = StatsScn.instance()
+	var statsView = StatsViewScn.instance()
 	statsView.sceneName = sceneName
 	statsView.setData(G.currentSceneStats)
 	Utils.tryConnect(statsView, "statsViewKeyPressed", self, "_on_statsViewKeyPressed")

@@ -1,19 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://SceneStatsView.gd" type="Script" id=1]
-
-[sub_resource type="StyleBoxFlat" id=3]
-draw_center = false
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color( 0.839216, 0.960784, 0.0313726, 1 )
-border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+[ext_resource path="res://scene_stats/SceneStatsView.gd" type="Script" id=1]
 
 [sub_resource type="StyleBoxFlat" id=1]
 draw_center = false
@@ -28,8 +15,20 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="Animation" id=2]
-resource_name = "appear"
+[sub_resource type="StyleBoxFlat" id=2]
+draw_center = false
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0.839216, 0.960784, 0.0313726, 1 )
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="Animation" id=3]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Panel:self_modulate")
@@ -75,6 +74,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+sceneName = "<SCENE NAME>"
 
 [node name="Panel" type="Panel" parent="."]
 self_modulate = Color( 0, 0, 0, 0 )
@@ -115,7 +115,7 @@ margin_right = 1180.0
 margin_bottom = 35.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/normal = SubResource( 3 )
+custom_styles/normal = SubResource( 1 )
 text = "\"<SCENE NAME>\" STATISTICS:"
 align = 1
 valign = 1
@@ -323,7 +323,7 @@ margin_right = 1180.0
 margin_bottom = 550.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/normal = SubResource( 1 )
+custom_styles/normal = SubResource( 2 )
 text = "PRESS 'ENTER'  TO CONTINUE..."
 align = 1
 valign = 1
@@ -334,4 +334,4 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "appear"
-anims/appear = SubResource( 2 )
+anims/appear = SubResource( 3 )

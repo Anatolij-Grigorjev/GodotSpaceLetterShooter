@@ -31,7 +31,9 @@ func _ready():
 	
 	
 func _buildAvailableScenesData() -> Array:
-	var loadedScenes := []
+	var loadedScenes := [
+		Mock.sceneShiledShips(1)
+	]
 	for path in scenePaths:
 		var sceneJSON = Utils.file2JSON(path)
 		loadedScenes.append(Utils.parseJSONSceneSpec(sceneJSON))
