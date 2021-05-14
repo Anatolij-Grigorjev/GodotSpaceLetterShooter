@@ -172,7 +172,8 @@ func _findWithTextInGroup(text: String, group: String) -> Node2D:
 	
 func _on_shipShotFired(projectile: Node2D):
 	add_child(projectile)
-	if (projectile.is_in_group("shootable-projectile")):
+	#dont count enemy projectiles towards player stats
+	if (not projectile.is_in_group("shootable-projectile")):
 		G.connectProjectileStatsSignals(projectile)
 	
 	
