@@ -22,6 +22,7 @@ var sceneSpec: SceneSpec
 
 func _ready():
 	sceneHovered = false
+	self.set("custom_styles/panel", self.get("custom_styles/panel").duplicate(true))
 	#center pivot for scale animations
 	rect_pivot_offset = rect_size / 2
 	Utils.tryConnect($TouchPanel, "mouse_entered", self, "_onMouseEnteredArea")
