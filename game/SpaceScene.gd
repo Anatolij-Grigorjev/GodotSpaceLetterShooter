@@ -242,5 +242,12 @@ func _resolvePostWaveStatsActions():
 	else:
 		emit_signal("clearedAllWaves")
 		print("You are an hero!")
-		get_tree().quit()
+		_switchToSceneSelect()
+		
+		
+func _switchToSceneSelect():
+	var SceneSelectScn: PackedScene = load("res://scene_select/SceneSelect.tscn")
+	var sceneSelectView = SceneSelectScn.instance()
+	get_tree().get_root().add_child(sceneSelectView)
+	queue_free()
 	
