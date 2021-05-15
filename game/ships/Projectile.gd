@@ -15,7 +15,7 @@ onready var label: Label = $Label
 onready var area: Area2D = $Area2D
 
 
-var bouncedShield: bool = false
+var hadCollision: bool = false
 
 
 func _ready():
@@ -31,10 +31,10 @@ func _process(delta):
 
 
 func _on_Area2D_area_entered(area: Area2D):
+	hadCollision = true
 	var areaOwner: Node2D = area.get_parent()
 	if (areaOwner.is_in_group("bubble")):
 		fireDirection = fireDirection.bounce(fireDirection)
-		bouncedShield = true
 		return
 	if (areaOwner.is_in_group("projectile")):
 		speed = 0.0
@@ -44,7 +44,7 @@ func _on_Area2D_area_entered(area: Area2D):
 
 func _on_VisibilityNotifier2D_screen_exited():
 	#projectile didnt miss if it bounced of a shield
-	if (not bouncedShield):
+	if (not hadCollision):
 		emit_signal("projectileMissed")
 	queue_free()
 	
