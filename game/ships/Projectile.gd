@@ -43,7 +43,7 @@ func _on_Area2D_area_entered(area: Area2D):
 
 
 func _on_VisibilityNotifier2D_screen_exited():
-	#projectile didnt miss if it bounced of a shield
+	#event also fired during collision animation, so need to avoid counting that
 	if (not hadCollision):
 		emit_signal("projectileMissed")
 	queue_free()
