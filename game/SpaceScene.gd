@@ -37,7 +37,7 @@ var shooterCollided: bool = false
 func _ready():
 	
 	randomize()
-	G.currentScene = self
+	Stats.currentScene = self
 	shipsBuilderThread = Thread.new()
 	statsCookerThread = Thread.new()
 	
@@ -119,7 +119,7 @@ func _addShipsToScene(preparedShips: Array):
 
 
 func _registerShipHandlers(ship: TextShip) -> void:
-	G.connectTextShipStatsSignals(ship)
+	Stats.connectTextShipStatsSignals(ship)
 	Utils.tryConnect(ship, "textShipCollidedShooter", self, "_on_shooterCollided")
 	Utils.tryConnect(ship, "textShipDestroyed", self, "_countDestroyedShip")
 	Utils.tryConnect(ship, "shotFired", self, "_on_shipShotFired")
@@ -174,7 +174,7 @@ func _on_shipShotFired(projectile: Node2D):
 	add_child(projectile)
 	#dont count enemy projectiles towards player stats
 	if (not projectile.is_in_group("shootable-projectile")):
-		G.connectProjectileStatsSignals(projectile)
+		Stats.connectProjectileStatsSignals(projectile)
 	
 	
 func _countDestroyedShip(shipText: String):
@@ -194,7 +194,7 @@ func _checkSpecialCodes(keyCode: String) -> Dictionary:
 func _buildSceneStats(data):
 	var statsView = StatsViewScn.instance()
 	statsView.sceneName = sceneName
-	statsView.setData(G.currentSceneStats)
+	statsView.setData(Stats.currentSceneStats)
 	Utils.tryConnect(statsView, "statsViewKeyPressed", self, "_on_statsViewKeyPressed")
 	return statsView
 	

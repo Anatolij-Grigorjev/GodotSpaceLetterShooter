@@ -22,7 +22,6 @@ var chamber: String = ""
 
 func _ready():
 	emptyChamber()
-	G.shooterShip = self
 	
 	
 func chamberLetter(letter: String):

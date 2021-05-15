@@ -1,6 +1,5 @@
 extends Node
 
-var shooterShip: Node2D
 var currentScene: Node2D setget setCurrentScene
 
 var currentSceneStats: SceneStatsData

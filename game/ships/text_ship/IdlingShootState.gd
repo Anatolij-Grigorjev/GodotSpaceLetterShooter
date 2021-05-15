@@ -34,8 +34,9 @@ func exitState(nextState: String):
 	
 func performShot():
 	var projectile = projectileScn.instance()
+	var shooterShip: Node2D = get_tree().get_nodes_in_group("shooter")[0]
 	projectile.global_position = entity.projectilePosition.global_position
-	projectile.fireDirection = entity.global_position.direction_to(G.shooterShip.global_position)
+	projectile.fireDirection = entity.global_position.direction_to(shooterShip.global_position)
 	projectile.speed = projectileSpeed
 	_configureTextShipProjectile(projectile)
 	var useNumLetters = randi() % maxShotLength + 1
