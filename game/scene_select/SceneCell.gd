@@ -1,3 +1,4 @@
+tool
 extends Panel
 """
 Script used to populate info fields on scene selection cell
@@ -6,6 +7,10 @@ using a SceneSpec
 signal sceneSelected(spec)
 
 const CURSOR_SCENE_SELECTED = preload("res://white_rect.png")
+
+
+export(bool) var sceneDone: bool = false setget markSceneDone
+
 
 onready var anim: AnimationPlayer = $AnimationPlayer
 onready var sceneTitle: Label = $OuterMargin/VBoxContainer/SceneTitle
@@ -27,6 +32,12 @@ func _ready():
 	rect_pivot_offset = rect_size / 2
 	Utils.tryConnect($TouchPanel, "mouse_entered", self, "_onMouseEnteredArea")
 	Utils.tryConnect($TouchPanel, "mouse_exited", self, "_onMouseExitedArea")
+	
+	
+func markSceneDone(done: bool):
+	sceneDone = done
+	if ($SceneDoneMarker):
+		$SceneDoneMarker.visible = done
 	
 	
 func _process(delta):
