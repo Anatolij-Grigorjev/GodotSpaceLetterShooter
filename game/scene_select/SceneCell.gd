@@ -72,15 +72,17 @@ func _categorizeAllowedShipTypes(allowedShipTypes: Dictionary) -> Dictionary:
 	
 
 func _onMouseEnteredArea():
-	if (not anim.is_playing()):
-		anim.play("hover")
+	if (Utils.animIsPlayingAnimation(anim, "select")):
+		return
+	anim.play("hover")
 	sceneHovered = true
 	Input.set_custom_mouse_cursor(CURSOR_SCENE_SELECTED)
 	
 	
 func _onMouseExitedArea():
-	if (not anim.is_playing()):
-		anim.play("leave")
+	if (Utils.animIsPlayingAnimation(anim, "select")):
+		return
+	anim.play("leave")
 	sceneHovered = false
 	Input.set_custom_mouse_cursor(null)
 	
