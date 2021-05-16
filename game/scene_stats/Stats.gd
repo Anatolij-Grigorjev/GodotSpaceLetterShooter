@@ -1,4 +1,9 @@
 extends Node
+"""
+Connections relted to gather statistical data bout things happening
+in the current scene
+"""
+
 
 var currentScene: Node2D setget setCurrentScene
 
