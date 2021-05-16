@@ -120,6 +120,7 @@ In an in-game SceneSpec object instance
 """
 static func parseJSONSceneSpec(sceneSpecJSON: Dictionary) -> SceneSpec:
 	var spec = SceneSpec.new()
+	spec.id = sceneSpecJSON.id
 	spec.sceneName = sceneSpecJSON.name
 	spec.sceneBgColor = parseJSONColor(sceneSpecJSON.bgColor)
 	spec.smallestShipsWave = sceneSpecJSON.minShipsWave

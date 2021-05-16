@@ -6,38 +6,25 @@ const SceneCellScn = preload("res://scene_select/SceneCell.tscn")
 
 
 export(int) var minNumberScenes: int = 12
-export(Array, String) var scenePaths: Array = []
-
 
 onready var cellsGrid: GridContainer = $Panel/MarginContainer/SceneCells
-
-var scenesData: Array = []
 
 
 func _ready():
 	_clearRefSizeCells()
-	scenesData = _buildAvailableScenesData()
-	for spec in scenesData:
+	
+	for spec in Scenes.loadedSceneSpecs:
 		var sceneCell = SceneCellScn.instance()
 		sceneCell.setData(spec)
+		sceneCell.sceneDone = Scenes.sceneCompleteTracking[spec.id]
 		cellsGrid.add_child(sceneCell)
 		Utils.tryConnect(sceneCell, "sceneSelected", self, "_onSceneCellSceneSelected")
 	
-	for emptyIdx in range(minNumberScenes - scenesData.size()):
+	for emptyIdx in range(minNumberScenes - Scenes.loadedSceneSpecs.size()):
 		var placeholder = ReferenceRect.new()
 		placeholder.size_flags_horizontal = SIZE_EXPAND_FILL
 		placeholder.size_flags_vertical = SIZE_EXPAND_FILL
 		cellsGrid.add_child(placeholder)
-	
-	
-func _buildAvailableScenesData() -> Array:
-	var loadedScenes := [
-		Mock.sceneShiledShips(1)
-	]
-	for path in scenePaths:
-		var sceneJSON = Utils.file2JSON(path)
-		loadedScenes.append(Utils.parseJSONSceneSpec(sceneJSON))
-	return loadedScenes
 	
 	
 func _clearRefSizeCells():

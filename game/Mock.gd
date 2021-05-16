@@ -9,6 +9,7 @@ static func sceneShiledShips(numShips: int) -> SceneSpec:
 	
 static func sceneShipTypeQuantities(numFastShips: int, numShieldShips: int, numShooterShips: int) -> SceneSpec:
 	var spec := SceneSpec.new()
+	spec.id = 1000 + (1 * numFastShips) + (2 * numShieldShips) + (4 * numShooterShips)
 	spec.sceneName = "SPACE"
 	spec.sceneBgColor = Color.cornflower
 	spec.totalShips = numFastShips + numShieldShips + numShooterShips

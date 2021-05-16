@@ -159,6 +159,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Stats="*res://scene_stats/Stats.gd"
+Scenes="*res://scene_select/Scenes.tscn"
 
 [debug]
 

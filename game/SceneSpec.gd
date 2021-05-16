@@ -5,7 +5,7 @@ Parameters describing how to construct a scene:
 	- how many ships there are and how many per wave
 	- what kinds of ships are in this scene (shooting/passive, shield strength, etc)
 """
-
+var id: int
 var sceneName: String
 var sceneBgColor: Color
 var totalShips: int
@@ -18,6 +18,7 @@ var allowedShipsTypes: Dictionary
 
 
 func _init():
+	id = -1
 	sceneName = "<EMPTY>"
 	sceneBgColor = Color.black
 	totalShips = 0

@@ -4,7 +4,7 @@ Scene where text ships descend while player types
 and bottom ship shoots the descenders based on text
 """
 signal waveCleared(waveName)
-signal clearedAllWaves
+signal sceneCleared(sceneSpecId)
 signal letterTyped(letter)
 
 
@@ -47,6 +47,8 @@ func _ready():
 	Utils.tryConnect(shooter, "chamberEmptied", playerInput, "clearText")
 	Utils.tryConnect(shooter, "shipLeft", self, "_on_waveCleared")
 	Utils.tryConnect(shooter, "shotFired", self, "_on_shipShotFired")
+	
+	Utils.tryConnect(self, "sceneCleared", Scenes, "_onSceneCleared")
 	
 	_startNextWave()
 	
@@ -241,14 +243,6 @@ func _resolvePostWaveStatsActions():
 	if (remainingSceneShips > 0):
 		_startNextWave()
 	else:
-		emit_signal("clearedAllWaves")
 		print("You are an hero!")
-		_switchToSceneSelect()
-		
-		
-func _switchToSceneSelect():
-	var SceneSelectScn: PackedScene = load("res://scene_select/SceneSelect.tscn")
-	var sceneSelectView = SceneSelectScn.instance()
-	get_tree().get_root().add_child(sceneSelectView)
-	queue_free()
+		emit_signal("sceneCleared", cachedSpecification.id)
 	
