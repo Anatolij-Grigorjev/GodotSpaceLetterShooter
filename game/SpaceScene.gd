@@ -9,7 +9,6 @@ signal letterTyped(letter)
 
 
 const StatsViewScn = preload("res://scene_stats/SceneStatsView.tscn")
-const TextShipScn = preload("res://ships/text_ship/TextShip.tscn")
 
 
 export(bool) var showStatsBetweenWaves = true
