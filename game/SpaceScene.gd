@@ -64,7 +64,7 @@ func setInitialSceneSpec(spec: SceneSpec):
 
 func _prepareNextSceneWaveFromSpec():
 	$BG.self_modulate = cachedSpecification.sceneBgColor.darkened(0.25)
-	$CanvasLayer/SceneTitle.text = cachedSpecification.sceneName + ("\nWave %02d" % nextWaveNumber)
+	$CanvasLayer/SceneTitle.text = cachedSpecification.sceneName + ("\nWAVE %02d" % nextWaveNumber)
 	nextWaveNumber += 1
 
 	
