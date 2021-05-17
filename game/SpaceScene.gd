@@ -126,7 +126,7 @@ func _addShipsToScene(preparedShips: Array):
 
 func _registerShipHandlers(ship: TextShip) -> void:
 	Stats.connectTextShipStatsSignals(ship)
-	Utils.tryConnect(ship, "textShipCollidedShooter", self, "_on_shooterCollided")
+	Utils.tryConnect(ship, "textShipCollidedShooter", self, "_onShooterCollided")
 	Utils.tryConnect(ship, "textShipDestroyed", self, "_countDestroyedShip")
 	Utils.tryConnect(ship, "shotFired", self, "_onShipShotFired")
 	
@@ -201,7 +201,7 @@ func _buildSceneStats(data):
 	var statsView = StatsViewScn.instance()
 	statsView.sceneName = sceneName
 	statsView.setData(Stats.currentSceneStats)
-	Utils.tryConnect(statsView, "statsViewKeyPressed", self, "_on_statsViewKeyPressed")
+	Utils.tryConnect(statsView, "statsViewKeyPressed", self, "_onStatsViewKeyPressed")
 	return statsView
 	
 	
@@ -222,7 +222,7 @@ func _addStatsViewToCanvas():
 	$CanvasLayer.add_child(statsView)
 	
 	
-func _on_shooterCollided():
+func _onShooterCollided():
 	if (not stageOver):
 		_startEndSceneStats()
 		_addStatsViewToCanvas()
@@ -238,7 +238,7 @@ func _startNextWave():
 	_performWaveIntro()
 	
 	
-func _on_statsViewKeyPressed(statsView: Control):
+func _onStatsViewKeyPressed(statsView: Control):
 	statsView.queue_free()
 	_resolvePostWaveStatsActions()
 	
