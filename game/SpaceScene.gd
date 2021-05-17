@@ -43,9 +43,8 @@ func _ready():
 	
 	Utils.tryConnect(self, "letterTyped", playerInput, "addTypedLetter")
 	Utils.tryConnect(self, "letterTyped", shooter, "chamberLetter")
-	Utils.tryConnect(self, "waveCleared", shooter, "_on_currentScene_waveOver")
+	Utils.tryConnect(self, "waveCleared", self, "_onWaveCleared")
 	Utils.tryConnect(shooter, "chamberEmptied", playerInput, "clearText")
-	Utils.tryConnect(shooter, "shipLeft", self, "_on_waveCleared")
 	Utils.tryConnect(shooter, "shotFired", self, "_on_shipShotFired")
 	
 	Utils.tryConnect(self, "sceneCleared", Scenes, "_onSceneCleared")
@@ -96,6 +95,11 @@ func _calcNextWaveNumShips() -> int:
 	var numShipsWaveTo = cachedSpecification.largestShipsWave
 	var pickedInWave: int = numShipsWaveFrom + randi() % (numShipsWaveTo - numShipsWaveFrom + 1) 
 	return int(min(pickedInWave, remainingSceneShips))
+	
+	
+func _emitWaveClear():
+	var waveName := "%s - WAVE %02d" % [sceneName, nextWaveNumber - 1]
+	emit_signal("waveCleared", waveName)
 
 	
 func _waitAddCreatedShips():
@@ -105,7 +109,7 @@ func _waitAddCreatedShips():
 		remainingSceneShips -= (preparedShips.size())
 	else: 
 		_startEndSceneStats()
-		emit_signal("waveCleared", sceneName)
+		_emitWaveClear()
 	
 
 func _startEndSceneStats():
@@ -184,7 +188,7 @@ func _countDestroyedShip(shipText: String):
 	if (currentLiveShips <= 0):
 		yield(get_tree(), "idle_frame")
 		_startEndSceneStats()
-		emit_signal("waveCleared", sceneName)
+		_emitWaveClear()
 		
 
 func _checkSpecialCodes(keyCode: String) -> Dictionary:
@@ -201,8 +205,10 @@ func _buildSceneStats(data):
 	return statsView
 	
 	
-func _on_waveCleared():
-	print("Cleared wave: %s - %s" % [sceneName, nextWaveNumber - 1])
+func _onWaveCleared(waveName: String):
+	print("Cleared wave: %s" % waveName)
+	shooter.anim.play("leave")
+	yield(shooter.anim, "animation_finished")
 	yield(get_tree().create_timer(0.75), "timeout")
 	var wasLastWave := remainingSceneShips <= 0 or shooterCollided
 	if (wasLastWave or showStatsBetweenWaves):
