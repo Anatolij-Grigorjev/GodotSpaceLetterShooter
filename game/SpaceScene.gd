@@ -40,13 +40,14 @@ func _ready():
 	shipsBuilderThread = Thread.new()
 	statsCookerThread = Thread.new()
 	
+	Utils.tryConnect(self, "sceneCleared", Scenes, "_onSceneCleared")
+	Utils.tryConnect(self, "waveCleared", self, "_onWaveCleared")
+	
 	Utils.tryConnect(self, "letterTyped", playerInput, "addTypedLetter")
 	Utils.tryConnect(self, "letterTyped", shooter, "chamberLetter")
-	Utils.tryConnect(self, "waveCleared", self, "_onWaveCleared")
-	Utils.tryConnect(shooter, "chamberEmptied", playerInput, "clearText")
-	Utils.tryConnect(shooter, "shotFired", self, "_on_shipShotFired")
 	
-	Utils.tryConnect(self, "sceneCleared", Scenes, "_onSceneCleared")
+	Utils.tryConnect(shooter, "shotFired", self, "_onShipShotFired")
+	Utils.tryConnect(shooter, "chamberEmptied", playerInput, "clearText")
 	
 	_startNextWave()
 	
@@ -127,7 +128,7 @@ func _registerShipHandlers(ship: TextShip) -> void:
 	Stats.connectTextShipStatsSignals(ship)
 	Utils.tryConnect(ship, "textShipCollidedShooter", self, "_on_shooterCollided")
 	Utils.tryConnect(ship, "textShipDestroyed", self, "_countDestroyedShip")
-	Utils.tryConnect(ship, "shotFired", self, "_on_shipShotFired")
+	Utils.tryConnect(ship, "shotFired", self, "_onShipShotFired")
 	
 	
 func _input(event: InputEvent) -> void:
@@ -175,7 +176,7 @@ func _findWithTextInGroup(text: String, group: String) -> Node2D:
 	return null
 	
 	
-func _on_shipShotFired(projectile: Node2D):
+func _onShipShotFired(projectile: Node2D):
 	add_child(projectile)
 	#dont count enemy projectiles towards player stats
 	if (not projectile.is_in_group("shootable-projectile")):
