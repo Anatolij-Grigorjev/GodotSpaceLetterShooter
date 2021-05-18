@@ -29,45 +29,45 @@ func _connectSceneStatsSignals():
 	
 	
 func connectTextShipStatsSignals(textShip: TextShip):
-	Utils.tryConnect(textShip, "textShipDestroyed", self, "_on_textShipShotDown")
-	Utils.tryConnect(textShip.bubble, "bubbleBurst", self, "_on_textShipBubbleBurst")
-	Utils.tryConnect(textShip, "shotFired", self, "_on_textShipShotFired")
+	Utils.tryConnect(textShip, "textShipDestroyed", self, "_onTextShipShotDown")
+	Utils.tryConnect(textShip.bubble, "bubbleBurst", self, "_onTextShipBubbleBurst")
+	Utils.tryConnect(textShip, "shotFired", self, "_onTextShipShotFired")
 	
 
 func connectProjectileStatsSignals(projectile: Node2D):
-	Utils.tryConnect(projectile, "projectileDestroyed", self, "_on_projectileDestroyed")
-	Utils.tryConnect(projectile, "projectileMissed", self, "_on_projectileMissed")
+	Utils.tryConnect(projectile, "projectileDestroyed", self, "_onProjectileDestroyed")
+	Utils.tryConnect(projectile, "projectileMissed", self, "_onProjectileMissed")
 	
 	
 func _connectSceneNodeStatsSignals(scene: Node2D):
-	Utils.tryConnect(scene, "letterTyped", self, "_on_playerLetterTyped")
+	Utils.tryConnect(scene, "letterTyped", self, "_onPlayerLetterTyped")
 	
 	
 func _connectShooterStatsSignals(shooter: Node2D):
-	Utils.tryConnect(shooter, "shotFired", self, "_on_shooterShotFired")
+	Utils.tryConnect(shooter, "shotFired", self, "_onShooterShotFired")
 	
 	
 	
-func _on_playerLetterTyped(letter: String):
+func _onPlayerLetterTyped(letter: String):
 	currentSceneStats.totalLettersTyped += 1
 	
-func _on_shooterShotFired(projectile):
+func _onShooterShotFired(projectile):
 	currentSceneStats.totalShotsFired += 1
 	
-func _on_projectileMissed():
+func _onProjectileMissed():
 	currentSceneStats.totalShotsMissed += 1
 	
-func _on_textShipShotFired(projectile: Node2D):
+func _onTextShipShotFired(projectile: Node2D):
 	currentSceneStats.totalProjectilesLetters += projectile.get_node("Label").text.length()
 	
-func _on_textShipShotDown(text: String):
+func _onTextShipShotDown(text: String):
 	currentSceneStats.shipsShot += 1
 	currentSceneStats.totalShipsLetters += text.length()
 	if (text.length() > currentSceneStats.longestShipWord.length()):
 		currentSceneStats.longestShipWord = text
 		
-func _on_textShipBubbleBurst():
+func _onTextShipBubbleBurst():
 	currentSceneStats.shieldsBroken += 1
 	
-func _on_projectileDestroyed(text: String):
+func _onProjectileDestroyed(text: String):
 	currentSceneStats.projectilesShot += 1
