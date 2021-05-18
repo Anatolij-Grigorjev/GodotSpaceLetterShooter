@@ -13,8 +13,8 @@ static func sceneShipTypeQuantities(numFastShips: int= 0 , numShieldShips: int =
 	spec.sceneName = "SPACE"
 	spec.sceneBgColor = Color.cornflower.lightened(rand_range(-0.5, 0.5))
 	spec.totalShips = numFastShips + numShieldShips + numShooterShips
-	spec.smallestShipsWave = 2
-	spec.largestShipsWave = 4
+	spec.smallestShipsWave = min(2, spec.totalShips)
+	spec.largestShipsWave = min(4, spec.totalShips)
 	spec.allowedShipsTypes = {
 		#speedster
 		SceneShipLimits.new(566, 0, 0): numFastShips,
