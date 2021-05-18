@@ -37,4 +37,4 @@ func _switchToSceneSelect():
 	var SceneSelectScn: PackedScene = load("res://scene_select/SceneSelect.tscn")
 	var sceneSelectView = SceneSelectScn.instance()
 	get_tree().get_root().add_child(sceneSelectView)
-	queue_free()
+	Stats.currentScene.queue_free()
