@@ -6,6 +6,10 @@ const SceneCellScn = preload("res://scene_select/SceneCell.tscn")
 
 
 export(int) var minNumberScenes: int = 12
+export(Dictionary) var sceneTypeLoadPaths: Dictionary = {
+	"space": "res://SpaceScene.tscn"
+}
+
 
 onready var cellsGrid: GridContainer = $Panel/MarginContainer/SceneCells
 
@@ -33,4 +37,4 @@ func _clearRefSizeCells():
 
 
 func _onSceneCellSceneSelected(sceneSpec: SceneSpec):
-	Scenes.switchToShipScene("res://SpaceScene.tscn", sceneSpec)
+	Scenes.switchToShipScene(sceneTypeLoadPaths[sceneSpec.type], sceneSpec)

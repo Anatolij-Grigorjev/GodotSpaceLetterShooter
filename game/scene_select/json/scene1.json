@@ -1,6 +1,7 @@
 {
 	"id": 89,
 	"name": "<NAME>",
+	"type": "jungle",
 	"bgColor": {
 		"a": 1.0,
 		"b": 0.7,
