@@ -10,6 +10,9 @@ var loadedSceneSpecs: Array = []
 var sceneCompleteTracking: Dictionary = {}
 
 
+var activeScene: Object
+
+
 func _ready():
 	loadedSceneSpecs = _loadSceneSpecs()
 	#mark all scenes unfinished
@@ -37,4 +40,18 @@ func _switchToSceneSelect():
 	var SceneSelectScn: PackedScene = load("res://scene_select/SceneSelect.tscn")
 	var sceneSelectView = SceneSelectScn.instance()
 	get_tree().get_root().add_child(sceneSelectView)
-	Stats.currentScene.queue_free()
+	_replaceActiveScene(sceneSelectView)
+	
+	
+func switchToShipScene(scenePath: String, sceneSpec: SceneSpec):
+	var ShipScenScn: PackedScene = load(scenePath)
+	var shipScene = ShipScenScn.instance()
+	shipScene.setInitialSceneSpec(sceneSpec)
+	get_tree().get_root().add_child(shipScene)
+	_replaceActiveScene(shipScene)
+	
+	
+func _replaceActiveScene(newActiveScene: Object):
+	if (activeScene):
+		activeScene.queue_free()
+	activeScene = newActiveScene

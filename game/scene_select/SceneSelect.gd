@@ -33,8 +33,4 @@ func _clearRefSizeCells():
 
 
 func _onSceneCellSceneSelected(sceneSpec: SceneSpec):
-	var SpaceSceneScn: PackedScene = load("res://SpaceScene.tscn")
-	var spaceScene = SpaceSceneScn.instance()
-	spaceScene.setInitialSceneSpec(sceneSpec)
-	get_tree().get_root().add_child(spaceScene)
-	queue_free()
+	Scenes.switchToShipScene("res://SpaceScene.tscn", sceneSpec)
