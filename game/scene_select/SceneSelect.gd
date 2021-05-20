@@ -7,7 +7,8 @@ const SceneCellScn = preload("res://scene_select/SceneCell.tscn")
 
 export(int) var minNumberScenes: int = 12
 export(Dictionary) var sceneTypeLoadPaths: Dictionary = {
-	"space": "res://SpaceScene.tscn"
+	"space": "res://scene/space_scene/SpaceScene.tscn",
+	"brown": "res://scene/space_scene/BrownScene.tscn"
 }
 
 

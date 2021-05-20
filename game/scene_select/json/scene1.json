@@ -1,12 +1,12 @@
 {
 	"id": 89,
-	"name": "<NAME>",
-	"type": "space",
+	"name": "HYPERSPACE",
+	"type": "brown",
 	"bgColor": {
 		"a": 1.0,
-		"b": 0.7,
-		"g": 0.8,
-		"r": 1.0
+		"b": 0.1,
+		"g": 0.3,
+		"r": 0.75
 	},
 	"minShipsWave": 2,
 	"maxShipsWave": 4,

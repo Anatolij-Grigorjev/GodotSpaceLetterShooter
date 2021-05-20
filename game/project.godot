@@ -67,12 +67,12 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "SceneShipLimits",
 "language": "GDScript",
-"path": "res://SceneShipLimits.gd"
+"path": "res://scene/SceneShipLimits.gd"
 }, {
 "base": "Reference",
 "class": "SceneSpec",
 "language": "GDScript",
-"path": "res://SceneSpec.gd"
+"path": "res://scene/SceneSpec.gd"
 }, {
 "base": "Reference",
 "class": "SceneStatsData",
@@ -82,7 +82,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "SceneWaveSpec",
 "language": "GDScript",
-"path": "res://SceneWaveSpec.gd"
+"path": "res://scene/SceneWaveSpec.gd"
 }, {
 "base": "Node",
 "class": "State",
