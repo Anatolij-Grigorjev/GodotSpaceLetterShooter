@@ -1,0 +1,27 @@
+{
+	"id": 2,
+	"name": "SHIELDED",
+	"type": "space",
+	"bgColor": {
+		"a": 1.0,
+		"b": 0.99,
+		"g": 0.28,
+		"r": 0.19
+	},
+	"minShipsWave": 2,
+	"maxShipsWave": 3,
+	"allowedShipsTypes": [
+		{
+			"speed": 435.0,
+			"shieldHP": 2,
+			"shotPriority": 0,
+			"numShips": 4
+		},
+		{
+			"speed": 400.0,
+			"shieldHP": 4,
+			"shotPriority": 0,
+			"numShips": 3
+		}
+	]
+}

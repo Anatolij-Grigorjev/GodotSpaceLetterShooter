@@ -1,0 +1,27 @@
+{
+	"id": 1,
+	"name": "FASTTRACK",
+	"type": "space",
+	"bgColor": {
+		"a": 1.0,
+		"b": 0.93,
+		"g": 0.58,
+		"r": 0.39
+	},
+	"minShipsWave": 2,
+	"maxShipsWave": 3,
+	"allowedShipsTypes": [
+		{
+			"speed": 567.0,
+			"shieldHP": 0,
+			"shotPriority": 0,
+			"numShips": 3
+		},
+		{
+			"speed": 666.0,
+			"shieldHP": 0,
+			"shotPriority": 0,
+			"numShips": 2
+		}
+	]
+}
