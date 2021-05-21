@@ -5,6 +5,7 @@ and bottom ship shoots the descenders based on text
 """
 signal waveCleared(waveName)
 signal sceneCleared(sceneSpecId)
+signal sceneFailed(sceneSpecId)
 signal letterTyped(letter)
 
 
@@ -41,6 +42,7 @@ func _ready():
 	statsCookerThread = Thread.new()
 	
 	Utils.tryConnect(self, "sceneCleared", Scenes, "_onSceneCleared")
+	Utils.tryConnect(self, "sceneFailed", Scenes, "_onSceneFailed")
 	Utils.tryConnect(self, "waveCleared", self, "_onWaveCleared")
 	
 	Utils.tryConnect(self, "letterTyped", playerInput, "addTypedLetter")
@@ -244,11 +246,12 @@ func _onStatsViewKeyPressed(statsView: Control):
 	
 	
 func _resolvePostWaveStatsActions():
-	if (shooterCollided):
-		get_tree().quit()
 	if (remainingSceneShips > 0):
 		_startNextWave()
 	else:
-		print("You are an hero!")
-		emit_signal("sceneCleared", cachedSpecification.id)
+		var correctSceneEndSignal = (
+			"sceneCleared" if not shooterCollided
+			else "sceneFailed"
+		)
+		emit_signal(correctSceneEndSignal, cachedSpecification.id)
 	

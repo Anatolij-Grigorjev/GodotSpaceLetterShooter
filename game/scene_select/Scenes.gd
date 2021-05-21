@@ -35,6 +35,10 @@ func _onSceneCleared(sceneSpecId: int):
 	sceneCompleteTracking[sceneSpecId] = true
 	_switchToSceneSelect()
 	
+
+func _onSceneFailed(sceneSpecId: int):
+	_switchToSceneSelect()
+	
 	
 func _switchToSceneSelect():
 	var SceneSelectScn: PackedScene = load("res://scene_select/SceneSelect.tscn")
