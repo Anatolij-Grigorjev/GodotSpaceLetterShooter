@@ -3,7 +3,6 @@ extends Node2D
 Scene where text ships descend while player types 
 and bottom ship shoots the descenders based on text
 """
-signal waveCleared(waveName)
 signal sceneCleared(sceneSpecId)
 signal sceneFailed(sceneSpecId)
 signal letterTyped(letter)
@@ -43,7 +42,6 @@ func _ready():
 	
 	Utils.tryConnect(self, "sceneCleared", Scenes, "_onSceneCleared")
 	Utils.tryConnect(self, "sceneFailed", Scenes, "_onSceneFailed")
-	Utils.tryConnect(self, "waveCleared", self, "_onWaveCleared")
 	
 	Utils.tryConnect(self, "letterTyped", playerInput, "addTypedLetter")
 	Utils.tryConnect(self, "letterTyped", shooter, "chamberLetter")
@@ -97,11 +95,6 @@ func _calcNextWaveNumShips() -> int:
 	var numShipsWaveTo = cachedSpecification.largestShipsWave
 	var pickedInWave: int = numShipsWaveFrom + randi() % (numShipsWaveTo - numShipsWaveFrom + 1) 
 	return int(min(pickedInWave, remainingSceneShips))
-	
-	
-func _emitWaveClear():
-	var waveName := "%s - WAVE %02d" % [sceneName, nextWaveNumber - 1]
-	emit_signal("waveCleared", waveName)
 
 	
 func _waitAddCreatedShips():
@@ -111,7 +104,8 @@ func _waitAddCreatedShips():
 		remainingSceneShips -= (preparedShips.size())
 	else: 
 		_startEndSceneStats()
-		_emitWaveClear()
+		var waveName := "%s - WAVE %02d" % [sceneName, nextWaveNumber - 1]
+		_onWaveCleared(waveName)
 	
 
 func _startEndSceneStats():
@@ -190,7 +184,8 @@ func _countDestroyedShip(shipText: String):
 	if (currentLiveShips <= 0):
 		yield(get_tree(), "idle_frame")
 		_startEndSceneStats()
-		_emitWaveClear()
+		var waveName := "%s - WAVE %02d" % [sceneName, nextWaveNumber - 1]
+		_onWaveCleared(waveName)
 		
 
 func _checkSpecialCodes(keyCode: String) -> Dictionary:
