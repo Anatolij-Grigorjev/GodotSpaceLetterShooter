@@ -241,7 +241,7 @@ func _onStatsViewKeyPressed(statsView: Control):
 	
 	
 func _resolvePostWaveStatsActions():
-	if (remainingSceneShips > 0):
+	if (remainingSceneShips > 0 and not shooterCollided):
 		_startNextWave()
 	else:
 		var correctSceneEndSignal = (
