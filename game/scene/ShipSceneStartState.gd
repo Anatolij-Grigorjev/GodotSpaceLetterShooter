@@ -4,14 +4,9 @@ State behavior describing actions for a scene to startup
 and leading up to first wave
 """
 
-var shipsBuilderThread: Thread
-
 
 func enterState(prevState: String):
 	.enterState(prevState)
-	randomize()
-	Stats.currentScene = entity
-	shipsBuilderThread = Thread.new()
 	Utils.tryConnect(entity, "sceneCleared", Scenes, "_onSceneCleared")
 	Utils.tryConnect(entity, "sceneFailed", Scenes, "_onSceneFailed")
 	

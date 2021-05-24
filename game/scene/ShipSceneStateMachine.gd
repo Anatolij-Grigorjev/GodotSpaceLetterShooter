@@ -5,6 +5,8 @@ FSM for controlling distinct phases during a ship scene
 """
 
 func _ready():
+	randomize()
+	Stats.currentScene = entity
 	call_deferred("setState", "SceneStart")
 	
 
