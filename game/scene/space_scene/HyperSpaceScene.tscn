@@ -6,6 +6,13 @@
 
 [node name="HyperSpaceScene" instance=ExtResource( 1 )]
 
+[node name="SceneTitle" parent="CanvasLayer" index="1"]
+margin_left = 110.0
+margin_top = -209.529
+margin_right = 182.0
+margin_bottom = -178.529
+rect_pivot_offset = Vector2( 72, 0 )
+
 [node name="BG" type="Sprite" parent="." index="5"]
 show_behind_parent = true
 position = Vector2( 640, 500 )

@@ -1,4 +1,5 @@
 extends State
+class_name ShipSceneStartState
 """
 State behavior describing actions for a scene to startup 
 and leading up to first wave
@@ -7,6 +8,9 @@ and leading up to first wave
 
 func enterState(prevState: String):
 	.enterState(prevState)
+	
+	assert(entity.cachedSpecification)
+	
 	Utils.tryConnect(entity, "sceneCleared", Scenes, "_onSceneCleared")
 	Utils.tryConnect(entity, "sceneFailed", Scenes, "_onSceneFailed")
 	

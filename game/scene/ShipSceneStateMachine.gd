@@ -11,12 +11,18 @@ func _ready():
 	
 
 func _getNextState(delta: float) -> String:
+	var stateNode = stateNodes[state] as State
 	match(state):
 		"SceneStart":
+			# in this method the enterState was already invoked, so 
+			# state is done
+			return "WaveStart"
+		"WaveStart":
+			
 			return NO_STATE
 		"WaveProcess":
 			return NO_STATE
-		"WaveSwitch":
+		"WaveEnd":
 			return NO_STATE
 		"SceneEnd":
 			return NO_STATE

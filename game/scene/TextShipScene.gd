@@ -16,6 +16,7 @@ export(bool) var showStatsBetweenWaves = true
 
 onready var shooter = $ShooterShip
 onready var playerInput = $CanvasLayer/PlayerInput
+onready var musicControl = $CanvasLayer/MusicControl
 onready var shipsFactory = $TextShipFactory
 
 
@@ -52,8 +53,6 @@ func _ready():
 	_startNextWave()
 	
 	
-	
-	
 func setInitialSceneSpec(spec: SceneSpec):
 	cachedSpecification = spec
 	sceneName = cachedSpecification.sceneName
@@ -62,13 +61,13 @@ func setInitialSceneSpec(spec: SceneSpec):
 	remainingSceneShipSpecs = cachedSpecification.allowedShipsTypes.duplicate()
 
 
-func _prepareNextSceneWaveFromSpec():
+func _prepareNextWaveBGAndTitle():
 	$BG.self_modulate = cachedSpecification.sceneBgColor.darkened(0.25)
 	$CanvasLayer/SceneTitle.text = cachedSpecification.sceneName + ("\nWAVE %02d" % nextWaveNumber)
 	nextWaveNumber += 1
 
 	
-func _performWaveIntro():
+func _playWaveIntroAnimations():
 	shooter.anim.play("arrive")
 	yield(shooter.anim, "animation_finished")
 	$AnimationPlayer.play("show_title")
@@ -231,8 +230,8 @@ func _onShooterCollided():
 func _startNextWave():
 	currentLiveShips = 0
 	stageOver = false
-	_prepareNextSceneWaveFromSpec()
-	_performWaveIntro()
+	_prepareNextWaveBGAndTitle()
+	_playWaveIntroAnimations()
 	
 	
 func _onStatsViewKeyPressed(statsView: Control):
