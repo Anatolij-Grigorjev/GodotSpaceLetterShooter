@@ -4,6 +4,11 @@ class_name ShipSceneStateMachine
 FSM for controlling distinct phases during a ship scene
 """
 
+var cachedSpecification: SceneSpec
+
+var remainingSceneShips: int
+
+
 func _ready():
 	randomize()
 	Stats.currentScene = entity
@@ -14,9 +19,10 @@ func _getNextState(delta: float) -> String:
 	var stateNode = stateNodes[state] as State
 	match(state):
 		"SceneStart":
-			# in this method the enterState was already invoked, so 
-			# state is done
-			return "WaveStart"
+			if (remainingSceneShips > 0):
+				return "WaveStart"
+			else:
+				return "SceneEnd"
 		"WaveStart":
 			
 			return NO_STATE
