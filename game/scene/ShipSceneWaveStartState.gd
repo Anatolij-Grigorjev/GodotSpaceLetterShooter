@@ -19,8 +19,8 @@ func enterState(prevState: String):
 	
 	
 func _prepareWaveBGAndTitle():
-	entity.get_node('BG').self_modulate = entity.cachedSpecification.sceneBgColor.darkened(0.25)
-	entity.get_node('CanvasLayer/SceneTitle').text = entity.cachedSpecification.sceneName + ("\nWAVE %02d" % waveNumber)
+	entity.get_node('BG').self_modulate = fsm.sceneSpecification.sceneBgColor.darkened(0.25)
+	entity.get_node('CanvasLayer/SceneTitle').text = fsm.sceneSpecification.sceneName + ("\nWAVE %02d" % waveNumber)
 	
 	
 func _playWaveIntroAnimations():
@@ -36,9 +36,14 @@ func processState(delta: float):
 	if (shipsAdded or shipsBuilderThread.is_active()):
 		return
 	var ships: Array = shipsBuilderThread.wait_to_finish()
-	entity._addShipsToScene(ships)
+	_addSceneShips(ships)
 	shipsAdded = true
 	
+	
+func _addSceneShips(ships: Array):
+	var parent = entity.get_node("TextShips")
+	for node in ships:
+		parent.add_child(node)
 	
 	
 func exitState(nextState: String):

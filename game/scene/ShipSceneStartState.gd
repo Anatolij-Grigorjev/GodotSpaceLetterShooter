@@ -26,11 +26,8 @@ func exitState(nextState: String):
 	#no ships found, next state is ending scene without waves
 	if (nextState == "SceneEnd"):
 		return
-	_prepareFirstWave()
 	
-	
-func _prepareFirstWave():
-	var waveStartState: ShipSceneWaveStartState = fsm.getState("WaveStart")
+	var waveStartState: ShipSceneWaveStartState = fsm.getState(nextState)
 	waveStartState.waveNumber = 1
 	waveStartState.waveSpec = _buildFirstWaveSpec()
 	
@@ -44,6 +41,7 @@ func _buildFirstWaveSpec() -> SceneWaveSpec:
 	var nextWaveSpec = SceneWaveSpec.new(numShips, firstShipStart, entity.remainingSceneShipSpecs)
 	for nextWaveShipSpec in nextWaveSpec.shipTypes:
 		fsm.remainingSceneShipSpecs[nextWaveShipSpec] -= 1
+	fsm.remainingSceneShips -= numShips
 	return nextWaveSpec
 
 
