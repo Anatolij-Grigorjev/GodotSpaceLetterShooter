@@ -85,6 +85,11 @@ _global_script_classes=[ {
 "path": "res://scene/SceneWaveSpec.gd"
 }, {
 "base": "State",
+"class": "ShipSceneEndState",
+"language": "GDScript",
+"path": "res://scene/ShipSceneEndState.gd"
+}, {
+"base": "State",
 "class": "ShipSceneStartState",
 "language": "GDScript",
 "path": "res://scene/ShipSceneStartState.gd"
@@ -165,6 +170,7 @@ _global_script_class_icons={
 "SceneSpec": "",
 "SceneStatsData": "",
 "SceneWaveSpec": "",
+"ShipSceneEndState": "",
 "ShipSceneStartState": "",
 "ShipSceneStateMachine": "",
 "ShipSceneWaveEndState": "",

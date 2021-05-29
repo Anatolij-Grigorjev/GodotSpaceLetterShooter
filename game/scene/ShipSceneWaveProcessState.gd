@@ -7,7 +7,6 @@ State to hold and use logic of ongoing wave in scene
 
 var liveWaveShips: int = 0
 var waveOver: bool = false
-var shooterFailed: bool = false
 
 
 func enterState(prevState: String):
@@ -21,7 +20,6 @@ func enterState(prevState: String):
 func exitState(nextState: String):
 	.exitState(nextState)
 	var stateNode = fsm.getState(nextState)
-	stateNode.shooterFailed = shooterFailed
 
 
 func _registerShipHandlers(ship: TextShip) -> void:
@@ -33,7 +31,7 @@ func _registerShipHandlers(ship: TextShip) -> void:
 	
 func _onShooterCollided():
 	waveOver = true
-	shooterFailed = true
+	fsm.shooterFailed = true
 	
 	
 func _countDestroyedShip(shipText: String):

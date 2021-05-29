@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://space_music_bg.wav" type="AudioStream" id=1]
 [ext_resource path="res://scene/TextShipScene.gd" type="Script" id=2]
@@ -6,6 +6,12 @@
 [ext_resource path="res://player_input/PlayerInput.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ships/text_ship/TextShipFactory.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ships/shooter/ShooterShip.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scene/ShipSceneStateMachine.gd" type="Script" id=7]
+[ext_resource path="res://scene/ShipSceneStartState.gd" type="Script" id=8]
+[ext_resource path="res://scene/ShipSceneWaveEndState.gd" type="Script" id=9]
+[ext_resource path="res://scene/ShipSceneWaveStartState.gd" type="Script" id=10]
+[ext_resource path="res://scene/ShipSceneWaveProcessState.gd" type="Script" id=11]
+[ext_resource path="res://scene/ShipSceneEndState.gd" type="Script" id=12]
 
 [sub_resource type="Animation" id=1]
 resource_name = "show_title"
@@ -62,6 +68,24 @@ tracks/3/keys = {
 [node name="TextShipScene" type="Node2D"]
 position = Vector2( 0, -17.8588 )
 script = ExtResource( 2 )
+
+[node name="ShipSceneStateMachine" type="Node" parent="."]
+script = ExtResource( 7 )
+
+[node name="ShipSceneStartState" type="Node" parent="ShipSceneStateMachine"]
+script = ExtResource( 8 )
+
+[node name="ShipSceneWaveStartState" type="Node" parent="ShipSceneStateMachine"]
+script = ExtResource( 10 )
+
+[node name="ShipSceneWaveProcessState" type="Node" parent="ShipSceneStateMachine"]
+script = ExtResource( 11 )
+
+[node name="ShipSceneWaveEndState" type="Node" parent="ShipSceneStateMachine"]
+script = ExtResource( 9 )
+
+[node name="ShipSceneEndState" type="Node" parent="ShipSceneStateMachine"]
+script = ExtResource( 12 )
 
 [node name="TextShips" type="Node2D" parent="."]
 

@@ -7,6 +7,8 @@ FSM for controlling distinct phases during a ship scene
 var sceneSpecification: SceneSpec setget setSceneSpec
 var remainingSceneShips := 0
 var remainingSceneShipSpecs := {}
+var shooterFailed: bool = false
+var waveNumber: int = 0
 
 
 func _ready():
@@ -26,24 +28,57 @@ func _getNextState(delta: float) -> String:
 	match(state):
 		"SceneStart":
 			if (remainingSceneShips > 0):
-				
+				waveNumber = 1
+				_setNextWaveSpec(waveNumber)
 				return "WaveStart"
 			else:
 				return "SceneEnd"
 		"WaveStart":
-			var waveStartState = stateNode as ShipSceneWaveStartState
-			if waveStartState.shipsAdded:
+			if stateNode.shipsAdded:
 				return "WaveProcess"
 			return NO_STATE
 		"WaveProcess":
-			var waveProcessState = stateNode as ShipSceneWaveProcessState
-			if waveProcessState.waveOver:
+			if stateNode.waveOver:
 				return "WaveEnd"
 			return NO_STATE
 		"WaveEnd":
+			if stateNode.statsViewClosed:
+				var wasLastWave = shooterFailed or remainingSceneShips <= 0
+				if (wasLastWave):
+					return "SceneEnd"
+				else:
+					waveNumber += 1
+					_setNextWaveSpec(waveNumber)
+					return "WaveStart"
 			return NO_STATE
 		"SceneEnd":
 			return NO_STATE
 		_:
 			breakpoint
 			return NO_STATE
+
+
+func _setNextWaveSpec(waveNumber: int):
+	var waveStartState: ShipSceneWaveStartState = getState("WaveStart")
+	waveStartState.waveNumber = waveNumber
+	waveStartState.waveSpec = _buildNextWaveSpec()
+	remainingSceneShips -= waveStartState.waveSpec.numShips
+	
+
+func _buildNextWaveSpec() -> SceneWaveSpec:
+	var numShips = _calcNextWaveNumShips()
+	var firstShipStart = Vector2(
+		rand_range(100, 175),
+		rand_range(50, 100)
+	)
+	var nextWaveSpec = SceneWaveSpec.new(numShips, firstShipStart, entity.remainingSceneShipSpecs)
+	for nextWaveShipSpec in nextWaveSpec.shipTypes:
+		remainingSceneShipSpecs[nextWaveShipSpec] -= 1
+	return nextWaveSpec
+
+
+func _calcNextWaveNumShips() -> int:
+	var numShipsWaveFrom = sceneSpecification.smallestShipsWave
+	var numShipsWaveTo = sceneSpecification.largestShipsWave
+	var pickedInWave: int = numShipsWaveFrom + randi() % (numShipsWaveTo - numShipsWaveFrom + 1) 
+	return int(min(pickedInWave, remainingSceneShips))

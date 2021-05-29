@@ -16,7 +16,7 @@ func _ready():
 func setCurrentScene(scene: Node2D):
 	if (scene != currentScene):
 		currentScene = scene
-		currentSceneStats = SceneStatsData.new(scene.sceneName)
+		currentSceneStats = SceneStatsData.new(scene.fsm.sceneSpecification.sceneName)
 		_connectSceneStatsSignals()
 		
 

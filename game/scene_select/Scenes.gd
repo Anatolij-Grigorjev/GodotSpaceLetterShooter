@@ -49,7 +49,7 @@ func _switchToSceneSelect():
 func switchToShipScene(scenePath: String, sceneSpec: SceneSpec):
 	var ShipScenScn: PackedScene = load(scenePath)
 	var shipScene = ShipScenScn.instance()
-	shipScene.setInitialSceneSpec(sceneSpec)
+	shipScene.setSceneSpecificaion(sceneSpec)
 	get_tree().get_root().add_child(shipScene)
 	_replaceActiveScene(shipScene)
 	

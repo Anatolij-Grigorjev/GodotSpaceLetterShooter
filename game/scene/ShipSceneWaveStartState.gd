@@ -10,6 +10,10 @@ var shipsBuilderThread: Thread
 var shipsAdded: bool = false
 
 
+func _ready():
+	shipsBuilderThread = Thread.new()
+
+
 func enterState(prevState: String):
 	.enterState(prevState)
 	_prepareWaveBGAndTitle()
