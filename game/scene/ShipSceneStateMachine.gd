@@ -13,7 +13,6 @@ var waveNumber: int = 0
 
 func _ready():
 	randomize()
-	Stats.currentScene = entity
 	call_deferred("setState", "SceneStart")
 	
 	
@@ -71,7 +70,7 @@ func _buildNextWaveSpec() -> SceneWaveSpec:
 		rand_range(100, 175),
 		rand_range(50, 100)
 	)
-	var nextWaveSpec = SceneWaveSpec.new(numShips, firstShipStart, entity.remainingSceneShipSpecs)
+	var nextWaveSpec = SceneWaveSpec.new(numShips, firstShipStart, remainingSceneShipSpecs)
 	for nextWaveShipSpec in nextWaveSpec.shipTypes:
 		remainingSceneShipSpecs[nextWaveShipSpec] -= 1
 	return nextWaveSpec
@@ -82,3 +81,10 @@ func _calcNextWaveNumShips() -> int:
 	var numShipsWaveTo = sceneSpecification.largestShipsWave
 	var pickedInWave: int = numShipsWaveFrom + randi() % (numShipsWaveTo - numShipsWaveFrom + 1) 
 	return int(min(pickedInWave, remainingSceneShips))
+	
+	
+func _onShipShotFired(projectile: Node2D):
+	entity.add_child(projectile)
+	#dont count enemy projectiles towards player stats
+	if (not projectile.is_in_group("shootable-projectile")):
+		Stats.connectProjectileStatsSignals(projectile)

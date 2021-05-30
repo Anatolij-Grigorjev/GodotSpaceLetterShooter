@@ -7,6 +7,7 @@ State to hold and use logic of ongoing wave in scene
 
 var liveWaveShips: int = 0
 var waveOver: bool = false
+var latestKeyInputEvent: InputEventKey = InputEventKey.new()
 
 
 func enterState(prevState: String):
@@ -15,6 +16,12 @@ func enterState(prevState: String):
 	liveWaveShips = shipsContainer.get_child_count()
 	for ship in shipsContainer.get_children():
 		_registerShipHandlers(ship)
+		
+		
+func processState(delta: float):
+	.processState(delta)
+	_processLatestKey(latestKeyInputEvent)
+	
 		
 		
 func exitState(nextState: String):
@@ -26,7 +33,7 @@ func _registerShipHandlers(ship: TextShip) -> void:
 	Stats.connectTextShipStatsSignals(ship)
 	Utils.tryConnect(ship, "textShipCollidedShooter", self, "_onShooterCollided")
 	Utils.tryConnect(ship, "textShipDestroyed", self, "_countDestroyedShip")
-	Utils.tryConnect(ship, "shotFired", self, "_onShipShotFired")
+	Utils.tryConnect(ship, "shotFired", fsm, "_onShipShotFired")
 	
 	
 func _onShooterCollided():
@@ -37,19 +44,16 @@ func _onShooterCollided():
 func _countDestroyedShip(shipText: String):
 	liveWaveShips -= 1
 	waveOver = liveWaveShips <= 0
-		
-		
-func _onShipShotFired(projectile: Node2D):
-	entity.add_child(projectile)
-	#dont count enemy projectiles towards player stats
-	if (not projectile.is_in_group("shootable-projectile")):
-		Stats.connectProjectileStatsSignals(projectile)
-		
-		
+	
+
+
 func _input(event: InputEvent) -> void:
 	if (not event is InputEventKey):
 		return
-	var keyEvent: InputEventKey = event as InputEventKey
+	latestKeyInputEvent = event as InputEventKey
+
+		
+func _processLatestKey(keyEvent: InputEventKey) -> void:
 	if (not _isKeyJustPressed(keyEvent)):
 		return
 	var keyCharCode: String = OS.get_scancode_string(keyEvent.scancode)

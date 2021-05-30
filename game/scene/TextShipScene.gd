@@ -13,14 +13,22 @@ onready var playerInput = $CanvasLayer/PlayerInput
 onready var musicControl = $CanvasLayer/MusicControl
 onready var shipsFactory = $TextShipFactory
 onready var fsm: ShipSceneStateMachine = $ShipSceneStateMachine
-
+onready var stateLabel: Label = $CanvasLayer/StateLabel
 
 
 func _ready():
 	randomize()
-	Stats.currentScene = self
+	call_deferred("_bindSceneStats")
+	
+	
+func _process(delta: float):
+	stateLabel.text = "state: %s" % fsm.state
+	
 	
 
 func setSceneSpecificaion(spec: SceneSpec):
 	get_node("ShipSceneStateMachine").sceneSpecification = spec
 	
+
+func _bindSceneStats():
+	Stats.currentScene = self

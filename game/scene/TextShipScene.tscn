@@ -72,19 +72,19 @@ script = ExtResource( 2 )
 [node name="ShipSceneStateMachine" type="Node" parent="."]
 script = ExtResource( 7 )
 
-[node name="ShipSceneStartState" type="Node" parent="ShipSceneStateMachine"]
+[node name="SceneStart" type="Node" parent="ShipSceneStateMachine"]
 script = ExtResource( 8 )
 
-[node name="ShipSceneWaveStartState" type="Node" parent="ShipSceneStateMachine"]
+[node name="WaveStart" type="Node" parent="ShipSceneStateMachine"]
 script = ExtResource( 10 )
 
-[node name="ShipSceneWaveProcessState" type="Node" parent="ShipSceneStateMachine"]
+[node name="WaveProcess" type="Node" parent="ShipSceneStateMachine"]
 script = ExtResource( 11 )
 
-[node name="ShipSceneWaveEndState" type="Node" parent="ShipSceneStateMachine"]
+[node name="WaveEnd" type="Node" parent="ShipSceneStateMachine"]
 script = ExtResource( 9 )
 
-[node name="ShipSceneEndState" type="Node" parent="ShipSceneStateMachine"]
+[node name="SceneEnd" type="Node" parent="ShipSceneStateMachine"]
 script = ExtResource( 12 )
 
 [node name="TextShips" type="Node2D" parent="."]
@@ -129,6 +129,21 @@ margin_top = -75.0
 margin_right = 75.0
 margin_bottom = -25.0
 music = ExtResource( 1 )
+
+[node name="StateLabel" type="Label" parent="CanvasLayer"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 140.341
+margin_top = -55.9446
+margin_right = 280.341
+margin_bottom = -41.9446
+text = "STATE: <SOMETHING>"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TextShipFactory" parent="." instance=ExtResource( 5 )]
 

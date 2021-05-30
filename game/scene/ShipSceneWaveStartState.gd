@@ -8,6 +8,7 @@ var waveNumber: int = 0
 var waveSpec: SceneWaveSpec
 var shipsBuilderThread: Thread
 var shipsAdded: bool = false
+var introsDone: bool = false
 
 
 func _ready():
@@ -18,7 +19,7 @@ func enterState(prevState: String):
 	.enterState(prevState)
 	_prepareWaveBGAndTitle()
 	_assertCreateWaveState()
-	shipsBuilderThread = entity.shipsFactory.startGenerateShipsAsync(waveSpec)
+	shipsBuilderThread.start(entity.shipsFactory, "generateShips", waveSpec)
 	yield(_playWaveIntroAnimations(), "completed")
 	
 	
@@ -32,12 +33,13 @@ func _playWaveIntroAnimations():
 	yield(entity.shooter.anim, "animation_finished")
 	entity.get_node('AnimationPlayer').play("show_title")
 	yield(entity.get_node('AnimationPlayer'), "animation_finished")
+	introsDone = true
 	
 	
 	
 func processState(delta: float):
 	.processState(delta)
-	if (shipsAdded or shipsBuilderThread.is_active()):
+	if (not introsDone or shipsAdded):
 		return
 	var ships: Array = shipsBuilderThread.wait_to_finish()
 	_addSceneShips(ships)
@@ -59,11 +61,12 @@ func exitState(nextState: String):
 func _resetState():
 	waveNumber = 0
 	waveSpec = null
-	shipsBuilderThread = null
 	shipsAdded = false
+	introsDone = false
 	
 	
 func _assertCreateWaveState():
 	assert(waveNumber != 0)
 	assert(waveSpec)
+	assert(not introsDone)
 	assert(not shipsAdded)

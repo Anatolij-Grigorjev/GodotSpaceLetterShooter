@@ -27,7 +27,7 @@ func enterState(prevState: String):
 	
 func processState(delta: float):
 	.processState(delta)
-	if (statsViewClosed or statsCookerThread.is_active()):
+	if (statsViewClosed):
 		return
 	if (not statsViewAdded):
 		var statsViewNode = statsCookerThread.wait_to_finish()

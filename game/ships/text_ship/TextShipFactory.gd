@@ -11,17 +11,6 @@ export(bool) var printDebug: bool = false
 onready var pathGenerator: PathGenerator = $PathGenerator
 onready var wordsProvider: WordsProvider = $WordsProvider
 
-
-var asyncProductionThread: Thread
-
-
-func _ready():
-	asyncProductionThread = Thread.new()
-	
-	
-func startGenerateShipsAsync(waveSpec: SceneWaveSpec) -> Thread:
-	asyncProductionThread.start(self, "generateShips", waveSpec)
-	return asyncProductionThread
 	
 	
 func generateShips(waveSpec: SceneWaveSpec) -> Array:
