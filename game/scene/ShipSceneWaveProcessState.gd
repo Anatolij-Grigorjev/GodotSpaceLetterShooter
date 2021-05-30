@@ -7,11 +7,13 @@ State to hold and use logic of ongoing wave in scene
 
 var liveWaveShips: int = 0
 var waveOver: bool = false
-var latestKeyInputEvent: InputEventKey = InputEventKey.new()
+var latestKeyInputEvent: InputEventKey
 
 
 func enterState(prevState: String):
 	.enterState(prevState)
+	waveOver = false
+	latestKeyInputEvent = null
 	var shipsContainer = entity.get_node("TextShips")
 	liveWaveShips = shipsContainer.get_child_count()
 	for ship in shipsContainer.get_children():
@@ -20,13 +22,14 @@ func enterState(prevState: String):
 		
 func processState(delta: float):
 	.processState(delta)
-	_processLatestKey(latestKeyInputEvent)
+	if (latestKeyInputEvent):
+		_processLatestKey()
 	
 		
 		
 func exitState(nextState: String):
 	.exitState(nextState)
-	var stateNode = fsm.getState(nextState)
+	waveOver = false
 
 
 func _registerShipHandlers(ship: TextShip) -> void:
@@ -53,7 +56,8 @@ func _input(event: InputEvent) -> void:
 	latestKeyInputEvent = event as InputEventKey
 
 		
-func _processLatestKey(keyEvent: InputEventKey) -> void:
+func _processLatestKey() -> void:
+	var keyEvent: InputEventKey = latestKeyInputEvent
 	if (not _isKeyJustPressed(keyEvent)):
 		return
 	var keyCharCode: String = OS.get_scancode_string(keyEvent.scancode)
@@ -68,6 +72,7 @@ func _processLatestKey(keyEvent: InputEventKey) -> void:
 		entity.shooter.faceShootable(shootableWithLetter)
 	if (specialCodeToggles.fireChambered):
 		entity.shooter.tryFireAt(shootableWithLetter)
+	latestKeyInputEvent = null
 	
 
 func _isKeyJustPressed(keyEvent: InputEventKey) -> bool:

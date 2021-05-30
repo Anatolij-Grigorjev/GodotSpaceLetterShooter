@@ -9,6 +9,7 @@ const StatsViewScn = preload("res://scene_stats/SceneStatsView.tscn")
 
 var statsViewClosed: bool = false
 var statsViewAdded: bool = false
+var shipLeft: bool = false
 var statsCookerThread: Thread
 
 
@@ -18,16 +19,19 @@ func _ready():
 
 func enterState(prevState: String):
 	.enterState(prevState)
+	shipLeft = false
+	statsViewAdded = false
+	statsViewClosed = false
 	statsCookerThread.start(self, "_buildSceneStats", null)
 	entity.shooter.anim.play("leave")
 	yield(entity.shooter.anim, "animation_finished")
 	yield(get_tree().create_timer(0.75), "timeout")
-	
+	shipLeft = true
 	
 	
 func processState(delta: float):
 	.processState(delta)
-	if (statsViewClosed):
+	if (not shipLeft or statsViewClosed):
 		return
 	if (not statsViewAdded):
 		var statsViewNode = statsCookerThread.wait_to_finish()
