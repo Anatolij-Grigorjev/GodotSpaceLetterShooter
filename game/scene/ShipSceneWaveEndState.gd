@@ -23,8 +23,9 @@ func enterState(prevState: String):
 	statsViewAdded = false
 	statsViewClosed = false
 	statsCookerThread.start(self, "_buildSceneStats", null)
-	entity.shooter.anim.play("leave")
-	yield(entity.shooter.anim, "animation_finished")
+	if (not fsm.shooterFailed):
+		entity.shooter.anim.play("leave")
+		yield(entity.shooter.anim, "animation_finished")
 	yield(get_tree().create_timer(0.75), "timeout")
 	shipLeft = true
 	
