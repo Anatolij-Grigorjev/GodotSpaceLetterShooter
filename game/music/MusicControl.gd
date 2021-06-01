@@ -12,9 +12,15 @@ export(bool) var currentlyPlaying: bool = false setget _setPlaying
 onready var player: AudioStreamPlayer = $MusicPlayer
 
 
+func _ready():
+	_setPlaybackEnabled(GameConfig.sceneBGMusicEnabled)
+
+
 func _process(delta: float):
 	if (Input.is_action_just_released("toggle_music")):
-		_setPlaybackEnabled(not playbackEnabled)
+		var shouldPlaybackBeEnabled = not playbackEnabled
+		GameConfig.sceneBGMusicEnabled = shouldPlaybackBeEnabled
+		_setPlaybackEnabled(shouldPlaybackBeEnabled)
 
 
 func _setPlaying(shouldBePlaying: bool):
