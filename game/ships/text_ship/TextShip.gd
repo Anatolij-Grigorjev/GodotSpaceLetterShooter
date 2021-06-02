@@ -9,6 +9,7 @@ signal textShipCollidedShooter
 signal textShipDestroyed(text)
 
 export(String) var currentText: String = "test" setget setCurrentText, getCurrentText
+export(bool) var isTargeted: bool = false setget _setAsTarget
 export(float) var speed: float = 450
 
 onready var fsm: StateMachine = $TextShipStateMachine
@@ -55,10 +56,6 @@ func prepare(text: String, startPosition: Vector2, shipPath: Array, limiters: Sc
 		"IdlingBubble": (1 if shipHasShield else 0),
 		"IdlingShoot": limiters.shootInclination
 	}
-	
-	
-func _process(delta: float):
-	pass
 
 
 func setCurrentText(text: String) -> void:
@@ -73,6 +70,15 @@ func getCurrentText() -> String:
 		return $Sprite/Label.text
 	else:
 		return currentText
+		
+		
+func _setAsTarget(isTarget: bool):
+	var wasTarget = isTargeted
+	if (wasTarget == isTarget):
+		return
+	isTargeted = isTarget
+	if ($Sprite/Target):
+		$Sprite/Target.visible = isTargeted
 	
 	
 func projectileHitText(projectile: Node2D) -> bool:

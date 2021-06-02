@@ -16,6 +16,9 @@ onready var fsm: ShipSceneStateMachine = $ShipSceneStateMachine
 onready var stateLabel: Label = $CanvasLayer/StateLabel
 
 
+var currentShipTarget: TextShip
+
+
 func _ready():
 	randomize()
 	call_deferred("_bindSceneStats")
@@ -32,3 +35,8 @@ func setSceneSpecificaion(spec: SceneSpec):
 
 func _bindSceneStats():
 	Stats.currentScene = self
+	
+	
+func _onShooterClearChamber():
+	for ship in $TextShips.get_children():
+		ship.isTargeted = false

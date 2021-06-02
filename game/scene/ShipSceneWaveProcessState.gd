@@ -69,7 +69,12 @@ func _processLatestKey() -> void:
 
 	var shootableWithLetter: Node2D = _findShootableWithNextText(entity.shooter.chamber)
 	if (is_instance_valid(shootableWithLetter)):
+		if (is_instance_valid(entity.currentShipTarget)):
+			entity.currentShipTarget.isTargeted = false
+			entity.currentShipTarget = null
 		entity.shooter.faceShootable(shootableWithLetter)
+		if _shootableIsShip(shootableWithLetter):
+			entity.currentShipTarget = shootableWithLetter
 	if (specialCodeToggles.fireChambered):
 		entity.shooter.tryFireAt(shootableWithLetter)
 	latestKeyInputEvent = null
@@ -96,6 +101,10 @@ func _findWithTextInGroup(text: String, group: String) -> Node2D:
 		if (node.nextTextIs(text)):
 			return node
 	return null
+	
+
+func _shootableIsShip(shootable: Node2D) -> bool:
+	return shootable.get_groups().find("text_ship") != -1
 	
 	
 func _checkSpecialCodes(keyCode: String) -> Dictionary:

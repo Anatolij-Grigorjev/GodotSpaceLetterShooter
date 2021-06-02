@@ -38,10 +38,15 @@ func faceShootable(shootable: Node2D) -> void:
 	var shootSide: int = Side.LEFT if myPosition.x > shootablePosition.x else Side.RIGHT
 	rotation = angleToShip * shootSide
 	
+	if "isTargeted" in shootable:
+		shootable.isTargeted = true
+	
 	
 func tryFireAt(target: Node2D):
 	if (not chamber.empty() and is_instance_valid(target)):
 		fireChambered(target)
+		if "isTargeted" in target:
+			target.isTargeted = false
 	else:
 		missFire()
 
