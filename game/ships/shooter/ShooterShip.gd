@@ -46,7 +46,7 @@ func tryFireAt(target: Node2D):
 	if (not chamber.empty() and is_instance_valid(target)):
 		fireChambered(target)
 		if "isTargeted" in target:
-			target.isTargeted = false
+			target.lockTarget()
 	else:
 		missFire()
 

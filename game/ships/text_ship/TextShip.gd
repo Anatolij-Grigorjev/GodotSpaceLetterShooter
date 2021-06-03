@@ -79,6 +79,12 @@ func _setAsTarget(isTarget: bool):
 	isTargeted = isTarget
 	if ($Sprite/Target):
 		$Sprite/Target.visible = isTargeted
+		$Sprite/Target/AnimationPlayer.play("spin")
+		
+		
+func lockTarget():
+	$Sprite/Target/AnimationPlayer.play("lock")
+	isTargeted = false
 	
 	
 func projectileHitText(projectile: Node2D) -> bool:
