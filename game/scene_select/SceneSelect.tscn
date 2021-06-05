@@ -2,7 +2,7 @@
 
 [ext_resource path="res://white_rect.png" type="Texture" id=1]
 [ext_resource path="res://scene_select/SceneSelect.gd" type="Script" id=2]
-[ext_resource path="res://stars/particle.png" type="Texture" id=3]
+[ext_resource path="res://scene_select/GlowingStar.tscn" type="PackedScene" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 0.729412 )
@@ -16,8 +16,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="."]
-self_modulate = Color( 0, 0, 0, 0.729412 )
+[node name="SpaceBG" type="TextureRect" parent="."]
+self_modulate = Color( 0, 0, 0, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 0.745117
@@ -28,279 +28,71 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Star2" type="TextureRect" parent="TextureRect"]
-margin_left = 337.0
-margin_top = 101.304
-margin_right = 377.0
-margin_bottom = 141.304
-rect_pivot_offset = Vector2( 19.5874, 21.6329 )
-texture = ExtResource( 3 )
-stretch_mode = 4
+[node name="GlowingStar" parent="SpaceBG" instance=ExtResource( 3 )]
+margin_left = 83.423
+margin_top = 88.0817
+margin_right = 123.423
+margin_bottom = 128.082
 
-[node name="Star3" type="TextureRect" parent="TextureRect"]
-margin_left = 206.68
-margin_top = 197.007
-margin_right = 246.68
-margin_bottom = 237.007
-rect_pivot_offset = Vector2( 19.5874, 21.6329 )
-texture = ExtResource( 3 )
-stretch_mode = 4
+[node name="GlowingStar2" parent="SpaceBG" instance=ExtResource( 3 )]
+margin_left = 123.385
+margin_top = 267.222
+margin_right = 163.385
+margin_bottom = 307.222
 
-[node name="Star4" type="TextureRect" parent="TextureRect"]
-margin_left = 414.377
-margin_top = 211.77
-margin_right = 454.377
-margin_bottom = 251.77
-rect_pivot_offset = Vector2( 19.5874, 21.6329 )
-texture = ExtResource( 3 )
-stretch_mode = 4
+[node name="GlowingStar3" parent="SpaceBG" instance=ExtResource( 3 )]
+margin_left = 304.822
+margin_top = 73.8423
+margin_right = 344.822
+margin_bottom = 113.842
 
-[node name="Star5" type="TextureRect" parent="TextureRect"]
-margin_left = 454.593
-margin_top = 66.1782
-margin_right = 494.593
-margin_bottom = 106.178
-rect_pivot_offset = Vector2( 19.5874, 21.6329 )
-texture = ExtResource( 3 )
-stretch_mode = 4
+[node name="GlowingStar4" parent="SpaceBG" instance=ExtResource( 3 )]
+margin_left = 556.538
+margin_top = 257.576
+margin_right = 596.538
+margin_bottom = 297.576
 
-[node name="Star6" type="TextureRect" parent="TextureRect"]
-margin_left = 529.426
-margin_top = 153.228
-margin_right = 569.426
-margin_bottom = 193.228
-rect_pivot_offset = Vector2( 19.5874, 21.6329 )
-texture = ExtResource( 3 )
-stretch_mode = 4
+[node name="GlowingStar5" parent="SpaceBG" instance=ExtResource( 3 )]
+margin_left = 316.765
+margin_top = 357.252
+margin_right = 356.765
+margin_bottom = 397.252
 
-[node name="Star7" type="TextureRect" parent="TextureRect"]
-margin_left = 151.192
-margin_top = 46.3248
-margin_right = 191.192
-margin_bottom = 86.3248
-rect_pivot_offset = Vector2( 19.5874, 21.6329 )
-texture = ExtResource( 3 )
-stretch_mode = 4
+[node name="GlowingStar6" parent="SpaceBG" instance=ExtResource( 3 )]
+margin_left = 657.797
+margin_top = 542.698
+margin_right = 697.797
+margin_bottom = 582.698
 
-[node name="Star8" type="TextureRect" parent="TextureRect"]
-margin_left = 65.1601
-margin_top = 292.202
-margin_right = 105.16
-margin_bottom = 332.202
-rect_pivot_offset = Vector2( 19.5874, 21.6329 )
-texture = ExtResource( 3 )
-stretch_mode = 4
+[node name="GlowingStar7" parent="SpaceBG" instance=ExtResource( 3 )]
+margin_left = 217.756
+margin_top = 597.703
+margin_right = 257.756
+margin_bottom = 637.703
 
-[node name="Star9" type="TextureRect" parent="TextureRect"]
-margin_left = 215.536
-margin_top = 352.589
-margin_right = 255.536
-margin_bottom = 392.589
-rect_pivot_offset = Vector2( 19.5874, 21.6329 )
-texture = ExtResource( 3 )
-stretch_mode = 4
+[node name="GlowingStar8" parent="SpaceBG" instance=ExtResource( 3 )]
+margin_left = 940.68
+margin_top = 597.703
+margin_right = 980.68
+margin_bottom = 637.703
 
-[node name="Star10" type="TextureRect" parent="TextureRect"]
-margin_left = 86.6276
-margin_top = 442.75
-margin_right = 126.628
-margin_bottom = 482.75
-rect_pivot_offset = Vector2( 19.5874, 21.6329 )
-texture = ExtResource( 3 )
-stretch_mode = 4
+[node name="GlowingStar9" parent="SpaceBG" instance=ExtResource( 3 )]
+margin_left = 1107.27
+margin_top = 137.231
+margin_right = 1147.27
+margin_bottom = 177.231
 
-[node name="Star11" type="TextureRect" parent="TextureRect"]
-margin_left = 184.24
-margin_top = 594.758
-margin_right = 224.24
-margin_bottom = 634.758
-rect_pivot_offset = Vector2( 19.5874, 21.6329 )
-texture = ExtResource( 3 )
-stretch_mode = 4
-
-[node name="Star12" type="TextureRect" parent="TextureRect"]
-margin_left = 386.171
-margin_top = 627.543
-margin_right = 426.171
-margin_bottom = 667.543
-rect_pivot_offset = Vector2( 19.5874, 21.6329 )
-texture = ExtResource( 3 )
-stretch_mode = 4
-
-[node name="Star13" type="TextureRect" parent="TextureRect"]
-margin_left = 341.463
-margin_top = 468.83
-margin_right = 381.463
-margin_bottom = 508.83
-rect_pivot_offset = Vector2( 19.5874, 21.6329 )
-texture = ExtResource( 3 )
-stretch_mode = 4
-
-[node name="Star14" type="TextureRect" parent="TextureRect"]
-margin_left = 567.984
-margin_top = 386.865
-margin_right = 607.984
-margin_bottom = 426.865
-rect_pivot_offset = Vector2( 19.5874, 21.6329 )
-texture = ExtResource( 3 )
-stretch_mode = 4
-
-[node name="Star15" type="TextureRect" parent="TextureRect"]
-margin_left = 544.139
-margin_top = 588.051
-margin_right = 584.139
-margin_bottom = 628.051
-rect_pivot_offset = Vector2( 19.5874, 21.6329 )
-texture = ExtResource( 3 )
-stretch_mode = 4
-
-[node name="Star16" type="TextureRect" parent="TextureRect"]
-margin_left = 411.506
-margin_top = 355.57
-margin_right = 451.506
-margin_bottom = 395.57
-rect_pivot_offset = Vector2( 19.5874, 21.6329 )
-texture = ExtResource( 3 )
-stretch_mode = 4
-
-[node name="Star17" type="TextureRect" parent="TextureRect"]
-margin_left = 617.908
-margin_top = 266.154
-margin_right = 657.908
-margin_bottom = 306.154
-rect_pivot_offset = Vector2( 19.5874, 21.6329 )
-texture = ExtResource( 3 )
-stretch_mode = 4
-
-[node name="Star18" type="TextureRect" parent="TextureRect"]
-margin_left = 647.713
-margin_top = 512.793
-margin_right = 687.713
-margin_bottom = 552.793
-rect_pivot_offset = Vector2( 19.5874, 21.6329 )
-texture = ExtResource( 3 )
-stretch_mode = 4
-
-[node name="Star19" type="TextureRect" parent="TextureRect"]
-margin_left = 729.677
-margin_top = 348.864
-margin_right = 769.677
-margin_bottom = 388.864
-rect_pivot_offset = Vector2( 19.5874, 21.6329 )
-texture = ExtResource( 3 )
-stretch_mode = 4
-
-[node name="Star20" type="TextureRect" parent="TextureRect"]
-margin_left = 769.915
-margin_top = 598.483
-margin_right = 809.915
-margin_bottom = 638.483
-rect_pivot_offset = Vector2( 19.5874, 21.6329 )
-texture = ExtResource( 3 )
-stretch_mode = 4
-
-[node name="Star21" type="TextureRect" parent="TextureRect"]
-margin_left = 942.786
-margin_top = 271.37
-margin_right = 982.786
-margin_bottom = 311.37
-rect_pivot_offset = Vector2( 19.5874, 21.6329 )
-texture = ExtResource( 3 )
-stretch_mode = 4
-
-[node name="Star22" type="TextureRect" parent="TextureRect"]
-margin_left = 842.938
-margin_top = 451.692
-margin_right = 882.938
-margin_bottom = 491.692
-rect_pivot_offset = Vector2( 19.5874, 21.6329 )
-texture = ExtResource( 3 )
-stretch_mode = 4
-
-[node name="Star23" type="TextureRect" parent="TextureRect"]
-margin_left = 979.297
-margin_top = 621.582
-margin_right = 1019.3
-margin_bottom = 661.582
-rect_pivot_offset = Vector2( 19.5874, 21.6329 )
-texture = ExtResource( 3 )
-stretch_mode = 4
-
-[node name="Star24" type="TextureRect" parent="TextureRect"]
-margin_left = 1184.95
-margin_top = 621.582
-margin_right = 1224.95
-margin_bottom = 661.582
-rect_pivot_offset = Vector2( 19.5874, 21.6329 )
-texture = ExtResource( 3 )
-stretch_mode = 4
-
-[node name="Star25" type="TextureRect" parent="TextureRect"]
-margin_left = 1062.01
-margin_top = 390.591
-margin_right = 1102.01
-margin_bottom = 430.591
-rect_pivot_offset = Vector2( 19.5874, 21.6329 )
-texture = ExtResource( 3 )
-stretch_mode = 4
-
-[node name="Star26" type="TextureRect" parent="TextureRect"]
-margin_left = 1125.34
-margin_top = 220.701
-margin_right = 1165.34
-margin_bottom = 260.701
-rect_pivot_offset = Vector2( 19.5874, 21.6329 )
-texture = ExtResource( 3 )
-stretch_mode = 4
-
-[node name="Star27" type="TextureRect" parent="TextureRect"]
-margin_left = 1124.6
-margin_top = 17.2792
-margin_right = 1164.6
-margin_bottom = 57.2792
-rect_pivot_offset = Vector2( 19.5874, 21.6329 )
-texture = ExtResource( 3 )
-stretch_mode = 4
-
-[node name="Star28" type="TextureRect" parent="TextureRect"]
-margin_left = 834.741
-margin_top = 171.522
-margin_right = 874.741
-margin_bottom = 211.522
-rect_pivot_offset = Vector2( 19.5874, 21.6329 )
-texture = ExtResource( 3 )
-stretch_mode = 4
-
-[node name="Star29" type="TextureRect" parent="TextureRect"]
-margin_left = 888.391
-margin_top = 44.8491
-margin_right = 928.391
-margin_bottom = 84.8491
-rect_pivot_offset = Vector2( 19.5874, 21.6329 )
-texture = ExtResource( 3 )
-stretch_mode = 4
-
-[node name="Star30" type="TextureRect" parent="TextureRect"]
-margin_left = 632.065
-margin_top = 35.9075
-margin_right = 672.065
-margin_bottom = 75.9075
-rect_pivot_offset = Vector2( 19.5874, 21.6329 )
-texture = ExtResource( 3 )
-stretch_mode = 4
-
-[node name="Star31" type="TextureRect" parent="TextureRect"]
-margin_left = 693.166
-margin_top = 170.032
-margin_right = 733.166
-margin_bottom = 210.032
-rect_pivot_offset = Vector2( 19.5874, 21.6329 )
-texture = ExtResource( 3 )
-stretch_mode = 4
+[node name="GlowingStar10" parent="SpaceBG" instance=ExtResource( 3 )]
+margin_left = 1144.98
+margin_top = 486.121
+margin_right = 1184.98
+margin_bottom = 526.121
 
 [node name="Panel" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 0.44249
+margin_right = 0.442505
 custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -313,6 +105,9 @@ margin_left = 20.0
 margin_top = 20.0
 margin_right = -20.0
 margin_bottom = -20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="SceneCells" type="GridContainer" parent="Panel/MarginContainer"]
 margin_right = 1240.0
