@@ -56,8 +56,6 @@ func fireChambered(shootable: Node2D) -> void:
 	var projectile = projectileScene.instance()
 	projectile.global_position = shotPosition.global_position
 	projectile.fireDirection = global_position.direction_to(shootable.global_position)
-	# speed boost based on text size
-	projectile.speed *= (1 + chamber.length() / 10)
 	_configureShooterShipProjectile(projectile)
 	projectile.get_node("Label").text = chamber
 	emit_signal("shotFired", projectile)
