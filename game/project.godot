@@ -52,7 +52,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "ParticlesBattery",
 "language": "GDScript",
-"path": "res://utils/ParticlesBattery.gd"
+"path": "res://components/ParticlesBattery.gd"
 }, {
 "base": "Node",
 "class": "PathGenerator",
@@ -62,7 +62,7 @@ _global_script_classes=[ {
 "base": "AudioStreamPlayer",
 "class": "RandomAudioPlayer",
 "language": "GDScript",
-"path": "res://utils/RandomAudioPlayer.gd"
+"path": "res://components/RandomAudioPlayer.gd"
 }, {
 "base": "Reference",
 "class": "SceneShipLimits",
@@ -147,12 +147,12 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "WeightedItems",
 "language": "GDScript",
-"path": "res://utils/WeightedItems.gd"
+"path": "res://components/WeightedItems.gd"
 }, {
 "base": "Node",
 "class": "WordsProvider",
 "language": "GDScript",
-"path": "res://utils/WordsProvider.gd"
+"path": "res://components/WordsProvider.gd"
 } ]
 _global_script_class_icons={
 "AnimationState": "",

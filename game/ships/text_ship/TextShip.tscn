@@ -593,7 +593,6 @@ position = Vector2( 0.758209, -12.5102 )
 [node name="Target" type="Sprite" parent="Sprite"]
 visible = false
 position = Vector2( 0.701233, -13.2906 )
-scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 16 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite/Target"]

@@ -65,7 +65,9 @@ tracks/3/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 72, 0 ) ]
 }
 
-[node name="TextShipScene" type="Node2D"]
+[node name="TextShipScene" type="Node2D" groups=[
+"scenes",
+]]
 position = Vector2( 0, -17.8588 )
 script = ExtResource( 2 )
 

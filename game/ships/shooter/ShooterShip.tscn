@@ -4,10 +4,11 @@
 [ext_resource path="res://ships/shooter/ShooterShip.gd" type="Script" id=2]
 [ext_resource path="res://ships/Projectile.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ships/shooter/shot_spark.png" type="Texture" id=4]
-[ext_resource path="res://utils/ParticlesBattery.gd" type="Script" id=5]
+[ext_resource path="res://components/ParticlesBattery.gd" type="Script" id=5]
 [ext_resource path="res://ships/shooter/shot_miss.wav" type="AudioStream" id=6]
 [ext_resource path="res://ships/shooter/shot_hit.wav" type="AudioStream" id=7]
 [ext_resource path="res://ships/shooter/shooter_engine.wav" type="AudioStream" id=8]
+
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0.514815, 1 )

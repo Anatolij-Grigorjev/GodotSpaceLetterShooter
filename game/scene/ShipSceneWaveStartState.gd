@@ -17,14 +17,13 @@ func _ready():
 
 func enterState(prevState: String):
 	.enterState(prevState)
-	_prepareWaveBGAndTitle()
+	_prepareWaveTitle()
 	_assertCreateWaveState()
 	shipsBuilderThread.start(entity.shipsFactory, "generateShips", waveSpec)
 	yield(_playWaveIntroAnimations(), "completed")
 	
 	
-func _prepareWaveBGAndTitle():
-	entity.get_node('BG').self_modulate = fsm.sceneSpecification.sceneBgColor.darkened(0.25)
+func _prepareWaveTitle():
 	entity.get_node('CanvasLayer/SceneTitle').text = fsm.sceneSpecification.sceneName + ("\nWAVE %02d" % waveNumber)
 	
 	

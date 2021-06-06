@@ -18,6 +18,7 @@ func _ready():
 	#mark all scenes unfinished
 	for spec in loadedSceneSpecs:
 		sceneCompleteTracking[spec.id] = false
+	call_deferred("_setFirstActiveScene")
 		
 		
 func _loadSceneSpecs() -> Array:
@@ -28,6 +29,15 @@ func _loadSceneSpecs() -> Array:
 		var sceneJSON = Utils.file2JSON(path)
 		loadedScenes.append(Utils.parseJSONSceneSpec(sceneJSON))
 	return loadedScenes
+	
+	
+func _setFirstActiveScene():
+	if is_instance_valid(activeScene):
+		return
+	
+	for activeNode in get_tree().get_root().get_children():
+		if activeNode.is_in_group("scenes"):
+			activeScene = activeNode
 	
 	
 func _onSceneCleared(sceneSpecId: int):
@@ -56,5 +66,9 @@ func switchToShipScene(scenePath: String, sceneSpec: SceneSpec):
 	
 func _replaceActiveScene(newActiveScene: Object):
 	if (activeScene):
+		print("Replacing active scene %s with new scene: %s" % [activeScene, newActiveScene])
+		if is_instance_valid(activeScene.get_parent()):
+			var parent: Node = activeScene.get_parent()
+			parent.remove_child(activeScene)
 		activeScene.queue_free()
 	activeScene = newActiveScene
