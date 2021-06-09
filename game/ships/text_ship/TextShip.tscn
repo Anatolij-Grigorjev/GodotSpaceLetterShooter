@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://ships/text_ship/explode_ship.wav" type="AudioStream" id=1]
 [ext_resource path="res://ships/text_ship/ship_fly.wav" type="AudioStream" id=2]
@@ -47,8 +47,25 @@ color = Color( 0.839216, 0.960784, 0.0313726, 1 )
 [sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0, 0, 0, 1 )
 
+[sub_resource type="Animation" id=24]
+resource_name = "lock-in"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 0.203063, 0.203063 ),
+"update": 0,
+"values": [ Vector2( 5, 5 ), Vector2( 1, 1 ) ]
+}
+
 [sub_resource type="Animation" id=15]
-resource_name = "lock"
+resource_name = "lock-out"
 length = 0.25
 step = 0.05
 tracks/0/type = "value"
@@ -76,7 +93,7 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=16]
 resource_name = "spin"
 length = 2.5
 loop = true
@@ -105,10 +122,10 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="CircleShape2D" id=7]
+[sub_resource type="CircleShape2D" id=17]
 radius = 55.0
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=18]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:scale")
 tracks/0/interp = 2
@@ -122,7 +139,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=19]
 length = 0.5
 step = 0.05
 tracks/0/type = "value"
@@ -176,7 +193,7 @@ tracks/3/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=20]
 length = 1.5
 step = 0.05
 tracks/0/type = "value"
@@ -338,7 +355,7 @@ tracks/12/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=21]
 length = 0.45
 step = 0.05
 tracks/0/type = "value"
@@ -378,7 +395,7 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=22]
 length = 0.45
 step = 0.05
 tracks/0/type = "value"
@@ -394,7 +411,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( -12.8323, -14.8655 ), Vector2( -9.43268, -31.9148 ), Vector2( 3.33854, -32.5816 ), Vector2( 17.2273, -20.7114 ), Vector2( 10.3533, -7.97244 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=23]
 length = 1.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite/Nose:self_modulate")
@@ -593,12 +610,14 @@ position = Vector2( 0.758209, -12.5102 )
 [node name="Target" type="Sprite" parent="Sprite"]
 visible = false
 position = Vector2( 0.701233, -13.2906 )
+scale = Vector2( 5, 5 )
 texture = ExtResource( 16 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite/Target"]
-autoplay = "spin"
-anims/lock = SubResource( 15 )
-anims/spin = SubResource( 6 )
+anims/lock-in = SubResource( 24 )
+anims/lock-out = SubResource( 15 )
+anims/spin = SubResource( 16 )
+next/lock-in = "spin"
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2( -1.13544, -12.2627 )
@@ -609,18 +628,18 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 7 )
+shape = SubResource( 17 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/appear = SubResource( 8 )
-anims/collide_ship = SubResource( 9 )
-anims/die = SubResource( 10 )
-anims/hit = SubResource( 11 )
-anims/miss = SubResource( 12 )
-anims/shoot = SubResource( 13 )
+anims/appear = SubResource( 18 )
+anims/collide_ship = SubResource( 19 )
+anims/die = SubResource( 20 )
+anims/hit = SubResource( 21 )
+anims/miss = SubResource( 22 )
+anims/shoot = SubResource( 23 )
 
 [node name="ExplosionsBattery" type="Node2D" parent="."]
 

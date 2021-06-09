@@ -73,17 +73,19 @@ func getCurrentText() -> String:
 		
 		
 func _setAsTarget(isTarget: bool):
+	print("[%s] targeted '%s' -> '%s'" % [self, isTargeted, isTarget])
 	var wasTarget = isTargeted
 	if (wasTarget == isTarget):
 		return
 	isTargeted = isTarget
 	if ($Sprite/Target):
 		$Sprite/Target.visible = isTargeted
-		$Sprite/Target/AnimationPlayer.play("spin")
+		if (isTargeted):
+			$Sprite/Target/AnimationPlayer.play("lock-in")
 		
 		
 func lockTarget():
-	$Sprite/Target/AnimationPlayer.play("lock")
+	$Sprite/Target/AnimationPlayer.play("lock-out")
 	isTargeted = false
 	
 	
