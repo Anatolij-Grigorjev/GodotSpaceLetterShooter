@@ -73,7 +73,6 @@ func getCurrentText() -> String:
 		
 		
 func _setAsTarget(isTarget: bool):
-	print("[%s] targeted '%s' -> '%s'" % [self, isTargeted, isTarget])
 	var wasTarget = isTargeted
 	if (wasTarget == isTarget):
 		return

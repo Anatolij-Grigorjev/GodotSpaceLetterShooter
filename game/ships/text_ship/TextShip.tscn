@@ -66,7 +66,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=15]
 resource_name = "lock-out"
-length = 0.25
+length = 0.2
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:scale")
@@ -75,10 +75,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25 ),
+"times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 0.203063, 0.203063 ),
 "update": 0,
-"values": [ Vector2( 5, 5 ), Vector2( 0.1, 0.1 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 3, 3 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:visible")
@@ -87,10 +87,22 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.25 ),
+"times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 300.0 ]
 }
 
 [sub_resource type="Animation" id=16]
@@ -610,7 +622,8 @@ position = Vector2( 0.758209, -12.5102 )
 [node name="Target" type="Sprite" parent="Sprite"]
 visible = false
 position = Vector2( 0.701233, -13.2906 )
-scale = Vector2( 5, 5 )
+rotation = 5.23599
+scale = Vector2( 3, 3 )
 texture = ExtResource( 16 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite/Target"]
