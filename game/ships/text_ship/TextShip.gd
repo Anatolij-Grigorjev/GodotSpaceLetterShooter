@@ -48,6 +48,8 @@ func prepare(text: String, startPosition: Vector2, shipPath: Array, limiters: Sc
 	$TextShipStateMachine/Descending.descendPath = shipPath
 	speed = limiters.shipSpeed
 	$Sprite/ShipBubble.setInitialHitPoints(limiters.shieldHitPoints)
+	_setupShieldHitsBar(limiters.shieldHitPoints)
+	
 	
 	var shipHasShield := limiters.shieldHitPoints > 0
 	var shipWillShoot := limiters.shootInclination > 0
@@ -56,6 +58,16 @@ func prepare(text: String, startPosition: Vector2, shipPath: Array, limiters: Sc
 		"IdlingBubble": (1 if shipHasShield else 0),
 		"IdlingShoot": limiters.shootInclination
 	}
+	
+	
+func _setupShieldHitsBar(maxHits: int):
+	$Sprite/ShipBubble/HitsBar.max_value = maxHits
+	$Sprite/ShipBubble/HitsBar.value = maxHits
+		
+	Utils.tryConnect(
+		$Sprite/ShipBubble, "bubbleHit", 
+		self, "_adjustRemainingShieldHits"
+	)
 
 
 func setCurrentText(text: String) -> void:
@@ -97,3 +109,9 @@ func disableThrusters():
 	thrustersAudio.playing = false
 	thrusterLeft.emitting = false
 	thrusterRight.emitting = false
+	
+	
+func _adjustRemainingShieldHits(hitsRemaining: int):
+	$Sprite/ShipBubble/HitsBar.value = hitsRemaining
+	if (hitsRemaining <= 0):
+		$Sprite/ShipBubble/HitsBar.visible = false

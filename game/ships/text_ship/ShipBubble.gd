@@ -4,7 +4,7 @@ extends Node2D
 const COLOR_CHANGE_COEF = float(1.0 / 5.0)
 
 signal bubbleBurst
-
+signal bubbleHit(hitsRemaining)
 
 export(Color) var bubbleMaxHitsColor = Color.green
 
@@ -48,7 +48,9 @@ func _on_Area2D_area_entered(area: Area2D):
 			
 func _hitBubble():
 	bubbleHitsCurrent += 1
-	if (bubbleHitsCurrent < bubbleMaxHits):
+	var hitsRemaining = bubbleMaxHits - bubbleHitsCurrent
+	emit_signal("bubbleHit", hitsRemaining)
+	if (hitsRemaining > 0):
 		_bubbleHitForAnimation("hit")
 		_updateBubbleColor()
 	else:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://ships/text_ship/explode_ship.wav" type="AudioStream" id=1]
 [ext_resource path="res://ships/text_ship/ship_fly.wav" type="AudioStream" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://ships/shooter/shot_spark.png" type="Texture" id=14]
 [ext_resource path="res://ships/text_ship/IdlingShootState.tscn" type="PackedScene" id=15]
 [ext_resource path="res://ships/text_ship/shooter_crosshair.png" type="Texture" id=16]
+[ext_resource path="res://components/HitsBar.tscn" type="PackedScene" id=17]
 
 [sub_resource type="Curve" id=1]
 max_value = 2.0
@@ -618,6 +619,13 @@ position = Vector2( -4.04677, 11.6642 )
 
 [node name="ShipBubble" parent="Sprite" instance=ExtResource( 3 )]
 position = Vector2( 0.758209, -12.5102 )
+
+[node name="HitsBar" parent="Sprite/ShipBubble" instance=ExtResource( 17 )]
+margin_left = -108.506
+margin_top = 80.6881
+margin_right = 49.4944
+margin_bottom = 107.688
+rect_rotation = -90.5775
 
 [node name="Target" type="Sprite" parent="Sprite"]
 visible = false
