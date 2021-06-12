@@ -62,7 +62,9 @@ func prepare(text: String, startPosition: Vector2, shipPath: Array, limiters: Sc
 	
 func _setupShieldHitsBar(maxHits: int):
 	$Sprite/ShipBubble/HitsBar.max_value = maxHits
-	$Sprite/ShipBubble/HitsBar.value = maxHits
+	_adjustRemainingShieldHits(maxHits)
+	
+	
 		
 	Utils.tryConnect(
 		$Sprite/ShipBubble, "bubbleHit", 
