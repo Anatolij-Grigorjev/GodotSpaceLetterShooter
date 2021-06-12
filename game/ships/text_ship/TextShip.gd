@@ -49,8 +49,6 @@ func prepare(text: String, startPosition: Vector2, shipPath: Array, limiters: Sc
 	speed = limiters.shipSpeed
 	$Sprite/ShipBubble.setInitialHitPoints(limiters.shieldHitPoints)
 	_setupShieldHitsBar(limiters.shieldHitPoints)
-	
-	
 	var shipHasShield := limiters.shieldHitPoints > 0
 	var shipWillShoot := limiters.shootInclination > 0
 	actionWeights = {
@@ -63,6 +61,7 @@ func prepare(text: String, startPosition: Vector2, shipPath: Array, limiters: Sc
 func _setupShieldHitsBar(maxHits: int):
 	$Sprite/ShipBubble/HitsBar.max_value = maxHits
 	_adjustRemainingShieldHits(maxHits)
+	$Sprite/ShipBubble/HitsBar.visible = false
 	
 	
 		
@@ -91,14 +90,17 @@ func _setAsTarget(isTarget: bool):
 	if (wasTarget == isTarget):
 		return
 	isTargeted = isTarget
-	if ($Sprite/Target):
-		$Sprite/Target.visible = isTargeted
-		if (isTargeted):
-			$Sprite/Target/AnimationPlayer.play("lock-in")
+	if ($Sprite/Target and isTargeted):
+		$Sprite/Target.lockin()
+			
+			
+func _pulseTarget(letter: String):
+	$Sprite/Target.pulse()
+		
 		
 		
 func lockTarget():
-	$Sprite/Target/AnimationPlayer.play("lock-out")
+	$Sprite/Target.lockout()
 	isTargeted = false
 	
 	
@@ -115,5 +117,8 @@ func disableThrusters():
 	
 func _adjustRemainingShieldHits(hitsRemaining: int):
 	$Sprite/ShipBubble/HitsBar.value = hitsRemaining
+	$Sprite/ShipBubble/HitsBar.visible = true
+	yield(get_tree().create_timer(0.5), "timeout")
+	$Sprite/ShipBubble/HitsBar.visible = false
 	if (hitsRemaining <= 0):
 		$Sprite/ShipBubble/HitsBar.visible = false

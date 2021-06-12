@@ -49,6 +49,7 @@ func _addSceneShips(ships: Array):
 	var parent = entity.get_node("TextShips")
 	for node in ships:
 		parent.add_child(node)
+		Utils.tryConnect(entity, "letterTyped", node, "_pulseTarget")
 	
 	
 func exitState(nextState: String):
