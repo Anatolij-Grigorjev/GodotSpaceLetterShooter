@@ -1,29 +1,43 @@
 extends Sprite
 
+const PULSE_REDUCE_PER_SECOND = 0.5
+
+
+onready var anim: AnimationPlayer = $AnimationPlayer
+onready var tween: Tween = $Tween
+
+
 func _ready():
 	visible = false
-	
-	
-func _process(delta: float):
-	if (visible 
-		and scale.x > 1.0 and scale.y > 1.0 
-		and $AnimationPlayer.current_animation == "spin"
-	):
-		scale = lerp(scale, Vector2.ONE, delta * 0.0001)
-		if (scale.x < 1.01 and scale.y < 1.01):
-			scale = Vector2.ONE
-	
 
 	
 func lockin():
-	visible = true
-	$AnimationPlayer.play("lock-in")
+	#sets sprite visible
+	anim.play("lock-in")
 	
 	
 func lockout():
-	$AnimationPlayer.play("lock-out")
-	visible = false
+	#sets sprite invisible
+	anim.play("lock-out")
 	
 	
 func pulse():
-	scale *= 1.25
+	#ignore pulsing when not spin animation
+	if (anim.current_animation != "spin"):
+		return
+	scale *= 1.1
+	if (tween.is_active()):
+		tween.stop_all()
+		tween.remove_all()
+	_buildCurrentPulseReduceTween()
+	tween.start()
+	
+	
+func _buildCurrentPulseReduceTween():
+	var scaleDelta = scale.x - 1.0
+	tween.interpolate_property(
+		self, "scale", 
+		null, Vector2.ONE,
+		scaleDelta / PULSE_REDUCE_PER_SECOND, 
+		Tween.TRANS_EXPO, Tween.EASE_IN_OUT
+	)
