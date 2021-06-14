@@ -49,46 +49,68 @@ margin_right = 344.822
 margin_bottom = 113.842
 
 [node name="GlowingStar4" parent="SpaceBG" instance=ExtResource( 3 )]
-margin_left = 556.538
-margin_top = 257.576
-margin_right = 596.538
-margin_bottom = 297.576
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -83.462
+margin_top = -102.424
+margin_right = -43.462
+margin_bottom = -62.424
 
 [node name="GlowingStar5" parent="SpaceBG" instance=ExtResource( 3 )]
+anchor_top = 1.0
+anchor_bottom = 1.0
 margin_left = 316.765
-margin_top = 357.252
+margin_top = -362.748
 margin_right = 356.765
-margin_bottom = 397.252
+margin_bottom = -322.748
 
 [node name="GlowingStar6" parent="SpaceBG" instance=ExtResource( 3 )]
-margin_left = 657.797
-margin_top = 542.698
-margin_right = 697.797
-margin_bottom = 582.698
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 17.797
+margin_top = 182.698
+margin_right = 57.797
+margin_bottom = 222.698
 
 [node name="GlowingStar7" parent="SpaceBG" instance=ExtResource( 3 )]
+anchor_top = 1.0
+anchor_bottom = 1.0
 margin_left = 217.756
-margin_top = 597.703
+margin_top = -122.297
 margin_right = 257.756
-margin_bottom = 637.703
+margin_bottom = -82.297
 
 [node name="GlowingStar8" parent="SpaceBG" instance=ExtResource( 3 )]
-margin_left = 940.68
-margin_top = 597.703
-margin_right = 980.68
-margin_bottom = 637.703
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -339.32
+margin_top = -122.297
+margin_right = -299.32
+margin_bottom = -82.297
 
 [node name="GlowingStar9" parent="SpaceBG" instance=ExtResource( 3 )]
-margin_left = 1107.27
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -172.73
 margin_top = 137.231
-margin_right = 1147.27
+margin_right = -132.73
 margin_bottom = 177.231
 
 [node name="GlowingStar10" parent="SpaceBG" instance=ExtResource( 3 )]
-margin_left = 1144.98
-margin_top = 486.121
-margin_right = 1184.98
-margin_bottom = 526.121
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -135.02
+margin_top = -233.879
+margin_right = -95.02
+margin_bottom = -193.879
 
 [node name="Panel" type="Panel" parent="."]
 anchor_right = 1.0
