@@ -10,8 +10,8 @@ script = ExtResource( 3 )
 scroll_rate = 333.0
 
 [node name="space" type="ParallaxLayer" parent="."]
-motion_scale = Vector2( 0, 1 )
-motion_mirroring = Vector2( 0, 720 )
+scale = Vector2( 1, 2 )
+motion_mirroring = Vector2( 200, 720 )
 
 [node name="Sprite" type="Sprite" parent="space"]
 position = Vector2( 640, 360 )
@@ -20,7 +20,7 @@ texture = ExtResource( 1 )
 
 [node name="BigStars" type="ParallaxLayer" parent="."]
 motion_scale = Vector2( 0, 1 )
-motion_mirroring = Vector2( 0, 1280 )
+motion_mirroring = Vector2( 720, 1280 )
 
 [node name="BigStar" type="Sprite" parent="BigStars"]
 position = Vector2( 196.024, 276.389 )
@@ -76,7 +76,7 @@ texture = ExtResource( 2 )
 
 [node name="SmallStars" type="ParallaxLayer" parent="."]
 motion_scale = Vector2( 0, 2 )
-motion_mirroring = Vector2( 0, 1280 )
+motion_mirroring = Vector2( 400, 1280 )
 
 [node name="star" type="Sprite" parent="SmallStars"]
 position = Vector2( 124.449, 198.874 )
