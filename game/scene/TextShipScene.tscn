@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://space_music_bg.wav" type="AudioStream" id=1]
 [ext_resource path="res://scene/TextShipScene.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://scene/ShipSceneWaveStartState.gd" type="Script" id=10]
 [ext_resource path="res://scene/ShipSceneWaveProcessState.gd" type="Script" id=11]
 [ext_resource path="res://scene/ShipSceneEndState.gd" type="Script" id=12]
+[ext_resource path="res://components/ScreenShake.tscn" type="PackedScene" id=13]
 
 [sub_resource type="Animation" id=1]
 resource_name = "show_title"
@@ -151,3 +152,7 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/show_title = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="ScreenShake" parent="Camera2D" instance=ExtResource( 13 )]

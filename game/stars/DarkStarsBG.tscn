@@ -10,7 +10,6 @@ script = ExtResource( 3 )
 scroll_rate = 333.0
 
 [node name="space" type="ParallaxLayer" parent="."]
-scale = Vector2( 1, 2 )
 motion_mirroring = Vector2( 200, 720 )
 
 [node name="Sprite" type="Sprite" parent="space"]

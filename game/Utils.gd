@@ -144,3 +144,14 @@ static func parseJSONShipLimits(shipLimitsJSON: Dictionary) -> SceneShipLimits:
 		shipLimitsJSON.shieldHP,
 		shipLimitsJSON.shotPriority
 	)
+
+
+"""
+Generate random Vector2 with coordinates between
+(-range_x;-range_y) and (range_x;range_y)
+"""
+static func rand_point(range_x: float, range_y: float) -> Vector2:
+	return Vector2(
+		rand_range(-range_x, range_x),
+		rand_range(-range_y, range_y)
+	)

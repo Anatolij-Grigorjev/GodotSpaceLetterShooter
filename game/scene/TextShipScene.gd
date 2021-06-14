@@ -9,6 +9,7 @@ signal letterTyped(letter)
 
 
 onready var shooter = $ShooterShip
+onready var shaker = $Camera2D/ScreenShake
 onready var playerInput = $CanvasLayer/PlayerInput
 onready var musicControl = $CanvasLayer/MusicControl
 onready var shipsFactory = $TextShipFactory
@@ -40,3 +41,7 @@ func _bindSceneStats():
 func _onShooterClearChamber():
 	for ship in $TextShips.get_children():
 		ship.isTargeted = false
+		
+		
+func _startTextShipHitShake(textShip: TextShip):
+	shaker.beginShake()
