@@ -154,5 +154,7 @@ __meta__ = {
 anims/show_title = SubResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 640, 360 )
+current = true
 
 [node name="ScreenShake" parent="Camera2D" instance=ExtResource( 13 )]

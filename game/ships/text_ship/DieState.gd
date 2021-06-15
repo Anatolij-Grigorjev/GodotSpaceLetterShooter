@@ -15,5 +15,6 @@ func processState(delta: float):
 	
 func enterState(prevState: String):
 	.enterState(prevState)
+	entity.emit_signal("shipHit", entity)
 	entityText = str(entity.currentText)
 	entity.currentText = ""
