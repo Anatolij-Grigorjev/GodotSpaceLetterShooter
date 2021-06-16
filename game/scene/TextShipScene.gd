@@ -35,6 +35,9 @@ func _process(delta: float):
 	camera.position.y -= screenTravel
 	shooter.position.y -= screenTravel
 	$TextShips.position.y -= screenTravel
+	for projectileNode in get_tree().get_nodes_in_group("projectile"):
+		if (is_instance_valid(projectileNode)):
+			projectileNode.position.y -= screenTravel
 		
 	
 
