@@ -5,12 +5,12 @@
 [ext_resource path="res://stars/DarkStarsBG.gd" type="Script" id=3]
 
 [node name="DarkStarsBG" type="ParallaxBackground"]
-scroll_ignore_camera_zoom = true
 script = ExtResource( 3 )
-scroll_rate = 333.0
+scroll_rate = 300.0
 
 [node name="space" type="ParallaxLayer" parent="."]
-motion_mirroring = Vector2( 200, 720 )
+scale = Vector2( 2, 2 )
+motion_mirroring = Vector2( 600, 720 )
 
 [node name="Sprite" type="Sprite" parent="space"]
 position = Vector2( 640, 360 )
