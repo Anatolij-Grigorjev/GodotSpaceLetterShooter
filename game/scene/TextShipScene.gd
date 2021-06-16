@@ -8,7 +8,11 @@ signal sceneFailed(sceneSpecId)
 signal letterTyped(letter)
 
 
+export(float) var screenScrollSpeed = 300
+
+
 onready var shooter = $ShooterShip
+onready var camera = $Camera2D
 onready var shaker = $Camera2D/ScreenShake
 onready var playerInput = $CanvasLayer/PlayerInput
 onready var musicControl = $CanvasLayer/MusicControl
@@ -22,12 +26,16 @@ var currentShipTarget: TextShip
 
 func _ready():
 	randomize()
+	Utils.tryConnect(fsm, "stateChanged", self, "_fsmStateChanged")
 	call_deferred("_bindSceneStats")
 	
 	
 func _process(delta: float):
-	stateLabel.text = "state: %s" % fsm.state
-	
+	var screenTravel = delta * screenScrollSpeed
+	camera.position.y -= screenTravel
+	shooter.position.y -= screenTravel
+	$TextShips.position.y -= screenTravel
+		
 	
 
 func setSceneSpecificaion(spec: SceneSpec):
@@ -45,3 +53,7 @@ func _onShooterClearChamber():
 		
 func _startTextShipHitShake(textShip: TextShip):
 	shaker.beginShake()
+	
+
+func _fsmStateChanged(oldState: String, newState: String):
+	stateLabel.text = "state: [%s] -> [%s]" % [oldState, newState]

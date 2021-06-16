@@ -134,13 +134,13 @@ margin_bottom = -25.0
 music = ExtResource( 1 )
 
 [node name="StateLabel" type="Label" parent="CanvasLayer"]
-anchor_top = 1.0
-anchor_bottom = 1.0
+anchor_top = 1.00069
+anchor_bottom = 1.00069
 margin_left = 140.341
 margin_top = -55.9446
 margin_right = 280.341
 margin_bottom = -41.9446
-text = "STATE: <SOMETHING>"
+text = "STATE: <NO_STATE> -> <NO_STATE>"
 align = 1
 valign = 1
 uppercase = true
