@@ -5,6 +5,7 @@ State to hold and use logic of ongoing wave in scene
 """
 
 
+
 var liveWaveShips: int = 0
 var waveOver: bool = false
 var latestKeyInputEvent: InputEventKey
@@ -14,7 +15,7 @@ func enterState(prevState: String):
 	.enterState(prevState)
 	waveOver = false
 	latestKeyInputEvent = null
-	var shipsContainer = entity.get_node("TextShips")
+	var shipsContainer = entity.textShipsContainer
 	liveWaveShips = shipsContainer.get_child_count()
 	for ship in shipsContainer.get_children():
 		_registerShipHandlers(ship)

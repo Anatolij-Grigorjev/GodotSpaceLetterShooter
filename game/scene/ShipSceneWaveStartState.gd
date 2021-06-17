@@ -46,9 +46,9 @@ func processState(delta: float):
 	
 	
 func _addSceneShips(ships: Array):
-	var parent = entity.get_node("TextShips")
+	var shipsContainer = entity.textShipsContainer
 	for node in ships:
-		parent.add_child(node)
+		shipsContainer.add_child(node)
 		Utils.tryConnect(entity, "letterTyped", node, "_pulseTarget")
 		Utils.tryConnect(node, "shipHit", entity, "_startTextShipHitShake")
 	

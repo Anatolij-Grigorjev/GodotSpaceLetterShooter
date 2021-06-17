@@ -11,9 +11,10 @@ signal letterTyped(letter)
 export(float) var screenScrollSpeed = 300
 
 
-onready var shooter = $ShooterShip
-onready var camera = $Camera2D
-onready var shaker = $Camera2D/ScreenShake
+onready var shooter = $MovingElements/ShooterShip
+onready var textShipsContainer = $MovingElements/TextShips
+onready var camera = $MovingElements/Camera2D
+onready var shaker = $MovingElements/Camera2D/ScreenShake
 onready var playerInput = $CanvasLayer/PlayerInput
 onready var musicControl = $CanvasLayer/MusicControl
 onready var shipsFactory = $TextShipFactory
@@ -32,9 +33,7 @@ func _ready():
 	
 func _process(delta: float):
 	var screenTravel = delta * screenScrollSpeed
-	camera.position.y -= screenTravel
-	shooter.position.y -= screenTravel
-	$TextShips.position.y -= screenTravel
+	$MovingElements.position.y -= screenTravel
 	for projectileNode in get_tree().get_nodes_in_group("projectile"):
 		if (is_instance_valid(projectileNode)):
 			projectileNode.position.y -= screenTravel
@@ -50,7 +49,7 @@ func _bindSceneStats():
 	
 	
 func _onShooterClearChamber():
-	for ship in $TextShips.get_children():
+	for ship in textShipsContainer.get_children():
 		ship.isTargeted = false
 		
 		
