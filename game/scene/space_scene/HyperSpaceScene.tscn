@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scene/TextShipScene.tscn" type="PackedScene" id=1]
-[ext_resource path="res://white_rect.png" type="Texture" id=2]
-[ext_resource path="res://stars/Stars.tscn" type="PackedScene" id=3]
+[ext_resource path="res://stars/HyperStarsBG.tscn" type="PackedScene" id=2]
 
 [node name="HyperSpaceScene" instance=ExtResource( 1 )]
 
@@ -13,23 +12,4 @@ margin_right = 182.0
 margin_bottom = -178.529
 rect_pivot_offset = Vector2( 72, 0 )
 
-[node name="BG" type="Sprite" parent="." index="5"]
-show_behind_parent = true
-position = Vector2( 640, 500 )
-scale = Vector2( 100, 50 )
-texture = ExtResource( 2 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="Darkinator" type="Sprite" parent="BG" index="0"]
-self_modulate = Color( 0, 0, 0, 0.729412 )
-texture = ExtResource( 2 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="Stars" parent="BG" index="1" instance=ExtResource( 3 )]
-modulate = Color( 0.815686, 0.780392, 0.933333, 1 )
-position = Vector2( -6.81296, -10.7964 )
-scale = Vector2( 0.01, 0.2 )
+[node name="HyperStarsBG" parent="." index="5" instance=ExtResource( 2 )]

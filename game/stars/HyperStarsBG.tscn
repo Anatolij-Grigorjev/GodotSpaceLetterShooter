@@ -1,0 +1,167 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://stars/ParallaxAutoScroll.gd" type="Script" id=1]
+[ext_resource path="res://stars/scroll_bg_space.png" type="Texture" id=2]
+[ext_resource path="res://stars/particle.png" type="Texture" id=3]
+
+[node name="HyperStarsBG" type="ParallaxBackground"]
+script = ExtResource( 1 )
+
+[node name="space" type="ParallaxLayer" parent="."]
+scale = Vector2( 2, 2 )
+motion_mirroring = Vector2( 600, 720 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Sprite" type="Sprite" parent="space"]
+position = Vector2( 640, 360 )
+scale = Vector2( 40, 1 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="BigStars" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0, 5 )
+motion_mirroring = Vector2( 330, 500 )
+
+[node name="BigSmear" type="Sprite" parent="BigStars"]
+position = Vector2( 196.024, 276.389 )
+scale = Vector2( 0.75, 10 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="BigSmear2" type="Sprite" parent="BigStars"]
+position = Vector2( 612.951, 84.9928 )
+scale = Vector2( 0.75, 10 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="BigSmear3" type="Sprite" parent="BigStars"]
+position = Vector2( 1168.85, 449.499 )
+scale = Vector2( 0.75, 10 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="BigSmear4" type="Sprite" parent="BigStars"]
+position = Vector2( 276.483, 586.036 )
+scale = Vector2( 0.75, 10 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="BigSmear5" type="Sprite" parent="BigStars"]
+position = Vector2( 466.661, 490.948 )
+scale = Vector2( 0.75, 10 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="BigSmear6" type="Sprite" parent="BigStars"]
+position = Vector2( 787.28, 289.799 )
+scale = Vector2( 0.75, 10 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="SmallStars" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0, 10 )
+motion_mirroring = Vector2( 250, 500 )
+
+[node name="SmallSmear" type="Sprite" parent="SmallStars"]
+position = Vector2( 213.848, 242.032 )
+scale = Vector2( 0.25, 2 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="SmallSmear2" type="Sprite" parent="SmallStars"]
+position = Vector2( 67.4187, 94.0616 )
+scale = Vector2( 0.25, 2 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="SmallSmear3" type="Sprite" parent="SmallStars"]
+position = Vector2( 929.038, 437.785 )
+scale = Vector2( 0.25, 2 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="SmallSmear4" type="Sprite" parent="SmallStars"]
+position = Vector2( 1178.74, 690.567 )
+scale = Vector2( 0.25, 2 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="SmallSmear5" type="Sprite" parent="SmallStars"]
+position = Vector2( 1089.34, 172.671 )
+scale = Vector2( 0.25, 2 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="SmallSmear6" type="Sprite" parent="SmallStars"]
+position = Vector2( 72.0428, 610.417 )
+scale = Vector2( 0.25, 2 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="SmallSmear7" type="Sprite" parent="SmallStars"]
+position = Vector2( 571.443, 662.823 )
+scale = Vector2( 0.25, 2 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="SmallSmear8" type="Sprite" parent="SmallStars"]
+position = Vector2( 794.94, 124.889 )
+scale = Vector2( 0.25, 2 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="SmallSmear9" type="Sprite" parent="SmallStars"]
+position = Vector2( 675.9, 429.252 )
+scale = Vector2( 0.25, 2 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="SmallSmear10" type="Sprite" parent="SmallStars"]
+position = Vector2( 529.026, 198.874 )
+scale = Vector2( 0.25, 2 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="SmallSmear11" type="Sprite" parent="SmallStars"]
+position = Vector2( 226.038, 407.398 )
+scale = Vector2( 0.25, 2 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": ""
+}

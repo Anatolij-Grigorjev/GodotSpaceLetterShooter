@@ -1,6 +1,6 @@
 extends ParallaxBackground
 """
-Perform automatic scrolling of BG at fixed rate
+Perform automatic scrolling of Parallax BG at fixed rate
 """
 
 export(float) var scroll_rate = 120.66
