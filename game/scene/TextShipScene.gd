@@ -15,6 +15,7 @@ onready var shooter = $MovingElements/ShooterShip
 onready var textShipsContainer = $MovingElements/TextShips
 onready var camera = $MovingElements/Camera2D
 onready var shaker = $MovingElements/Camera2D/ScreenShake
+onready var freeze = $FreezeFrame
 onready var playerInput = $CanvasLayer/PlayerInput
 onready var musicControl = $CanvasLayer/MusicControl
 onready var shipsFactory = $TextShipFactory
@@ -53,8 +54,13 @@ func _onShooterClearChamber():
 		ship.isTargeted = false
 		
 		
-func _startTextShipHitShake(textShip: TextShip):
-	shaker.beginShake()
+func _onTextShipHit(lettersRemaining: int):
+	if lettersRemaining > 0:
+		shaker.beginShake()
+		freeze.startFreeze(0.05)
+	else:
+		shaker.beginShake()
+		freeze.startFreeze(0.06)
 	
 
 func _fsmStateChanged(oldState: String, newState: String):

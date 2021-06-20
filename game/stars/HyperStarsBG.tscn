@@ -8,7 +8,6 @@
 script = ExtResource( 1 )
 
 [node name="space" type="ParallaxLayer" parent="."]
-scale = Vector2( 2, 2 )
 motion_mirroring = Vector2( 600, 720 )
 __meta__ = {
 "_editor_description_": ""
@@ -23,7 +22,7 @@ __meta__ = {
 }
 
 [node name="BigStars" type="ParallaxLayer" parent="."]
-motion_scale = Vector2( 0, 5 )
+motion_scale = Vector2( 0, 4 )
 motion_mirroring = Vector2( 330, 500 )
 
 [node name="BigSmear" type="Sprite" parent="BigStars"]
@@ -75,7 +74,7 @@ __meta__ = {
 }
 
 [node name="SmallStars" type="ParallaxLayer" parent="."]
-motion_scale = Vector2( 0, 10 )
+motion_scale = Vector2( 0, 8 )
 motion_mirroring = Vector2( 250, 500 )
 
 [node name="SmallSmear" type="Sprite" parent="SmallStars"]

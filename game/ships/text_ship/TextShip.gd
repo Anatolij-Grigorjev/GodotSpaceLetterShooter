@@ -7,7 +7,7 @@ Controller for ship with a piece of text in a label in a sprite
 signal shotFired(projectile)
 signal textShipCollidedShooter
 signal textShipDestroyed(text)
-signal shipHit(textShip)
+signal shipHit(lettersRemaining)
 
 
 export(String) var currentText: String = "test" setget setCurrentText, getCurrentText

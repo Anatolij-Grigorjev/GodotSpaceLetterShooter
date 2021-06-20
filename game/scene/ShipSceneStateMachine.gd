@@ -85,6 +85,7 @@ func _calcNextWaveNumShips() -> int:
 	
 func _onShipShotFired(projectile: Node2D):
 	entity.add_child(projectile)
+	entity.freeze.startFreeze(0.035)
 	#dont count enemy projectiles towards player stats
 	if (not projectile.is_in_group("shootable-projectile")):
 		Stats.connectProjectileStatsSignals(projectile)

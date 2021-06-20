@@ -50,7 +50,7 @@ func _addSceneShips(ships: Array):
 	for node in ships:
 		shipsContainer.add_child(node)
 		Utils.tryConnect(entity, "letterTyped", node, "_pulseTarget")
-		Utils.tryConnect(node, "shipHit", entity, "_startTextShipHitShake")
+		Utils.tryConnect(node, "shipHit", entity, "_onTextShipHit")
 	
 	
 func exitState(nextState: String):
