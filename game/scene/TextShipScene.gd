@@ -56,10 +56,10 @@ func _onShooterClearChamber():
 		
 func _onTextShipHit(lettersRemaining: int):
 	if lettersRemaining > 0:
-		shaker.beginShake()
+		shaker.beginShake(0.2, 15, 10, 1)
 		freeze.startFreeze(0.05)
 	else:
-		shaker.beginShake()
+		shaker.beginShake(0.2, 15, 20, 2)
 		freeze.startFreeze(0.06)
 	
 
