@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://ships/shooter/shooting_ship.png" type="Texture" id=1]
 [ext_resource path="res://ships/shooter/ShooterShip.gd" type="Script" id=2]
@@ -8,7 +8,7 @@
 [ext_resource path="res://ships/shooter/shot_miss.wav" type="AudioStream" id=6]
 [ext_resource path="res://ships/shooter/shot_hit.wav" type="AudioStream" id=7]
 [ext_resource path="res://ships/shooter/shooter_engine.wav" type="AudioStream" id=8]
-
+[ext_resource path="res://ships/shooter/VisibleSpoke.tscn" type="PackedScene" id=9]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0.514815, 1 )
@@ -116,7 +116,7 @@ tracks/2/keys = {
 "values": [ false, true ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=14]
 resource_name = "destroy"
 length = 2.0
 tracks/0/type = "value"
@@ -156,7 +156,7 @@ tracks/2/keys = {
 "values": [ 0.0, 0.75 ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=15]
 length = 0.4
 step = 0.05
 tracks/0/type = "value"
@@ -186,8 +186,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=15]
-resource_name = "leave"
+[sub_resource type="Animation" id=16]
 length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -226,7 +225,7 @@ tracks/2/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=17]
 length = 0.4
 step = 0.05
 tracks/0/type = "value"
@@ -365,6 +364,13 @@ __meta__ = {
 [node name="ThrusterSound" type="AudioStreamPlayer2D" parent="Sprite"]
 stream = ExtResource( 8 )
 
+[node name="VisibleSpoke" parent="Sprite" instance=ExtResource( 9 )]
+visible = false
+rotation = 4.25686
+scale = Vector2( 0.5, 4 )
+offset = Vector2( 0, 50 )
+allowedRotationRange = Vector2( 120, 240 )
+
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 2
@@ -374,8 +380,8 @@ shape = SubResource( 12 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/arrive = SubResource( 13 )
-anims/destroy = SubResource( 17 )
-anims/jam = SubResource( 14 )
-anims/leave = SubResource( 15 )
-anims/shoot = SubResource( 16 )
+anims/destroy = SubResource( 14 )
+anims/jam = SubResource( 15 )
+anims/leave = SubResource( 16 )
+anims/shoot = SubResource( 17 )
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
