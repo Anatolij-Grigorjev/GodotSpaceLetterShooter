@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://ships/shooter/shooting_ship.png" type="Texture" id=1]
 [ext_resource path="res://ships/shooter/ShooterShip.gd" type="Script" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://ships/shooter/shot_miss.wav" type="AudioStream" id=6]
 [ext_resource path="res://ships/shooter/shot_hit.wav" type="AudioStream" id=7]
 [ext_resource path="res://ships/shooter/shooter_engine.wav" type="AudioStream" id=8]
-[ext_resource path="res://ships/shooter/VisibleSpoke.tscn" type="PackedScene" id=9]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0.514815, 1 )
@@ -363,13 +362,6 @@ __meta__ = {
 
 [node name="ThrusterSound" type="AudioStreamPlayer2D" parent="Sprite"]
 stream = ExtResource( 8 )
-
-[node name="VisibleSpoke" parent="Sprite" instance=ExtResource( 9 )]
-visible = false
-rotation = 4.25686
-scale = Vector2( 0.5, 4 )
-offset = Vector2( 0, 50 )
-allowedRotationRange = Vector2( 120, 240 )
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4

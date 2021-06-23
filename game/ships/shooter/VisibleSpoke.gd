@@ -26,3 +26,4 @@ func showSpoke():
 
 func _onTimeout():
 	visible = false
+	queue_free()

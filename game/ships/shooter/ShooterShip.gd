@@ -3,6 +3,8 @@ extends Node2D
 Controller for ship that shoots projectiles 
 while player is typing for the illusion of a dogfight
 """
+const SpokeScn = preload("res://ships/shooter/VisibleSpoke.tscn")
+
 enum Side {
 	LEFT = -1,
 	RIGHT = 1
@@ -28,8 +30,15 @@ func chamberLetter(letter: String):
 	chamber += letter
 	
 	
-func showSpoke(letter: String):
-	$Sprite/VisibleSpoke.showSpoke()
+func addSpoke(letter: String):
+	var spoke = SpokeScn.instance()
+	spoke.allowedRotationRange = Vector2(150, 210)
+	spoke.scale = Vector2(0.5, 4)
+	spoke.offset = Vector2(0, 50)
+	spoke.visible = false
+	
+	$Sprite.add_child(spoke)
+	spoke.showSpoke()
 	
 	
 func faceShootable(shootable: Node2D) -> void:

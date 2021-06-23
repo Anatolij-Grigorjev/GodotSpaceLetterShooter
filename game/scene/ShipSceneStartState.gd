@@ -16,7 +16,7 @@ func enterState(prevState: String):
 	
 	Utils.tryConnect(entity, "letterTyped", entity.playerInput, "addTypedLetter")
 	Utils.tryConnect(entity, "letterTyped", entity.shooter, "chamberLetter")
-	Utils.tryConnect(entity, "letterTyped", entity.shooter, "showSpoke")
+	Utils.tryConnect(entity, "letterTyped", entity.shooter, "addSpoke")
 	
 	Utils.tryConnect(entity.shooter, "shotFired", fsm, "_onShipShotFired")
 	Utils.tryConnect(entity.shooter, "chamberEmptied", entity.playerInput, "clearText")
