@@ -33,7 +33,7 @@ func chamberLetter(letter: String):
 func addSpoke(letter: String):
 	var spoke = SpokeScn.instance()
 	spoke.allowedRotationRange = Vector2(150, 210)
-	spoke.scale = Vector2(0.5, 4)
+	spoke.scale = Vector2(0.1, 3)
 	spoke.offset = Vector2(0, 50)
 	spoke.visible = false
 	
