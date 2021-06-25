@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://ships/shooter/shooting_ship.png" type="Texture" id=1]
 [ext_resource path="res://ships/shooter/ShooterShip.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://ships/shooter/shot_miss.wav" type="AudioStream" id=6]
 [ext_resource path="res://ships/shooter/shot_hit.wav" type="AudioStream" id=7]
 [ext_resource path="res://ships/shooter/shooter_engine.wav" type="AudioStream" id=8]
+[ext_resource path="res://blur_sprite_shader.tres" type="Material" id=9]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0.514815, 1 )
@@ -67,6 +68,17 @@ emission_box_extents = Vector3( 12, 1, 1 )
 flag_disable_z = true
 spread = 100.0
 gravity = Vector3( 0, 300, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 10 )
+color_ramp = SubResource( 8 )
+
+[sub_resource type="ParticlesMaterial" id=18]
+emission_shape = 2
+emission_box_extents = Vector3( 12, 1, 1 )
+flag_disable_z = true
+spread = 100.0
+gravity = Vector3( 0, 500, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale_curve = SubResource( 10 )
@@ -185,45 +197,6 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=16]
-length = 3.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 2, 2.6, 3 ),
-"transitions": PoolRealArray( 0.999999, 0.287175, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, 100 ), Vector2( 0, 100 ), Vector2( 0, -1500 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite/ThrusterSound:playing")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite/Thruster:emitting")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
 [sub_resource type="Animation" id=17]
 length = 0.4
 step = 0.05
@@ -292,6 +265,106 @@ tracks/4/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=16]
+resource_name = "transition_wave"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 0.999999, 0.287175 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -100 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite/ThrusterSound:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite/Thruster:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 0.307786 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.9, 1.1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite/ThrusterHyper:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite/ThrusterHyper:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite:material:shader_param/radius")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 0.287175 ),
+"update": 0,
+"values": [ 0.0, 2.5 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Sprite/Thruster:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0.4, 1.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
 [node name="ShooterShip" type="Node2D" groups=[
 "shooter",
 ]]
@@ -300,6 +373,7 @@ projectileScene = ExtResource( 3 )
 projectileCollisionMask = 2
 
 [node name="Sprite" type="Sprite" parent="."]
+material = ExtResource( 9 )
 texture = ExtResource( 1 )
 
 [node name="ShotPosition" type="Position2D" parent="Sprite"]
@@ -360,6 +434,16 @@ __meta__ = {
 "_editor_description_": ""
 }
 
+[node name="ThrusterHyper" type="Particles2D" parent="Sprite"]
+visible = false
+show_behind_parent = true
+position = Vector2( 0, 35 )
+amount = 200
+process_material = SubResource( 18 )
+__meta__ = {
+"_editor_description_": ""
+}
+
 [node name="ThrusterSound" type="AudioStreamPlayer2D" parent="Sprite"]
 stream = ExtResource( 8 )
 
@@ -374,6 +458,6 @@ shape = SubResource( 12 )
 anims/arrive = SubResource( 13 )
 anims/destroy = SubResource( 14 )
 anims/jam = SubResource( 15 )
-anims/leave = SubResource( 16 )
 anims/shoot = SubResource( 17 )
+anims/transition_wave = SubResource( 16 )
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

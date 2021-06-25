@@ -9,6 +9,8 @@ const StatsViewScn = preload("res://scene_stats/SceneStatsView.tscn")
 
 var statsViewClosed: bool = false
 var statsViewAdded: bool = false
+var shipDestroyed: bool = false
+var shipLeaving: bool = false
 var shipLeft: bool = false
 var statsCookerThread: Thread
 
@@ -19,30 +21,44 @@ func _ready():
 
 func enterState(prevState: String):
 	.enterState(prevState)
+	shipLeaving = false
 	shipLeft = false
+	shipDestroyed = false
 	statsViewAdded = false
 	statsViewClosed = false
 	statsCookerThread.start(self, "_buildSceneStats", null)
 	entity.currentShipTarget = null
 	if (fsm.shooterFailed):
-		entity.shooter.anim.play("destroy")
-	else:
-		entity.shooter.anim.play("leave")
-	yield(entity.shooter.anim, "animation_finished")
-	yield(get_tree().create_timer(0.75), "timeout")
-	shipLeft = true
+		yield(_playShipAnimationAndWait("destroy", 0.75), "completed")
+		shipDestroyed = true
 	
 	
 func processState(delta: float):
 	.processState(delta)
-	if (not shipLeft or statsViewClosed):
+	#step 1 - destroy failed ship
+	if (fsm.shooterFailed and not shipDestroyed):
 		return
+	#step 2 - cook stats view
 	if (not statsViewAdded):
 		var statsViewNode = statsCookerThread.wait_to_finish()
 		entity.get_node("CanvasLayer").add_child(statsViewNode)
 		statsViewAdded = true
-	
-	
+	#step 3 - wait for stats to close
+	if (not statsViewClosed):
+		return
+	#finish state after stats if ship was destroyed
+	if (shipDestroyed):
+		shipLeft = true
+	#step 4 - play leave animation
+	if (not shipLeaving and not shipDestroyed):
+		shipLeaving = true
+		entity.shooter.rotation = 0
+		yield(_playShipAnimationAndWait("transition_wave", 2.5), "completed")
+		entity.shooter.anim.play_backwards("transition_wave")
+		yield(entity.shooter.anim, "animation_finished")
+		shipLeft = true
+		
+		
 	
 func _buildSceneStats(data):
 	var statsView = StatsViewScn.instance()
@@ -55,5 +71,12 @@ func _buildSceneStats(data):
 func _onStatsViewKeyPressed(statsView: Control):
 	statsView.queue_free()
 	statsViewClosed = true
+	
+	
+func _playShipAnimationAndWait(animName: String, postAnimWaitTime: float):
+	entity.shooter.anim.play(animName)
+	yield(entity.shooter.anim, "animation_finished")
+	if (postAnimWaitTime > 0):
+		yield(get_tree().create_timer(postAnimWaitTime), "timeout")
 	
 	

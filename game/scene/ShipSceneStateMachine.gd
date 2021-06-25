@@ -41,7 +41,7 @@ func _getNextState(delta: float) -> String:
 				return "WaveEnd"
 			return NO_STATE
 		"WaveEnd":
-			if stateNode.statsViewClosed:
+			if stateNode.shipLeft:
 				var wasLastWave = shooterFailed or remainingSceneShips <= 0
 				if (wasLastWave):
 					return "SceneEnd"
