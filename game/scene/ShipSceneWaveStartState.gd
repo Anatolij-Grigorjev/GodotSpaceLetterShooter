@@ -32,7 +32,9 @@ func _prepareWaveTitle():
 func _playWaveIntroAnimations():
 	if (firstWave):
 		entity.shooter.anim.play("arrive")
-		yield(entity.shooter.anim, "animation_finished")
+	else:
+		entity.shooter.anim.play_backwards("transition_wave")
+	yield(entity.shooter.anim, "animation_finished")
 	entity.get_node('AnimationPlayer').play("show_title")
 	yield(entity.get_node('AnimationPlayer'), "animation_finished")
 	introsDone = true

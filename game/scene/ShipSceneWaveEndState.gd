@@ -54,8 +54,6 @@ func processState(delta: float):
 		shipLeaving = true
 		entity.shooter.rotation = 0
 		yield(_playShipAnimationAndWait("transition_wave", 2.5), "completed")
-		entity.shooter.anim.play_backwards("transition_wave")
-		yield(entity.shooter.anim, "animation_finished")
 		shipLeft = true
 		
 		
