@@ -155,3 +155,12 @@ static func rand_point(range_x: float, range_y: float) -> Vector2:
 		rand_range(-range_x, range_x),
 		rand_range(-range_y, range_y)
 	)
+	
+	
+"""
+Safely get first element from possible null or empty array
+"""
+static func getFirst(arr: Array):
+	if (arr == null or arr.empty()):
+		return null
+	return arr[0] 

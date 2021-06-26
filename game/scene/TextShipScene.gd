@@ -61,6 +61,27 @@ func _onTextShipHit(lettersRemaining: int):
 	else:
 		shaker.beginShake(0.2, 15, 20, 2)
 		freeze.startFreeze(0.06)
+		
+		
+func _onShooterToggleHyperspeed():
+	var animator = _findBGAnimator()
+	if (not animator):
+		return
+	var waveEnded = fsm.state == "WaveEnd"
+	if (waveEnded):
+		animator.play("hyper")
+	else:
+		animator.play_backwards("hyper")
+
+
+func _findBGAnimator() -> AnimationPlayer:
+	var currentSceneBGNode = Utils.getFirst(get_tree().get_nodes_in_group("bg"))
+	if (is_instance_valid(currentSceneBGNode)):
+		var animator: AnimationPlayer = currentSceneBGNode.get_node('AnimationPlayer')
+		if (animator):
+			return animator
+	return null
+	
 	
 
 func _fsmStateChanged(oldState: String, newState: String):

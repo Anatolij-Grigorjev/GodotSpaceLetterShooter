@@ -12,6 +12,7 @@ enum Side {
 
 signal shotFired(projectile)
 signal chamberEmptied
+signal hyperspeedToggled
 
 export(PackedScene) var projectileScene: PackedScene
 export(int, LAYERS_2D_PHYSICS) var projectileCollisionMask: int = 0

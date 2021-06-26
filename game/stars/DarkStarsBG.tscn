@@ -1,10 +1,39 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://stars/scroll_bg_space.png" type="Texture" id=1]
 [ext_resource path="res://stars/particle.png" type="Texture" id=2]
 [ext_resource path="res://stars/ParallaxAutoScroll.gd" type="Script" id=3]
 
-[node name="DarkStarsBG" type="ParallaxBackground"]
+[sub_resource type="Animation" id=1]
+resource_name = "hyper"
+tracks/0/type = "value"
+tracks/0/path = NodePath("BigStars:motion_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 2.2974, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 1 ), Vector2( 0, 4 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SmallStars:motion_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 2 ), Vector2( 0, 8 ) ]
+}
+
+[node name="DarkStarsBG" type="ParallaxBackground" groups=[
+"bg",
+]]
 script = ExtResource( 3 )
 scroll_rate = 300.0
 
@@ -130,3 +159,6 @@ texture = ExtResource( 2 )
 position = Vector2( 347.336, -408.787 )
 scale = Vector2( 1, 2 )
 texture = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/hyper = SubResource( 1 )
