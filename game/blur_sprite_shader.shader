@@ -1,7 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=2]
-
-[sub_resource type="Shader" id=19]
-code = "shader_type canvas_item;
+shader_type canvas_item;
 render_mode blend_mix;
 
 uniform float radius = 4.0;
@@ -17,8 +14,4 @@ void fragment() {
 	col /= 5.0;
 
 	COLOR = col;
-}"
-
-[resource]
-shader = SubResource( 19 )
-shader_param/radius = 0.0
+}
