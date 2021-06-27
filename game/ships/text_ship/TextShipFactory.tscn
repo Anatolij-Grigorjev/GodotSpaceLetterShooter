@@ -4,7 +4,6 @@
 [ext_resource path="res://ships/text_ship/PathGenerator.gd" type="Script" id=2]
 [ext_resource path="res://components/WordsProvider.gd" type="Script" id=3]
 
-
 [node name="TextShipFactory" type="Node"]
 script = ExtResource( 1 )
 printDebug = true
@@ -19,4 +18,4 @@ pathBoundsHorizMargins = Vector2( 150, 150 )
 
 [node name="WordsProvider" type="Node" parent="."]
 script = ExtResource( 3 )
-filePath = "res://corpus.txt"
+filePath = "res://corpus_same_letter.txt"
