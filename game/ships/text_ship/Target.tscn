@@ -91,6 +91,8 @@ tracks/0/keys = {
 }
 
 [node name="Target" type="Sprite"]
+visible = false
+scale = Vector2( 3, 3 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
 

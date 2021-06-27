@@ -94,6 +94,8 @@ func _setAsTarget(isTarget: bool):
 	isTargeted = isTarget
 	if ($Sprite/Target and isTargeted):
 		$Sprite/Target.lockin()
+	elif ($Sprite/Target):
+		$Sprite/Target.lockout()
 			
 			
 func _pulseTarget(letter: String):
