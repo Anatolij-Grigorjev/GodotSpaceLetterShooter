@@ -27,7 +27,6 @@ func enterState(prevState: String):
 	statsViewAdded = false
 	statsViewClosed = false
 	statsCookerThread.start(self, "_buildSceneStats", null)
-	entity.currentShipTarget = null
 	if (fsm.shooterFailed):
 		yield(_playShipAnimationAndWait("destroy", 0.75), "completed")
 		shipDestroyed = true

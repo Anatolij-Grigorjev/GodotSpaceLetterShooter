@@ -23,9 +23,6 @@ onready var fsm: ShipSceneStateMachine = $ShipSceneStateMachine
 onready var stateLabel: Label = $CanvasLayer/StateLabel
 
 
-var currentShipTarget: TextShip
-
-
 func _ready():
 	randomize()
 	Utils.tryConnect(fsm, "stateChanged", self, "_fsmStateChanged")

@@ -70,11 +70,7 @@ func _processLatestKey() -> void:
 
 	var shootableWithLetter: Node2D = _findShootableWithNextText(entity.shooter.chamber)
 	if (is_instance_valid(shootableWithLetter)):
-		if (is_instance_valid(entity.currentShipTarget)):
-			entity.currentShipTarget = null
 		entity.shooter.faceShootable(shootableWithLetter)
-		if _shootableIsShip(shootableWithLetter):
-			entity.currentShipTarget = shootableWithLetter
 	if (specialCodeToggles.fireChambered):
 		entity.shooter.tryFireAt(shootableWithLetter)
 	latestKeyInputEvent = null
