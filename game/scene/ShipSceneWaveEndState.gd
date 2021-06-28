@@ -52,7 +52,7 @@ func processState(delta: float):
 	if (not shipLeaving and not shipDestroyed):
 		shipLeaving = true
 		entity.shooter.rotation = 0
-		yield(_playShipAnimationAndWait("transition_wave", 2.5), "completed")
+		yield(_playShipAnimationAndWait("transition_wave", entity.endWaveWaitTime), "completed")
 		shipLeft = true
 		
 		

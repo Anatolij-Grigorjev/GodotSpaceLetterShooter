@@ -9,6 +9,7 @@ signal letterTyped(letter)
 
 
 export(float) var screenScrollSpeed = 300
+export(float) var endWaveWaitTime = 2.5
 
 
 onready var shooter = $MovingElements/ShooterShip
@@ -16,6 +17,7 @@ onready var textShipsContainer = $MovingElements/TextShips
 onready var camera = $MovingElements/Camera2D
 onready var shaker = $MovingElements/Camera2D/ScreenShake
 onready var freeze = $FreezeFrame
+onready var animator = $AnimationPlayer
 onready var playerInput = $CanvasLayer/PlayerInput
 onready var musicControl = $CanvasLayer/MusicControl
 onready var shipsFactory = $TextShipFactory
@@ -64,11 +66,21 @@ func _onShooterToggleHyperspeed():
 	var animator = _findBGAnimator()
 	if (not animator):
 		return
+	var hyperSpeedAnimKey = "hyper"
+	var hyperSpeedAnimation = animator.get_animation(hyperSpeedAnimKey)
 	var waveEnded = fsm.state == "WaveEnd"
 	if (waveEnded):
-		animator.play("hyper")
+		#violent shake during acceleration of hyperness
+		shaker.beginShake(hyperSpeedAnimation.length, 20, 25, 2)
+		animator.play(hyperSpeedAnimKey)
+		yield(animator, "animation_finished")
+		var remainingFlyTime = max(0, shooter.anim.current_animation_length - hyperSpeedAnimation.length)
+		#less violent shake for fly part
+		shaker.beginShake(endWaveWaitTime + remainingFlyTime, 10, 15, 1)
 	else:
-		animator.play_backwards("hyper")
+		#violent shake during acceleration of hyperness
+		shaker.beginShake(hyperSpeedAnimation.length, 10, 15, 2)
+		animator.play_backwards(hyperSpeedAnimKey)
 
 
 func _findBGAnimator() -> AnimationPlayer:

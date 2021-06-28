@@ -35,8 +35,8 @@ func _playWaveIntroAnimations():
 	else:
 		entity.shooter.anim.play_backwards("transition_wave")
 	yield(entity.shooter.anim, "animation_finished")
-	entity.get_node('AnimationPlayer').play("show_title")
-	yield(entity.get_node('AnimationPlayer'), "animation_finished")
+	entity.animator.play("show_title")
+	yield(entity.animator, "animation_finished")
 	introsDone = true
 	
 	
