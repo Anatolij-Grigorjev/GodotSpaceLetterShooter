@@ -52,3 +52,4 @@ __meta__ = {
 }
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
