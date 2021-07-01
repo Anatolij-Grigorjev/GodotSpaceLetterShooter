@@ -36,8 +36,8 @@ func _ready():
 	
 func markSceneDone(done: bool):
 	sceneDone = done
-	if ($SceneDoneMarker):
-		$SceneDoneMarker.visible = done
+	if ($OuterMargin/VBoxContainer/SceneTitle/SceneDoneMarker):
+		$OuterMargin/VBoxContainer/SceneTitle/SceneDoneMarker.visible = done
 	
 	
 func _process(delta):

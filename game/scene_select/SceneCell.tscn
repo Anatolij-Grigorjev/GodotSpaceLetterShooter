@@ -4,9 +4,9 @@
 [ext_resource path="res://scene_select/icon_shield.png" type="Texture" id=2]
 [ext_resource path="res://scene_select/icon_shoot.png" type="Texture" id=3]
 [ext_resource path="res://scene_select/SceneCell.gd" type="Script" id=4]
-[ext_resource path="res://white_rect.png" type="Texture" id=5]
+[ext_resource path="res://stars/particle.png" type="Texture" id=5]
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.419608, 0.419608, 0.415686, 1 )
 border_width_left = 5
 border_width_top = 5
@@ -31,7 +31,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 resource_name = "hover"
 length = 0.25
 step = 0.05
@@ -72,7 +72,7 @@ tracks/2/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 resource_name = "leave"
 length = 0.25
 step = 0.05
@@ -113,7 +113,7 @@ tracks/2/keys = {
 "values": [ Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 resource_name = "select"
 length = 0.75
 step = 0.05
@@ -157,25 +157,11 @@ tracks/2/keys = {
 [node name="SceneCell" type="Panel"]
 margin_right = 350.0
 margin_bottom = 350.0
+rect_pivot_offset = Vector2( 175, 175 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 7 )
+custom_styles/panel = SubResource( 1 )
 script = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="SceneDoneMarker" type="TextureRect" parent="."]
-visible = false
-modulate = Color( 0.223529, 0.917647, 0.054902, 1 )
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -25.0
-margin_top = -25.0
-margin_right = 25.0
-margin_bottom = 25.0
-texture = ExtResource( 5 )
-expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -215,6 +201,52 @@ valign = 1
 uppercase = true
 __meta__ = {
 "_editor_description_": ""
+}
+
+[node name="SceneDoneMarker" type="HBoxContainer" parent="OuterMargin/VBoxContainer/SceneTitle"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right" type="TextureRect" parent="OuterMargin/VBoxContainer/SceneTitle/SceneDoneMarker"]
+modulate = Color( 0.223529, 0.917647, 0.054902, 1 )
+margin_right = 47.0
+margin_bottom = 49.0
+rect_pivot_offset = Vector2( 24.2922, 26.2539 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VSeparator" type="VSeparator" parent="OuterMargin/VBoxContainer/SceneTitle/SceneDoneMarker"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 47.0
+margin_right = 282.0
+margin_bottom = 49.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+
+[node name="Left" type="TextureRect" parent="OuterMargin/VBoxContainer/SceneTitle/SceneDoneMarker"]
+modulate = Color( 0.223529, 0.917647, 0.054902, 1 )
+margin_left = 282.0
+margin_right = 330.0
+margin_bottom = 49.0
+rect_pivot_offset = Vector2( 24.2922, 26.2539 )
+size_flags_horizontal = 3
+texture = ExtResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
 }
 
 [node name="ShipRowsContainer" type="VBoxContainer" parent="OuterMargin/VBoxContainer"]
@@ -343,9 +375,9 @@ valign = 1
 uppercase = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/hover = SubResource( 4 )
-anims/leave = SubResource( 5 )
-anims/select = SubResource( 6 )
+anims/hover = SubResource( 3 )
+anims/leave = SubResource( 4 )
+anims/select = SubResource( 5 )
 
 [node name="TouchPanel" type="Panel" parent="."]
 self_modulate = Color( 1, 1, 1, 0 )
