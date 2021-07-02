@@ -442,6 +442,7 @@ __meta__ = {
 }
 
 [node name="Thruster" type="Particles2D" parent="Sprite"]
+visible = false
 show_behind_parent = true
 position = Vector2( 0, 35 )
 amount = 100
@@ -479,4 +480,6 @@ anims/destroy = SubResource( 16 )
 anims/jam = SubResource( 17 )
 anims/shoot = SubResource( 18 )
 anims/transition_wave = SubResource( 19 )
+
+[node name="Tween" type="Tween" parent="."]
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

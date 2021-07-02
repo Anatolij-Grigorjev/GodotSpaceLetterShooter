@@ -51,7 +51,7 @@ func processState(delta: float):
 	#step 4 - play leave animation
 	if (not shipLeaving and not shipDestroyed):
 		shipLeaving = true
-		entity.shooter.rotation = 0
+		yield(_resetShipRotation(), "completed")
 		yield(_playShipAnimationAndWait("transition_wave", entity.endWaveWaitTime), "completed")
 		shipLeft = true
 		
@@ -76,4 +76,8 @@ func _playShipAnimationAndWait(animName: String, postAnimWaitTime: float):
 	if (postAnimWaitTime > 0):
 		yield(get_tree().create_timer(postAnimWaitTime), "timeout")
 	
+	
+func _resetShipRotation():
+	entity.shooter.startResetRotationTween()
+	yield(entity.shooter.tween, "tween_all_completed")
 	

@@ -5,6 +5,8 @@ while player is typing for the illusion of a dogfight
 """
 const SpokeScn = preload("res://ships/shooter/VisibleSpoke.tscn")
 
+const ROTATE_RADS_PER_SEC = 3
+
 enum Side {
 	LEFT = -1,
 	RIGHT = 1
@@ -19,6 +21,8 @@ export(int, LAYERS_2D_PHYSICS) var projectileCollisionMask: int = 0
 
 onready var shotPosition: Position2D = $Sprite/ShotPosition
 onready var anim: AnimationPlayer = $AnimationPlayer
+onready var tween: Tween = $Tween
+
 
 var chamber: String = ""
 
@@ -84,6 +88,15 @@ func missFire():
 func emptyChamber():
 	chamber = ""
 	emit_signal("chamberEmptied")
+	
+	
+func startResetRotationTween():
+	tween.interpolate_property(
+		self, "rotation", 
+		null, 0.0, rotation / ROTATE_RADS_PER_SEC, 
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
+	)
+	tween.start()
 
 
 func _on_Area2D_area_entered(area: Area2D):
