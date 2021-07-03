@@ -442,7 +442,6 @@ __meta__ = {
 }
 
 [node name="Thruster" type="Particles2D" parent="Sprite"]
-visible = false
 show_behind_parent = true
 position = Vector2( 0, 35 )
 amount = 100

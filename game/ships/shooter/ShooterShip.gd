@@ -90,13 +90,15 @@ func emptyChamber():
 	emit_signal("chamberEmptied")
 	
 	
-func startResetRotationTween():
+func resetRotationTween():
 	tween.interpolate_property(
 		self, "rotation", 
 		null, 0.0, rotation / ROTATE_RADS_PER_SEC, 
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
 	)
 	tween.start()
+	yield(tween, "tween_all_completed")
+	tween.remove_all()
 
 
 func _on_Area2D_area_entered(area: Area2D):
