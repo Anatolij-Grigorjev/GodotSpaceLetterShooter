@@ -93,7 +93,7 @@ func emptyChamber():
 func resetRotationTween():
 	tween.interpolate_property(
 		self, "rotation", 
-		null, 0.0, rotation / ROTATE_RADS_PER_SEC, 
+		null, 0.0, abs(rotation) / ROTATE_RADS_PER_SEC, 
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
 	)
 	tween.start()
