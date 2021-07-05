@@ -38,6 +38,8 @@ func markSceneDone(done: bool):
 	sceneDone = done
 	if ($OuterMargin/VBoxContainer/SceneTitle/SceneDoneMarker):
 		$OuterMargin/VBoxContainer/SceneTitle/SceneDoneMarker.visible = done
+	if ($LevelDoneOutline):
+		$LevelDoneOutline.visible = done
 	
 	
 func _process(delta):
