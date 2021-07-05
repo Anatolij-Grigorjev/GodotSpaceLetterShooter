@@ -402,12 +402,13 @@ __meta__ = {
 
 [node name="LevelDoneOutline" type="Panel" parent="."]
 visible = false
-margin_right = 350.0
-margin_bottom = 350.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 175, 175 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 7 )
 __meta__ = {
+"_edit_use_anchors_": false,
 "_editor_description_": ""
 }

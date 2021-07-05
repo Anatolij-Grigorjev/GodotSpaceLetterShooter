@@ -79,8 +79,13 @@ func _buildNextWaveSpec() -> SceneWaveSpec:
 func _calcNextWaveNumShips() -> int:
 	var numShipsWaveFrom = sceneSpecification.smallestShipsWave
 	var numShipsWaveTo = sceneSpecification.largestShipsWave
-	var pickedInWave: int = numShipsWaveFrom + randi() % (numShipsWaveTo - numShipsWaveFrom + 1) 
-	return int(min(pickedInWave, remainingSceneShips))
+	var numShipsPickedForWave = 0
+	#use all remaining ships in next wave if there are not many left
+	if (remainingSceneShips <= numShipsWaveTo):
+		numShipsPickedForWave = remainingSceneShips
+	else:
+		numShipsPickedForWave = numShipsWaveFrom + randi() % (numShipsWaveTo - numShipsWaveFrom + 1) 
+	return int(min(numShipsPickedForWave, remainingSceneShips))
 	
 	
 func _onShipShotFired(projectile: Node2D):
