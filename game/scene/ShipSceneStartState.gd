@@ -22,3 +22,4 @@ func enterState(prevState: String):
 	Utils.tryConnect(entity.shooter, "chamberEmptied", entity.playerInput, "clearText")
 	Utils.tryConnect(entity.shooter, "chamberEmptied", entity, "_onShooterClearChamber")
 	Utils.tryConnect(entity.shooter, "hyperspeedToggled", entity, "_onShooterToggleHyperspeed")
+	Utils.tryConnect(entity.shooter, "shooterHitByShot", entity, "_onShooterHitByShot")

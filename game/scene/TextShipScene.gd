@@ -60,6 +60,11 @@ func _onTextShipHit(lettersRemaining: int):
 	else:
 		shaker.beginShake(0.2, 15, 20, 2)
 		freeze.startFreeze(0.06)
+
+
+func _onShooterHitByShot(projectile: Node2D):
+	freeze.startFreeze(0.1)
+	shaker.beginShake(0.75, 25, 25, 1)
 		
 		
 func _onShooterToggleHyperspeed():
@@ -78,7 +83,7 @@ func _onShooterToggleHyperspeed():
 		#less violent shake for fly part
 		shaker.beginShake(endWaveWaitTime + remainingFlyTime, 10, 15, 1)
 	else:
-		#violent shake during acceleration of hyperness
+		#non-violent shake on deacceleration from hyperness
 		shaker.beginShake(hyperSpeedAnimation.length, 10, 15, 2)
 		animator.play_backwards(hyperSpeedAnimKey)
 

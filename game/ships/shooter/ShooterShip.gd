@@ -14,6 +14,7 @@ enum Side {
 
 signal shotFired(projectile)
 signal chamberEmptied
+signal shooterHitByShot(projectile)
 signal hyperspeedToggled
 
 export(PackedScene) var projectileScene: PackedScene
@@ -104,6 +105,8 @@ func resetRotationTween():
 func _on_Area2D_area_entered(area: Area2D):
 	var areaOwner: Node2D = area.get_parent()
 	if (areaOwner.is_in_group("projectile")):
+		emit_signal("shooterHitByShot", areaOwner)
+		anim.play("hit")
 		emptyChamber()
 	
 		
