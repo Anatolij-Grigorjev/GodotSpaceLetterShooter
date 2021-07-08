@@ -123,6 +123,7 @@ static func parseJSONSceneSpec(sceneSpecJSON: Dictionary) -> SceneSpec:
 	spec.id = sceneSpecJSON.id
 	spec.type = sceneSpecJSON.type
 	spec.sceneName = sceneSpecJSON.name
+	spec.wordsCorpusPath = sceneSpecJSON.get('wordsCorpusPath', "")
 	spec.sceneBgColor = parseJSONColor(sceneSpecJSON.bgColor)
 	spec.smallestShipsWave = sceneSpecJSON.minShipsWave
 	spec.largestShipsWave = sceneSpecJSON.maxShipsWave
@@ -164,3 +165,10 @@ static func getFirst(arr: Array):
 	if (arr == null or arr.empty()):
 		return null
 	return arr[0] 
+	
+	
+"""
+Check if a given string is null or empty
+"""
+static func isEmptyString(string: String) -> bool:
+	return string == null or string.empty()

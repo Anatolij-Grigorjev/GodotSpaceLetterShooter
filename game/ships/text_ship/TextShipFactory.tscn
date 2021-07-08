@@ -18,4 +18,3 @@ pathBoundsHorizMargins = Vector2( 150, 150 )
 
 [node name="WordsProvider" type="Node" parent="."]
 script = ExtResource( 3 )
-filePath = "res://corpus.txt"

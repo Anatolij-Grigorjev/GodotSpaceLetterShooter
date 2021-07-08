@@ -41,6 +41,7 @@ func _process(delta: float):
 	
 
 func setSceneSpecificaion(spec: SceneSpec):
+	$TextShipFactory.setShipsWordsCorpusPath(spec.wordsCorpusPath)
 	get_node("ShipSceneStateMachine").sceneSpecification = spec
 	
 
