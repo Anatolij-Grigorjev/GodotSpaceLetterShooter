@@ -10,7 +10,7 @@ const CURSOR_SCENE_SELECTED = preload("res://white_rect.png")
 
 
 export(bool) var sceneDone: bool = false setget markSceneDone
-export(int) var sceneCorpusSize: int = 0 setget setCorpusSize
+export(String) var sceneCorpusSource: String = "corpus_path.txt" setget setCorpusPath
 
 
 onready var anim: AnimationPlayer = $AnimationPlayer
@@ -41,12 +41,17 @@ func markSceneDone(done: bool):
 		$OuterMargin/VBoxContainer/SceneTitle/SceneDoneMarker.visible = done
 	if ($LevelDoneOutline):
 		$LevelDoneOutline.visible = done
+	if ($OuterMargin/VBoxContainer/CorpusTextContainer):
+		$OuterMargin/VBoxContainer/CorpusTextContainer.modulate = Color.black if done else Color.white
 		
 		
-func setCorpusSize(newSize: int):
-	sceneCorpusSize = newSize
-	if ($OuterMargin/VBoxContainer/CorpusTextContainer/CorpusSizeValueLbl):
-		$OuterMargin/VBoxContainer/CorpusTextContainer/CorpusSizeValueLbl.text = "<%d>" % newSize
+func setCorpusPath(path: String):
+	if (not Utils.isEmptyString(path)):
+		sceneCorpusSource = path
+	else:
+		sceneCorpusSource = GameConfig.DEFAULT_WORDS_CORPUS_PATH
+	if ($OuterMargin/VBoxContainer/CorpusTextContainer/CorpusPathValueLbl):
+		$OuterMargin/VBoxContainer/CorpusTextContainer/CorpusPathValueLbl.text = "'%s'" % sceneCorpusSource
 	
 	
 func _process(delta):
@@ -64,6 +69,7 @@ func setData(sceneSpec: SceneSpec):
 		sceneSpec.smallestShipsWave,
 		sceneSpec.largestShipsWave
 	]
+	setCorpusPath(sceneSpec.wordsCorpusPath)
 	self_modulate = sceneSpec.sceneBgColor
 	var categorizedTypeCountsByRowNode = _categorizeAllowedShipTypes(sceneSpec.allowedShipsTypes)
 	for rowNode in categorizedTypeCountsByRowNode:

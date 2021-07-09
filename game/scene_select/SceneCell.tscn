@@ -398,42 +398,26 @@ margin_bottom = 320.0
 
 [node name="CorpusLbl" type="Label" parent="OuterMargin/VBoxContainer/CorpusTextContainer"]
 modulate = Color( 0.839216, 0.960784, 0.0313726, 1 )
-margin_right = 134.0
+margin_right = 112.0
 margin_bottom = 19.0
-size_flags_horizontal = 3
 size_flags_vertical = 1
-size_flags_stretch_ratio = 2.0
 custom_styles/normal = SubResource( 8 )
-text = "corpus size "
+text = "corpus source:  "
 align = 2
 valign = 1
 __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="CorpusSizeValueLbl" type="Label" parent="OuterMargin/VBoxContainer/CorpusTextContainer"]
+[node name="CorpusPathValueLbl" type="Label" parent="OuterMargin/VBoxContainer/CorpusTextContainer"]
 modulate = Color( 0.839216, 0.960784, 0.0313726, 1 )
-margin_left = 138.0
-margin_right = 172.0
-margin_bottom = 19.0
-size_flags_vertical = 1
-custom_styles/normal = SubResource( 8 )
-text = "<0>"
-valign = 1
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="CorpusSizeWordsLbl" type="Label" parent="OuterMargin/VBoxContainer/CorpusTextContainer"]
-modulate = Color( 0.839216, 0.960784, 0.0313726, 1 )
-margin_left = 176.0
+margin_left = 116.0
 margin_right = 310.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-size_flags_stretch_ratio = 2.0
 custom_styles/normal = SubResource( 8 )
-text = "word(-s)"
+text = "'corpus_path.txt'"
 valign = 1
 __meta__ = {
 "_editor_description_": ""

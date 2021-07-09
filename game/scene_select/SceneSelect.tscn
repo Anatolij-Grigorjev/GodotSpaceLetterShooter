@@ -17,6 +17,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+minNumberScenes = 8
 
 [node name="SpaceBG" type="TextureRect" parent="."]
 self_modulate = Color( 0, 0, 0, 1 )

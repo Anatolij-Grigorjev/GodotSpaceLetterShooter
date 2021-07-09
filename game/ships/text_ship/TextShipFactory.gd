@@ -4,7 +4,6 @@ Facility creates and configures text ship instances in a
 background thread to make them ready for next wave participation
 """
 const TextShipScn = preload("res://ships/text_ship/TextShip.tscn")
-const DEFAULT_WORDS_CORPUS_PATH = "corpus.txt"
 
 export(bool) var printDebug: bool = false
 
@@ -16,8 +15,8 @@ onready var wordsProvider: WordsProvider = $WordsProvider
 func setShipsWordsCorpusPath(filePath: String):
 	var corpusResourcePath = "res://"
 	if (Utils.isEmptyString(filePath)):
-		corpusResourcePath += DEFAULT_WORDS_CORPUS_PATH
-		print("No corpus file supplied, using default '%s'..." % DEFAULT_WORDS_CORPUS_PATH)
+		corpusResourcePath += GameConfig.DEFAULT_WORDS_CORPUS_PATH
+		print("No corpus file supplied, using default '%s'..." % GameConfig.DEFAULT_WORDS_CORPUS_PATH)
 	else:
 		corpusResourcePath += filePath
 	print("Using corpus path '%s'..." % corpusResourcePath)
