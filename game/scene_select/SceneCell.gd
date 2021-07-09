@@ -10,6 +10,7 @@ const CURSOR_SCENE_SELECTED = preload("res://white_rect.png")
 
 
 export(bool) var sceneDone: bool = false setget markSceneDone
+export(int) var sceneCorpusSize: int = 0 setget setCorpusSize
 
 
 onready var anim: AnimationPlayer = $AnimationPlayer
@@ -40,6 +41,12 @@ func markSceneDone(done: bool):
 		$OuterMargin/VBoxContainer/SceneTitle/SceneDoneMarker.visible = done
 	if ($LevelDoneOutline):
 		$LevelDoneOutline.visible = done
+		
+		
+func setCorpusSize(newSize: int):
+	sceneCorpusSize = newSize
+	if ($OuterMargin/VBoxContainer/CorpusTextContainer/CorpusSizeValueLbl):
+		$OuterMargin/VBoxContainer/CorpusTextContainer/CorpusSizeValueLbl.text = "<%d>" % newSize
 	
 	
 func _process(delta):
