@@ -25,6 +25,9 @@ onready var thrusterRight: Particles2D = $Thrusters/ThrusterRight
 onready var thrustersAudio: AudioStreamPlayer = $Thrusters/AudioStreamPlayer2D
 
 
+var shipHasShield: bool = false
+
+
 var actionWeights := {}
 
 func _ready():
@@ -51,7 +54,7 @@ func prepare(text: String, startPosition: Vector2, shipPath: Array, limiters: Sc
 	speed = limiters.shipSpeed
 	$Sprite/ShipBubble.setInitialHitPoints(limiters.shieldHitPoints)
 	_setupShieldHitsBar(limiters.shieldHitPoints)
-	var shipHasShield := limiters.shieldHitPoints > 0
+	shipHasShield = limiters.shieldHitPoints > 0
 	var shipWillShoot := limiters.shootInclination > 0
 	actionWeights = {
 		"Idling": (1 if shipWillShoot or not shipHasShield else 0),

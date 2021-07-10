@@ -107,6 +107,7 @@ func _getNextIdlingState() -> String:
 	
 	
 func _onEntityBubbleBurst():
+	entity.shipHasShield = false
 	idlingActionsWeights.disableItem("IdlingBubble")
 	if idlingActionsWeights.isItemDisabled("Idling"):
 		idlingActionsWeights.setItemWeight("Idling", 1)
