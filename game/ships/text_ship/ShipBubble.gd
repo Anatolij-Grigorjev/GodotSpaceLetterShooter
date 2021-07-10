@@ -43,12 +43,13 @@ func _on_Area2D_area_entered(area: Area2D):
 	var areaOwner: Node2D = area.get_parent()
 	if (areaOwner.is_in_group("projectile")):
 		var collideProjectile = areaOwner
-		_hitBubble()
+		#hit bubble for half the received word length
+		_hitBubble(collideProjectile.getText().length() / 2)
 			
 			
-func _hitBubble():
-	bubbleHitsCurrent += 1
-	var hitsRemaining = bubbleMaxHits - bubbleHitsCurrent
+func _hitBubble(hitsReceived: int):
+	bubbleHitsCurrent += hitsReceived
+	var hitsRemaining = max(0, bubbleMaxHits - bubbleHitsCurrent)
 	emit_signal("bubbleHit", hitsRemaining)
 	if (hitsRemaining > 0):
 		_bubbleHitForAnimation("hit")

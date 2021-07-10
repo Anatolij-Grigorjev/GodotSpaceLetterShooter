@@ -89,7 +89,7 @@ func _on_Area2D_area_entered(area: Area2D):
 			return
 		var collideProjectile = areaOwner
 		if (entity.projectileHitText(collideProjectile)):
-			var payload: String = collideProjectile.label.text
+			var payload: String = collideProjectile.getText()
 			if (entity.currentText.length() > payload.length()):
 				hitChars = payload.length()
 				collisionNextState = "Hit"

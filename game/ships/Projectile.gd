@@ -16,10 +16,6 @@ onready var area: Area2D = $Area2D
 
 
 var hadCollision: bool = false
-
-
-func _ready():
-	pass
 	
 
 
@@ -38,7 +34,7 @@ func _on_Area2D_area_entered(area: Area2D):
 		return
 	if (areaOwner.is_in_group("projectile")):
 		speed = 0.0
-		emit_signal("projectileDestroyed", label.text)
+		emit_signal("projectileDestroyed", getText())
 	$AnimationPlayer.play("collide")
 
 
@@ -50,7 +46,11 @@ func _on_VisibilityNotifier2D_screen_exited():
 	
 	
 func nextTextIs(text: String) -> bool:
-	return label.text.begins_with(text)
+	return getText().begins_with(text)
+	
+	
+func getText() -> String:
+	return label.text if is_instance_valid(label) else ""
 	
 	
 func _slowDown():

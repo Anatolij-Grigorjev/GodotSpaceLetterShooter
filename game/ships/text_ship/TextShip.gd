@@ -109,7 +109,7 @@ func lockTarget():
 	
 	
 func projectileHitText(projectile: Node2D) -> bool:
-	var payload: String = projectile.label.text
+	var payload: String = projectile.getText()
 	return not payload.empty() and nextTextIs(payload)
 	
 	
