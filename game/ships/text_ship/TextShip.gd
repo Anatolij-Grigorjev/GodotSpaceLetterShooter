@@ -97,12 +97,14 @@ func _setAsTarget(isTarget: bool):
 	isTargeted = isTarget
 	if ($Sprite/Target and isTargeted):
 		$Sprite/Target.lockin()
+		_animateTargetIfInputTextExactMatch()
 	elif ($Sprite/Target):
 		$Sprite/Target.lockout()
 			
 			
 func _pulseTarget(letter: String):
 	$Sprite/Target.pulse()
+	_animateTargetIfInputTextExactMatch()
 		
 		
 		
@@ -129,3 +131,9 @@ func _adjustRemainingShieldHits(hitsRemaining: int):
 	$Sprite/ShipBubble/HitsBar.visible = false
 	if (hitsRemaining <= 0):
 		$Sprite/ShipBubble/HitsBar.visible = false
+		
+
+func _animateTargetIfInputTextExactMatch():
+	var inputText: String = get_tree().get_nodes_in_group("input")[0].label.text
+	if (inputText == getCurrentText()):
+		$Sprite/Target.anim.play("exact_match")

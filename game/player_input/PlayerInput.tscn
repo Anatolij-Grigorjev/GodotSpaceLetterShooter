@@ -8,8 +8,9 @@
 [ext_resource path="res://player_input/type_key1.wav" type="AudioStream" id=6]
 [ext_resource path="res://player_input/type_key5.wav" type="AudioStream" id=7]
 
-
-[node name="PlayerInput" type="Control"]
+[node name="PlayerInput" type="Control" groups=[
+"input",
+]]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
