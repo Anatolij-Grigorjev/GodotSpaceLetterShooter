@@ -97,14 +97,16 @@ func _setAsTarget(isTarget: bool):
 	isTargeted = isTarget
 	if ($Sprite/Target and isTargeted):
 		$Sprite/Target.lockin()
-		_animateTargetIfInputTextExactMatch()
+		if (not shipHasShield):
+			_animateTargetIfInputTextExactMatch()
 	elif ($Sprite/Target):
 		$Sprite/Target.lockout()
 			
 			
 func _pulseTarget(letter: String):
 	$Sprite/Target.pulse()
-	_animateTargetIfInputTextExactMatch()
+	if (not shipHasShield):
+		_animateTargetIfInputTextExactMatch()
 		
 		
 		
