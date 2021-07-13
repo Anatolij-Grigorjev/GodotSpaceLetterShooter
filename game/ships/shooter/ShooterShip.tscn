@@ -8,9 +8,10 @@
 [ext_resource path="res://ships/shooter/shot_miss.wav" type="AudioStream" id=6]
 [ext_resource path="res://ships/shooter/shot_hit.wav" type="AudioStream" id=7]
 [ext_resource path="res://ships/shooter/shooter_engine.wav" type="AudioStream" id=8]
-[ext_resource path="res://blur_sprite_shader.shader" type="Shader" id=9]
+[ext_resource path="res://shaders/blur_sprite_shader.shader" type="Shader" id=9]
 [ext_resource path="res://ships/shooter/shooter_engine_transition.wav" type="AudioStream" id=10]
-[ext_resource path="res://sprite_color_shader.shader" type="Shader" id=11]
+[ext_resource path="res://shaders/sprite_color_shader.shader" type="Shader" id=11]
+
 
 [sub_resource type="ShaderMaterial" id=21]
 shader = ExtResource( 11 )

@@ -2,14 +2,14 @@
 
 [ext_resource path="res://ships/text_ship/shooter_crosshair.png" type="Texture" id=1]
 [ext_resource path="res://ships/text_ship/Target.gd" type="Script" id=2]
-[ext_resource path="res://glow_sprite.shader" type="Shader" id=3]
+[ext_resource path="res://shaders/glow_sprite.shader" type="Shader" id=3]
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
 shader_param/radius = 4.0
 shader_param/amount = 0.0
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=2]
 resource_name = "exact_match"
 loop = true
 tracks/0/type = "value"
@@ -85,8 +85,7 @@ tracks/5/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 0.819608, 0.0666667, 0.0666667, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "lock-in"
+[sub_resource type="Animation" id=3]
 length = 0.25
 step = 0.05
 tracks/0/type = "value"
@@ -138,8 +137,7 @@ tracks/3/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "lock-out"
+[sub_resource type="Animation" id=4]
 length = 0.2
 step = 0.05
 tracks/0/type = "value"
@@ -191,8 +189,7 @@ tracks/3/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "spin"
+[sub_resource type="Animation" id=5]
 length = 2.5
 loop = true
 tracks/0/type = "value"
@@ -209,15 +206,15 @@ tracks/0/keys = {
 }
 
 [node name="Target" type="Sprite"]
-material = SubResource( 4 )
+material = SubResource( 1 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/exact_match = SubResource( 5 )
-anims/lock-in = SubResource( 1 )
-anims/lock-out = SubResource( 2 )
-anims/spin = SubResource( 3 )
+anims/exact_match = SubResource( 2 )
+anims/lock-in = SubResource( 3 )
+anims/lock-out = SubResource( 4 )
+anims/spin = SubResource( 5 )
 next/lock-in = "spin"
 
 [node name="Tween" type="Tween" parent="."]
