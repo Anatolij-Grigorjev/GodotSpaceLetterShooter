@@ -43,8 +43,9 @@ func _on_Area2D_area_entered(area: Area2D):
 	var areaOwner: Node2D = area.get_parent()
 	if (areaOwner.is_in_group("projectile")):
 		var collideProjectile = areaOwner
-		#hit bubble for half the received word length
-		_hitBubble(collideProjectile.getText().length() / 2)
+		#hit bubble for half the received word length (at least 1)
+		var hitsReceived = max(1, collideProjectile.getText().length() / 2)
+		_hitBubble(hitsReceived)
 			
 			
 func _hitBubble(hitsReceived: int):
