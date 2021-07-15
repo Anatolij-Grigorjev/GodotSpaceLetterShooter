@@ -26,6 +26,7 @@ onready var tween: Tween = $Tween
 
 
 var chamber: String = ""
+var shipHit = false
 
 
 func _ready():
@@ -33,10 +34,14 @@ func _ready():
 	
 	
 func chamberLetter(letter: String):
+	if (shipHit):
+		return
 	chamber += letter
 	
 	
 func addSpoke(letter: String):
+	if (shipHit):
+		return
 	var spoke = SpokeScn.instance()
 	spoke.allowedRotationRange = Vector2(150, 210)
 	spoke.scale = Vector2(0.1, 3)
@@ -48,6 +53,8 @@ func addSpoke(letter: String):
 	
 	
 func faceShootable(shootable: Node2D) -> void:
+	if (shipHit):
+		return
 	var myPosition: Vector2 = global_position
 	var shootablePosition: Vector2 = shootable.global_position
 	
@@ -62,6 +69,8 @@ func faceShootable(shootable: Node2D) -> void:
 	
 	
 func tryFireAt(target: Node2D):
+	if (shipHit):
+		return
 	if (not chamber.empty() and is_instance_valid(target)):
 		fireChambered(target)
 		if "isTargeted" in target:
@@ -71,6 +80,8 @@ func tryFireAt(target: Node2D):
 
 
 func fireChambered(shootable: Node2D) -> void:
+	if (shipHit):
+		return
 	anim.play("shoot")
 	var projectile = projectileScene.instance()
 	projectile.global_position = shotPosition.global_position
@@ -106,8 +117,12 @@ func _on_Area2D_area_entered(area: Area2D):
 	var areaOwner: Node2D = area.get_parent()
 	if (areaOwner.is_in_group("projectile")):
 		emit_signal("shooterHitByShot", areaOwner)
+		shipHit = true
 		anim.play("hit")
 		emptyChamber()
+		yield(anim, "animation_finished")
+		shipHit = false
+		
 	
 		
 		
