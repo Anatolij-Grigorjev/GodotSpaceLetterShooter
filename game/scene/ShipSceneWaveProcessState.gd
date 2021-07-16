@@ -3,9 +3,6 @@ class_name ShipSceneWaveProcessState
 """
 State to hold and use logic of ongoing wave in scene
 """
-
-
-
 var liveWaveShips: int = 0
 var waveOver: bool = false
 var latestKeyInputEvent: InputEventKey
@@ -73,7 +70,7 @@ func _processLatestKey() -> void:
 	if (is_instance_valid(shootableWithLetter)):
 		entity.shooter.faceShootable(shootableWithLetter)
 	if (specialCodeToggles.fireChambered):
-		entity.shooter.tryFireAt(shootableWithLetter)
+		entity.emit_signal("fireCodeTyped", shootableWithLetter)
 	latestKeyInputEvent = null
 	
 

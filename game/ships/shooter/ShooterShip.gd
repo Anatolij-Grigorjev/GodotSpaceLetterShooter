@@ -3,8 +3,6 @@ extends Node2D
 Controller for ship that shoots projectiles 
 while player is typing for the illusion of a dogfight
 """
-const SpokeScn = preload("res://ships/shooter/VisibleSpoke.tscn")
-
 const ROTATE_RADS_PER_SEC = 3
 
 enum Side {
@@ -23,6 +21,7 @@ export(int, LAYERS_2D_PHYSICS) var projectileCollisionMask: int = 0
 onready var shotPosition: Position2D = $Sprite/ShotPosition
 onready var anim: AnimationPlayer = $AnimationPlayer
 onready var tween: Tween = $Tween
+onready var fsm: StateMachine = $ShooterShipStateMachine
 
 
 var chamber: String = ""
@@ -33,28 +32,7 @@ func _ready():
 	emptyChamber()
 	
 	
-func chamberLetter(letter: String):
-	if (shipHit):
-		return
-	chamber += letter
-	
-	
-func addSpoke(letter: String):
-	if (shipHit):
-		return
-	var spoke = SpokeScn.instance()
-	spoke.allowedRotationRange = Vector2(150, 210)
-	spoke.scale = Vector2(0.1, 3)
-	spoke.offset = Vector2(0, 50)
-	spoke.visible = false
-	
-	$Sprite.add_child(spoke)
-	spoke.showSpoke()
-	
-	
 func faceShootable(shootable: Node2D) -> void:
-	if (shipHit):
-		return
 	var myPosition: Vector2 = global_position
 	var shootablePosition: Vector2 = shootable.global_position
 	
@@ -66,35 +44,6 @@ func faceShootable(shootable: Node2D) -> void:
 	
 	if "isTargeted" in shootable:
 		shootable.isTargeted = true
-	
-	
-func tryFireAt(target: Node2D):
-	if (shipHit):
-		return
-	if (not chamber.empty() and is_instance_valid(target)):
-		fireChambered(target)
-		if "isTargeted" in target:
-			target.lockTarget()
-	else:
-		missFire()
-
-
-func fireChambered(shootable: Node2D) -> void:
-	if (shipHit):
-		return
-	anim.play("shoot")
-	var projectile = projectileScene.instance()
-	projectile.global_position = shotPosition.global_position
-	projectile.fireDirection = global_position.direction_to(shootable.global_position)
-	_configureShooterShipProjectile(projectile)
-	projectile.get_node("Label").text = chamber
-	emit_signal("shotFired", projectile)
-	emptyChamber()
-	
-	
-func missFire():
-	anim.play("jam")
-	emptyChamber()
 	
 	
 func emptyChamber():
@@ -111,22 +60,3 @@ func resetRotationTween():
 	tween.start()
 	yield(tween, "tween_all_completed")
 	tween.remove_all()
-
-
-func _on_Area2D_area_entered(area: Area2D):
-	var areaOwner: Node2D = area.get_parent()
-	if (areaOwner.is_in_group("projectile")):
-		emit_signal("shooterHitByShot", areaOwner)
-		shipHit = true
-		anim.play("hit")
-		emptyChamber()
-		yield(anim, "animation_finished")
-		shipHit = false
-		
-	
-		
-		
-func _configureShooterShipProjectile(projectile: Node2D):
-	projectile.get_node("Sprite").modulate = Color.lightblue
-	projectile.get_node("Area2D").collision_mask = projectileCollisionMask
-	projectile.get_node("Area2D").collision_layer = 0

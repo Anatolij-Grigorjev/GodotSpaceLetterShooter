@@ -6,6 +6,7 @@ and bottom ship shoots the descenders based on text
 signal sceneCleared(sceneSpecId)
 signal sceneFailed(sceneSpecId)
 signal letterTyped(letter)
+signal fireCodeTyped(lockedTarget)
 
 
 export(float) var screenScrollSpeed = 300

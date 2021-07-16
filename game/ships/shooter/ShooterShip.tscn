@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://ships/shooter/shooting_ship.png" type="Texture" id=1]
 [ext_resource path="res://ships/shooter/ShooterShip.gd" type="Script" id=2]
@@ -11,11 +11,15 @@
 [ext_resource path="res://shaders/blur_sprite_shader.shader" type="Shader" id=9]
 [ext_resource path="res://ships/shooter/shooter_engine_transition.wav" type="AudioStream" id=10]
 [ext_resource path="res://shaders/sprite_color_shader.shader" type="Shader" id=11]
+[ext_resource path="res://ships/shooter/ShooterShipStateMachine.gd" type="Script" id=12]
+[ext_resource path="res://fsm/AnimationState.gd" type="Script" id=13]
+[ext_resource path="res://ships/shooter/ShooterShipPreparingState.gd" type="Script" id=14]
+[ext_resource path="res://ships/shooter/ShooterShipShootingState.gd" type="Script" id=15]
+[ext_resource path="res://ships/shooter/ShooterShipLeavingState.gd" type="Script" id=16]
 
 [sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 11 )
-shader_param/modulate = Color( 0.819608, 0.0666667, 0.0666667, 1 )
-shader_param/mix_coef = 0.0
+shader = ExtResource( 9 )
+shader_param/radius = 0.0
 
 [sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0.514815, 1 )
@@ -489,6 +493,28 @@ script = ExtResource( 2 )
 projectileScene = ExtResource( 3 )
 projectileCollisionMask = 2
 
+[node name="ShooterShipStateMachine" type="Node" parent="."]
+script = ExtResource( 12 )
+
+[node name="Appearing" type="Node" parent="ShooterShipStateMachine"]
+script = ExtResource( 13 )
+animatorPath = NodePath("../../AnimationPlayer")
+animationName = "arrive"
+
+[node name="Preparing" type="Node" parent="ShooterShipStateMachine"]
+script = ExtResource( 14 )
+
+[node name="Shooting" type="Node" parent="ShooterShipStateMachine"]
+script = ExtResource( 15 )
+
+[node name="Hit" type="Node" parent="ShooterShipStateMachine"]
+script = ExtResource( 13 )
+animatorPath = NodePath("../../AnimationPlayer")
+animationName = "hit"
+
+[node name="Leaving" type="Node" parent="ShooterShipStateMachine"]
+script = ExtResource( 16 )
+
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 1 )
 rotation = 18.8496
@@ -584,4 +610,4 @@ anims/shoot = SubResource( 19 )
 anims/transition_wave = SubResource( 20 )
 
 [node name="Tween" type="Tween" parent="."]
-[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="area_entered" from="Area2D" to="ShooterShipStateMachine" method="_on_Area2D_area_entered"]
