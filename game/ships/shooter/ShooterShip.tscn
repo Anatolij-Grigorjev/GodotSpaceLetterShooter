@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://ships/shooter/shooting_ship.png" type="Texture" id=1]
 [ext_resource path="res://ships/shooter/ShooterShip.gd" type="Script" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://ships/shooter/ShooterShipShootingState.gd" type="Script" id=15]
 [ext_resource path="res://ships/shooter/ShooterShipLeavingState.gd" type="Script" id=16]
 [ext_resource path="res://ships/shooter/ShooterShipHitState.gd" type="Script" id=17]
+[ext_resource path="res://components/StateLabel.tscn" type="PackedScene" id=18]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 9 )
@@ -611,4 +612,11 @@ anims/shoot = SubResource( 19 )
 anims/transition_wave = SubResource( 20 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="StateLabel" parent="." instance=ExtResource( 18 )]
+margin_left = -63.1108
+margin_top = -73.1511
+margin_right = 65.8892
+margin_bottom = -57.1511
+sourceFSM = NodePath("../ShooterShipStateMachine")
 [connection signal="area_entered" from="Area2D" to="ShooterShipStateMachine" method="_on_Area2D_area_entered"]
