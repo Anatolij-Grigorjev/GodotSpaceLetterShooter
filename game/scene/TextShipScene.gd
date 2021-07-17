@@ -23,12 +23,10 @@ onready var playerInput = $CanvasLayer/PlayerInput
 onready var musicControl = $CanvasLayer/MusicControl
 onready var shipsFactory = $TextShipFactory
 onready var fsm: ShipSceneStateMachine = $ShipSceneStateMachine
-onready var stateLabel: Label = $CanvasLayer/StateLabel
 
 
 func _ready():
 	randomize()
-	Utils.tryConnect(fsm, "stateChanged", self, "_fsmStateChanged")
 	call_deferred("_bindSceneStats")
 	
 	
@@ -97,8 +95,3 @@ func _findBGAnimator() -> AnimationPlayer:
 		if (animator):
 			return animator
 	return null
-	
-	
-
-func _fsmStateChanged(oldState: String, newState: String):
-	stateLabel.text = "state: [%s] -> [%s]" % [oldState, newState]

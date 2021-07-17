@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://space_music_bg.wav" type="AudioStream" id=1]
 [ext_resource path="res://scene/TextShipScene.gd" type="Script" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://scene/ShipSceneEndState.gd" type="Script" id=12]
 [ext_resource path="res://components/ScreenShake.tscn" type="PackedScene" id=13]
 [ext_resource path="res://FreezeFrame.tscn" type="PackedScene" id=14]
+[ext_resource path="res://components/StateLabel.tscn" type="PackedScene" id=15]
 
 [sub_resource type="Animation" id=1]
 resource_name = "show_title"
@@ -142,20 +143,12 @@ margin_right = 75.0
 margin_bottom = -25.0
 music = ExtResource( 1 )
 
-[node name="StateLabel" type="Label" parent="CanvasLayer"]
-anchor_top = 1.00069
-anchor_bottom = 1.00069
-margin_left = 140.341
-margin_top = -55.9446
-margin_right = 280.341
-margin_bottom = -41.9446
-text = "STATE: <NO_STATE> -> <NO_STATE>"
-align = 1
-valign = 1
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="StateLabel" parent="CanvasLayer" instance=ExtResource( 15 )]
+margin_left = 134.621
+margin_top = 660.37
+margin_right = 263.621
+margin_bottom = 676.37
+sourceFSM = NodePath("../../ShipSceneStateMachine")
 
 [node name="TextShipFactory" parent="." instance=ExtResource( 5 )]
 
