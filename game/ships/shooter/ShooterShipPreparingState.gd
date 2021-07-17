@@ -30,5 +30,5 @@ func _addSpoke():
 	spoke.offset = Vector2(0, 50)
 	spoke.visible = false
 	
-	$Sprite.add_child(spoke)
+	entity.sprite.add_child(spoke)
 	spoke.showSpoke()

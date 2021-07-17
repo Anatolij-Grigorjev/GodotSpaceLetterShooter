@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://ships/shooter/shooting_ship.png" type="Texture" id=1]
 [ext_resource path="res://ships/shooter/ShooterShip.gd" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://ships/shooter/ShooterShipPreparingState.gd" type="Script" id=14]
 [ext_resource path="res://ships/shooter/ShooterShipShootingState.gd" type="Script" id=15]
 [ext_resource path="res://ships/shooter/ShooterShipLeavingState.gd" type="Script" id=16]
+[ext_resource path="res://ships/shooter/ShooterShipHitState.gd" type="Script" id=17]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 9 )
@@ -508,7 +509,7 @@ script = ExtResource( 14 )
 script = ExtResource( 15 )
 
 [node name="Hit" type="Node" parent="ShooterShipStateMachine"]
-script = ExtResource( 13 )
+script = ExtResource( 17 )
 animatorPath = NodePath("../../AnimationPlayer")
 animationName = "hit"
 

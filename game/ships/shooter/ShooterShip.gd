@@ -21,6 +21,7 @@ export(int, LAYERS_2D_PHYSICS) var projectileCollisionMask: int = 0
 onready var shotPosition: Position2D = $Sprite/ShotPosition
 onready var anim: AnimationPlayer = $AnimationPlayer
 onready var tween: Tween = $Tween
+onready var sprite: Sprite = $Sprite
 onready var fsm: StateMachine = $ShooterShipStateMachine
 
 

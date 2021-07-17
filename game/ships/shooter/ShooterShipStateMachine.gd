@@ -5,7 +5,7 @@ FSM for handling states of shooter ship
 """
 
 var collisionNextState: String = NO_STATE
-var shipNextTarget = null
+var shootingPressed: bool = false
 
 func _ready():
 	entity.emptyChamber()
@@ -26,9 +26,8 @@ func _getNextState(delta: float) -> String:
 			else:
 				return NO_STATE
 		"Preparing":
-			if (shipNextTarget != null):
-				getState("Shooting").shotTarget = shipNextTarget
-				shipNextTarget = null
+			if (shootingPressed):
+				shootingPressed = false
 				return "Shooting"
 			return NO_STATE
 		"Shooting":
@@ -52,17 +51,18 @@ func _getNextState(delta: float) -> String:
 			
 			
 func sceneLetterTyped(letter: String):
-	getState('Preparing').letterTyped(letter)
+	if (state == 'Preparing'):
+		getState(state).letterTyped(letter)
 	
 	
 func sceneFireCodeTyped(shootableTarget):
-	shipNextTarget = shootableTarget
+	getState('Shooting').shotTarget = shootableTarget
+	shootingPressed = true
 		
 	
 func _on_Area2D_area_entered(area: Area2D):
 	var areaOwner: Node2D = area.get_parent()
 	if (areaOwner.is_in_group("projectile")):
-		emit_signal("shooterHitByShot", areaOwner)
-		entity.emptyChamber()
+		getState('Hit').hitShot = areaOwner
 		collisionNextState = "Hit"
 		
