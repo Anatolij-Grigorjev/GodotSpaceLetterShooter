@@ -619,4 +619,5 @@ margin_top = -73.1511
 margin_right = 65.8892
 margin_bottom = -57.1511
 sourceFSM = NodePath("../ShooterShipStateMachine")
+showPrevStateTimeout = 0.75
 [connection signal="area_entered" from="Area2D" to="ShooterShipStateMachine" method="_on_Area2D_area_entered"]

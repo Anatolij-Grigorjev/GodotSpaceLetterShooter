@@ -149,6 +149,7 @@ margin_top = 660.37
 margin_right = 263.621
 margin_bottom = 676.37
 sourceFSM = NodePath("../../ShipSceneStateMachine")
+showPrevStateTimeout = 2.0
 
 [node name="TextShipFactory" parent="." instance=ExtResource( 5 )]
 
