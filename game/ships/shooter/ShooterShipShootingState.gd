@@ -38,7 +38,7 @@ func fireChambered(shootable: Node2D) -> void:
 	projectile.fireDirection = entity.global_position.direction_to(shootable.global_position)
 	_configureShooterShipProjectile(projectile)
 	projectile.get_node("Label").text = entity.chamber
-	emit_signal("shotFired", projectile)
+	entity.emit_signal("shotFired", projectile)
 	entity.emptyChamber()
 	
 	

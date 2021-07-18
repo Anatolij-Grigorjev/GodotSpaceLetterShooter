@@ -9,6 +9,7 @@ var shootingPressed: bool = false
 
 func _ready():
 	entity.emptyChamber()
+	call_deferred("setState", 'Appearing')
 	
 	
 func _getNextState(delta: float) -> String:
