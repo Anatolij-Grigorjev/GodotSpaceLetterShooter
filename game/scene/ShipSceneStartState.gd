@@ -11,11 +11,8 @@ func enterState(prevState: String):
 	
 	assert(fsm.sceneSpecification)
 	
-	Utils.tryConnect(entity, "sceneCleared", Scenes, "_onSceneCleared")
-	Utils.tryConnect(entity, "sceneFailed", Scenes, "_onSceneFailed")
-	
 	Utils.tryConnect(entity, "letterTyped", entity.playerInput, "addTypedLetter")
-	Utils.tryConnect(entity, "letterTyped", entity.shooter.fsm, "sceneLetterTyped")
+	Utils.tryConnect(entity, "letterTyped", entity.shooter.fsm.getState('Preparing'), "letterTyped")
 	Utils.tryConnect(entity, "fireCodeTyped", entity.shooter.fsm, "sceneFireCodeTyped")
 	
 	Utils.tryConnect(entity.shooter, "shotFired", fsm, "_onShipShotFired")

@@ -3,8 +3,6 @@ extends Node2D
 Scene where text ships descend while player types 
 and bottom ship shoots the descenders based on text
 """
-signal sceneCleared(sceneSpecId)
-signal sceneFailed(sceneSpecId)
 signal letterTyped(letter)
 signal fireCodeTyped(lockedTarget)
 

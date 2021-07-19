@@ -49,11 +49,6 @@ func _getNextState(delta: float) -> String:
 		_: 
 			breakpoint
 			return NO_STATE
-			
-			
-func sceneLetterTyped(letter: String):
-	if (state == 'Preparing'):
-		getState(state).letterTyped(letter)
 	
 	
 func sceneFireCodeTyped(shootableTarget):
