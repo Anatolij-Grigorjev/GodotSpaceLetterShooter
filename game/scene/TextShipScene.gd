@@ -25,6 +25,13 @@ onready var fsm: ShipSceneStateMachine = $ShipSceneStateMachine
 
 func _ready():
 	randomize()
+	
+	Utils.tryConnect(shooter, "shotFired", fsm, "_onShipShotFired")
+	Utils.tryConnect(shooter, "chamberEmptied", playerInput, "clearText")
+	Utils.tryConnect(shooter, "chamberEmptied", self, "_onShooterClearChamber")
+	Utils.tryConnect(shooter, "hyperspeedToggled", self, "_onShooterToggleHyperspeed")
+	Utils.tryConnect(shooter, "shooterHitByShot", self, "_onShooterHitByShot")
+	
 	call_deferred("_bindSceneStats")
 	
 	
