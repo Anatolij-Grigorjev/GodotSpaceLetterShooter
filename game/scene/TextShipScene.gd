@@ -83,8 +83,8 @@ func _onShooterToggleHyperspeed():
 		#less violent shake for fly part
 		shaker.beginShake(endWaveWaitTime + remainingFlyTime, 10, 15, 1)
 	else:
-		#non-violent shake on deacceleration from hyperness
-		shaker.beginShake(hyperSpeedAnimation.length, 10, 15, 2)
+		#quick non-violent shakes on deacceleration from hyperness
+		shaker.beginShake(hyperSpeedAnimation.length, 20, 10, 2)
 		animator.play_backwards(hyperSpeedAnimKey)
 
 
