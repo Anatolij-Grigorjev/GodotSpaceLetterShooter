@@ -9,7 +9,6 @@ var shootingPressed: bool = false
 
 func _ready():
 	entity.emptyChamber()
-	call_deferred("setState", 'Appearing')
 	
 	
 func _getNextState(delta: float) -> String:
@@ -20,7 +19,7 @@ func _getNextState(delta: float) -> String:
 		return nextState
 	
 	match (state):
-		"Appearing":
+		"StartingWave":
 			var appearingState = getState(state)
 			if (appearingState.animationFinished):
 				return "Preparing"
@@ -43,6 +42,8 @@ func _getNextState(delta: float) -> String:
 				return "Preparing"
 			else:
 				return NO_STATE
+		"LeavingWave":
+			return NO_STATE
 		"Leaving":
 			
 			return NO_STATE
