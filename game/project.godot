@@ -124,6 +124,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ships/shooter/ShooterShipLeavingState.gd"
 }, {
+"base": "AnimationState",
+"class": "ShooterShipLeavingWaveState",
+"language": "GDScript",
+"path": "res://ships/shooter/ShooterShipLeavingWaveState.gd"
+}, {
 "base": "State",
 "class": "ShooterShipPreparingState",
 "language": "GDScript",
@@ -208,6 +213,7 @@ _global_script_class_icons={
 "ShipSceneWaveStartState": "",
 "ShooterShipHitState": "",
 "ShooterShipLeavingState": "",
+"ShooterShipLeavingWaveState": "",
 "ShooterShipPreparingState": "",
 "ShooterShipShootingState": "",
 "ShooterShipStartingWaveState": "",

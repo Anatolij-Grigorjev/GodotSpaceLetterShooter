@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://ships/shooter/shooting_ship.png" type="Texture" id=1]
 [ext_resource path="res://ships/shooter/ShooterShip.gd" type="Script" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://ships/shooter/ShooterShipLeavingState.gd" type="Script" id=16]
 [ext_resource path="res://ships/shooter/ShooterShipHitState.gd" type="Script" id=17]
 [ext_resource path="res://components/StateLabel.tscn" type="PackedScene" id=18]
+[ext_resource path="res://ships/shooter/ShooterShipLeavingWaveState.gd" type="Script" id=19]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 9 )
@@ -513,6 +514,11 @@ script = ExtResource( 15 )
 script = ExtResource( 17 )
 animatorPath = NodePath("../../AnimationPlayer")
 animationName = "hit"
+
+[node name="LeavingWave" type="Node" parent="ShooterShipStateMachine"]
+script = ExtResource( 19 )
+animatorPath = NodePath("../../AnimationPlayer")
+animationName = "transition_wave"
 
 [node name="Leaving" type="Node" parent="ShooterShipStateMachine"]
 script = ExtResource( 16 )

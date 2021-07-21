@@ -43,6 +43,9 @@ func _getNextState(delta: float) -> String:
 			else:
 				return NO_STATE
 		"LeavingWave":
+			var leavingWaveState = getState(state)
+			if (leavingWaveState.animationFinished):
+				return "Leaving"
 			return NO_STATE
 		"Leaving":
 			

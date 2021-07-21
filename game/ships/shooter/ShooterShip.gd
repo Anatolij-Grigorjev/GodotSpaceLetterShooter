@@ -3,8 +3,6 @@ extends Node2D
 Controller for ship that shoots projectiles 
 while player is typing for the illusion of a dogfight
 """
-const ROTATE_RADS_PER_SEC = 3
-
 enum Side {
 	LEFT = -1,
 	RIGHT = 1
@@ -50,14 +48,3 @@ func faceShootable(shootable: Node2D) -> void:
 func emptyChamber():
 	chamber = ""
 	emit_signal("chamberEmptied")
-	
-	
-func resetRotationTween():
-	tween.interpolate_property(
-		self, "rotation", 
-		null, 0.0, abs(rotation) / ROTATE_RADS_PER_SEC, 
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
-	)
-	tween.start()
-	yield(tween, "tween_all_completed")
-	tween.remove_all()
