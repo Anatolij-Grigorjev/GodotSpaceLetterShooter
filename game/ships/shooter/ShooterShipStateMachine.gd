@@ -7,15 +7,17 @@ FSM for handling states of shooter ship
 var collisionNextState: String = NO_STATE
 var shootingPressed: bool = false
 
+var requestedNextState: String = NO_STATE
+
 func _ready():
 	entity.emptyChamber()
 	
 	
 func _getNextState(delta: float) -> String:
 	
-	if (collisionNextState != NO_STATE):
-		var nextState = collisionNextState
-		collisionNextState = NO_STATE
+	if (requestedNextState != NO_STATE):
+		var nextState = requestedNextState
+		requestedNextState = NO_STATE
 		return nextState
 	
 	match (state):
@@ -64,5 +66,11 @@ func _on_Area2D_area_entered(area: Area2D):
 	var areaOwner: Node2D = area.get_parent()
 	if (areaOwner.is_in_group("projectile")):
 		getState('Hit').hitShot = areaOwner
-		collisionNextState = "Hit"
+		requestNextState("Hit")
 		
+
+func requestNextState(nextState: String):
+	if (state == NO_STATE):
+		setState(nextState)
+	else:
+		requestedNextState = nextState

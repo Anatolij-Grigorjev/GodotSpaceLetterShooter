@@ -51,7 +51,7 @@ func processState(delta: float):
 	#step 4 - play leave animation
 	if (not shipLeaving and not shipDestroyed):
 		shipLeaving = true
-		entity.shooter.fsm.setState("LeavingWave")
+		entity.shooter.fsm.requestNextState("LeavingWave")
 		yield(get_tree(), "idle_frame")
 		yield(entity.shooter.fsm, "stateChanged")
 		shipLeft = true
