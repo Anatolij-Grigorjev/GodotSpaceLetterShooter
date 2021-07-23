@@ -8,8 +8,6 @@ const SpokeScn = preload("res://ships/shooter/VisibleSpoke.tscn")
 
 func _ready():
 	pass
-	
-
 
 
 func letterTyped(letter: String):

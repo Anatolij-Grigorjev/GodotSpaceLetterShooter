@@ -18,7 +18,13 @@ func _ready():
 
 func enterState(prevState: String):
 	.enterState(prevState)
+	animationFinished = false
 	animator.play(animationName)
+	
+	
+func exitState(nextState: String):
+	.exitState(nextState)
+	animationFinished = false
 	
 	
 func _animatorFinishedAnimation(animationName: String) -> void:

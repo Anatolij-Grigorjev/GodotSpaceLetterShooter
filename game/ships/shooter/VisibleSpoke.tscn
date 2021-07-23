@@ -3,7 +3,9 @@
 [ext_resource path="res://ships/shooter/VisibleSpoke.gd" type="Script" id=1]
 [ext_resource path="res://ships/shooter/shooting_ship.png" type="Texture" id=2]
 
-[node name="VisibleSpoke" type="Sprite"]
+[node name="VisibleSpoke" type="Sprite" groups=[
+"spoke",
+]]
 scale = Vector2( 0.1, 1 )
 texture = ExtResource( 2 )
 offset = Vector2( 0, 40 )

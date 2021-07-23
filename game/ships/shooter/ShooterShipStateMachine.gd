@@ -3,11 +3,9 @@ class_name ShooterShipStateMachine
 """
 FSM for handling states of shooter ship
 """
-
-var collisionNextState: String = NO_STATE
-var shootingPressed: bool = false
-
+export(Array, String) var noInterruptionStates = ["Hit"]
 var requestedNextState: String = NO_STATE
+
 
 func _ready():
 	entity.emptyChamber()
@@ -18,7 +16,8 @@ func _getNextState(delta: float) -> String:
 	if (requestedNextState != NO_STATE):
 		var nextState = requestedNextState
 		requestedNextState = NO_STATE
-		return nextState
+		if _shouldUseNextRequestedState(nextState, delta):
+			return nextState
 	
 	match (state):
 		"StartingWave":
@@ -28,9 +27,6 @@ func _getNextState(delta: float) -> String:
 			else:
 				return NO_STATE
 		"Preparing":
-			if (shootingPressed):
-				shootingPressed = false
-				return "Shooting"
 			return NO_STATE
 		"Shooting":
 			var shootingState = getState(state)
@@ -57,9 +53,16 @@ func _getNextState(delta: float) -> String:
 			return NO_STATE
 	
 	
-func sceneFireCodeTyped(shootableTarget):
+func onSceneFireCodeTyped(shootableTarget):
 	getState('Shooting').shotTarget = shootableTarget
-	shootingPressed = true
+	requestNextState('Shooting')
+	
+	
+	
+func onSceneLetterTyped(letter: String):
+	if (state == 'Preparing'):
+		getState(state).letterTyped(letter)
+	
 		
 	
 func _on_Area2D_area_entered(area: Area2D):
@@ -74,3 +77,7 @@ func requestNextState(nextState: String):
 		setState(nextState)
 	else:
 		requestedNextState = nextState
+		
+		
+func _shouldUseNextRequestedState(requestedState: String, delta: float) -> bool:
+	return not (state in noInterruptionStates)
