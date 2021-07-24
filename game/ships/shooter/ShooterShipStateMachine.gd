@@ -20,12 +20,10 @@ func _getNextState(delta: float) -> String:
 			return nextState
 	
 	match (state):
-		"StartingWave":
-			var appearingState = getState(state)
-			if (appearingState.animationFinished):
-				return "Preparing"
-			else:
-				return NO_STATE
+		"StartingFirstWave":
+			return _ifAnimationFinishedGoToState("Preparing")
+		"StartingNextWave":
+			return _ifAnimationFinishedGoToState("Preparing")
 		"Preparing":
 			return NO_STATE
 		"Shooting":
@@ -35,22 +33,23 @@ func _getNextState(delta: float) -> String:
 			else:
 				return NO_STATE
 		"Hit":
-			var hitState = getState(state)
-			if (hitState.animationFinished):
-				return "Preparing"
-			else:
-				return NO_STATE
+			return _ifAnimationFinishedGoToState("Preparing")
 		"LeavingWave":
-			var leavingWaveState = getState(state)
-			if (leavingWaveState.animationFinished):
-				return "Leaving"
-			return NO_STATE
+			return _ifAnimationFinishedGoToState("Leaving")
 		"Leaving":
 			
 			return NO_STATE
 		_: 
 			breakpoint
 			return NO_STATE
+			
+			
+func _ifAnimationFinishedGoToState(nextState: String) -> String:
+	var animatedState: AnimationState = getState(state)
+	if animatedState.animationFinished:
+		return nextState
+	else:
+		return NO_STATE
 	
 	
 func onSceneFireCodeTyped(shootableTarget):

@@ -28,7 +28,7 @@ func _prepareWaveTitle():
 	
 	
 func _playWaveIntroAnimations():
-	entity.shooter.fsm.requestNextState("StartingWave")
+	entity.shooter.startNextWave()
 	yield(get_tree(), "idle_frame")
 	yield(entity.shooter.fsm, "stateChanged")
 	entity.animator.play("show_title")

@@ -31,6 +31,13 @@ func _ready():
 	emptyChamber()
 	
 	
+func startNextWave():
+	if (fsm.state == StateMachine.NO_STATE):
+		fsm.requestNextState("StartingFirstWave")
+	else:
+		fsm.requestNextState("StartingNextWave")
+	
+	
 func faceShootable(shootable: Node2D) -> void:
 	var myPosition: Vector2 = global_position
 	var shootablePosition: Vector2 = shootable.global_position

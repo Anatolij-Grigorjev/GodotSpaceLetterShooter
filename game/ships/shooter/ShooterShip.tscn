@@ -12,7 +12,7 @@
 [ext_resource path="res://ships/shooter/shooter_engine_transition.wav" type="AudioStream" id=10]
 [ext_resource path="res://shaders/sprite_color_shader.shader" type="Shader" id=11]
 [ext_resource path="res://ships/shooter/ShooterShipStateMachine.gd" type="Script" id=12]
-[ext_resource path="res://ships/shooter/ShooterShipStartingWaveState.gd" type="Script" id=13]
+[ext_resource path="res://fsm/AnimationState.gd" type="Script" id=13]
 [ext_resource path="res://ships/shooter/ShooterShipPreparingState.gd" type="Script" id=14]
 [ext_resource path="res://ships/shooter/ShooterShipShootingState.gd" type="Script" id=15]
 [ext_resource path="res://ships/shooter/ShooterShipLeavingState.gd" type="Script" id=16]
@@ -500,10 +500,16 @@ projectileCollisionMask = 2
 [node name="ShooterShipStateMachine" type="Node" parent="."]
 script = ExtResource( 12 )
 
-[node name="StartingWave" type="Node" parent="ShooterShipStateMachine"]
+[node name="StartingFirstWave" type="Node" parent="ShooterShipStateMachine"]
 script = ExtResource( 13 )
 animatorPath = NodePath("../../AnimationPlayer")
-animationName = "<varies>"
+animationName = "arrive"
+
+[node name="StartingNextWave" type="Node" parent="ShooterShipStateMachine"]
+script = ExtResource( 13 )
+animatorPath = NodePath("../../AnimationPlayer")
+animationName = "transition_wave"
+playBackwards = true
 
 [node name="Preparing" type="Node" parent="ShooterShipStateMachine"]
 script = ExtResource( 14 )
@@ -526,6 +532,7 @@ script = ExtResource( 16 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 1 )
+position = Vector2( 0, 200 )
 rotation = 18.8496
 texture = ExtResource( 1 )
 
@@ -581,6 +588,7 @@ __meta__ = {
 [node name="Thruster" type="Particles2D" parent="Sprite"]
 show_behind_parent = true
 position = Vector2( 0, 35 )
+emitting = false
 amount = 100
 process_material = SubResource( 12 )
 __meta__ = {
