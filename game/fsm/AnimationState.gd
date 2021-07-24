@@ -6,7 +6,7 @@ and finishes when that animation is completed
 """
 export(NodePath) var animatorPath: NodePath
 export(String) var animationName: String
-
+export(bool) var playBackwards: bool = false
 
 onready var animator: AnimationPlayer = get_node(animatorPath) as AnimationPlayer
 var animationFinished: bool = false
@@ -19,7 +19,10 @@ func _ready():
 func enterState(prevState: String):
 	.enterState(prevState)
 	animationFinished = false
-	animator.play(animationName)
+	if (not playBackwards):
+		animator.play(animationName)
+	else:
+		animator.play_backwards(animationName)
 	
 	
 func exitState(nextState: String):
@@ -28,4 +31,5 @@ func exitState(nextState: String):
 	
 	
 func _animatorFinishedAnimation(animationName: String) -> void:
-	animationFinished = animationName == self.animationName
+	#only set flag if this animation finished during this state run
+	animationFinished = isActive and animationName == self.animationName
