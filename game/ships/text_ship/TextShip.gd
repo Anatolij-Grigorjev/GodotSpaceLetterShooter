@@ -31,6 +31,7 @@ var shipHasShield: bool = false
 var actionWeights := {}
 
 func _ready():
+	bubble.ownerShip = self
 	bubble.anim.play("hide")
 	#set FSM idling weights
 	for action in actionWeights:

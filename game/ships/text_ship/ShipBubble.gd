@@ -10,6 +10,7 @@ export(Color) var bubbleMaxHitsColor = Color.green
 
 onready var anim: AnimationPlayer = $AnimationPlayer
 onready var sprite: Sprite = $Sprite
+onready var rechargeTimer: Timer = $RechargeTimer
 
 
 var bubbleHit: bool = false
@@ -19,9 +20,12 @@ var bubbleMaxHits: int
 var bubbleHitsCurrent: int = 0
 var currentBubbleDamageColor: Color
 
+var ownerShip: Node2D
+
 
 func _ready():
 	bubbleHit = false
+	Utils.tryConnect(rechargeTimer, "timeout", self, "_onBubbleRecharge")
 	if (not bubbleMaxHits):
 		_setMaxHitPoints(1)
 	_updateBubbleColor()
@@ -43,9 +47,14 @@ func _on_Area2D_area_entered(area: Area2D):
 	var areaOwner: Node2D = area.get_parent()
 	if (areaOwner.is_in_group("projectile")):
 		var collideProjectile = areaOwner
-		#hit bubble for half the received word length (at least 1)
-		var hitsReceived = max(1, collideProjectile.getText().length() / 2)
-		_hitBubble(hitsReceived)
+		var projectileText: String = collideProjectile.getText()
+		#destroy bubble if projectile payload is exact word match
+		if (projectileText == ownerShip.currentText):
+			_hitBubble(bubbleMaxHits)
+		else:
+			#hit bubble for half the received word length (at least 1)
+			var hitsReceived = max(1, projectileText.length() / 2)
+			_hitBubble(hitsReceived)
 			
 			
 func _hitBubble(hitsReceived: int):
@@ -53,6 +62,8 @@ func _hitBubble(hitsReceived: int):
 	var hitsRemaining = max(0, bubbleMaxHits - bubbleHitsCurrent)
 	emit_signal("bubbleHit", hitsRemaining)
 	if (hitsRemaining > 0):
+		if (rechargeTimer.is_stopped()):
+			rechargeTimer.start()
 		_bubbleHitForAnimation("hit")
 		_updateBubbleColor()
 	else:
@@ -75,4 +86,11 @@ func _updateBubbleColor():
 	else:
 		sprite.self_modulate = Color.transparent
 		
-		
+
+func _onBubbleRecharge():
+	bubbleHitsCurrent = max(0, bubbleHitsCurrent - 1)
+	var hitsRemaining = bubbleMaxHits - bubbleHitsCurrent
+	if (bubbleHitsCurrent == 0):
+		rechargeTimer.stop()
+	_updateBubbleColor()
+	emit_signal("bubbleHit", hitsRemaining)
