@@ -68,8 +68,6 @@ func _setupShieldHitsBar(maxHits: int):
 	_adjustRemainingShieldHits(maxHits)
 	$Sprite/ShipBubble/HitsBar.visible = false
 	
-	
-		
 	Utils.tryConnect(
 		$Sprite/ShipBubble, "bubbleHit", 
 		self, "_adjustRemainingShieldHits"

@@ -6,8 +6,18 @@ chambers the letters
 """
 const SpokeScn = preload("res://ships/shooter/VisibleSpoke.tscn")
 
+var speed: float = 300
+
 func _ready():
 	pass
+	
+	
+func processState(delta: float):
+	.processState(delta)
+	if (Input.is_action_pressed("move_ship_left")):
+		entity.position.x -= (speed * delta)
+	if (Input.is_action_pressed("move_ship_right")):
+		entity.position.x += (speed * delta)
 
 
 func letterTyped(letter: String):
