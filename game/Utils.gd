@@ -156,7 +156,19 @@ static func rand_point(range_x: float, range_y: float) -> Vector2:
 		rand_range(-range_x, range_x),
 		rand_range(-range_y, range_y)
 	)
-	
+
+
+"""
+Returns a vector with coordinates swapped with respect to input vector
+So for a given passed Vector2(x,y) will return Vector2(y,x)
+Returns null for null input
+"""
+static func swapVector(input: Vector2) -> Vector2:
+	#if null or zero then return same
+	if (not input):
+		return input
+	return Vector2(input.y, input.x)
+
 	
 """
 Safely get first element from possible null or empty array
