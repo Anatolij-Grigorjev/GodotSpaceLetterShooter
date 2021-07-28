@@ -41,11 +41,8 @@ func _process(delta: float):
 		var animationName = _getTurnAnimationName(starsMoveDirection, nextDirection)
 		$AnimationPlayer.play(animationName)
 	
-	if _directionHorizontal():
-		scroll_offset.x += (delta * scroll_rate)
-	else:
-		scroll_offset.y += (delta * scroll_rate)
-		
+	scroll_offset += (delta * (Vector2.ONE * scroll_rate))
+
 	
 	
 func hide():
@@ -114,6 +111,7 @@ func _generateHyperTurnAnimations():
 	
 func _generateHyperAnimationDirection(direction: int) -> Animation:
 	var animation: Animation = Animation.new()
+	animation.length = 1.0
 	var directionStarsCruiseSpeed = directionParams[direction]
 	var bigStarsMotionScaleTrackIdx := _addAnimationTrackMotionScale(animation, $BigStars.name)
 	_addAnimationTrackValueInterpolation(
@@ -132,6 +130,7 @@ func _generateHyperAnimationDirection(direction: int) -> Animation:
 	
 func _generateHyperTurnFromToDirectionAnimation(fromDirection: int, toDirection: int) -> Animation:
 	var animation = _generateHyperAnimationDirection(fromDirection)
+	animation.length = 4.0
 	var changeDirMethodTrackIdx = animation.add_track(Animation.TYPE_METHOD)
 	animation.track_set_path(changeDirMethodTrackIdx, '.')
 	animation.track_insert_key(changeDirMethodTrackIdx, 1.0, {
