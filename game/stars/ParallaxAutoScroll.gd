@@ -27,21 +27,24 @@ var directionNames: Array = [
 ]
 
 
+var runningStandalone: bool = false
+
+
 func _ready():
 	_applyMoveDirection(starsMoveDirection)
 	_generateHyperSpeedAnimations()
 	_generateHyperTurnAnimations()
-	print($AnimationPlayer.get_animation_list())
-	
+	runningStandalone = get_tree().get_nodes_in_group("shooter").empty()
 	
 
 func _process(delta: float):
-	if Input.is_action_just_released("debug1"):
-		var nextDirection = _getNextRandomDirection()
-		var animationName = _getTurnAnimationName(starsMoveDirection, nextDirection)
-		$AnimationPlayer.play(animationName)
+	if (runningStandalone):
+		if Input.is_action_just_released("debug1"):
+			var nextDirection = _getNextRandomDirection()
+			var animationName = _getTurnAnimationName(starsMoveDirection, nextDirection)
+			$AnimationPlayer.play(animationName)
 	
-	scroll_offset += (delta * (Vector2.ONE * scroll_rate))
+		scroll_offset += (delta * (Vector2.ONE * scroll_rate))
 
 	
 	

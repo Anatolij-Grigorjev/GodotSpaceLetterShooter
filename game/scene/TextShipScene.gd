@@ -76,7 +76,7 @@ func _onShooterToggleHyperspeed():
 	var animator = _findBGAnimator()
 	if (not animator):
 		return
-	var hyperSpeedAnimKey = "hyper_fly_up"
+	var hyperSpeedAnimKey = "hyper_down"
 	var hyperSpeedAnimation = animator.get_animation(hyperSpeedAnimKey)
 	var waveEnded = fsm.state == "WaveEnd"
 	if (waveEnded):

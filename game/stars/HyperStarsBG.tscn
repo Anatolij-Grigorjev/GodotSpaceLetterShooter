@@ -1,35 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://stars/ParallaxAutoScroll.gd" type="Script" id=1]
 [ext_resource path="res://stars/scroll_bg_space.png" type="Texture" id=2]
 [ext_resource path="res://stars/particle.png" type="Texture" id=3]
-
-[sub_resource type="Animation" id=1]
-resource_name = "hyper"
-tracks/0/type = "value"
-tracks/0/path = NodePath("BigStars:motion_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 2.2974, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 4 ), Vector2( 0, 16 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SmallStars:motion_scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 2.14355, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 8 ), Vector2( 0, 32 ) ]
-}
 
 [node name="HyperStarsBG" type="ParallaxBackground" groups=[
 "bg",
@@ -196,4 +169,3 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/hyper = SubResource( 1 )
