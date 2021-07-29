@@ -43,6 +43,16 @@ func _process(delta: float):
 			var nextDirection = _getNextRandomDirection()
 			var animationName = _getTurnAnimationName(starsMoveDirection, nextDirection)
 			$AnimationPlayer.play(animationName)
+		if Input.is_action_just_released("debug2"):
+			#opposite direction
+			var opposite = _getOppositeDirection(starsMoveDirection)
+			$AnimationPlayer.play("hyper_" + directionNames[starsMoveDirection])
+			yield($AnimationPlayer, "animation_finished")
+			yield(get_tree().create_timer(1.5), "timeout")
+			$AnimationPlayer.play("hyper_" + directionNames[opposite])
+			yield($AnimationPlayer, "animation_finished")
+			_applyMoveDirection(starsMoveDirection)
+			print(directionParams)
 	
 		scroll_offset += (delta * (Vector2.ONE * scroll_rate))
 
@@ -79,6 +89,13 @@ func _applyMoveDirection(direction: int):
 	
 func _directionHorizontal() -> bool:
 	return starsMoveDirection in [Direction.LEFT, Direction.RIGHT]
+	
+
+func _getOppositeDirection(direction: int) -> int:
+	if (direction % 2 == 0):
+		return direction + 1
+	else:
+		return direction - 1
 	
 
 func _getTurnAnimationName(fromDirection: int, toDirection: int) -> String:
