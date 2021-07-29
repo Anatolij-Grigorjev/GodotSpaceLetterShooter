@@ -22,6 +22,8 @@ onready var musicControl = $CanvasLayer/MusicControl
 onready var shipsFactory = $TextShipFactory
 onready var fsm: ShipSceneStateMachine = $ShipSceneStateMachine
 
+var starsBG
+
 
 func _ready():
 	randomize()
@@ -33,6 +35,8 @@ func _ready():
 	Utils.tryConnect(shooter, "shooterHitByShot", self, "_onShooterHitByShot")
 	
 	call_deferred("_bindSceneStats")
+	
+	starsBG = Utils.getFirst(get_tree().get_nodes_in_group("bg"))
 	
 	
 func _process(delta: float):
@@ -90,13 +94,15 @@ func _onShooterToggleHyperspeed():
 	else:
 		#quick non-violent shakes on deacceleration from hyperness
 		shaker.beginShake(hyperSpeedAnimation.length, 20, 10, 2)
-		animator.play_backwards(hyperSpeedAnimKey)
+		animator.play("hyper_up")
+		yield(animator, "animation_finished")
+		# DOWN direction in background == 1
+		starsBG.starsMoveDirection = 1
+		
 
 
 func _findBGAnimator() -> AnimationPlayer:
-	var currentSceneBGNode = Utils.getFirst(get_tree().get_nodes_in_group("bg"))
-	if (is_instance_valid(currentSceneBGNode)):
-		var animator: AnimationPlayer = currentSceneBGNode.get_node('AnimationPlayer')
-		if (animator):
-			return animator
+	var animator: AnimationPlayer = starsBG.get_node('AnimationPlayer')
+	if (animator):
+		return animator
 	return null

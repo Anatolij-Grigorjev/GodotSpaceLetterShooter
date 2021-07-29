@@ -52,7 +52,7 @@ func _process(delta: float):
 			$AnimationPlayer.play("hyper_" + directionNames[opposite])
 			yield($AnimationPlayer, "animation_finished")
 			_applyMoveDirection(starsMoveDirection)
-			print(directionParams)
+			
 	
 		scroll_offset += (delta * (Vector2.ONE * scroll_rate))
 
