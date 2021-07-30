@@ -35,7 +35,8 @@ func _ready():
 	_generateHyperSpeedAnimations()
 	_generateHyperTurnAnimations()
 	runningStandalone = get_tree().get_nodes_in_group("shooter").empty()
-	
+	if (runningStandalone):
+		print($AnimationPlayer.get_animation_list())
 
 func _process(delta: float):
 	if (runningStandalone):
