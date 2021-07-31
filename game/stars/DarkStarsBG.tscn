@@ -134,3 +134,5 @@ scale = Vector2( 1, 2 )
 texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="TurnParallaxTween" type="Tween" parent="."]

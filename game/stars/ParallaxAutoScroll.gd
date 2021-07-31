@@ -12,6 +12,10 @@ export(float) var scroll_rate = 120.66
 export(Direction) var starsMoveDirection = Direction.DOWN setget _applyMoveDirection
 
 
+onready var anim: AnimationPlayer = $AnimationPlayer
+onready var tween: Tween = $TurnParallaxTween
+
+
 var directionParams: Array = [
 	#UP
 	[Vector2(0, -1), Vector2(0, -2)],
@@ -36,22 +40,22 @@ func _ready():
 	_generateHyperTurnAnimations()
 	runningStandalone = get_tree().get_nodes_in_group("shooter").empty()
 	if (runningStandalone):
-		print($AnimationPlayer.get_animation_list())
+		print(anim.get_animation_list())
 
 func _process(delta: float):
 	if (runningStandalone):
 		if Input.is_action_just_released("debug1"):
 			var nextDirection = _getNextRandomDirection()
 			var animationName = _getTurnAnimationName(starsMoveDirection, nextDirection)
-			$AnimationPlayer.play(animationName)
+			anim.play(animationName)
 		if Input.is_action_just_released("debug2"):
 			#opposite direction
 			var opposite = _getOppositeDirection(starsMoveDirection)
-			$AnimationPlayer.play("hyper_" + directionNames[starsMoveDirection])
-			yield($AnimationPlayer, "animation_finished")
+			anim.play("hyper_" + directionNames[starsMoveDirection])
+			yield(anim, "animation_finished")
 			yield(get_tree().create_timer(1.5), "timeout")
-			$AnimationPlayer.play("hyper_" + directionNames[opposite])
-			yield($AnimationPlayer, "animation_finished")
+			anim.play("hyper_" + directionNames[opposite])
+			yield(anim, "animation_finished")
 			_applyMoveDirection(starsMoveDirection)
 			
 	
@@ -115,7 +119,7 @@ func _generateHyperSpeedAnimations():
 		var directionIdx: int = Direction[direction]
 		var hyperAnimation = _generateHyperAnimationDirection(directionIdx)
 		var animationName = "hyper_%s" % directionNames[directionIdx]
-		$AnimationPlayer.add_animation(animationName, hyperAnimation)
+		anim.add_animation(animationName, hyperAnimation)
 		
 
 func _generateHyperTurnAnimations():
@@ -127,7 +131,7 @@ func _generateHyperTurnAnimations():
 			var toIdx = Direction[toDirection]
 			var animationName = _getTurnAnimationName(fromIdx, toIdx)
 			var animation = _generateHyperTurnFromToDirectionAnimation(fromIdx, toIdx)
-			$AnimationPlayer.add_animation(animationName, animation)
+			anim.add_animation(animationName, animation)
 	
 	
 func _generateHyperAnimationDirection(direction: int) -> Animation:
