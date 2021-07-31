@@ -13,7 +13,6 @@ export(Direction) var starsMoveDirection = Direction.DOWN setget _applyMoveDirec
 
 
 onready var anim: AnimationPlayer = $AnimationPlayer
-onready var tween: Tween = $TurnParallaxTween
 
 
 var directionParams: Array = [
@@ -158,7 +157,7 @@ func _generateHyperTurnFromToDirectionAnimation(fromDirection: int, toDirection:
 	animation.length = 4.0
 	var changeDirMethodTrackIdx = animation.add_track(Animation.TYPE_METHOD)
 	animation.track_set_path(changeDirMethodTrackIdx, '.')
-	animation.track_insert_key(changeDirMethodTrackIdx, 1.0, {
+	animation.track_insert_key(changeDirMethodTrackIdx, 4.0, {
 		"method": "_applyMoveDirection",
 		"args": [toDirection]
 	})
