@@ -163,16 +163,18 @@ func _generateHyperTurnFromToDirectionAnimation(fromDirection: int, toDirection:
 	})
 	var bigStarsTrackIdx = animation.find_track($BigStars.name + ":motion_scale")
 	var newDirectionBigStarsCruiseSpeed = directionParams[toDirection][0]
+	var prevDirectionBigStarsCruiseSpeed = directionParams[fromDirection][0]
 	_addAnimationTrackValueInterpolation(
 		animation, bigStarsTrackIdx,
-		newDirectionBigStarsCruiseSpeed * 3, newDirectionBigStarsCruiseSpeed,
+		prevDirectionBigStarsCruiseSpeed * 3, newDirectionBigStarsCruiseSpeed,
 		1.0, 3.0
 	)
 	var smallStarsTrackIdx = animation.find_track($SmallStars.name + ":motion_scale")
 	var newDirectionSmallStarsCruisSpeed = directionParams[toDirection][1]
+	var prevDirectionSmallStarsCruisSpeed = directionParams[fromDirection][1]
 	_addAnimationTrackValueInterpolation(
 		animation, smallStarsTrackIdx,
-		newDirectionSmallStarsCruisSpeed * 3, newDirectionSmallStarsCruisSpeed,
+		prevDirectionSmallStarsCruisSpeed * 3, newDirectionSmallStarsCruisSpeed,
 		1.0, 3.0
 	)
 	return animation
