@@ -17,7 +17,7 @@ signal fireCodeTyped(lockedTarget)
 
 export(float) var screenScrollSpeed = 300
 export(float) var endWaveWaitTime = 2.5
-export(Direction) var shipPosition = Direction.DOWN setget setShipPosition
+export(Direction) var shipDirection = Direction.DOWN setget setShipPosition
 
 onready var shooter = $MovingElements/ShooterShip
 onready var textShipsContainer = $MovingElements/TextShips
@@ -37,8 +37,8 @@ var starsBG
 var directionShipAngles = {
 	Direction.UP: 180,
 	Direction.DOWN: 0,
-	Direction.LEFT: 270,
-	Direction.RIGHT: 90
+	Direction.LEFT: 90,
+	Direction.RIGHT: 270
 }
 onready var directionPositions = {
 	Direction.UP: $MovingElements/ShooterPositions/Top,
@@ -63,11 +63,12 @@ func _ready():
 	
 	
 func _process(delta: float):
-	var screenTravel = delta * screenScrollSpeed
-	$MovingElements.position.y -= screenTravel
+	var screenTravelAmount = delta * screenScrollSpeed
+	var screenTravel := _setAmountTravelAsDirectionVector(screenTravelAmount)
+	$MovingElements.position += screenTravel
 	for projectileNode in get_tree().get_nodes_in_group("projectile"):
 		if (is_instance_valid(projectileNode)):
-			projectileNode.position.y -= screenTravel
+			projectileNode.position += screenTravel
 		
 	
 
@@ -77,13 +78,28 @@ func setSceneSpecificaion(spec: SceneSpec):
 	
 	
 func setShipPosition(newPosition: int):
-	shipPosition = clamp(newPosition, Direction.UP, Direction.RIGHT)
-	shooter.position = directionPositions[shipPosition]
-	shooter.rotation_degrees = directionShipAngles[shipPosition]
+	shipDirection = clamp(newPosition, Direction.UP, Direction.RIGHT)
+	shooter.position = directionPositions[shipDirection].position
+	shooter.rotation_degrees = directionShipAngles[shipDirection]
 	
 
 func _bindSceneStats():
 	Stats.currentScene = self
+	
+	
+func _setAmountTravelAsDirectionVector(amount: float) -> Vector2:
+	match(shipDirection):
+		Direction.UP:
+			return Vector2(0, amount)
+		Direction.DOWN:
+			return Vector2(0, -amount)
+		Direction.LEFT:
+			return Vector2(amount, 0)
+		Direction.RIGHT:
+			return Vector2(-amount, 0)
+		_:
+			breakpoint
+			return Vector2.ZERO
 	
 	
 func _onShooterClearChamber():
