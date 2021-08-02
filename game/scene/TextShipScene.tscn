@@ -103,7 +103,24 @@ current = true
 [node name="TextShips" type="Node2D" parent="MovingElements"]
 
 [node name="ShooterShip" parent="MovingElements" instance=ExtResource( 6 )]
-position = Vector2( 620.347, 654.806 )
+position = Vector2( 620, 655 )
+
+[node name="ShooterPositions" type="Node2D" parent="MovingElements"]
+
+[node name="Bottom" type="Position2D" parent="MovingElements/ShooterPositions"]
+position = Vector2( 620, 655 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Top" type="Position2D" parent="MovingElements/ShooterPositions"]
+position = Vector2( 620, 65 )
+
+[node name="Left" type="Position2D" parent="MovingElements/ShooterPositions"]
+position = Vector2( 65, 295 )
+
+[node name="Right" type="Position2D" parent="MovingElements/ShooterPositions"]
+position = Vector2( 1215, 295 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -157,3 +174,5 @@ showPrevStateTimeout = 2.0
 anims/show_title = SubResource( 1 )
 
 [node name="FreezeFrame" parent="." instance=ExtResource( 14 )]
+
+[node name="ShipMovePositionsTween" type="Tween" parent="."]

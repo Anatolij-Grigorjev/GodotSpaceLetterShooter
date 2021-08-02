@@ -3,13 +3,21 @@ extends Node2D
 Scene where text ships descend while player types 
 and bottom ship shoots the descenders based on text
 """
+enum Direction {
+	UP = 0,
+	DOWN = 1,
+	LEFT = 2,
+	RIGHT = 3
+}
+
+
 signal letterTyped(letter)
 signal fireCodeTyped(lockedTarget)
 
 
 export(float) var screenScrollSpeed = 300
 export(float) var endWaveWaitTime = 2.5
-
+export(Direction) var shipPosition = Direction.DOWN setget setShipPosition
 
 onready var shooter = $MovingElements/ShooterShip
 onready var textShipsContainer = $MovingElements/TextShips
@@ -21,8 +29,23 @@ onready var playerInput = $CanvasLayer/PlayerInput
 onready var musicControl = $CanvasLayer/MusicControl
 onready var shipsFactory = $TextShipFactory
 onready var fsm: ShipSceneStateMachine = $ShipSceneStateMachine
+onready var tween: Tween = $ShipMovePositionsTween
 
 var starsBG
+
+
+var directionShipAngles = {
+	Direction.UP: 180,
+	Direction.DOWN: 0,
+	Direction.LEFT: 270,
+	Direction.RIGHT: 90
+}
+onready var directionPositions = {
+	Direction.UP: $MovingElements/ShooterPositions/Top,
+	Direction.DOWN: $MovingElements/ShooterPositions/Bottom,
+	Direction.LEFT: $MovingElements/ShooterPositions/Left,
+	Direction.RIGHT: $MovingElements/ShooterPositions/Right
+}
 
 
 func _ready():
@@ -51,6 +74,12 @@ func _process(delta: float):
 func setSceneSpecificaion(spec: SceneSpec):
 	$TextShipFactory.setShipsWordsCorpusPath(spec.wordsCorpusPath)
 	get_node("ShipSceneStateMachine").sceneSpecification = spec
+	
+	
+func setShipPosition(newPosition: int):
+	shipPosition = clamp(newPosition, Direction.UP, Direction.RIGHT)
+	shooter.position = directionPositions[shipPosition]
+	shooter.rotation_degrees = directionShipAngles[shipPosition]
 	
 
 func _bindSceneStats():
@@ -106,3 +135,19 @@ func _findBGAnimator() -> AnimationPlayer:
 	if (animator):
 		return animator
 	return null
+
+
+func tweenShipToNewDirection(newDirection: int):
+	tween.interpolate_property(
+		shooter, 'position', 
+		null, directionPositions[newDirection].position,
+		1.0, Tween.TRANS_EXPO, Tween.EASE_OUT
+	)
+	tween.interpolate_property(
+		shooter, 'rotation_degrees',
+		null, directionShipAngles[newDirection],
+		1.0, Tween.TRANS_EXPO, Tween.EASE_IN
+	)
+	tween.start()
+	yield(tween, "tween_all_completed")
+	setShipPosition(newDirection)
