@@ -51,15 +51,17 @@ onready var directionPositions = {
 func _ready():
 	randomize()
 	
+	starsBG = Utils.getFirst(get_tree().get_nodes_in_group("bg"))
+	
 	Utils.tryConnect(shooter, "shotFired", fsm, "_onShipShotFired")
 	Utils.tryConnect(shooter, "chamberEmptied", playerInput, "clearText")
 	Utils.tryConnect(shooter, "chamberEmptied", self, "_onShooterClearChamber")
 	Utils.tryConnect(shooter, "hyperspeedToggled", self, "_onShooterToggleHyperspeed")
 	Utils.tryConnect(shooter, "shooterHitByShot", self, "_onShooterHitByShot")
+	Utils.tryConnect(starsBG, "bgWillHaveTurned", self, "_scheduleShooterTurning")
 	
 	call_deferred("_bindSceneStats")
 	
-	starsBG = Utils.getFirst(get_tree().get_nodes_in_group("bg"))
 	
 	
 func _process(delta: float):
@@ -122,27 +124,9 @@ func _onShooterHitByShot(projectile: Node2D):
 		
 		
 func _onShooterToggleHyperspeed():
-	var animator = _findBGAnimator()
-	if (not animator):
-		return
-	var hyperSpeedAnimKey = "hyper_down"
-	var hyperSpeedAnimation = animator.get_animation(hyperSpeedAnimKey)
 	var waveEnded = fsm.state == "WaveEnd"
 	if (waveEnded):
-		#violent shake during acceleration of hyperness
-		shaker.beginShake(hyperSpeedAnimation.length, 20, 25, 2)
-		animator.play(hyperSpeedAnimKey)
-		yield(animator, "animation_finished")
-		var remainingFlyTime = max(0, shooter.anim.current_animation_length - hyperSpeedAnimation.length)
-		#less violent shake for fly part
-		shaker.beginShake(endWaveWaitTime + remainingFlyTime, 10, 15, 1)
-	else:
-		#quick non-violent shakes on deacceleration from hyperness
-		shaker.beginShake(hyperSpeedAnimation.length, 20, 10, 2)
-		animator.play("hyper_up")
-		yield(animator, "animation_finished")
-		# DOWN direction in background == 1
-		starsBG.starsMoveDirection = 1
+		starsBG.startHyperTurn()
 		
 
 
@@ -151,6 +135,12 @@ func _findBGAnimator() -> AnimationPlayer:
 	if (animator):
 		return animator
 	return null
+	
+	
+func _scheduleShooterTurning(direction: int, time: float):
+	if (time > 1.0):
+		yield(get_tree().create_timer(time - 1.0), "timeout")
+	tweenShipToNewDirection(direction)
 
 
 func tweenShipToNewDirection(newDirection: int):

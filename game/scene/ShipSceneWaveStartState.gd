@@ -31,10 +31,6 @@ func _playWaveIntroAnimations():
 	entity.shooter.startNextWave()
 	yield(get_tree(), "idle_frame")
 	yield(entity.shooter.fsm, "stateChanged")
-	if (waveNumber > 1):
-		entity.tweenShipToNewDirection(entity.Direction.LEFT)
-		var animationName = entity.starsBG._getTurnAnimationName(entity.starsBG.starsMoveDirection, entity.Direction.RIGHT)
-		entity.starsBG.anim.play(animationName)
 	entity.animator.play("show_title")
 	yield(entity.animator, "animation_finished")
 	introsDone = true

@@ -8,6 +8,10 @@ enum Direction {
 	LEFT = 2,
 	RIGHT = 3
 }
+
+signal bgWillHaveTurned(newDirection, waitTime)
+
+
 export(float) var scroll_rate = 120.66
 export(Direction) var starsMoveDirection = Direction.DOWN setget _applyMoveDirection
 
@@ -31,13 +35,14 @@ var directionNames: Array = [
 
 
 var runningStandalone: bool = false
-
+var screenShaker: Node2D
 
 func _ready():
 	_applyMoveDirection(starsMoveDirection)
 	_generateHyperSpeedAnimations()
 	_generateHyperTurnAnimations()
 	runningStandalone = get_tree().get_nodes_in_group("shooter").empty()
+	screenShaker = Utils.getFirst(get_tree().get_nodes_in_group("screen_shake"))
 	if (runningStandalone):
 		print(anim.get_animation_list())
 
@@ -59,6 +64,15 @@ func _process(delta: float):
 			
 	
 		scroll_offset += (delta * (Vector2.ONE * scroll_rate))
+		
+
+func startHyperTurn():
+	var nextDirection: int = _getNextAllowedDirection()
+	var animName: String = _getTurnAnimationName(starsMoveDirection, nextDirection)
+	var animation: Animation = anim.get_animation(animName)
+	screenShaker.beginShake(animation.length, 20, 25, 2)
+	emit_signal("bgWillHaveTurned", nextDirection, animation.length)
+	anim.play(animName)
 
 	
 	
@@ -116,6 +130,13 @@ func _getNextRandomDirection() -> int:
 	directions.shuffle()
 	return Utils.getFirst(directions)
 	
+
+func _getNextAllowedDirection() -> int:
+	if (starsMoveDirection != Direction.DOWN):
+		return Direction.DOWN
+	else:
+		return Direction.LEFT if randi() % 2 == 0 else Direction.RIGHT
+
 	
 func _generateHyperSpeedAnimations():
 	for direction in Direction:
