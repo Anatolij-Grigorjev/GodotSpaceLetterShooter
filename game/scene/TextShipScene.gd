@@ -125,8 +125,11 @@ func _onShooterHitByShot(projectile: Node2D):
 		
 func _onShooterToggleHyperspeed():
 	var waveEnded = fsm.state == "WaveEnd"
-	if (waveEnded):
+	var sceneEnded = waveEnded and fsm.remainingSceneShips <= 0
+	if (waveEnded and not sceneEnded):
 		starsBG.startHyperTurn()
+	elif (sceneEnded):
+		starsBG.startHyper()
 		
 
 
@@ -147,12 +150,12 @@ func tweenShipToNewDirection(newDirection: int):
 	tween.interpolate_property(
 		shooter, 'position', 
 		null, directionPositions[newDirection].position,
-		1.0, Tween.TRANS_EXPO, Tween.EASE_OUT
+		1.0, Tween.TRANS_EXPO, Tween.EASE_IN_OUT
 	)
 	tween.interpolate_property(
 		shooter, 'rotation_degrees',
 		null, directionShipAngles[newDirection],
-		1.0, Tween.TRANS_EXPO, Tween.EASE_IN
+		1.0, Tween.TRANS_EXPO, Tween.EASE_OUT_IN
 	)
 	tween.start()
 	yield(tween, "tween_all_completed")

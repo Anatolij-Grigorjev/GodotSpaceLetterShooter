@@ -73,6 +73,13 @@ func startHyperTurn():
 	screenShaker.beginShake(animation.length, 20, 25, 2)
 	emit_signal("bgWillHaveTurned", nextDirection, animation.length)
 	anim.play(animName)
+	
+	
+func startHyper():
+	var animName = _getHyperAnimationName(starsMoveDirection)
+	var animation: Animation = anim.get_animation(animName)
+	screenShaker.beginShake(animation.length + 5.0, 20, 25, 2)
+	anim.play(animName)
 
 	
 	
@@ -119,6 +126,10 @@ func _getOppositeDirection(direction: int) -> int:
 func _getTurnAnimationName(fromDirection: int, toDirection: int) -> String:
 	return "hyper_%s_turn_%s" % [directionNames[fromDirection], directionNames[toDirection]]
 	
+
+func _getHyperAnimationName(direction: int) -> String:
+	return "hyper_%s" % directionNames[direction]
+	
 	
 func _getNodeMotionScaleKeyName(node: Node) -> String:
 	return "%s:motion_scale" % node.name
@@ -142,7 +153,7 @@ func _generateHyperSpeedAnimations():
 	for direction in Direction:
 		var directionIdx: int = Direction[direction]
 		var hyperAnimation = _generateHyperAnimationDirection(directionIdx)
-		var animationName = "hyper_%s" % directionNames[directionIdx]
+		var animationName = _getHyperAnimationName(directionIdx)
 		anim.add_animation(animationName, hyperAnimation)
 		
 
