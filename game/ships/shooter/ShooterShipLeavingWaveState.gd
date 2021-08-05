@@ -3,7 +3,7 @@ class_name ShooterShipLeavingWaveState
 """
 Shooter ship leaving a wave
 """
-const ROTATE_RADS_PER_SEC = 3
+const ROTATE_DEGREES_PER_SEC = 60
 
 
 func enterState(prevState: String):
@@ -12,9 +12,11 @@ func enterState(prevState: String):
 	
 	
 func _resetRotationTween():
+	var currentScene = Scenes.activeScene
+	var neutralSceneDirectionAngle = currentScene.directionShipAngles[currentScene.shipDirection]
 	entity.tween.interpolate_property(
-		entity, "rotation", 
-		null, 0.0, abs(entity.rotation) / ROTATE_RADS_PER_SEC, 
+		entity, "rotation_degrees", 
+		null, neutralSceneDirectionAngle, abs(entity.rotation) / ROTATE_DEGREES_PER_SEC, 
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
 	)
 	entity.tween.start()
