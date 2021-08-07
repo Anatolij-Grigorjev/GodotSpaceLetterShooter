@@ -7,6 +7,7 @@ const ROTATE_DEGREES_PER_SEC = 60
 
 
 func enterState(prevState: String):
+	entity.emptyChamber()
 	yield(_resetRotationTween(), "completed")
 	.enterState(prevState)
 	
