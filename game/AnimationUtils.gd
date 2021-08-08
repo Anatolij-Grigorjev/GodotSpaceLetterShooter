@@ -37,11 +37,11 @@ Add value interpolation local to the animation timeline in a value track.
 Method validates that the interpolation is contained in the animation 
 and the track index supplied is a value track
 """
-static func addAnimationValueTrackInterpolation(animation: Animation, valueTrackIdx: int, fromValue, toValue, startTime: float = 0.0, interpolationTime: float = 1.0):
+static func addAnimationValueTrackInterpolation(animation: Animation, valueTrackIdx: int, fromValue, toValue, startTime: float = 0.0, interpolationTime: float = 1.0, transition: float = 1.0):
 	assert(animation.length > startTime)
 	assert(animation.length >= startTime + interpolationTime)
 	_assertAnimationTrackAtIdxOfType(animation, valueTrackIdx, Animation.TYPE_VALUE)
-	animation.track_insert_key(valueTrackIdx, startTime, fromValue)
+	animation.track_insert_key(valueTrackIdx, startTime, fromValue, transition)
 	animation.track_insert_key(valueTrackIdx, startTime + interpolationTime, toValue)
 
 

@@ -222,12 +222,12 @@ func _generateHyperTurnFromToDirectionAnimation(fromDirection: int, toDirection:
 	Animations.addAnimationValueTrackInterpolation(
 		animation, bigStarsTrackIdx,
 		prevDirectionBigStarsCruiseSpeed * 3, prevDirectionBigStarsCruiseSpeed,
-		2.0, 1.0
+		2.0, 1.0, 1.5
 	)
 	Animations.addAnimationValueTrackInterpolation(
 		animation, bigStarsTrackIdx,
 		prevDirectionBigStarsCruiseSpeed, newDirectionBigStarsCruiseSpeed,
-		3.0, 1.0
+		3.0, 1.0, 0.5
 	)
 	var smallStarsTrackIdx = animation.find_track(_getNodeMotionScaleKeyName($SmallStars))
 	var newDirectionSmallStarsCruisSpeed = directionProps[toDirection].smallStarCruiseSpeed
@@ -235,11 +235,11 @@ func _generateHyperTurnFromToDirectionAnimation(fromDirection: int, toDirection:
 	Animations.addAnimationValueTrackInterpolation(
 		animation, smallStarsTrackIdx,
 		prevDirectionSmallStarsCruisSpeed * 3, prevDirectionSmallStarsCruisSpeed,
-		2.0, 1.0
+		2.0, 1.0, 1.5
 	)
 	Animations.addAnimationValueTrackInterpolation(
 		animation, smallStarsTrackIdx,
 		prevDirectionSmallStarsCruisSpeed, newDirectionSmallStarsCruisSpeed,
-		3.0, 1.0
+		3.0, 1.0, 0.5
 	)
 	return animation
