@@ -9,9 +9,16 @@ var hitShot
 
 func enterState(prevState: String):
 	.enterState(prevState)
-	_removeShipSpokes()
+	_hideShipShotFX()
 	entity.emptyChamber()
 	entity.emit_signal("shooterHitByShot", hitShot)
+	
+	
+	
+func _hideShipShotFX():
+	_removeShipSpokes()
+	#hide shooting animation sprites
+	entity.shotPosition.get_node('ShotSprite').visible = false
 	
 	
 func _removeShipSpokes():
