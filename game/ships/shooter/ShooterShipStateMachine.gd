@@ -33,7 +33,12 @@ func _getNextState(delta: float) -> String:
 			else:
 				return NO_STATE
 		"Hit":
-			return _ifAnimationFinishedGoToState("Preparing")
+			var animatedState: AnimationState = getState(state)
+			if animatedState.animationFinished:
+				_startInvincibility()
+				return "Preparing"
+			else:
+				return NO_STATE
 		"LeavingWave":
 			return _ifAnimationFinishedGoToState("Leaving")
 		"Leaving":
@@ -66,7 +71,10 @@ func onSceneLetterTyped(letter: String):
 	
 func _on_Area2D_area_entered(area: Area2D):
 	var areaOwner: Node2D = area.get_parent()
-	if (areaOwner.is_in_group('projectile')):
+	if (
+		areaOwner.is_in_group('projectile') 
+		and entity.invincibilityTimer.is_stopped()
+	):
 		getState('Hit').hitShot = areaOwner
 		requestNextState('Hit')
 		
@@ -80,3 +88,10 @@ func requestNextState(nextState: String):
 		
 func _shouldUseNextRequestedState(requestedState: String, delta: float) -> bool:
 	return not (state in noInterruptionStates)
+	
+	
+func _startInvincibility():
+	entity.invincibilityTimer.start()
+	entity.anim.play("invincible_flash")
+	yield(entity.invincibilityTimer, "timeout")
+	entity.anim.stop(true)

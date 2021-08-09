@@ -21,6 +21,7 @@ onready var anim: AnimationPlayer = $AnimationPlayer
 onready var tween: Tween = $Tween
 onready var sprite: Sprite = $Sprite
 onready var fsm: StateMachine = $ShooterShipStateMachine
+onready var invincibilityTimer: Timer = $InvincibilityTimer
 
 
 var chamber: String = ""
