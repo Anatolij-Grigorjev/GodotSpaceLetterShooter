@@ -66,9 +66,9 @@ func onSceneLetterTyped(letter: String):
 	
 func _on_Area2D_area_entered(area: Area2D):
 	var areaOwner: Node2D = area.get_parent()
-	if (areaOwner.is_in_group("projectile")):
+	if (areaOwner.is_in_group('projectile')):
 		getState('Hit').hitShot = areaOwner
-		requestNextState("Hit")
+		requestNextState('Hit')
 		
 
 func requestNextState(nextState: String):
