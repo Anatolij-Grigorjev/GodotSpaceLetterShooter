@@ -281,8 +281,9 @@ tracks/7/keys = {
 
 [sub_resource type="Animation" id=21]
 resource_name = "invincible_flash"
-length = 0.5
+length = 0.25
 loop = true
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:material:shader")
 tracks/0/interp = 1
@@ -302,7 +303,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.5 ),
+"times": PoolRealArray( 0, 0.15, 0.25 ),
 "transitions": PoolRealArray( 0.406126, 3.73213, 1 ),
 "update": 0,
 "values": [ 0.0, 0.85, 0.0 ]

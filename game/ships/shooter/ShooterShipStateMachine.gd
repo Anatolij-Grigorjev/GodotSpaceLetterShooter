@@ -94,4 +94,5 @@ func _startInvincibility():
 	entity.invincibilityTimer.start()
 	entity.anim.play("invincible_flash")
 	yield(entity.invincibilityTimer, "timeout")
-	entity.anim.stop(true)
+	entity.anim.stop()
+	entity.sprite.material.set_shader_param("mix_coef", 0.0)
