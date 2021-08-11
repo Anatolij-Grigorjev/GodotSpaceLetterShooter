@@ -62,6 +62,10 @@ func _ready():
 	
 	call_deferred("_bindSceneStats")
 	
+	#running standalone, make mock scene spec
+	if Scenes.activeScene == null:
+		setSceneSpecificaion(Mock.sceneShipTypeQuantities(1, 1, 1))
+	
 	
 	
 func _process(delta: float):
