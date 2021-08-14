@@ -4,7 +4,7 @@ extends Control
 Running score total GUI control
 Visualizes adding points to total score.
 """
-const TOTAL_SCORE_FORMAT: String = "%06d"
+const TOTAL_SCORE_FORMAT: String = "SCORE: %06d"
 const ADD_SCORE_FORMAT: String = "+%03d"
 
 export(int) var totalScore: int = 0 setget _setTotalScore

@@ -110,7 +110,7 @@ __meta__ = {
 [node name="ScoreLbl" type="Label" parent="VBoxContainer"]
 margin_right = 48.0
 margin_bottom = 14.0
-text = "000000"
+text = "SCORE: 000000"
 align = 2
 valign = 1
 
