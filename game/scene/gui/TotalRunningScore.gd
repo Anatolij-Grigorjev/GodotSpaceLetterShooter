@@ -29,8 +29,10 @@ func _process(delta: float):
 	
 	
 func addPoints(numPoints: int):
-	newAddedScore = numPoints
-	addedPointsLbl.text = ADD_SCORE_FORMAT % numPoints
+	if (Utils.animIsPlayingAnimation(anim, "hide_add")):
+		_flushAddedScore()
+	newAddedScore += numPoints
+	addedPointsLbl.text = ADD_SCORE_FORMAT % newAddedScore
 	anim.play("add_score")
 	addPointsDebounceTimer.start()
 	
@@ -44,6 +46,10 @@ func _setTotalScore(newTotal: int):
 func _onAddPointsDebounceEnded():
 	anim.play("hide_add")
 	yield(anim, "animation_finished")
+	_flushAddedScore()
+	
+	
+func _flushAddedScore():
 	_setTotalScore(totalScore + newAddedScore)
 	newAddedScore = 0
 
