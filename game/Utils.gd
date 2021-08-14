@@ -43,6 +43,11 @@ static func tryConnect(
 	target: Object, method: String,
 	binds: Array = []
 ) -> bool:
+	if not (is_instance_valid(source) and is_instance_valid(target)):
+		print("CONNECT_ERROR: either source or target instance was missing! Cant connect %s '%s' to %s '%s'" % [
+			source, source, target, method
+		])
+		return false
 	if (source.is_connected(sourceSignal, target, method)):
 		return false
 	var connectError = source.connect(sourceSignal, target, method, binds)
