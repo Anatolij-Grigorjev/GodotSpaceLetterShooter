@@ -16,16 +16,18 @@ onready var addPointsDebounceTimer: Timer = $AddedPointsDebounce
 
 
 var newAddedScore: int = 0
-
+var runningStandalone: bool = false
 
 func _ready():
 	addedPointsLbl.visible = false
 	Utils.tryConnect(addPointsDebounceTimer, "timeout", self, "_onAddPointsDebounceEnded")
+	runningStandalone = get_tree().get_nodes_in_group("shooter").empty()
 	
 	
 func _process(delta: float):
-	if Input.is_action_just_released("debug1"):
-		addPoints(randi() % 300)
+	if (runningStandalone):
+		if Input.is_action_just_released("debug1"):
+			addPoints(randi() % 300)
 	
 	
 func addPoints(numPoints: int):
