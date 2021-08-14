@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://space_music_bg.wav" type="AudioStream" id=1]
 [ext_resource path="res://scene/TextShipScene.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://components/ScreenShake.tscn" type="PackedScene" id=13]
 [ext_resource path="res://FreezeFrame.tscn" type="PackedScene" id=14]
 [ext_resource path="res://components/StateLabel.tscn" type="PackedScene" id=15]
+[ext_resource path="res://scene/gui/TotalRunningScore.tscn" type="PackedScene" id=16]
 
 [sub_resource type="Animation" id=1]
 resource_name = "show_title"
@@ -167,6 +168,10 @@ margin_right = 263.621
 margin_bottom = 676.37
 sourceFSM = NodePath("../../ShipSceneStateMachine")
 showPrevStateTimeout = 2.0
+
+[node name="TotalRunningScore" parent="CanvasLayer" instance=ExtResource( 16 )]
+margin_left = 20.0
+margin_top = 20.0
 
 [node name="TextShipFactory" parent="." instance=ExtResource( 5 )]
 

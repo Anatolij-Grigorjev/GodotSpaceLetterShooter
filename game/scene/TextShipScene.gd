@@ -25,8 +25,11 @@ onready var camera = $MovingElements/Camera2D
 onready var shaker = $MovingElements/Camera2D/ScreenShake
 onready var freeze = $FreezeFrame
 onready var animator = $AnimationPlayer
+
 onready var playerInput = $CanvasLayer/PlayerInput
 onready var musicControl = $CanvasLayer/MusicControl
+onready var totalScore = $CanvasLayer/TotalRunningScore
+
 onready var shipsFactory = $TextShipFactory
 onready var fsm: ShipSceneStateMachine = $ShipSceneStateMachine
 onready var tween: Tween = $ShipMovePositionsTween
@@ -50,6 +53,8 @@ onready var directionPositions = {
 
 func _ready():
 	randomize()
+	
+	totalScore.totalScore = GameConfig.totalShooterScore
 	
 	starsBG = Utils.getFirst(get_tree().get_nodes_in_group("bg"))
 	
