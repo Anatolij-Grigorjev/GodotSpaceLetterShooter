@@ -3,6 +3,8 @@ extends Node2D
 Scene where text ships descend while player types 
 and bottom ship shoots the descenders based on text
 """
+const FloatingPointsScn = preload("res://scene/gui/FloatingPoints.tscn")  
+
 enum Direction {
 	UP = 0,
 	DOWN = 1,
@@ -140,6 +142,23 @@ func _onShooterToggleHyperspeed():
 	elif (sceneEnded):
 		starsBG.startHyper()
 		
+		
+func _onTextShipPointsEarned(numPoints: int, shipPosition: Vector2):
+	
+	totalScore.addPoints(numPoints)
+	
+	var floatingPointsNode: Node = _createFloatingPointsNode(numPoints)
+	$CanvasLayer.add_child(floatingPointsNode)
+	floatingPointsNode.rect_position = shipPosition
+
+
+
+func _createFloatingPointsNode(numPoints: int) -> Node:
+	var floatingPointsNode := FloatingPointsScn.instance()
+	floatingPointsNode.get_node("Label").text = "+%03d" % numPoints
+	
+	return floatingPointsNode
+
 
 
 func _findBGAnimator() -> AnimationPlayer:

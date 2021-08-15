@@ -8,6 +8,7 @@ signal shotFired(projectile)
 signal textShipCollidedShooter
 signal textShipDestroyed(text)
 signal shipHit(lettersRemaining)
+signal shipKillEarnedPoints(points, shipPosition)
 
 
 export(String) var currentText: String = "test" setget setCurrentText, getCurrentText

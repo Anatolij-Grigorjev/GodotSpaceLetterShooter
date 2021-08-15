@@ -18,3 +18,10 @@ func enterState(prevState: String):
 	entity.emit_signal("shipHit", 0)
 	entityText = str(entity.currentText)
 	entity.currentText = ""
+	
+	
+func scoreShipKillPoints():
+	
+	var numPoints: int = 300
+	entity.emit_signal("shipKillEarnedPoints", numPoints, entity.position)
+	
