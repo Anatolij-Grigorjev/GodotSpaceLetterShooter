@@ -6,6 +6,7 @@ last label character was hit
 """
 
 var entityText := ""
+var finalShotLettersNum: int = 0
 
 func processState(delta: float):
 	if (animationFinished):
@@ -21,7 +22,8 @@ func enterState(prevState: String):
 	
 	
 func scoreShipKillPoints():
+	var lettersBonusPoints: int = entity.perLetterBonusPoints * max(finalShotLettersNum - 1, 0)
+	var numPoints: int = entity.baseKillPoints + lettersBonusPoints
 	
-	var numPoints: int = 300
 	entity.emit_signal("shipKillEarnedPoints", numPoints, entity.position)
 	

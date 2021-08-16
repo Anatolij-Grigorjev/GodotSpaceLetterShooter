@@ -94,6 +94,7 @@ func _on_Area2D_area_entered(area: Area2D):
 				hitChars = payload.length()
 				collisionNextState = "Hit"
 			else: 
+				get_node("Die").finalShotLettersNum = entity.currentText.length()
 				collisionNextState = "Die"
 		else:
 			collisionNextState = "Miss"

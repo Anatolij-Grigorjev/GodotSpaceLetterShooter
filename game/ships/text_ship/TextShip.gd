@@ -14,6 +14,9 @@ signal shipKillEarnedPoints(points, shipPosition)
 export(String) var currentText: String = "test" setget setCurrentText, getCurrentText
 export(bool) var isTargeted: bool = false setget _setAsTarget
 export(float) var speed: float = 450
+export(int) var baseKillPoints: int = 300 
+export(int) var perLetterBonusPoints: int = 41
+
 
 onready var fsm: StateMachine = $TextShipStateMachine
 onready var sprite: Sprite = $Sprite
