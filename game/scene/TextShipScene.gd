@@ -71,6 +71,8 @@ func _ready():
 	
 	#running standalone, make mock scene spec
 	if Scenes.activeScene == null:
+		setShipPosition(Direction.RIGHT)
+		starsBG.starsMoveDirection = Direction.RIGHT
 		setSceneSpecificaion(Mock.sceneShipTypeQuantities(1, 1, 1))
 	
 	
@@ -103,11 +105,11 @@ func _bindSceneStats():
 func _setAmountTravelAsDirectionVector(amount: float) -> Vector2:
 	match(shipDirection):
 		Direction.UP:
-			return Vector2(0, amount)
+			return Vector2(0, -amount)
 		Direction.DOWN:
 			return Vector2(0, -amount)
 		Direction.LEFT:
-			return Vector2(amount, 0)
+			return Vector2(-amount, 0)
 		Direction.RIGHT:
 			return Vector2(-amount, 0)
 		_:
@@ -159,13 +161,6 @@ func _createFloatingPointsNode(numPoints: int) -> Node:
 	
 	return floatingPointsNode
 
-
-
-func _findBGAnimator() -> AnimationPlayer:
-	var animator: AnimationPlayer = starsBG.get_node('AnimationPlayer')
-	if (animator):
-		return animator
-	return null
 	
 	
 func _scheduleShooterTurning(direction: int, time: float):

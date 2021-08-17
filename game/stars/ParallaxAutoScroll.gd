@@ -35,12 +35,12 @@ var directionProps = {
 		"bigStarCruiseSpeed": Vector2(-1, 0),
 		"smallStarCruiseSpeed": Vector2(-2, 0),
 		"name": "left",
-		"spritesRotation": 90
+		"spritesRotation": 270
 	},
 	Direction.RIGHT: {
 		"bigStarCruiseSpeed": Vector2(1, 0),
 		"smallStarCruiseSpeed": Vector2(2, 0),
-		"name": "up",
+		"name": "right",
 		"spritesRotation": 90
 	}
 }
@@ -63,6 +63,7 @@ func _process(delta: float):
 		if Input.is_action_just_released("debug1"):
 			var nextDirection = _getNextRandomDirection()
 			var animationName = _getTurnAnimationName(starsMoveDirection, nextDirection)
+			print(animationName)
 			anim.play(animationName)
 		if Input.is_action_just_released("debug2"):
 			#opposite direction
