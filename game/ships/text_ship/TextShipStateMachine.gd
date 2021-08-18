@@ -9,7 +9,6 @@ export(Dictionary) var initialIdlingActionsWeights = {
 	"IdlingShoot": 1.0
 }
 
-var hitChars: int = 1
 var collisionNextState: String = NO_STATE
 
 var idlingActionsWeights: WeightedItems
@@ -91,7 +90,7 @@ func _on_Area2D_area_entered(area: Area2D):
 		if (entity.projectileHitText(collideProjectile)):
 			var payload: String = collideProjectile.getText()
 			if (entity.currentText.length() > payload.length()):
-				hitChars = payload.length()
+				getState("Hit").hitChars = payload.length()
 				collisionNextState = "Hit"
 			else: 
 				get_node("Die").finalShotLettersNum = entity.currentText.length()
