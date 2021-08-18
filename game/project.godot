@@ -149,6 +149,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ships/shooter/ShooterShipStateMachine.gd"
 }, {
+"base": "Reference",
+"class": "SingleReadVar",
+"language": "GDScript",
+"path": "res://SingleReadVar.gd"
+}, {
 "base": "Node",
 "class": "State",
 "language": "GDScript",
@@ -218,6 +223,7 @@ _global_script_class_icons={
 "ShooterShipPreparingState": "",
 "ShooterShipShootingState": "",
 "ShooterShipStateMachine": "",
+"SingleReadVar": "",
 "State": "",
 "StateMachine": "",
 "StateMachineState": "",
