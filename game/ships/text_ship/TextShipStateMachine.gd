@@ -9,9 +9,11 @@ export(Dictionary) var initialIdlingActionsWeights = {
 	"IdlingShoot": 1.0
 }
 
-var collisionNextState: String = NO_STATE
-
 var idlingActionsWeights: WeightedItems
+
+var lastCollidedProjectileCell: SingleReadVar = SingleReadVar.new(null)
+var lastCollidedShipCell: SingleReadVar = SingleReadVar.new(null)
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -25,11 +27,6 @@ func _ready():
 
 func _getNextState(delta: float) -> String:
 	
-	if (collisionNextState != NO_STATE):
-		var nextState = collisionNextState
-		collisionNextState = NO_STATE
-		return nextState
-	
 	match (state):
 		"Appearing":
 			var appearingState = getState(state)
@@ -38,23 +35,35 @@ func _getNextState(delta: float) -> String:
 			else:
 				return NO_STATE
 		"Descending":
+			var collisionState = _getLatestAnyCollisionState()
+			if (collisionState != NO_STATE):
+				return collisionState
 			var descendingState = getState(state)
 			if (descendingState.segmentOver):
 				return _getNextIdlingState()
 			return NO_STATE
 		"Idling":
+			var collisionState = _getLatestAnyCollisionState()
+			if (collisionState != NO_STATE):
+				return collisionState
 			var idlingState = getState(state)
 			if (idlingState.idlingOver):
 				return "Descending"
 			else:
 				return NO_STATE
 		"IdlingBubble":
+			if not lastCollidedShipCell.empty():
+				return _getShipAttemptedCollisionState(lastCollidedShipCell.readAndReset())
+				
 			var idlingBubbleState = getState(state)
 			if (idlingBubbleState.idlingOver):
 				return "Descending"
 			else:
 				return NO_STATE
 		"IdlingShoot":
+			var collisionState = _getLatestAnyCollisionState()
+			if (collisionState != NO_STATE):
+				return collisionState
 			var idlingShootState = getState(state)
 			if (idlingShootState.idlingOver):
 				return "Descending"
@@ -84,23 +93,37 @@ func _getNextState(delta: float) -> String:
 func _on_Area2D_area_entered(area: Area2D):
 	var areaOwner: Node2D = area.get_parent()
 	if (areaOwner.is_in_group("projectile")):
-		if (entity.bubble.bubbleHit):
-			return
-		var collideProjectile = areaOwner
-		if (entity.projectileHitText(collideProjectile)):
-			var payload: String = collideProjectile.getText()
-			if (entity.currentText.length() > payload.length()):
-				getState("Hit").hitChars = payload.length()
-				collisionNextState = "Hit"
-			else: 
-				get_node("Die").finalShotLettersNum = entity.currentText.length()
-				collisionNextState = "Die"
-		else:
-			collisionNextState = "Miss"
-		return
+		lastCollidedProjectileCell.write(areaOwner)
 	if (areaOwner.is_in_group("shooter")):
-		collisionNextState = "CollideShip"
+		lastCollidedShipCell.write(areaOwner)
+		
+		
+func _getProjectileAttemptedHitState(projectile: Node2D) -> String:
 	
+	if not entity.projectileHitText(projectile):
+		return "Miss"
+	var payload: String = projectile.getText()
+	if (entity.currentText.length() > payload.length()):
+		getState("Hit").hitChars = payload.length()
+		return "Hit"
+	else: 
+		get_node("Die").finalShotLettersNum = entity.currentText.length()
+		return "Die"
+		
+		
+func _getShipAttemptedCollisionState(ship: Node2D) -> String:
+	return "CollideShip"
+	
+
+func _getLatestAnyCollisionState() -> String:
+	if not lastCollidedShipCell.empty():
+		return _getShipAttemptedCollisionState(lastCollidedShipCell.readAndReset())
+	if not lastCollidedProjectileCell.empty():
+		return _getProjectileAttemptedHitState(lastCollidedProjectileCell.readAndReset())
+		
+	return NO_STATE
+	
+
 
 func _getNextIdlingState() -> String:
 	return idlingActionsWeights.pickRandomWeighted()
