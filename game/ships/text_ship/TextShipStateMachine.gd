@@ -29,11 +29,7 @@ func _getNextState(delta: float) -> String:
 	
 	match (state):
 		"Appearing":
-			var appearingState = getState(state)
-			if (appearingState.animationFinished):
-				return "Descending"
-			else:
-				return NO_STATE
+			return _ifAnimationFinishedGoToState("Descending")
 		"Descending":
 			var collisionState = _getLatestAnyCollisionState()
 			if (collisionState != NO_STATE):
@@ -70,17 +66,9 @@ func _getNextState(delta: float) -> String:
 			else:
 				return NO_STATE
 		"Hit":
-			var hitState = getState(state)
-			if (hitState.animationFinished):
-				return "Descending"
-			else:
-				return NO_STATE
+			return _ifAnimationFinishedGoToState("Descending")
 		"Miss":
-			var missState = getState(state)
-			if (missState.animationFinished):
-				return "Descending"
-			else:
-				return NO_STATE
+			return _ifAnimationFinishedGoToState("Descending")
 		"CollideShip":
 			return NO_STATE
 		"Die":
@@ -88,6 +76,14 @@ func _getNextState(delta: float) -> String:
 		_: 
 			breakpoint
 			return NO_STATE
+			
+
+func _ifAnimationFinishedGoToState(nextState: String) -> String:
+	var animatedState: AnimationState = getState(state)
+	if animatedState.animationFinished:
+		return nextState
+	else:
+		return NO_STATE
 
 
 func _on_Area2D_area_entered(area: Area2D):
