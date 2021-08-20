@@ -48,7 +48,7 @@ func _getNextState(delta: float) -> String:
 			else:
 				return NO_STATE
 		"IdlingBubble":
-			if not lastCollidedShipCell.empty():
+			if lastCollidedShipCell.present():
 				return _getShipAttemptedCollisionState(lastCollidedShipCell.readAndReset())
 				
 			var idlingBubbleState = getState(state)

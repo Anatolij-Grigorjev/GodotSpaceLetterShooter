@@ -20,6 +20,9 @@ Check if the current value of the single read cell equals the init value
 func empty() -> bool:
 	return equals(emptyValue)
 	
+	
+func present() -> bool:
+	return not empty()
 
 """
 Write new value into the single read cell, overriding whatever was before

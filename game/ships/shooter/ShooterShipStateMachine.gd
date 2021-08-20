@@ -3,8 +3,10 @@ class_name ShooterShipStateMachine
 """
 FSM for handling states of shooter ship
 """
-export(Array, String) var noInterruptionStates = ["Hit"]
 var requestedNextState: String = NO_STATE
+
+var lastTargetedShootableCell: SingleReadVar = SingleReadVar.new(null)
+var lastHitShotCell: SingleReadVar = SingleReadVar.new(null)
 
 
 func _ready():
@@ -13,20 +15,23 @@ func _ready():
 	
 func _getNextState(delta: float) -> String:
 	
-	if (requestedNextState != NO_STATE):
-		var nextState = requestedNextState
-		requestedNextState = NO_STATE
-		if _shouldUseNextRequestedState(nextState, delta):
-			return nextState
-	
 	match (state):
 		"StartingFirstWave":
 			return _ifAnimationFinishedGoToState("Preparing")
 		"StartingNextWave":
 			return _ifAnimationFinishedGoToState("Preparing")
 		"Preparing":
+			if lastHitShotCell.present():
+				getState('Hit').hitShot = lastHitShotCell.readAndReset()
+				return 'Hit'
+			if lastTargetedShootableCell.present():
+				getState('Shooting').shotTarget = lastTargetedShootableCell.readAndReset()
+				return 'Shooting'
 			return NO_STATE
 		"Shooting":
+			if lastHitShotCell.present():
+				getState('Hit').hitShot = lastHitShotCell.readAndReset()
+				return 'Hit'
 			var shootingState = getState(state)
 			if (shootingState.shootingDone):
 				return "Preparing"
@@ -58,9 +63,7 @@ func _ifAnimationFinishedGoToState(nextState: String) -> String:
 	
 	
 func onSceneFireCodeTyped(shootableTarget):
-	getState('Shooting').shotTarget = shootableTarget
-	requestNextState('Shooting')
-	
+	lastTargetedShootableCell.write(shootableTarget)
 	
 	
 func onSceneLetterTyped(letter: String):
@@ -68,26 +71,13 @@ func onSceneLetterTyped(letter: String):
 		getState(state).letterTyped(letter)
 	
 		
-	
 func _on_Area2D_area_entered(area: Area2D):
 	var areaOwner: Node2D = area.get_parent()
 	if (
 		areaOwner.is_in_group('projectile') 
 		and entity.invincibilityTimer.is_stopped()
 	):
-		getState('Hit').hitShot = areaOwner
-		requestNextState('Hit')
-		
-
-func requestNextState(nextState: String):
-	if (state == NO_STATE):
-		setState(nextState)
-	else:
-		requestedNextState = nextState
-		
-		
-func _shouldUseNextRequestedState(requestedState: String, delta: float) -> bool:
-	return not (state in noInterruptionStates)
+		lastHitShotCell.write(areaOwner)
 	
 	
 func _startInvincibility():

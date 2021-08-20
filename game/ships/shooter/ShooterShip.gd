@@ -34,9 +34,9 @@ func _ready():
 	
 func startNextWave():
 	if (fsm.state == StateMachine.NO_STATE):
-		fsm.requestNextState("StartingFirstWave")
+		fsm.state = "StartingFirstWave"
 	else:
-		fsm.requestNextState("StartingNextWave")
+		fsm.state = "StartingNextWave"
 	
 	
 func faceShootable(shootable: Node2D) -> void:
