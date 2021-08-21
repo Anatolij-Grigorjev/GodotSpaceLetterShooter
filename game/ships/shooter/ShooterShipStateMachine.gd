@@ -6,6 +6,7 @@ FSM for handling states of shooter ship
 var requestedNextState: String = NO_STATE
 
 var lastTargetedShootableCell: SingleReadVar = SingleReadVar.new(null)
+var shootCommandJustPressedCell: SingleReadVar = SingleReadVar.new(false)
 var lastHitShotCell: SingleReadVar = SingleReadVar.new(null)
 
 
@@ -24,7 +25,7 @@ func _getNextState(delta: float) -> String:
 			if lastHitShotCell.present():
 				getState('Hit').hitShot = lastHitShotCell.readAndReset()
 				return 'Hit'
-			if lastTargetedShootableCell.present():
+			if shootCommandJustPressedCell.readAndReset():
 				getState('Shooting').shotTarget = lastTargetedShootableCell.readAndReset()
 				return 'Shooting'
 			return NO_STATE
@@ -63,6 +64,7 @@ func _ifAnimationFinishedGoToState(nextState: String) -> String:
 	
 	
 func onSceneFireCodeTyped(shootableTarget):
+	shootCommandJustPressedCell.write(true)
 	lastTargetedShootableCell.write(shootableTarget)
 	
 	
