@@ -16,22 +16,25 @@ func _ready():
 	
 func _getNextState(delta: float) -> String:
 	
+	var shipWasHit: bool = false
+	if lastHitShotCell.present():
+		getState('Hit').hitShot = lastHitShotCell.readAndReset()
+		shipWasHit = true
+	
 	match (state):
 		"StartingFirstWave":
 			return _ifAnimationFinishedGoToState("Preparing")
 		"StartingNextWave":
 			return _ifAnimationFinishedGoToState("Preparing")
 		"Preparing":
-			if lastHitShotCell.present():
-				getState('Hit').hitShot = lastHitShotCell.readAndReset()
+			if shipWasHit:
 				return 'Hit'
 			if shootCommandJustPressedCell.readAndReset():
 				getState('Shooting').shotTarget = lastTargetedShootableCell.readAndReset()
 				return 'Shooting'
 			return NO_STATE
 		"Shooting":
-			if lastHitShotCell.present():
-				getState('Hit').hitShot = lastHitShotCell.readAndReset()
+			if shipWasHit:
 				return 'Hit'
 			var shootingState = getState(state)
 			if (shootingState.shootingDone):
