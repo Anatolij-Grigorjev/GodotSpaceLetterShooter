@@ -10,7 +10,7 @@ const ADD_SCORE_FORMAT: String = "+%03d"
 export(int) var totalScore: int = 0 setget _setTotalScore
 
 onready var totalScoreLbl: Label = $VBoxContainer/ScoreLbl
-onready var addedPointsLbl: Label = $VBoxContainer/AddedPointsLbl
+onready var addedPointsLbl: Label = $VBoxContainer/ScoreLbl/AddedPointsLbl
 onready var anim: AnimationPlayer = $AnimationPlayer
 onready var addPointsDebounceTimer: Timer = $AddedPointsDebounce
 

@@ -20,7 +20,7 @@ expand_margin_bottom = 2.0
 [sub_resource type="Animation" id=2]
 length = 0.3
 tracks/0/type = "value"
-tracks/0/path = NodePath("VBoxContainer/AddedPointsLbl:visible")
+tracks/0/path = NodePath("VBoxContainer/ScoreLbl/AddedPointsLbl:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -32,7 +32,7 @@ tracks/0/keys = {
 "values": [ true ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("VBoxContainer/AddedPointsLbl:rect_scale")
+tracks/1/path = NodePath("VBoxContainer/ScoreLbl/AddedPointsLbl:rect_scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -44,7 +44,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("VBoxContainer/AddedPointsLbl:modulate")
+tracks/2/path = NodePath("VBoxContainer/ScoreLbl/AddedPointsLbl:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -56,7 +56,7 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("VBoxContainer/AddedPointsLbl:rect_position")
+tracks/3/path = NodePath("VBoxContainer/ScoreLbl/AddedPointsLbl:rect_position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -71,7 +71,7 @@ tracks/3/keys = {
 [sub_resource type="Animation" id=3]
 length = 0.3
 tracks/0/type = "value"
-tracks/0/path = NodePath("VBoxContainer/AddedPointsLbl:visible")
+tracks/0/path = NodePath("VBoxContainer/ScoreLbl/AddedPointsLbl:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -83,7 +83,7 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("VBoxContainer/AddedPointsLbl:rect_position")
+tracks/1/path = NodePath("VBoxContainer/ScoreLbl/AddedPointsLbl:rect_position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -95,7 +95,7 @@ tracks/1/keys = {
 "values": [ Vector2( 0, 18 ), Vector2( 0, 0 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("VBoxContainer/AddedPointsLbl:modulate")
+tracks/2/path = NodePath("VBoxContainer/ScoreLbl/AddedPointsLbl:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -128,14 +128,16 @@ text = "SCORE: 000000"
 align = 2
 valign = 1
 
-[node name="AddedPointsLbl" type="Label" parent="VBoxContainer"]
-visible = false
+[node name="AddedPointsLbl" type="Label" parent="VBoxContainer/ScoreLbl"]
 margin_top = 25.0
-margin_right = 101.0
+margin_right = 99.0
 margin_bottom = 39.0
 text = "000000"
 align = 2
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/add_score = SubResource( 2 )
