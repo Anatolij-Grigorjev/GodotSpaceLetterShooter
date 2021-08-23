@@ -119,6 +119,9 @@ func lockTarget():
 	
 	
 func projectileHitText(projectile: Node2D) -> bool:
+	if not projectile.has_method("getText"):
+		print("NOT PROJECTILE: %s" % projectile)
+		return false
 	var payload: String = projectile.getText()
 	return not payload.empty() and nextTextIs(payload)
 	
