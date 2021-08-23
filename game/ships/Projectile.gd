@@ -29,10 +29,10 @@ func _process(delta):
 func _on_Area2D_area_entered(area: Area2D):
 	hadCollision = true
 	var areaOwner: Node2D = area.get_parent()
-	if (areaOwner.is_in_group("bubble")):
-		fireDirection = fireDirection.bounce(fireDirection)
-		return
-	if (areaOwner.is_in_group("projectile")):
+	if (
+		areaOwner.is_in_group("projectile")
+		or areaOwner.is_in_group("bubble")
+	):
 		speed = 0.0
 		emit_signal("projectileDestroyed", getText())
 	$AnimationPlayer.play("collide")
