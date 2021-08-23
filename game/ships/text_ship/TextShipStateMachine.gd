@@ -95,7 +95,8 @@ func _on_Area2D_area_entered(area: Area2D):
 		
 		
 func _getProjectileAttemptedHitState(projectile: Node2D) -> String:
-	
+	if not is_instance_valid(projectile):
+		return NO_STATE
 	if not entity.projectileHitText(projectile):
 		return "Miss"
 	var payload: String = projectile.getText()
