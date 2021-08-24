@@ -53,6 +53,7 @@ func _onAddPointsDebounceEnded():
 	
 func _flushAddedScore():
 	_setTotalScore(totalScore + newAddedScore)
+	GameConfig.totalShooterScore += newAddedScore
 	newAddedScore = 0
 
 

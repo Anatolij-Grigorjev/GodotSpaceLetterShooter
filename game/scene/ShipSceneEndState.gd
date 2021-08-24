@@ -14,7 +14,6 @@ func _ready():
 
 func enterState(prevState: String):
 	.enterState(prevState)
-	GameConfig.totalShooterScore += entity.totalScore.totalScore
 	if (fsm.shooterFailed):
 		emit_signal("sceneFailed", fsm.sceneSpecification.id)
 	else:
