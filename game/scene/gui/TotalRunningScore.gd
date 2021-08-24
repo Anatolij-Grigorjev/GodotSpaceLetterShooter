@@ -4,13 +4,14 @@ extends Control
 Running score total GUI control
 Visualizes adding points to total score.
 """
-const TOTAL_SCORE_FORMAT: String = "SCORE: %06d"
+const TOTAL_SCORE_NUM_FORMAT: String = "%06d"
 const ADD_SCORE_FORMAT: String = "+%03d"
 
 export(int) var totalScore: int = 0 setget _setTotalScore
+export(String) var scoreTextPrefix: String = "SCORE: " setget _setScorePrefix
 
 onready var totalScoreLbl: Label = $VBoxContainer/ScoreLbl
-onready var addedPointsLbl: Label = $VBoxContainer/ScoreLbl/AddedPointsLbl
+onready var addedPointsLbl: Label = $VBoxContainer/AddedPointsLbl
 onready var anim: AnimationPlayer = $AnimationPlayer
 onready var addPointsDebounceTimer: Timer = $AddedPointsDebounce
 
@@ -41,8 +42,17 @@ func addPoints(numPoints: int):
 	
 func _setTotalScore(newTotal: int):
 	totalScore = newTotal
+	_updateScoreLabelIfPresent()
+		
+		
+func _setScorePrefix(newPrefix: String):
+	scoreTextPrefix = newPrefix
+	_updateScoreLabelIfPresent()
+	
+	
+func _updateScoreLabelIfPresent():
 	if ($VBoxContainer/ScoreLbl):
-		$VBoxContainer/ScoreLbl.text = TOTAL_SCORE_FORMAT % totalScore
+		$VBoxContainer/ScoreLbl.text = scoreTextPrefix + TOTAL_SCORE_NUM_FORMAT % totalScore
 		
 		
 func _onAddPointsDebounceEnded():

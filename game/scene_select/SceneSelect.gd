@@ -12,10 +12,13 @@ export(Dictionary) var sceneTypeLoadPaths: Dictionary = {
 }
 
 
-onready var cellsGrid: GridContainer = $Panel/MarginContainer/SceneCells
+onready var cellsGrid: GridContainer = $Panel/VBoxContainer/MarginContainer/SceneCells
 
 
 func _ready():
+	
+	$Panel/VBoxContainer/TotalRunningScore.totalScore = GameConfig.totalShooterScore
+	
 	_clearRefSizeCells()
 	
 	for spec in Scenes.loadedSceneSpecs:
