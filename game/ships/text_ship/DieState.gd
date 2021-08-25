@@ -22,8 +22,10 @@ func enterState(prevState: String):
 	
 	
 func scoreShipKillPoints():
-	var lettersBonusPoints: int = entity.perLetterBonusPoints * max(finalShotLettersNum - 1, 0)
-	var numPoints: int = entity.baseKillPoints + lettersBonusPoints
+	var extraLettersNum := max(finalShotLettersNum - 1, 0)
+	var perLetterBonusPoints: int = entity.perLetterBonusPoints * extraLettersNum
+	var allLetterBonus: float = perLetterBonusPoints * (1.0 + extraLettersNum / 10.0)
+	var numPoints: int = entity.baseKillPoints + allLetterBonus
 	
-	entity.emit_signal("shipKillEarnedPoints", numPoints, entity.position)
+	entity.emit_signal("shipHitEarnedPoints", numPoints, entity.position)
 	
