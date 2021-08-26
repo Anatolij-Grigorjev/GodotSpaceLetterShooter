@@ -71,8 +71,13 @@ func _ready():
 	
 	#running standalone, make mock scene spec
 	if Scenes.activeScene == null:
-		setShipPosition(Direction.RIGHT)
-		starsBG.starsMoveDirection = Direction.RIGHT
+		var randomDirection: int = Utils.getRandom([
+			Direction.RIGHT, 
+			Direction.LEFT, 
+			Direction.DOWN
+		])
+		setShipPosition(randomDirection)
+		starsBG.starsMoveDirection = randomDirection
 		setSceneSpecificaion(Mock.sceneShipTypeQuantities(1, 1, 1))
 	
 	
