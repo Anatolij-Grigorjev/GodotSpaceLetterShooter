@@ -280,48 +280,131 @@ tracks/7/keys = {
 }
 
 [sub_resource type="Animation" id=21]
-resource_name = "invincible_flash"
-length = 0.25
-loop = true
-step = 0.05
+length = 3.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:material:shader")
+tracks/0/path = NodePath("Sprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 11 ) ]
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 0.999999, 0.287175 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -100 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:material:shader_param/mix_coef")
+tracks/1/path = NodePath("Sprite/Thruster:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.15, 0.25 ),
-"transitions": PoolRealArray( 0.406126, 3.73213, 1 ),
-"update": 0,
-"values": [ 0.0, 0.85, 0.0 ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite:material:shader_param/modulate")
+tracks/2/path = NodePath("Sprite:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 0.307786 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.9, 1.1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite/ThrusterHyper:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite/ThrusterHyper:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite:material:shader")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 9 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite:material:shader_param/radius")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 0.287175 ),
 "update": 0,
-"values": [ Color( 0.172549, 0, 0.733333, 1 ) ]
+"values": [ 0.0, 2.5 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Sprite/Thruster:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0.4, 1.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/8/type = "method"
+tracks/8/path = NodePath(".")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "hyperspeedToggled" ],
+"method": "emit_signal"
+} ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Sprite/TransitionThruster:playing")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=22]
 length = 0.4
 step = 0.05
 tracks/0/type = "value"
@@ -351,7 +434,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=23]
 length = 0.4
 step = 0.05
 tracks/0/type = "value"
@@ -419,7 +502,7 @@ tracks/4/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=24]
 length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -601,10 +684,12 @@ frame = 3
 [node name="ShotHit" type="AudioStreamPlayer2D" parent="Sprite/ShotPosition"]
 position = Vector2( -0.0644836, 40.013 )
 stream = ExtResource( 7 )
+volume_db = 8.0
 
 [node name="ShotMiss" type="AudioStreamPlayer2D" parent="Sprite/ShotPosition"]
 position = Vector2( -0.0644836, 40.013 )
 stream = ExtResource( 6 )
+volume_db = 12.0
 
 [node name="ParticlesBattery" type="Node2D" parent="Sprite"]
 script = ExtResource( 5 )
@@ -674,9 +759,9 @@ anims/arrive = SubResource( 15 )
 anims/destroy = SubResource( 16 )
 anims/hit = SubResource( 17 )
 anims/invincible_flash = SubResource( 21 )
-anims/jam = SubResource( 18 )
-anims/shoot = SubResource( 19 )
-anims/transition_wave = SubResource( 20 )
+anims/jam = SubResource( 22 )
+anims/shoot = SubResource( 23 )
+anims/transition_wave = SubResource( 24 )
 
 [node name="Tween" type="Tween" parent="."]
 
