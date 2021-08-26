@@ -189,3 +189,17 @@ Check if a given string is null or empty
 """
 static func isEmptyString(string: String) -> bool:
 	return string == null or string.empty()
+	
+	
+"""
+Get array element at random index. Doesnt modify the input array
+Short circuit if array is of size 1
+"""
+static func getRandom(elems: Array):
+	if (elems == null or elems.empty()):
+		return null
+	if (elems.size() == 1):
+		return elems[0]
+	
+	return elems[randi() % elems.size()]
+	
