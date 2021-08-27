@@ -33,6 +33,7 @@ func exitState(nextState: String):
 func _registerShipHandlers(ship: TextShip) -> void:
 	Stats.connectTextShipStatsSignals(ship)
 	Utils.tryConnect(ship, "textShipCollidedShooter", self, "_onShooterCollided")
+	Utils.tryConnect(ship, "textShipReachedFinish", self, "_onShooterCollided")
 	Utils.tryConnect(ship, "textShipDestroyed", self, "_countDestroyedShip")
 	Utils.tryConnect(ship, "shotFired", fsm, "_onShipShotFired")
 	

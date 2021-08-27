@@ -6,6 +6,7 @@ Controller for ship with a piece of text in a label in a sprite
 """
 signal shotFired(projectile)
 signal textShipCollidedShooter
+signal textShipReachedFinish
 signal textShipDestroyed(text)
 signal shipHit(lettersRemaining)
 signal shipHitEarnedPoints(points, shipPosition)

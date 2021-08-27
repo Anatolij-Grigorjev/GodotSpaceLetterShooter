@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://ships/text_ship/explode_ship.wav" type="AudioStream" id=1]
 [ext_resource path="res://ships/text_ship/ship_fly.wav" type="AudioStream" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://ships/text_ship/IdlingShootState.tscn" type="PackedScene" id=15]
 [ext_resource path="res://ships/text_ship/Target.tscn" type="PackedScene" id=16]
 [ext_resource path="res://components/HitsBar.tscn" type="PackedScene" id=17]
+[ext_resource path="res://ships/text_ship/ReachedFinishState.gd" type="Script" id=18]
 
 [sub_resource type="Curve" id=1]
 max_value = 2.0
@@ -413,6 +414,61 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( -12.8323, -14.8655 ), Vector2( -9.43268, -31.9148 ), Vector2( 3.33854, -32.5816 ), Vector2( 17.2273, -20.7114 ), Vector2( 10.3533, -7.97244 ), Vector2( 0, 0 ) ]
 }
 
+[sub_resource type="Animation" id=14]
+resource_name = "reached_finish"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 0.25 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.172549, 0, 0.733333, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite/Label:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.25 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ":)" ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "textShipCollidedShooter" ],
+"method": "emit_signal"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite/Nose:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
 [sub_resource type="Animation" id=12]
 length = 1.5
 tracks/0/type = "value"
@@ -539,6 +595,11 @@ script = ExtResource( 7 )
 animatorPath = NodePath("../../AnimationPlayer")
 animationName = "collide_ship"
 
+[node name="ReachedFinish" type="Node" parent="TextShipStateMachine"]
+script = ExtResource( 18 )
+animatorPath = NodePath("../../AnimationPlayer")
+animationName = "reached_finish"
+
 [node name="Thrusters" type="Node2D" parent="."]
 
 [node name="ThrusterLeft" type="Particles2D" parent="Thrusters"]
@@ -563,6 +624,7 @@ process_material = SubResource( 4 )
 stream = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 5 )
 
 [node name="Label" type="Label" parent="Sprite"]
@@ -586,6 +648,7 @@ __meta__ = {
 }
 
 [node name="Nose" type="Sprite" parent="Sprite"]
+visible = false
 position = Vector2( 3.95642, 33.8362 )
 texture = ExtResource( 5 )
 region_enabled = true
@@ -640,6 +703,7 @@ anims/collide_ship = SubResource( 8 )
 anims/die = SubResource( 9 )
 anims/hit = SubResource( 10 )
 anims/miss = SubResource( 11 )
+anims/reached_finish = SubResource( 14 )
 anims/shoot = SubResource( 12 )
 
 [node name="ExplosionsBattery" type="Node2D" parent="."]

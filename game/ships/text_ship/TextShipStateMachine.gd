@@ -13,6 +13,7 @@ var idlingActionsWeights: WeightedItems
 
 var lastCollidedProjectileCell: SingleReadVar = SingleReadVar.new(null)
 var lastCollidedShipCell: SingleReadVar = SingleReadVar.new(null)
+var shipReachedFinishCell: SingleReadVar = SingleReadVar.new(false)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -50,6 +51,8 @@ func _getNextState(delta: float) -> String:
 		"IdlingBubble":
 			if lastCollidedShipCell.present():
 				return _getShipAttemptedCollisionState(lastCollidedShipCell.readAndReset())
+			if shipReachedFinishCell.present():
+				return _getShipReachedFinishState()
 				
 			var idlingBubbleState = getState(state)
 			if (idlingBubbleState.idlingOver):
@@ -70,6 +73,8 @@ func _getNextState(delta: float) -> String:
 		"Miss":
 			return _ifAnimationFinishedGoToState("Descending")
 		"CollideShip":
+			return NO_STATE
+		"ReachedFinish":
 			return NO_STATE
 		"Die":
 			return NO_STATE
@@ -92,6 +97,8 @@ func _on_Area2D_area_entered(area: Area2D):
 		lastCollidedProjectileCell.write(areaOwner)
 	if (areaOwner.is_in_group("shooter")):
 		lastCollidedShipCell.write(areaOwner)
+	if(area.is_in_group("textShipFinish")):
+		shipReachedFinishCell.write(true)
 		
 		
 func _getProjectileAttemptedHitState(projectile: Node2D) -> String:
@@ -111,13 +118,19 @@ func _getProjectileAttemptedHitState(projectile: Node2D) -> String:
 func _getShipAttemptedCollisionState(ship: Node2D) -> String:
 	return "CollideShip"
 	
+	
+func _getShipReachedFinishState() -> String:
+	return "ReachedFinish"
+	
 
 func _getLatestAnyCollisionState() -> String:
-	if not lastCollidedShipCell.empty():
+	if lastCollidedShipCell.present():
 		return _getShipAttemptedCollisionState(lastCollidedShipCell.readAndReset())
-	if not lastCollidedProjectileCell.empty():
+	if shipReachedFinishCell.present():
+		return _getShipReachedFinishState()
+	if lastCollidedProjectileCell.present():
 		return _getProjectileAttemptedHitState(lastCollidedProjectileCell.readAndReset())
-		
+	
 	return NO_STATE
 	
 
