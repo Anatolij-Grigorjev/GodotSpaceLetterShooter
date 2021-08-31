@@ -15,7 +15,7 @@ motion_mirroring = Vector2( 600, 700 )
 
 [node name="Sprite" type="Sprite" parent="space"]
 position = Vector2( 640, 360 )
-scale = Vector2( 40, 1 )
+scale = Vector2( 80, 2 )
 texture = ExtResource( 1 )
 
 [node name="BigStars" type="ParallaxLayer" parent="."]
