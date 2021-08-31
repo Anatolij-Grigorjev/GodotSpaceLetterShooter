@@ -23,7 +23,7 @@
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 11 )
 shader_param/modulate = Color( 0.172549, 0, 0.733333, 1 )
-shader_param/mix_coef = 0.0
+shader_param/mix_coef = 0.116573
 
 [sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0.514815, 1 )
@@ -279,7 +279,7 @@ tracks/7/keys = {
 "values": [ Color( 0.819608, 0.0666667, 0.0666667, 1 ) ]
 }
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=18]
 resource_name = "invincible_flash"
 length = 0.25
 loop = true
@@ -321,7 +321,7 @@ tracks/2/keys = {
 "values": [ Color( 0.172549, 0, 0.733333, 1 ) ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=19]
 length = 0.4
 step = 0.05
 tracks/0/type = "value"
@@ -351,7 +351,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=20]
 length = 0.4
 step = 0.05
 tracks/0/type = "value"
@@ -419,7 +419,7 @@ tracks/4/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=21]
 length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -673,10 +673,10 @@ shape = SubResource( 14 )
 anims/arrive = SubResource( 15 )
 anims/destroy = SubResource( 16 )
 anims/hit = SubResource( 17 )
-anims/invincible_flash = SubResource( 21 )
-anims/jam = SubResource( 18 )
-anims/shoot = SubResource( 19 )
-anims/transition_wave = SubResource( 20 )
+anims/invincible_flash = SubResource( 18 )
+anims/jam = SubResource( 19 )
+anims/shoot = SubResource( 20 )
+anims/transition_wave = SubResource( 21 )
 
 [node name="Tween" type="Tween" parent="."]
 

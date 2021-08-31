@@ -62,6 +62,7 @@ func _ready():
 	
 	Utils.tryConnect(shooter, "shotFired", fsm, "_onShipShotFired")
 	Utils.tryConnect(shooter, "chamberEmptied", playerInput, "clearText")
+	Utils.tryConnect(shooter, "shotFired", playerInput, "flashInput")
 	Utils.tryConnect(shooter, "chamberEmptied", self, "_onShooterClearChamber")
 	Utils.tryConnect(shooter, "hyperspeedToggled", self, "_onShooterToggleHyperspeed")
 	Utils.tryConnect(shooter, "shooterHitByShot", self, "_onShooterHitByShot")

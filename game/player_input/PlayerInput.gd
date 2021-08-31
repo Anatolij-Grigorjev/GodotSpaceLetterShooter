@@ -6,6 +6,7 @@ while shoot-typing
 
 onready var label: Label = $Panel/Label
 onready var audioPlayer: RandomAudioPlayer = $RandomTypingSound
+onready var anim: AnimationPlayer = $AnimationPlayer
 
 
 func _ready():
@@ -20,3 +21,7 @@ func addTypedLetter(letter: String) -> void:
 
 func clearText():
 	label.text = ""
+	
+	
+func flashInput(ignored):
+	anim.play("flash_input")
