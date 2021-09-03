@@ -8,7 +8,7 @@ Creates new Animation instance and sets its length to provided argument
 value. 
 Returns created animation instance
 """
-static func createAnimationOfLength(length: float = 1.0) -> Animation:
+static func createAnimationOfLength(length: float) -> Animation:
 	var animation = Animation.new()
 	animation.length = length
 	return animation
