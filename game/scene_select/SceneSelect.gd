@@ -13,7 +13,7 @@ export(Dictionary) var sceneTypeLoadPaths: Dictionary = {
 
 
 onready var cellsGrid: GridContainer = $Panel/VBoxContainer/MarginContainer/SceneCells
-onready var totalRunningScore: Control = $Panel/TotalRunningScore
+onready var totalRunningScore: Control = $Panel/VBoxContainer/HBoxContainer/TotalRunningScore
 
 
 func _ready():

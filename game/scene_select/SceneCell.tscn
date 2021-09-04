@@ -6,7 +6,7 @@
 [ext_resource path="res://scene_select/SceneCell.gd" type="Script" id=4]
 [ext_resource path="res://stars/particle.png" type="Texture" id=5]
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.419608, 0.419608, 0.415686, 1 )
 border_width_left = 5
 border_width_top = 5
@@ -31,14 +31,13 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id=8]
+[sub_resource type="StyleBoxFlat" id=3]
 content_margin_left = 5.0
 content_margin_right = 5.0
 content_margin_bottom = 5.0
 draw_center = false
 
-[sub_resource type="Animation" id=3]
-resource_name = "hover"
+[sub_resource type="Animation" id=4]
 length = 0.25
 step = 0.05
 tracks/0/type = "value"
@@ -78,8 +77,7 @@ tracks/2/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.05 ) ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "leave"
+[sub_resource type="Animation" id=5]
 length = 0.25
 step = 0.05
 tracks/0/type = "value"
@@ -119,8 +117,7 @@ tracks/2/keys = {
 "values": [ Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "select"
+[sub_resource type="Animation" id=6]
 length = 0.75
 step = 0.05
 tracks/0/type = "value"
@@ -178,7 +175,7 @@ margin_bottom = 350.0
 rect_pivot_offset = Vector2( 175, 175 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 6 )
+custom_styles/panel = SubResource( 1 )
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -187,17 +184,19 @@ __meta__ = {
 [node name="OuterMargin" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 20.0
-margin_top = 20.0
-margin_right = -20.0
-margin_bottom = -10.0
+custom_constants/margin_right = 15
+custom_constants/margin_top = 15
+custom_constants/margin_left = 15
+custom_constants/margin_bottom = 15
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="OuterMargin"]
-margin_right = 310.0
-margin_bottom = 320.0
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 335.0
+margin_bottom = 335.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 20
@@ -207,7 +206,7 @@ __meta__ = {
 
 [node name="SceneTitle" type="Label" parent="OuterMargin/VBoxContainer"]
 modulate = Color( 0.839216, 0.960784, 0.0313726, 1 )
-margin_right = 310.0
+margin_right = 320.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -268,7 +267,7 @@ __meta__ = {
 
 [node name="ShipRowsContainer" type="VBoxContainer" parent="OuterMargin/VBoxContainer"]
 margin_top = 40.0
-margin_right = 310.0
+margin_right = 320.0
 margin_bottom = 281.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -276,13 +275,13 @@ size_flags_stretch_ratio = 15.0
 custom_constants/separation = 15
 
 [node name="FastShipsRow" type="HBoxContainer" parent="OuterMargin/VBoxContainer/ShipRowsContainer"]
-margin_right = 310.0
+margin_right = 320.0
 margin_bottom = 70.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Icon" type="TextureRect" parent="OuterMargin/VBoxContainer/ShipRowsContainer/FastShipsRow"]
-margin_right = 151.0
+margin_right = 156.0
 margin_bottom = 70.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -292,8 +291,8 @@ expand = true
 stretch_mode = 6
 
 [node name="Times" type="Label" parent="OuterMargin/VBoxContainer/ShipRowsContainer/FastShipsRow"]
-margin_left = 155.0
-margin_right = 230.0
+margin_left = 160.0
+margin_right = 238.0
 margin_bottom = 70.0
 size_flags_horizontal = 3
 size_flags_vertical = 5
@@ -303,8 +302,8 @@ valign = 1
 uppercase = true
 
 [node name="Qnty" type="Label" parent="OuterMargin/VBoxContainer/ShipRowsContainer/FastShipsRow"]
-margin_left = 234.0
-margin_right = 310.0
+margin_left = 242.0
+margin_right = 320.0
 margin_bottom = 70.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -315,13 +314,13 @@ uppercase = true
 
 [node name="ShiledShipsRow" type="HBoxContainer" parent="OuterMargin/VBoxContainer/ShipRowsContainer"]
 margin_top = 85.0
-margin_right = 310.0
+margin_right = 320.0
 margin_bottom = 155.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Icon" type="TextureRect" parent="OuterMargin/VBoxContainer/ShipRowsContainer/ShiledShipsRow"]
-margin_right = 151.0
+margin_right = 156.0
 margin_bottom = 70.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -331,8 +330,8 @@ expand = true
 stretch_mode = 6
 
 [node name="Times" type="Label" parent="OuterMargin/VBoxContainer/ShipRowsContainer/ShiledShipsRow"]
-margin_left = 155.0
-margin_right = 230.0
+margin_left = 160.0
+margin_right = 238.0
 margin_bottom = 70.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -342,8 +341,8 @@ valign = 1
 uppercase = true
 
 [node name="Qnty" type="Label" parent="OuterMargin/VBoxContainer/ShipRowsContainer/ShiledShipsRow"]
-margin_left = 234.0
-margin_right = 310.0
+margin_left = 242.0
+margin_right = 320.0
 margin_bottom = 70.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -354,13 +353,13 @@ uppercase = true
 
 [node name="ShooterShipsRow" type="HBoxContainer" parent="OuterMargin/VBoxContainer/ShipRowsContainer"]
 margin_top = 170.0
-margin_right = 310.0
+margin_right = 320.0
 margin_bottom = 241.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Icon" type="TextureRect" parent="OuterMargin/VBoxContainer/ShipRowsContainer/ShooterShipsRow"]
-margin_right = 151.0
+margin_right = 156.0
 margin_bottom = 71.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -370,8 +369,8 @@ expand = true
 stretch_mode = 6
 
 [node name="Times" type="Label" parent="OuterMargin/VBoxContainer/ShipRowsContainer/ShooterShipsRow"]
-margin_left = 155.0
-margin_right = 230.0
+margin_left = 160.0
+margin_right = 238.0
 margin_bottom = 71.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -381,8 +380,8 @@ valign = 1
 uppercase = true
 
 [node name="Qnty" type="Label" parent="OuterMargin/VBoxContainer/ShipRowsContainer/ShooterShipsRow"]
-margin_left = 234.0
-margin_right = 310.0
+margin_left = 242.0
+margin_right = 320.0
 margin_bottom = 71.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -393,7 +392,7 @@ uppercase = true
 
 [node name="CorpusTextContainer" type="HBoxContainer" parent="OuterMargin/VBoxContainer"]
 margin_top = 301.0
-margin_right = 310.0
+margin_right = 320.0
 margin_bottom = 320.0
 
 [node name="CorpusLbl" type="Label" parent="OuterMargin/VBoxContainer/CorpusTextContainer"]
@@ -401,7 +400,7 @@ modulate = Color( 0.839216, 0.960784, 0.0313726, 1 )
 margin_right = 112.0
 margin_bottom = 19.0
 size_flags_vertical = 1
-custom_styles/normal = SubResource( 8 )
+custom_styles/normal = SubResource( 3 )
 text = "corpus source:  "
 align = 2
 valign = 1
@@ -412,11 +411,11 @@ __meta__ = {
 [node name="CorpusPathValueLbl" type="Label" parent="OuterMargin/VBoxContainer/CorpusTextContainer"]
 modulate = Color( 0.839216, 0.960784, 0.0313726, 1 )
 margin_left = 116.0
-margin_right = 310.0
+margin_right = 320.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_styles/normal = SubResource( 8 )
+custom_styles/normal = SubResource( 3 )
 text = "'corpus_path.txt'"
 valign = 1
 __meta__ = {
@@ -424,9 +423,9 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/hover = SubResource( 3 )
-anims/leave = SubResource( 4 )
-anims/select = SubResource( 5 )
+anims/hover = SubResource( 4 )
+anims/leave = SubResource( 5 )
+anims/select = SubResource( 6 )
 
 [node name="TouchPanel" type="Panel" parent="."]
 self_modulate = Color( 1, 1, 1, 0 )
