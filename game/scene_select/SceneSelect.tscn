@@ -139,6 +139,8 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+margin_right = 1230.0
+margin_bottom = 22.0
 
 [node name="TotalRunningScore" parent="Panel/VBoxContainer/HBoxContainer" instance=ExtResource( 4 )]
 margin_right = 151.0

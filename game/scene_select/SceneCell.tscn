@@ -180,6 +180,7 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+sceneDone = true
 
 [node name="OuterMargin" type="MarginContainer" parent="."]
 anchor_right = 1.0
@@ -220,7 +221,6 @@ __meta__ = {
 }
 
 [node name="SceneDoneMarker" type="HBoxContainer" parent="OuterMargin/VBoxContainer/SceneTitle"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -232,7 +232,7 @@ __meta__ = {
 
 [node name="Right" type="TextureRect" parent="OuterMargin/VBoxContainer/SceneTitle/SceneDoneMarker"]
 modulate = Color( 0.223529, 0.917647, 0.054902, 1 )
-margin_right = 44.0
+margin_right = 45.0
 margin_bottom = 20.0
 rect_pivot_offset = Vector2( 24.2922, 26.2539 )
 size_flags_horizontal = 3
@@ -245,8 +245,8 @@ __meta__ = {
 
 [node name="VSeparator" type="VSeparator" parent="OuterMargin/VBoxContainer/SceneTitle/SceneDoneMarker"]
 self_modulate = Color( 1, 1, 1, 0 )
-margin_left = 44.0
-margin_right = 265.0
+margin_left = 45.0
+margin_right = 273.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -254,8 +254,8 @@ size_flags_stretch_ratio = 5.0
 
 [node name="Left" type="TextureRect" parent="OuterMargin/VBoxContainer/SceneTitle/SceneDoneMarker"]
 modulate = Color( 0.223529, 0.917647, 0.054902, 1 )
-margin_left = 265.0
-margin_right = 310.0
+margin_left = 273.0
+margin_right = 320.0
 margin_bottom = 20.0
 rect_pivot_offset = Vector2( 24.2922, 26.2539 )
 size_flags_horizontal = 3
@@ -391,6 +391,7 @@ valign = 1
 uppercase = true
 
 [node name="CorpusTextContainer" type="HBoxContainer" parent="OuterMargin/VBoxContainer"]
+modulate = Color( 0, 0, 0, 1 )
 margin_top = 301.0
 margin_right = 320.0
 margin_bottom = 320.0
@@ -427,17 +428,7 @@ anims/hover = SubResource( 4 )
 anims/leave = SubResource( 5 )
 anims/select = SubResource( 6 )
 
-[node name="TouchPanel" type="Panel" parent="."]
-self_modulate = Color( 1, 1, 1, 0 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
 [node name="LevelDoneOutline" type="Panel" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 175, 175 )
@@ -447,4 +438,13 @@ custom_styles/panel = SubResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false,
 "_editor_description_": ""
+}
+
+[node name="TouchPanel" type="Panel" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
 }
