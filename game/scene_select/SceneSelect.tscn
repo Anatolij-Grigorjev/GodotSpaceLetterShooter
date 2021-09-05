@@ -114,6 +114,14 @@ margin_top = -233.879
 margin_right = -95.02
 margin_bottom = -193.879
 
+[node name="GlowingStar11" parent="SpaceBG" instance=ExtResource( 3 )]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -470.689
+margin_top = 17.9454
+margin_right = -430.689
+margin_bottom = 57.9453
+
 [node name="Panel" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
