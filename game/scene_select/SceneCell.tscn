@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scene_select/icon_fast.png" type="Texture" id=1]
 [ext_resource path="res://scene_select/icon_shield.png" type="Texture" id=2]
 [ext_resource path="res://scene_select/icon_shoot.png" type="Texture" id=3]
 [ext_resource path="res://scene_select/SceneCell.gd" type="Script" id=4]
 [ext_resource path="res://stars/particle.png" type="Texture" id=5]
+[ext_resource path="res://scene_select/SceneLock.tscn" type="PackedScene" id=6]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.419608, 0.419608, 0.415686, 1 )
@@ -448,3 +449,9 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+
+[node name="SceneLock" parent="." instance=ExtResource( 6 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 0.0
+margin_bottom = 0.0
