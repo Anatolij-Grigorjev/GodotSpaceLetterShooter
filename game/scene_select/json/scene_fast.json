@@ -2,6 +2,7 @@
 	"id": 1,
 	"name": "FASTTRACK",
 	"type": "space",
+	"unlockPoints": 600,
 	"bgColor": {
 		"a": 1.0,
 		"b": 0.93,

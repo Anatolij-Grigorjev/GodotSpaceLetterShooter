@@ -3,6 +3,7 @@
 	"name": "SHIELDED",
 	"type": "space",
 	"wordsCorpusPath": "corpus_same_letter.txt",
+	"unlockPoints": 1600,
 	"bgColor": {
 		"a": 1.0,
 		"b": 0.99,

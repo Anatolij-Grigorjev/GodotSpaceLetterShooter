@@ -128,6 +128,7 @@ static func parseJSONSceneSpec(sceneSpecJSON: Dictionary) -> SceneSpec:
 	spec.id = sceneSpecJSON.id
 	spec.type = sceneSpecJSON.type
 	spec.sceneName = sceneSpecJSON.name
+	spec.unlockPoints = sceneSpecJSON.unlockPoints
 	spec.wordsCorpusPath = sceneSpecJSON.get('wordsCorpusPath', "")
 	spec.sceneBgColor = parseJSONColor(sceneSpecJSON.bgColor)
 	spec.smallestShipsWave = sceneSpecJSON.minShipsWave

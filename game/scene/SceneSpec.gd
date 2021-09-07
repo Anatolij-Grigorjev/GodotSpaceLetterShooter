@@ -8,6 +8,7 @@ Parameters describing how to construct a scene:
 var id: int
 var type: String
 var sceneName: String
+var unlockPoints: int
 var wordsCorpusPath: String
 var sceneBgColor: Color
 var totalShips: int
@@ -23,6 +24,7 @@ func _init():
 	id = -1
 	type = "space"
 	sceneName = "<EMPTY>"
+	unlockPoints = 0
 	wordsCorpusPath = ""
 	sceneBgColor = Color.black
 	totalShips = 0

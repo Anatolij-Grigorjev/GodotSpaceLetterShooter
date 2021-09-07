@@ -10,10 +10,10 @@ border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
 border_color = Color( 1, 1, 1, 1 )
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [node name="SceneLock" type="Panel"]
 margin_right = 256.0
@@ -33,18 +33,18 @@ __meta__ = {
 
 [node name="LockImage" type="TextureRect" parent="VBoxContainer"]
 margin_right = 256.0
-margin_bottom = 226.0
+margin_bottom = 210.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-size_flags_stretch_ratio = 9.0
+size_flags_stretch_ratio = 5.0
 texture = ExtResource( 1 )
-stretch_mode = 6
+stretch_mode = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="UnlockPointsRequirement" type="Label" parent="VBoxContainer"]
-margin_top = 230.0
+margin_top = 214.0
 margin_right = 256.0
 margin_bottom = 256.0
 size_flags_horizontal = 3

@@ -10,6 +10,7 @@ const CURSOR_SCENE_SELECTED = preload("res://white_rect.png")
 
 
 export(bool) var sceneDone: bool = false setget markSceneDone
+export(bool) var sceneLocked: bool = false setget markSceneLocked
 export(String) var sceneCorpusSource: String = "corpus_path.txt" setget setCorpusPath
 
 
@@ -34,6 +35,13 @@ func _ready():
 	Utils.tryConnect($TouchPanel, "mouse_entered", self, "_onMouseEnteredArea")
 	Utils.tryConnect($TouchPanel, "mouse_exited", self, "_onMouseExitedArea")
 	
+	
+
+func markSceneLocked(locked: bool):
+	sceneLocked = locked
+	if ($SceneLock):
+		$SceneLock.visible = locked
+
 	
 func markSceneDone(done: bool):
 	sceneDone = done
@@ -61,9 +69,13 @@ func _process(delta):
 		_selectThisScene()
 	
 
+func isUnlockedWithPointsTotal(totalScore: int) -> bool:
+	return $SceneLock.pointsRequirementAmount <= totalScore
+
 
 func setData(sceneSpec: SceneSpec):
 	self.sceneSpec = sceneSpec
+	$SceneLock.pointsRequirementAmount = sceneSpec.unlockPoints
 	$OuterMargin/VBoxContainer/SceneTitle.text = "%s\nWaves: %s - %s ship(-s)" % [
 		sceneSpec.sceneName,
 		sceneSpec.smallestShipsWave,

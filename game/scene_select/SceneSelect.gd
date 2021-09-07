@@ -26,6 +26,7 @@ func _ready():
 		var sceneCell = SceneCellScn.instance()
 		sceneCell.setData(spec)
 		sceneCell.sceneDone = Scenes.sceneCompleteTracking[spec.id]
+		sceneCell.sceneLocked = not sceneCell.isUnlockedWithPointsTotal(GameConfig.totalShooterScore)
 		cellsGrid.add_child(sceneCell)
 		Utils.tryConnect(sceneCell, "sceneSelected", self, "_onSceneCellSceneSelected")
 	
