@@ -204,3 +204,22 @@ static func getRandom(elems: Array):
 	
 	return elems[randi() % elems.size()]
 	
+	
+"""
+Attempt to map provided list of objects into a list of same ordering containing 
+the object property value at provided proerty path
+if the path is invalid for any object in the input list, a 'null' is set for 
+that element
+Always returns some kind of list, never null
+"""
+static func mapToProp(objectsArray: Array, propPath: String) -> Array:
+	if objectsArray == null or objectsArray.empty():
+		return []
+	var propValues = [].resize(objectsArray.size())
+	for idx in range(objectsArray.size()):
+		var object = objectsArray[idx]
+		var propValue = object.get(propPath)
+		propValues[idx] = propValue
+		
+	return propValues
+	

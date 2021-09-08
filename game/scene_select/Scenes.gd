@@ -22,6 +22,7 @@ func _ready():
 	#mark all scenes unfinished
 	for spec in loadedSceneSpecs:
 		scenesStateTracking[spec.id] = {
+			"spec": spec,
 			"complete": false,
 			"unlocked": false
 		}
@@ -97,4 +98,18 @@ func _unfadeBlack():
 	
 	
 func _unlockScenesIfEnoughPoints():
-	pass
+	var lockedSceneSpecIds: Array = _findLockedSceneSpecIds()
+	for specId in lockedSceneSpecIds:
+		if scenesStateTracking[specId].spec.unlockPoints <= GameConfig.totalShooterScore:
+			newlyUnlockedScenesIds.append(specId)
+	if not newlyUnlockedScenesIds.empty():
+		print("Unlocking %s more scenes!" % newlyUnlockedScenesIds.size())
+
+
+func _findLockedSceneSpecIds() -> Array:
+	var lockedSceneSpecIds = []
+	for specId in scenesStateTracking:
+		var sceneState = scenesStateTracking[specId]
+		if not sceneState.unlocked:
+			lockedSceneSpecIds.append(specId)
+	return lockedSceneSpecIds

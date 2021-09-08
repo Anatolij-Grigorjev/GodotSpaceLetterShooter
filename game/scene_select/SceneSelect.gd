@@ -54,6 +54,7 @@ func _unlockNewSceneCells():
 	if cellsToUnlock.empty():
 		return
 	cellsToUnlock.sort_custom(self, "_sceneCellsByPointsRequirementSort")
+	yield(get_tree().create_timer(1.0), "timeout")
 	for sceneCell in cellsToUnlock:
 		var cellLockAnimator = sceneCell.get_node("SceneLock").anim
 		cellLockAnimator.play("unlock")
