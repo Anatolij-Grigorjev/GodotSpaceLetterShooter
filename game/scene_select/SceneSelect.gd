@@ -25,8 +25,8 @@ func _ready():
 	for spec in Scenes.loadedSceneSpecs:
 		var sceneCell = SceneCellScn.instance()
 		sceneCell.setData(spec)
-		sceneCell.sceneDone = Scenes.sceneCompleteTracking[spec.id]
-		sceneCell.sceneLocked = not sceneCell.isUnlockedWithPointsTotal(GameConfig.totalShooterScore)
+		sceneCell.sceneDone = Scenes.scenesStateTracking[spec.id].complete
+		sceneCell.sceneLocked = Scenes.scenesStateTracking[spec.id].unlocked
 		cellsGrid.add_child(sceneCell)
 		Utils.tryConnect(sceneCell, "sceneSelected", self, "_onSceneCellSceneSelected")
 	
@@ -36,6 +36,8 @@ func _ready():
 		placeholder.size_flags_vertical = SIZE_EXPAND_FILL
 		cellsGrid.add_child(placeholder)
 	
+	call_deferred("_unlockNewSceneCells")
+	
 	
 func _clearRefSizeCells():
 	for child in cellsGrid.get_children():
@@ -44,3 +46,33 @@ func _clearRefSizeCells():
 
 func _onSceneCellSceneSelected(sceneSpec: SceneSpec):
 	Scenes.switchToShipScene(sceneTypeLoadPaths[sceneSpec.type], sceneSpec)
+	
+	
+func _unlockNewSceneCells():
+	var cellsToUnlock: Array = _findSceneCellsWithSpecIds(Scenes.newlyUnlockedScenesIds)
+	Scenes.newlyUnlockedScenesIds.clear()
+	if cellsToUnlock.empty():
+		return
+	cellsToUnlock.sort_custom(self, "_sceneCellsByPointsRequirementSort")
+	for sceneCell in cellsToUnlock:
+		var cellLockAnimator = sceneCell.get_node("SceneLock").anim
+		cellLockAnimator.play("unlock")
+		yield(cellLockAnimator, "animation_finished")
+		Scenes.scenesStateTracking[sceneCell.sceneSpec.id].unlocked = true
+		sceneCell.sceneLocked = false
+	
+	
+func _findSceneCellsWithSpecIds(specIds: Array) -> Array:
+	var foundCells = []
+	for sceneCell in cellsGrid.get_child_nodes():
+		if (sceneCell.sceneSpec.id in specIds):
+			foundCells.push_back(sceneCell)
+	return foundCells
+	
+	
+func _sceneCellsByPointsRequirementSort(sceneCell1: Control, sceneCell2: Control) -> bool:
+	if sceneCell1.sceneSpec.unlockPoints < sceneCell2.sceneSpec.unlockPoints:
+		return true
+	else:
+		return false
+	

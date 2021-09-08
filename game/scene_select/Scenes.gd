@@ -7,7 +7,9 @@ export(Array, String) var sceneSpecPaths: Array = []
 
 var loadedSceneSpecs: Array = []
 
-var sceneCompleteTracking: Dictionary = {}
+var scenesStateTracking: Dictionary = {}
+
+var newlyUnlockedScenesIds: Array = []
 
 onready var anim = $AnimationPlayer
 
@@ -19,7 +21,10 @@ func _ready():
 	loadedSceneSpecs = _loadSceneSpecs()
 	#mark all scenes unfinished
 	for spec in loadedSceneSpecs:
-		sceneCompleteTracking[spec.id] = false
+		scenesStateTracking[spec.id] = {
+			"complete": false,
+			"unlocked": false
+		}
 	call_deferred("_setFirstActiveScene")
 		
 		
@@ -43,12 +48,14 @@ func _setFirstActiveScene():
 	
 	
 func _onSceneCleared(sceneSpecId: int):
-	sceneCompleteTracking[sceneSpecId] = true
+	scenesStateTracking[sceneSpecId].complete = true
 	_switchToSceneSelect()
+	_unlockScenesIfEnoughPoints()
 	
 
 func _onSceneFailed(sceneSpecId: int):
 	_switchToSceneSelect()
+	_unlockScenesIfEnoughPoints()
 	
 	
 func _switchToSceneSelect():
@@ -87,3 +94,7 @@ func _fadeToBlackAndWait():
 
 func _unfadeBlack():
 	anim.play_backwards("fade")
+	
+	
+func _unlockScenesIfEnoughPoints():
+	pass

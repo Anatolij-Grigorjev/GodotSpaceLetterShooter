@@ -6,6 +6,10 @@ Panel with a lock and points requirement drawn on it
 export(int) var pointsRequirementAmount: int = 500 setget _setReqAmount
 export(String) var pointsRequirementFormat: String = "unlocks at [%04d] pts." setget _setReqFormat
 
+
+onready var anim: AnimationPlayer = $AnimationPlayer
+
+
 func _ready():
 	pass
 	
