@@ -26,7 +26,7 @@ func _ready():
 		var sceneCell = SceneCellScn.instance()
 		sceneCell.setData(spec)
 		sceneCell.sceneDone = Scenes.scenesStateTracking[spec.id].complete
-		sceneCell.sceneLocked = Scenes.scenesStateTracking[spec.id].unlocked
+		sceneCell.sceneLocked = not Scenes.scenesStateTracking[spec.id].unlocked
 		cellsGrid.add_child(sceneCell)
 		Utils.tryConnect(sceneCell, "sceneSelected", self, "_onSceneCellSceneSelected")
 	
@@ -53,6 +53,9 @@ func _unlockNewSceneCells():
 	Scenes.newlyUnlockedScenesIds.clear()
 	if cellsToUnlock.empty():
 		return
+	var newScenesAnim = $ScenesUnlockedPanel/AnimationPlayer
+	newScenesAnim.play("new_scenes")
+	yield(newScenesAnim, "animation_finished")
 	cellsToUnlock.sort_custom(self, "_sceneCellsByPointsRequirementSort")
 	yield(get_tree().create_timer(1.0), "timeout")
 	for sceneCell in cellsToUnlock:
@@ -65,9 +68,9 @@ func _unlockNewSceneCells():
 	
 func _findSceneCellsWithSpecIds(specIds: Array) -> Array:
 	var foundCells = []
-	for sceneCell in cellsGrid.get_child_nodes():
-		if (sceneCell.sceneSpec.id in specIds):
-			foundCells.push_back(sceneCell)
+	for sceneCell in cellsGrid.get_children():
+		if ("sceneSpec" in sceneCell and sceneCell.sceneSpec.id in specIds):
+			foundCells.append(sceneCell)
 	return foundCells
 	
 	

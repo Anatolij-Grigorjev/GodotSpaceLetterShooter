@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://white_rect.png" type="Texture" id=1]
 [ext_resource path="res://scene_select/SceneSelect.gd" type="Script" id=2]
 [ext_resource path="res://scene_select/GlowingStar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scene/gui/TotalRunningScore.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scene_select/ScenesUnlockedPanel.tscn" type="PackedScene" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 0.729412 )
@@ -222,3 +223,5 @@ margin_right = 920.0
 margin_bottom = 628.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="ScenesUnlockedPanel" parent="." instance=ExtResource( 5 )]

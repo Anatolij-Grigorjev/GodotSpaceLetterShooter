@@ -26,6 +26,7 @@ func _ready():
 			"complete": false,
 			"unlocked": false
 		}
+	call_deferred("_unlockScenesIfEnoughPoints")
 	call_deferred("_setFirstActiveScene")
 		
 		
