@@ -53,17 +53,18 @@ func _unlockNewSceneCells():
 	Scenes.newlyUnlockedScenesIds.clear()
 	if cellsToUnlock.empty():
 		return
+	yield(get_tree().create_timer(0.5), "timeout")
 	var newScenesAnim = $ScenesUnlockedPanel/AnimationPlayer
 	newScenesAnim.play("new_scenes")
 	yield(newScenesAnim, "animation_finished")
 	cellsToUnlock.sort_custom(self, "_sceneCellsByPointsRequirementSort")
 	yield(get_tree().create_timer(1.0), "timeout")
 	for sceneCell in cellsToUnlock:
-		var cellLockAnimator = sceneCell.get_node("SceneLock").anim
-		cellLockAnimator.play("unlock")
-		yield(cellLockAnimator, "animation_finished")
+		var cellLock = sceneCell.get_node("SceneLock")
+		yield(cellLock.playUnlockSequence(), "completed")
 		Scenes.scenesStateTracking[sceneCell.sceneSpec.id].unlocked = true
 		sceneCell.sceneLocked = false
+		yield(get_tree().create_timer(0.5), "timeout")
 	
 	
 func _findSceneCellsWithSpecIds(specIds: Array) -> Array:
