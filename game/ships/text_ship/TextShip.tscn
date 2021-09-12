@@ -414,7 +414,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( -12.8323, -14.8655 ), Vector2( -9.43268, -31.9148 ), Vector2( 3.33854, -32.5816 ), Vector2( 17.2273, -20.7114 ), Vector2( 10.3533, -7.97244 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=12]
 resource_name = "reached_finish"
 length = 0.5
 step = 0.05
@@ -469,7 +469,7 @@ tracks/3/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=13]
 length = 1.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite/Nose:self_modulate")
@@ -546,7 +546,7 @@ tracks/5/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Curve" id=13]
+[sub_resource type="Curve" id=14]
 max_value = 4.0
 _data = [ Vector2( 0, 4 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.389741 ), 0.0, 0.0, 0, 0 ]
 
@@ -703,8 +703,8 @@ anims/collide_ship = SubResource( 8 )
 anims/die = SubResource( 9 )
 anims/hit = SubResource( 10 )
 anims/miss = SubResource( 11 )
-anims/reached_finish = SubResource( 14 )
-anims/shoot = SubResource( 12 )
+anims/reached_finish = SubResource( 12 )
+anims/shoot = SubResource( 13 )
 
 [node name="ExplosionsBattery" type="Node2D" parent="."]
 
@@ -725,7 +725,7 @@ initial_velocity_random = 0.5
 angular_velocity = 45.0
 angular_velocity_random = 0.5
 orbit_velocity_random = 0.5
-scale_amount_curve = SubResource( 13 )
+scale_amount_curve = SubResource( 14 )
 color = Color( 0.819608, 0.0666667, 0.0666667, 1 )
 __meta__ = {
 "_editor_description_": ""
@@ -749,7 +749,7 @@ initial_velocity_random = 0.5
 angular_velocity = 45.0
 angular_velocity_random = 0.5
 orbit_velocity_random = 0.5
-scale_amount_curve = SubResource( 13 )
+scale_amount_curve = SubResource( 14 )
 color = Color( 0.819608, 0.0666667, 0.0666667, 1 )
 __meta__ = {
 "_editor_description_": ""
@@ -773,7 +773,7 @@ initial_velocity_random = 0.5
 angular_velocity = 45.0
 angular_velocity_random = 0.5
 orbit_velocity_random = 0.5
-scale_amount_curve = SubResource( 13 )
+scale_amount_curve = SubResource( 14 )
 color = Color( 0.819608, 0.0666667, 0.0666667, 1 )
 __meta__ = {
 "_editor_description_": ""
@@ -797,7 +797,7 @@ initial_velocity_random = 0.5
 angular_velocity = 45.0
 angular_velocity_random = 0.5
 orbit_velocity_random = 0.5
-scale_amount_curve = SubResource( 13 )
+scale_amount_curve = SubResource( 14 )
 color = Color( 0.819608, 0.0666667, 0.0666667, 1 )
 __meta__ = {
 "_editor_description_": ""

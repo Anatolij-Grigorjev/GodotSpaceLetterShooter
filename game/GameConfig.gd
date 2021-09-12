@@ -5,4 +5,4 @@ Game-wide configuration options
 
 var DEFAULT_WORDS_CORPUS_PATH = "corpus.txt"
 var sceneBGMusicEnabled = true
-var totalShooterScore = 0750
+var totalShooterScore = 0

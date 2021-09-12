@@ -24,7 +24,7 @@ func _ready():
 		scenesStateTracking[spec.id] = {
 			"spec": spec,
 			"complete": false,
-			"unlocked": false
+			"unlocked": GameConfig.totalShooterScore >= spec.unlockPoints
 		}
 	call_deferred("_unlockScenesIfEnoughPoints")
 	call_deferred("_setFirstActiveScene")
