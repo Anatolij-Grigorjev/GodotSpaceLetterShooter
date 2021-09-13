@@ -624,7 +624,6 @@ process_material = SubResource( 4 )
 stream = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 5 )
 
 [node name="Label" type="Label" parent="Sprite"]
@@ -632,10 +631,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -112.783
-margin_top = -92.8866
-margin_right = -32.7828
-margin_bottom = -78.8866
+margin_left = -109.783
+margin_top = -97.8866
+margin_right = -29.7828
+margin_bottom = -83.8866
 custom_styles/normal = SubResource( 5 )
 custom_colors/font_color = Color( 0.945098, 1, 0, 1 )
 custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
