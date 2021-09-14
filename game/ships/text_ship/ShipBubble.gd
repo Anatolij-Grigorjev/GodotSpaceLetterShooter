@@ -11,6 +11,7 @@ export(Color) var bubbleMaxHitsColor = Color.green
 onready var anim: AnimationPlayer = $AnimationPlayer
 onready var sprite: Sprite = $Sprite
 onready var rechargeTimer: Timer = $RechargeTimer
+onready var hitsBar: ProgressBar = $HitsBar
 
 
 var bubbleHit: bool = false
@@ -40,7 +41,23 @@ func _setMaxHitPoints(newMaxHitPoints: int):
 	bubbleMaxHits = newMaxHitPoints
 	bubbleHitsCurrent = 0
 	currentBubbleDamageColor = bubbleMaxHitsColor
+	_setupHitsBar(bubbleMaxHits)
 	_updateBubbleColor()
+	
+	
+func _setupHitsBar(maxHits: int):
+	$HitsBar.max_value = maxHits
+	_adjustHitsBarRemainingShieldHits(maxHits)
+	$HitsBar.visible = false
+	
+
+func _adjustHitsBarRemainingShieldHits(hitsRemaining: int):
+	$HitsBar.value = hitsRemaining
+	$HitsBar.visible = true
+	yield(get_tree().create_timer(0.5), "timeout")
+	$HitsBar.visible = false
+	if (hitsRemaining <= 0):
+		$HitsBar.visible = false
 
 
 func _on_Area2D_area_entered(area: Area2D):
@@ -61,6 +78,7 @@ func _hitBubble(hitsReceived: int):
 	bubbleHitsCurrent += hitsReceived
 	var hitsRemaining = max(0, bubbleMaxHits - bubbleHitsCurrent)
 	emit_signal("bubbleHit", hitsRemaining)
+	_adjustHitsBarRemainingShieldHits(hitsRemaining)
 	if (hitsRemaining > 0):
 		if (rechargeTimer.is_stopped()):
 			rechargeTimer.start()

@@ -10,7 +10,6 @@ signal shotLettersDepleted(lettersLeft)
 export(PackedScene) var projectileScn
 export(int, LAYERS_2D_PHYSICS) var projectileCollisionMask: int = 0
 export(float) var projectileSpeed: float = 150
-export(float) var idleTimeInShooting: float = 1.6
 export(int) var maxShotLength: int = 2
 
 
@@ -25,7 +24,6 @@ func processState(delta: float):
 func enterState(prevState: String):
 	.enterState(prevState)
 	entity.anim.play("shoot")
-	remainingIdleTime = idleTimeInShooting
 	
 	
 func exitState(nextState: String):

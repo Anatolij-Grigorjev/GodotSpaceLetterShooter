@@ -21,7 +21,6 @@ export(int) var perLetterBonusPoints: int = 41
 
 onready var fsm: StateMachine = $TextShipStateMachine
 onready var sprite: Sprite = $Sprite
-onready var projectilePosition: Position2D = $Sprite/Nose/ProjectilePosition
 onready var label: Label = $Sprite/Label
 onready var bubble = $Sprite/ShipBubble
 onready var anim: AnimationPlayer = $AnimationPlayer
@@ -59,7 +58,6 @@ func prepare(text: String, startPosition: Vector2, shipPath: Array, limiters: Sc
 	$TextShipStateMachine/Descending.descendPath = shipPath
 	speed = limiters.shipSpeed
 	$Sprite/ShipBubble.setInitialHitPoints(limiters.shieldHitPoints)
-	_setupShieldHitsBar(limiters.shieldHitPoints)
 	shipHasShield = limiters.shieldHitPoints > 0
 	var shipWillShoot := limiters.shootInclination > 0
 	actionWeights = {
@@ -68,16 +66,6 @@ func prepare(text: String, startPosition: Vector2, shipPath: Array, limiters: Sc
 		"IdlingShoot": limiters.shootInclination
 	}
 	
-	
-func _setupShieldHitsBar(maxHits: int):
-	$Sprite/ShipBubble/HitsBar.max_value = maxHits
-	_adjustRemainingShieldHits(maxHits)
-	$Sprite/ShipBubble/HitsBar.visible = false
-	
-	Utils.tryConnect(
-		$Sprite/ShipBubble, "bubbleHit", 
-		self, "_adjustRemainingShieldHits"
-	)
 
 
 func setCurrentText(text: String) -> void:
@@ -131,15 +119,6 @@ func disableThrusters():
 	thrustersAudio.playing = false
 	thrusterLeft.emitting = false
 	thrusterRight.emitting = false
-	
-	
-func _adjustRemainingShieldHits(hitsRemaining: int):
-	$Sprite/ShipBubble/HitsBar.value = hitsRemaining
-	$Sprite/ShipBubble/HitsBar.visible = true
-	yield(get_tree().create_timer(0.5), "timeout")
-	$Sprite/ShipBubble/HitsBar.visible = false
-	if (hitsRemaining <= 0):
-		$Sprite/ShipBubble/HitsBar.visible = false
 		
 
 func _animateTargetIfInputTextExactMatch():
