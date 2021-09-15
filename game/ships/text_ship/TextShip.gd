@@ -35,8 +35,9 @@ var shipHasShield: bool = false
 var actionWeights := {}
 
 func _ready():
-	bubble.ownerShip = self
-	bubble.anim.play("hide")
+	if is_instance_valid(bubble):
+		bubble.ownerShip = self
+		bubble.anim.play("hide")
 	#set FSM idling weights
 	for action in actionWeights:
 		fsm.idlingActionsWeights.setItemWeight(action, actionWeights[action])
@@ -57,7 +58,8 @@ func prepare(text: String, startPosition: Vector2, shipPath: Array, limiters: Sc
 	$Sprite.scale = Vector2.ZERO
 	$TextShipStateMachine/Descending.descendPath = shipPath
 	speed = limiters.shipSpeed
-	$Sprite/ShipBubble.setInitialHitPoints(limiters.shieldHitPoints)
+	if ($Sprite/ShipBubble):
+		$Sprite/ShipBubble.setInitialHitPoints(limiters.shieldHitPoints)
 	shipHasShield = limiters.shieldHitPoints > 0
 	var shipWillShoot := limiters.shootInclination > 0
 	actionWeights = {

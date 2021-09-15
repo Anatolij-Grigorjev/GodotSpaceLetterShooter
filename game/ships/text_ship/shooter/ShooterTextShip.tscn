@@ -109,9 +109,6 @@ visible = true
 position = Vector2( 3.95642, 33.8362 )
 scale = Vector2( 1, 1 )
 
-[node name="CollisionShape2D" parent="Area2D" index="0"]
-disabled = false
-
 [node name="AnimationPlayer" parent="." index="4"]
 anims/shoot = SubResource( 13 )
 

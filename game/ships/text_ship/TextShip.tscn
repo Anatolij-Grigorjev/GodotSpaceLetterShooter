@@ -1,8 +1,7 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://ships/text_ship/explode_ship.wav" type="AudioStream" id=1]
 [ext_resource path="res://ships/text_ship/ship_fly.wav" type="AudioStream" id=2]
-[ext_resource path="res://ships/text_ship/ShipBubble.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ships/text_ship/TextShip.gd" type="Script" id=4]
 [ext_resource path="res://ships/text_ship/enemy_ship_horiz.png" type="Texture" id=5]
 [ext_resource path="res://ships/text_ship/IdlingState.tscn" type="PackedScene" id=6]
@@ -48,7 +47,7 @@ color = Color( 0.839216, 0.960784, 0.0313726, 1 )
 bg_color = Color( 0, 0, 0, 1 )
 
 [sub_resource type="CircleShape2D" id=6]
-radius = 55.0
+radius = 66.03
 
 [sub_resource type="Animation" id=7]
 tracks/0/type = "value"
@@ -522,6 +521,7 @@ process_material = SubResource( 4 )
 stream = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 5 )
 
 [node name="Label" type="Label" parent="Sprite"]
@@ -543,9 +543,6 @@ clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="ShipBubble" parent="Sprite" instance=ExtResource( 3 )]
-position = Vector2( 0, -15 )
 
 [node name="Target" parent="Sprite" instance=ExtResource( 16 )]
 position = Vector2( -0.5, -15 )
