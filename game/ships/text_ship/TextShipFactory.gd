@@ -3,9 +3,12 @@ extends Node
 Facility creates and configures text ship instances in a 
 background thread to make them ready for next wave participation
 """
-const TextShipScn = preload("res://ships/text_ship/TextShip.tscn")
+export(PackedScene) var FastShipScn: PackedScene
+export(PackedScene) var ShiledShipScn: PackedScene
+export(PackedScene) var ShooterShipScn: PackedScene
 
 export(bool) var printDebug: bool = false
+
 
 
 onready var pathGenerator: PathGenerator = $PathGenerator
@@ -41,7 +44,8 @@ func generateShips(waveSpec: SceneWaveSpec) -> Array:
 	for idx in range(waveSpec.numShips):
 		var thisShipPosition: Vector2 = shipPositions[idx]
 		var shipPath = pathGenerator.generatePathSegments(thisShipPosition)
-		var textShip := TextShipScn.instance()
+		var waveShipLimits: SceneShipLimits = waveSpec.shipTypes[idx]
+		var textShip := _newShipInstanceAccordingToLimits(waveShipLimits)
 		textShip.prepare(
 			shipWords[idx], 
 			thisShipPosition, 
@@ -65,3 +69,12 @@ func _printFleetStats(numShips: int, shipPositions: Array, shipWords: Array, shi
 	print(Utils.joinToString(shipWords, " ", "%10s"))
 	print(Utils.joinToString(shipTypes, " ", "%10s"))
 	print("\n")
+
+
+func _newShipInstanceAccordingToLimits(limits: SceneShipLimits) -> Node:
+	if limits.shootInclination > 0:
+		return ShooterShipScn.instance()
+	if limits.shieldHitPoints > 0:
+		return ShiledShipScn.instance()
+	
+	return FastShipScn.instance()

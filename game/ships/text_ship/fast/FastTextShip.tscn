@@ -35,10 +35,7 @@ margin_top = -72.0
 margin_right = -51.0
 margin_bottom = -57.0
 
-[node name="ShipBubble" parent="Sprite" index="2"]
-visible = false
-
-[node name="Target" parent="Sprite" index="3"]
+[node name="Target" parent="Sprite" index="1"]
 visible = false
 
 [node name="Area2D" parent="." index="3"]
