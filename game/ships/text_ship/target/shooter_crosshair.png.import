@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/enemy_ship_1w_v1.png-58fbccc27c5914c73a7a7e7c9908140e.stex"
+path="res://.import/shooter_crosshair.png-79b66f4cda5a97e53762f2b877be90d0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ships/text_ship/enemy_ship_1w_v1.png"
-dest_files=[ "res://.import/enemy_ship_1w_v1.png-58fbccc27c5914c73a7a7e7c9908140e.stex" ]
+source_file="res://ships/text_ship/target/shooter_crosshair.png"
+dest_files=[ "res://.import/shooter_crosshair.png-79b66f4cda5a97e53762f2b877be90d0.stex" ]
 
 [params]
 

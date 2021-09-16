@@ -1,9 +1,8 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://ships/text_ship/explode_ship.wav" type="AudioStream" id=1]
 [ext_resource path="res://ships/text_ship/ship_fly.wav" type="AudioStream" id=2]
 [ext_resource path="res://ships/text_ship/TextShip.gd" type="Script" id=4]
-[ext_resource path="res://ships/text_ship/enemy_ship_horiz.png" type="Texture" id=5]
 [ext_resource path="res://ships/text_ship/IdlingState.tscn" type="PackedScene" id=6]
 [ext_resource path="res://fsm/AnimationState.gd" type="Script" id=7]
 [ext_resource path="res://ships/Projectile.tscn" type="PackedScene" id=8]
@@ -13,8 +12,10 @@
 [ext_resource path="res://ships/text_ship/DescendingState.tscn" type="PackedScene" id=12]
 [ext_resource path="res://ships/text_ship/IdlingBubbleState.tscn" type="PackedScene" id=13]
 [ext_resource path="res://ships/text_ship/IdlingShootState.tscn" type="PackedScene" id=15]
-[ext_resource path="res://ships/text_ship/Target.tscn" type="PackedScene" id=16]
+[ext_resource path="res://ships/text_ship/target/Target.tscn" type="PackedScene" id=16]
 [ext_resource path="res://ships/text_ship/ReachedFinishState.gd" type="Script" id=18]
+
+
 
 [sub_resource type="Curve" id=1]
 max_value = 2.0
@@ -522,7 +523,6 @@ stream = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 1e-05, 1e-05 )
-texture = ExtResource( 5 )
 
 [node name="Label" type="Label" parent="Sprite"]
 anchor_left = 0.5
