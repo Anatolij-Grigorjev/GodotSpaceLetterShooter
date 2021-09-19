@@ -1,21 +1,16 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://ships/text_ship/explode_ship.wav" type="AudioStream" id=1]
 [ext_resource path="res://ships/text_ship/ship_fly.wav" type="AudioStream" id=2]
 [ext_resource path="res://ships/text_ship/TextShip.gd" type="Script" id=4]
 [ext_resource path="res://ships/text_ship/IdlingState.tscn" type="PackedScene" id=6]
 [ext_resource path="res://fsm/AnimationState.gd" type="Script" id=7]
-[ext_resource path="res://ships/Projectile.tscn" type="PackedScene" id=8]
 [ext_resource path="res://ships/text_ship/DieState.gd" type="Script" id=9]
 [ext_resource path="res://ships/text_ship/TextShipStateMachine.gd" type="Script" id=10]
 [ext_resource path="res://ships/text_ship/HitState.gd" type="Script" id=11]
 [ext_resource path="res://ships/text_ship/DescendingState.tscn" type="PackedScene" id=12]
-[ext_resource path="res://ships/text_ship/IdlingBubbleState.tscn" type="PackedScene" id=13]
-[ext_resource path="res://ships/text_ship/IdlingShootState.tscn" type="PackedScene" id=15]
 [ext_resource path="res://ships/text_ship/target/Target.tscn" type="PackedScene" id=16]
 [ext_resource path="res://ships/text_ship/ReachedFinishState.gd" type="Script" id=18]
-
-
 
 [sub_resource type="Curve" id=1]
 max_value = 2.0
@@ -443,7 +438,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Curve" id=14]
+[sub_resource type="Curve" id=13]
 max_value = 4.0
 _data = [ Vector2( 0, 4 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.389741 ), 0.0, 0.0, 0, 0 ]
 
@@ -465,13 +460,6 @@ animationName = "appear"
 [node name="Descending" parent="TextShipStateMachine" instance=ExtResource( 12 )]
 
 [node name="Idling" parent="TextShipStateMachine" instance=ExtResource( 6 )]
-
-[node name="IdlingBubble" parent="TextShipStateMachine" instance=ExtResource( 13 )]
-
-[node name="IdlingShoot" parent="TextShipStateMachine" instance=ExtResource( 15 )]
-idleTime = 1.6
-projectileScn = ExtResource( 8 )
-projectileCollisionMask = 4
 
 [node name="Hit" type="Node" parent="TextShipStateMachine"]
 script = ExtResource( 11 )
@@ -588,7 +576,7 @@ initial_velocity_random = 0.5
 angular_velocity = 45.0
 angular_velocity_random = 0.5
 orbit_velocity_random = 0.5
-scale_amount_curve = SubResource( 14 )
+scale_amount_curve = SubResource( 13 )
 color = Color( 0.819608, 0.0666667, 0.0666667, 1 )
 __meta__ = {
 "_editor_description_": ""
@@ -612,7 +600,7 @@ initial_velocity_random = 0.5
 angular_velocity = 45.0
 angular_velocity_random = 0.5
 orbit_velocity_random = 0.5
-scale_amount_curve = SubResource( 14 )
+scale_amount_curve = SubResource( 13 )
 color = Color( 0.819608, 0.0666667, 0.0666667, 1 )
 __meta__ = {
 "_editor_description_": ""
@@ -636,7 +624,7 @@ initial_velocity_random = 0.5
 angular_velocity = 45.0
 angular_velocity_random = 0.5
 orbit_velocity_random = 0.5
-scale_amount_curve = SubResource( 14 )
+scale_amount_curve = SubResource( 13 )
 color = Color( 0.819608, 0.0666667, 0.0666667, 1 )
 __meta__ = {
 "_editor_description_": ""
@@ -660,7 +648,7 @@ initial_velocity_random = 0.5
 angular_velocity = 45.0
 angular_velocity_random = 0.5
 orbit_velocity_random = 0.5
-scale_amount_curve = SubResource( 14 )
+scale_amount_curve = SubResource( 13 )
 color = Color( 0.819608, 0.0666667, 0.0666667, 1 )
 __meta__ = {
 "_editor_description_": ""

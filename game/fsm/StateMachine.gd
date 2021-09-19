@@ -50,8 +50,8 @@ func setState(nextState: String):
 		_enterState(state, previousState)
 	
 
-func getState(state_name: String) -> State:
-	return stateNodes[state_name]
+func getState(stateName: String) -> State:
+	return stateNodes.get(stateName)
 		
 		
 func _enterState(nextState: String, prevState: String):
