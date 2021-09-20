@@ -5,7 +5,16 @@
 
 [node name="FastTextShip" instance=ExtResource( 1 )]
 
+[node name="ThrusterLeft" parent="Thrusters" index="0"]
+position = Vector2( 45.7538, -40.7136 )
+scale = Vector2( 0.660591, 1 )
+
+[node name="ThrusterRight" parent="Thrusters" index="1"]
+position = Vector2( -43.9795, -40.8879 )
+scale = Vector2( 0.66, 1 )
+
 [node name="Sprite" parent="." index="2"]
+scale = Vector2( 1, 1 )
 texture = ExtResource( 2 )
 
 [node name="Label" parent="Sprite" index="0"]
@@ -15,7 +24,7 @@ margin_right = -51.0
 margin_bottom = -57.0
 
 [node name="Target" parent="Sprite" index="1"]
-visible = false
+position = Vector2( 0, 23 )
 
 [node name="Area2D" parent="." index="3"]
 visible = false

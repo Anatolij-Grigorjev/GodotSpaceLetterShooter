@@ -10,6 +10,14 @@
 [node name="IdlingBubble" parent="TextShipStateMachine" index="3" instance=ExtResource( 4 )]
 idleTime = 1.6
 
+[node name="ThrusterLeft" parent="Thrusters" index="0"]
+position = Vector2( -35.8594, 44.2787 )
+rotation = 0.773515
+
+[node name="ThrusterRight" parent="Thrusters" index="1"]
+position = Vector2( 39.9883, 43.9549 )
+rotation = -0.735395
+
 [node name="Sprite" parent="." index="2"]
 scale = Vector2( 1, 1 )
 texture = ExtResource( 3 )
@@ -21,9 +29,11 @@ margin_right = -37.0
 margin_bottom = -80.0
 
 [node name="ShipBubble" parent="Sprite" index="1" instance=ExtResource( 2 )]
+visible = false
 position = Vector2( 0.608983, -6.08987 )
 
 [node name="Target" parent="Sprite" index="2"]
+visible = false
 position = Vector2( -2.93594, -7.99664 )
 
 [editable path="TextShipStateMachine/Descending"]
