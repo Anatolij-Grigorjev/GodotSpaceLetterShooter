@@ -48,8 +48,12 @@ func exitState(nextState: String):
 	pathMover.stop_all()
 	entity.disableThrusters()
 	
-	
-func _startNextPathSegment():
+
+"""
+Begin movement along next segment of path, returns object describing
+the traversal of this path segment by this ship
+"""
+func _startNextPathSegment() -> PathSegmentTraversal:
 	segmentOver = false
 	var startPoint = descendPath[lastPathPointIdx]
 	lastPathPointIdx += 1
@@ -62,6 +66,7 @@ func _startNextPathSegment():
 	)
 	pathMover.start()
 	_enableDirectionThruster(startPoint, endPoint)
+	return PathSegmentTraversal.new(startPoint, endPoint, moveTime)
 	
 	
 func _enableDirectionThruster(startPoint: Vector2, endPoint: Vector2):
