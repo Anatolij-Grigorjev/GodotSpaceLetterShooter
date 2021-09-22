@@ -22,10 +22,10 @@ func _ready():
 		idlingActionsWeights = WeightedItems.new(initialIdlingActionsWeights)
 	call_deferred("setState", "Appearing")
 	
-	if (getState("IdlingShoot")):
+	if (getState("IdlingShoot") != null):
 		Utils.tryConnect(getState("IdlingShoot"), "shotLettersDepleted", self, "_onEntityNotEnoughShotLetters")
 		
-	if (getState("IdlingBubble")):
+	if (getState("IdlingBubble") != null):
 		Utils.tryConnect(entity.bubble, "bubbleBurst", self, "_onEntityBubbleBurst")
 		
 	yield(get_tree(), "idle_frame")
