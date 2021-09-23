@@ -26,7 +26,7 @@ func _ready():
 		Utils.tryConnect(getState("IdlingShoot"), "shotLettersDepleted", self, "_onEntityNotEnoughShotLetters")
 		
 	if (getState("IdlingBubble") != null):
-		Utils.tryConnect(entity.bubble, "bubbleBurst", self, "_onEntityBubbleBurst")
+		Utils.tryConnect(entity.get_node("Sprite/ShipBubble"), "bubbleBurst", self, "_onEntityBubbleBurst")
 		
 	yield(get_tree(), "idle_frame")
 
