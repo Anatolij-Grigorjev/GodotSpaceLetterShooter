@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ships/text_ship/FastDescendingState.gd"
 }, {
+"base": "TextShipStateMachine",
+"class": "FastTextShipStateMachine",
+"language": "GDScript",
+"path": "res://ships/text_ship/fast/FastTextShipStateMachine.gd"
+}, {
 "base": "AnimationState",
 "class": "HitState",
 "language": "GDScript",
@@ -104,6 +109,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scene/SceneWaveSpec.gd"
 }, {
+"base": "TextShipStateMachine",
+"class": "ShieldedTextShipStateMachine",
+"language": "GDScript",
+"path": "res://ships/text_ship/shielded/ShieldedTextShipStateMachine.gd"
+}, {
 "base": "State",
 "class": "ShipSceneEndState",
 "language": "GDScript",
@@ -164,6 +174,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ships/shooter/ShooterShipStateMachine.gd"
 }, {
+"base": "TextShipStateMachine",
+"class": "ShooterTextShipStateMachine",
+"language": "GDScript",
+"path": "res://ships/text_ship/shooter/ShooterTextShipStateMachine.gd"
+}, {
 "base": "Reference",
 "class": "SingleReadVar",
 "language": "GDScript",
@@ -215,6 +230,7 @@ _global_script_class_icons={
 "DescendingState": "",
 "DieState": "",
 "FastDescendingState": "",
+"FastTextShipStateMachine": "",
 "HitState": "",
 "IdlingBubbleState": "",
 "IdlingShootState": "",
@@ -229,6 +245,7 @@ _global_script_class_icons={
 "SceneSpec": "",
 "SceneStatsData": "",
 "SceneWaveSpec": "",
+"ShieldedTextShipStateMachine": "",
 "ShipSceneEndState": "",
 "ShipSceneStartState": "",
 "ShipSceneStateMachine": "",
@@ -241,6 +258,7 @@ _global_script_class_icons={
 "ShooterShipPreparingState": "",
 "ShooterShipShootingState": "",
 "ShooterShipStateMachine": "",
+"ShooterTextShipStateMachine": "",
 "SingleReadVar": "",
 "State": "",
 "StateMachine": "",

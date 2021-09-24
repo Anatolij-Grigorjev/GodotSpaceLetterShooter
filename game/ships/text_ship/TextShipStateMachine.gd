@@ -3,6 +3,8 @@ class_name TextShipStateMachine
 """
 FSM for actions of a descending ship with text
 """
+const NO_STATE_MATCHED = "<???>"
+
 export(Dictionary) var initialIdlingActionsWeights = {
 	"Idling": 1.0,
 	"IdlingBubble": 1.0,
@@ -21,12 +23,6 @@ func _ready():
 	if (not idlingActionsWeights):
 		idlingActionsWeights = WeightedItems.new(initialIdlingActionsWeights)
 	call_deferred("setState", "Appearing")
-	
-	if (getState("IdlingShoot") != null):
-		Utils.tryConnect(getState("IdlingShoot"), "shotLettersDepleted", self, "_onEntityNotEnoughShotLetters")
-		
-	if (getState("IdlingBubble") != null):
-		Utils.tryConnect(entity.get_node("Sprite/ShipBubble"), "bubbleBurst", self, "_onEntityBubbleBurst")
 		
 	yield(get_tree(), "idle_frame")
 
@@ -53,26 +49,6 @@ func _getNextState(delta: float) -> String:
 				return "Descending"
 			else:
 				return NO_STATE
-		"IdlingBubble":
-			if lastCollidedShipCell.present():
-				return _getShipAttemptedCollisionState(lastCollidedShipCell.readAndReset())
-			if shipReachedFinishCell.present():
-				return _getShipReachedFinishState()
-				
-			var idlingBubbleState = getState(state)
-			if (idlingBubbleState.idlingOver):
-				return "Descending"
-			else:
-				return NO_STATE
-		"IdlingShoot":
-			var collisionState = _getLatestAnyCollisionState()
-			if (collisionState != NO_STATE):
-				return collisionState
-			var idlingShootState = getState(state)
-			if (idlingShootState.idlingOver):
-				return "Descending"
-			else:
-				return NO_STATE
 		"Hit":
 			return _ifAnimationFinishedGoToState("Descending")
 		"Miss":
@@ -84,8 +60,7 @@ func _getNextState(delta: float) -> String:
 		"Die":
 			return NO_STATE
 		_: 
-			breakpoint
-			return NO_STATE
+			return NO_STATE_MATCHED
 			
 
 func _ifAnimationFinishedGoToState(nextState: String) -> String:
@@ -139,18 +114,6 @@ func _getLatestAnyCollisionState() -> String:
 	return NO_STATE
 	
 
-
 func _getNextIdlingState() -> String:
 	return idlingActionsWeights.pickRandomWeighted()
-	
-	
-func _onEntityBubbleBurst():
-	entity.shipHasShield = false
-	idlingActionsWeights.disableItem("IdlingBubble")
-	if idlingActionsWeights.isItemDisabled("Idling"):
-		idlingActionsWeights.setItemWeight("Idling", 1)
-	
-
-func _onEntityNotEnoughShotLetters(lettersLeft: int):
-	idlingActionsWeights.disableItem("IdlingShoot")
 
