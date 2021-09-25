@@ -87,6 +87,24 @@ static func animIsPlayingAnimation(anim: AnimationPlayer, animationName: String)
 	return anim.is_playing() and anim.current_animation == animationName
 	
 
+"""
+Resolve a list of valid nodepaths into a list of nodes they point to
+Skips invalid paths
+"""
+static func resolveNodePathsList(origin: Node, relativePaths: Array) -> Array:
+	
+	if not is_instance_valid(origin):
+		return []
+		
+	var resolvedNodes := [];
+	for item in relativePaths:
+		var relativePath = item as NodePath
+		if is_instance_valid(relativePath):
+			var resolvedNode: Node = origin.get_node(relativePath)
+			if is_instance_valid(resolvedNode):
+				resolvedNodes.append(resolvedNode)
+	return resolvedNodes
+
 	
 """
 Parse the file at path 'filePath' as valid JSON and return the structure

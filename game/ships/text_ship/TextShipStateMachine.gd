@@ -17,18 +17,39 @@ var lastCollidedProjectileCell: SingleReadVar = SingleReadVar.new(null)
 var lastCollidedShipCell: SingleReadVar = SingleReadVar.new(null)
 var shipReachedFinishCell: SingleReadVar = SingleReadVar.new(false)
 
+var extensionNodes: Array
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if (not idlingActionsWeights):
 		idlingActionsWeights = WeightedItems.new(initialIdlingActionsWeights)
 	call_deferred("setState", "Appearing")
-		
 	yield(get_tree(), "idle_frame")
+	extensionNodes = _findAttachedExtensions()
+	for extension in extensionNodes:
+		extension.initExtension()
+		
+		
+func _findAttachedExtensions() -> Array:
+	var foundExtensions = []
+	for child in get_children():
+		var extension = child as TextShipStateMachineExtension
+		if is_instance_valid(extension):
+			foundExtensions.append(extension)
+	return foundExtensions
 
 
 func _getNextState(delta: float) -> String:
-	
+	var ownProcessResult = _tryProcessCurrentState(state, delta)
+	if (ownProcessResult != NO_STATE_MATCHED):
+		return ownProcessResult
+	else:
+		return _processFirstMatchingExtension(state, delta)
+			
+			
+			
+func _tryProcessCurrentState(state: String, delta: float) -> String:
 	match (state):
 		"Appearing":
 			return _ifAnimationFinishedGoToState("Descending")
@@ -61,6 +82,16 @@ func _getNextState(delta: float) -> String:
 			return NO_STATE
 		_: 
 			return NO_STATE_MATCHED
+			
+			
+func _processFirstMatchingExtension(state: String, delta: float) -> String:
+	for node in extensionNodes:
+		var extension = node as TextShipStateMachineExtension
+		var processStateResult = extension.tryProcessCurrentState(state, delta)
+		if processStateResult != NO_STATE_MATCHED:
+			return processStateResult
+	
+	return NO_STATE_MATCHED
 			
 
 func _ifAnimationFinishedGoToState(nextState: String) -> String:
@@ -104,13 +135,22 @@ func _getShipReachedFinishState() -> String:
 	
 
 func _getLatestAnyCollisionState() -> String:
+	var nonProjectileCollisions = _getNextNonProjectileCollisionsState()
+	if nonProjectileCollisions != NO_STATE:
+		return nonProjectileCollisions
+	
+	if lastCollidedProjectileCell.present():
+		return _getProjectileAttemptedHitState(lastCollidedProjectileCell.readAndReset())
+	
+	return NO_STATE
+	
+	
+func _getNextNonProjectileCollisionsState() -> String:
 	if lastCollidedShipCell.present():
 		return _getShipAttemptedCollisionState(lastCollidedShipCell.readAndReset())
 	if shipReachedFinishCell.present():
 		return _getShipReachedFinishState()
-	if lastCollidedProjectileCell.present():
-		return _getProjectileAttemptedHitState(lastCollidedProjectileCell.readAndReset())
-	
+		
 	return NO_STATE
 	
 
