@@ -26,7 +26,7 @@
 		},
 		{
 			"speed": 450.7,
-			"shieldHP": 1,
+			"shieldHP": 0,
 			"shotPriority": 5,
 			"numShips": 3
 		}
