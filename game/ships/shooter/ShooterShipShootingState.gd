@@ -16,11 +16,16 @@ func enterState(prevState: String):
 	
 func exitState(nextState: String):
 	.exitState(nextState)
+	#explicitly unset parameters controleld by animation
+	# animation might have been interrupted by a hit state
+	entity.sprite.position = Vector2.ZERO
+	entity.shotPosition.get_node('ShotSprite').visible = false
 	shootingDone = true
 	shotTarget = null
 	
 	
-func tryFireAt(target: Node2D):
+	
+func tryFireAt(target):
 	if (not entity.chamber.empty() and is_instance_valid(target)):
 		fireChambered(target)
 		if "isTargeted" in target:
@@ -31,7 +36,7 @@ func tryFireAt(target: Node2D):
 	shootingDone = true
 
 
-func fireChambered(shootable: Node2D) -> void:
+func fireChambered(shootable):
 	entity.anim.play("shoot")
 	var projectile = entity.projectileScene.instance()
 	projectile.global_position = entity.shotPosition.global_position
