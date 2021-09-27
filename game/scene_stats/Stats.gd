@@ -30,7 +30,8 @@ func _connectSceneStatsSignals():
 	
 func connectTextShipStatsSignals(textShip: TextShip):
 	Utils.tryConnect(textShip, "textShipDestroyed", self, "_onTextShipShotDown")
-	Utils.tryConnect(textShip.bubble, "bubbleBurst", self, "_onTextShipBubbleBurst")
+	if is_instance_valid(textShip.get_node("Sprite/ShipBubble")):
+		Utils.tryConnect(textShip.get_node("Sprite/ShipBubble"), "bubbleBurst", self, "_onTextShipBubbleBurst")
 	Utils.tryConnect(textShip, "shotFired", self, "_onTextShipShotFired")
 	
 
