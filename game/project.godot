@@ -32,12 +32,7 @@ _global_script_classes=[ {
 "base": "DescendingState",
 "class": "FastDescendingState",
 "language": "GDScript",
-"path": "res://ships/text_ship/FastDescendingState.gd"
-}, {
-"base": "TextShipStateMachine",
-"class": "FastTextShipStateMachine",
-"language": "GDScript",
-"path": "res://ships/text_ship/fast/FastTextShipStateMachineExtension.gd"
+"path": "res://ships/text_ship/fast/FastDescendingState.gd"
 }, {
 "base": "AnimationState",
 "class": "HitState",
@@ -73,11 +68,6 @@ _global_script_classes=[ {
 "class": "PathGenerator",
 "language": "GDScript",
 "path": "res://ships/text_ship/PathGenerator.gd"
-}, {
-"base": "Reference",
-"class": "PathSegmentTraversal",
-"language": "GDScript",
-"path": "res://ships/text_ship/PathSegmentTraversal.gd"
 }, {
 "base": "AudioStreamPlayer",
 "class": "RandomAudioPlayer",
@@ -235,7 +225,6 @@ _global_script_class_icons={
 "DescendingState": "",
 "DieState": "",
 "FastDescendingState": "",
-"FastTextShipStateMachine": "",
 "HitState": "",
 "IdlingBubbleState": "",
 "IdlingShootState": "",
@@ -243,7 +232,6 @@ _global_script_class_icons={
 "Mock": "",
 "ParticlesBattery": "",
 "PathGenerator": "",
-"PathSegmentTraversal": "",
 "RandomAudioPlayer": "",
 "ReachedFinishState": "",
 "SceneShipLimits": "",

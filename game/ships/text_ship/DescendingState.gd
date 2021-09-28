@@ -50,10 +50,10 @@ func exitState(nextState: String):
 	
 
 """
-Begin movement along next segment of path, returns object describing
-the traversal of this path segment by this ship
+Begin movement along next segment of path, returns how long
+the movement will take
 """
-func _startNextPathSegment() -> PathSegmentTraversal:
+func _startNextPathSegment() -> float:
 	segmentOver = false
 	var startPoint = descendPath[lastPathPointIdx]
 	lastPathPointIdx += 1
@@ -66,7 +66,7 @@ func _startNextPathSegment() -> PathSegmentTraversal:
 	)
 	pathMover.start()
 	_enableDirectionThruster(startPoint, endPoint)
-	return PathSegmentTraversal.new(startPoint, endPoint, moveTime)
+	return moveTime
 	
 	
 func _enableDirectionThruster(startPoint: Vector2, endPoint: Vector2):

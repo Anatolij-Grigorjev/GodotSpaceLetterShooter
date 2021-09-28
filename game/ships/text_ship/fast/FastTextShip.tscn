@@ -2,7 +2,7 @@
 
 [ext_resource path="res://ships/text_ship/TextShip.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ships/text_ship/fast/enemy_ship_fast.png" type="Texture" id=2]
-[ext_resource path="res://ships/text_ship/FastDescendingState.gd" type="Script" id=3]
+[ext_resource path="res://ships/text_ship/fast/FastDescendingState.gd" type="Script" id=3]
 
 [node name="FastTextShip" instance=ExtResource( 1 )]
 
@@ -28,6 +28,7 @@ margin_right = -51.0
 margin_bottom = -57.0
 
 [node name="Target" parent="Sprite" index="1"]
+visible = false
 position = Vector2( 0, 23 )
 
 [node name="Area2D" parent="." index="3"]
