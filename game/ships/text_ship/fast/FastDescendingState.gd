@@ -3,6 +3,8 @@ class_name FastDescendingState
 """
 Descending state subtype that creates illusion of faster descend
 """
+const FloatingTextScn = preload("res://ships/text_ship/FloatingText.tscn")
+
 export(int) var numSwitchesLoseLetter = 2
 var lastTraverseDirection: float = 1.0
 
@@ -34,5 +36,14 @@ func _checkShakeOffLetter(newTraverseDirection: float):
 		if lastTraverseDirection != newTraverseDirection:
 			elapsedDirectionSwitches += 1
 			if (elapsedDirectionSwitches == numSwitchesLoseLetter):
-				entity.currentText = entity.currentText.substr(1)
 				elapsedDirectionSwitches = 0
+				_shakeOffLetter()
+				
+
+func _shakeOffLetter():
+	var firstLetter = entity.currentText.substr(0, 1)
+	entity.currentText = entity.currentText.substr(1)
+	var floatingText = FloatingTextScn.instance()
+	floatingText.text = firstLetter
+	floatingText.global_position = entity.global_position
+	entity.get_parent().add_child(floatingText)

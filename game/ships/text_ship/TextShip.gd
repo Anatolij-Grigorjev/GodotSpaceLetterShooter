@@ -84,6 +84,10 @@ func getCurrentText() -> String:
 		return currentText
 		
 		
+func collectFloatingText(text: String):
+	setCurrentText(currentText + text)
+		
+		
 func _setAsTarget(isTarget: bool):
 	var wasTarget = isTargeted
 	if (wasTarget == isTarget):
