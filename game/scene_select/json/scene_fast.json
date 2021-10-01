@@ -10,7 +10,7 @@
 		"r": 0.39
 	},
 	"minShipsWave": 2,
-	"maxShipsWave": 4,
+	"maxShipsWave": 3,
 	"allowedShipsTypes": [
 		{
 			"speed": 567.0,
