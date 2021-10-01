@@ -21,15 +21,12 @@ func _ready():
 
 func enterState(prevState: String):
 	.enterState(prevState)
-	shipLeaving = false
-	shipLeft = false
-	shipDestroyed = false
-	statsViewAdded = false
-	statsViewClosed = false
+	_resetStateProgressFlags()
 	statsCookerThread.start(self, "_buildSceneStats", null)
 	if (fsm.shooterFailed):
 		yield(_playShipAnimationAndWait("destroy", 0.75), "completed")
 		shipDestroyed = true
+	_removeFloatingText()
 	
 	
 func processState(delta: float):
@@ -57,6 +54,14 @@ func processState(delta: float):
 		shipLeft = true
 		
 		
+func _resetStateProgressFlags():
+	shipLeaving = false
+	shipLeft = false
+	shipDestroyed = false
+	statsViewAdded = false
+	statsViewClosed = false
+		
+		
 	
 func _buildSceneStats(data):
 	var statsView = StatsViewScn.instance()
@@ -76,3 +81,9 @@ func _playShipAnimationAndWait(animName: String, postAnimWaitTime: float):
 	yield(entity.shooter.anim, "animation_finished")
 	if (postAnimWaitTime > 0):
 		yield(get_tree().create_timer(postAnimWaitTime), "timeout")
+		
+		
+func _removeFloatingText():
+	for node in entity.textShipsContainer.get_children():
+		if is_instance_valid(node):
+			node.queue_free()
