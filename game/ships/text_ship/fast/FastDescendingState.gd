@@ -45,5 +45,5 @@ func _shakeOffLetter():
 	entity.currentText = entity.currentText.substr(1)
 	var floatingText = FloatingTextScn.instance()
 	floatingText.text = firstLetter
-	floatingText.global_position = entity.global_position
+	floatingText.position = entity.position
 	entity.get_parent().add_child(floatingText)

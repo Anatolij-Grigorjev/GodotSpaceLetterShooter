@@ -10,7 +10,7 @@ export(String) var text: String = "T" setget setText
 
 
 func _ready():
-	
+
 	$Tween.interpolate_property(
 		self, "position", 
 		null, position + Vector2(0, rand_range(80, 120)),
