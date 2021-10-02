@@ -42,12 +42,12 @@ _global_script_classes=[ {
 "base": "IdlingState",
 "class": "IdlingBubbleState",
 "language": "GDScript",
-"path": "res://ships/text_ship/IdlingBubbleState.gd"
+"path": "res://ships/text_ship/shielded/IdlingBubbleState.gd"
 }, {
 "base": "IdlingState",
 "class": "IdlingShootState",
 "language": "GDScript",
-"path": "res://ships/text_ship/IdlingShootState.gd"
+"path": "res://ships/text_ship/shooter/IdlingShootState.gd"
 }, {
 "base": "State",
 "class": "IdlingState",

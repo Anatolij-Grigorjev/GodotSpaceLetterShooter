@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/hit_bubble.wav-e89f23c87e542d7206f1b26955856ddf.sample"
+
+[deps]
+
+source_file="res://ships/text_ship/shielded/hit_bubble.wav"
+dest_files=[ "res://.import/hit_bubble.wav-e89f23c87e542d7206f1b26955856ddf.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
