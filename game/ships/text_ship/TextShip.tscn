@@ -1,9 +1,10 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://ships/text_ship/explode_ship.wav" type="AudioStream" id=1]
 [ext_resource path="res://ships/text_ship/ship_fly.wav" type="AudioStream" id=2]
 [ext_resource path="res://ships/text_ship/shooter/enemy_ship_shooter.png" type="Texture" id=3]
 [ext_resource path="res://ships/text_ship/TextShip.gd" type="Script" id=4]
+[ext_resource path="res://shaders/sprite_outline.shader" type="Shader" id=5]
 [ext_resource path="res://ships/text_ship/IdlingState.tscn" type="PackedScene" id=6]
 [ext_resource path="res://fsm/AnimationState.gd" type="Script" id=7]
 [ext_resource path="res://ships/text_ship/DieState.gd" type="Script" id=9]
@@ -39,6 +40,8 @@ orbit_velocity = -0.25
 orbit_velocity_random = 0.0
 scale_curve = SubResource( 2 )
 color = Color( 0.839216, 0.960784, 0.0313726, 1 )
+
+[sub_resource type="ShaderMaterial" id=18]
 
 [sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0, 0, 0, 1 )
@@ -100,7 +103,7 @@ tracks/3/keys = {
 length = 0.5
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:self_modulate")
+tracks/0/path = NodePath("Sprite:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -396,6 +399,45 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( -12.8323, -14.8655 ), Vector2( -9.43268, -31.9148 ), Vector2( 3.33854, -32.5816 ), Vector2( 17.2273, -20.7114 ), Vector2( 10.3533, -7.97244 ), Vector2( 0, 0 ) ]
 }
 
+[sub_resource type="Animation" id=17]
+resource_name = "pickup_text"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:material:shader")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 5 ), null ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:material:shader_param/outline_width")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 3.0, 1.0, 2.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:material:shader_param/outline_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.839216, 0.960784, 0.0313726, 1 ), Color( 0.819608, 0.0666667, 0.0666667, 1 ), Color( 0.839216, 0.960784, 0.0313726, 1 ), Color( 0.819608, 0.0666667, 0.0666667, 1 ) ]
+}
+
 [sub_resource type="Animation" id=14]
 length = 0.5
 step = 0.05
@@ -510,6 +552,7 @@ process_material = SubResource( 4 )
 stream = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 18 )
 texture = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="Sprite"]
@@ -537,7 +580,6 @@ visible = false
 position = Vector2( -0.5, -15 )
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 position = Vector2( -1.13544, -12.2627 )
 collision_layer = 2
 collision_mask = 4
@@ -557,6 +599,7 @@ anims/collide_ship = SubResource( 10 )
 anims/die = SubResource( 11 )
 anims/hit = SubResource( 12 )
 anims/miss = SubResource( 13 )
+anims/pickup_text = SubResource( 17 )
 anims/reached_finish = SubResource( 14 )
 
 [node name="ExplosionsBattery" type="Node2D" parent="."]

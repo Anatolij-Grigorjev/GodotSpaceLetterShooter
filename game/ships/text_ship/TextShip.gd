@@ -35,6 +35,9 @@ var shipHasShield: bool = false
 var actionWeights := {}
 
 func _ready():
+	#every ship instance has unique material instance
+	sprite.material = sprite.material.duplicate(true)
+	
 	if is_instance_valid(bubble):
 		bubble.ownerShip = self
 		bubble.anim.play("hide")
@@ -86,6 +89,7 @@ func getCurrentText() -> String:
 		
 func collectFloatingText(text: String):
 	setCurrentText(currentText + text)
+	anim.play("pickup_text")
 		
 		
 func _setAsTarget(isTarget: bool):
