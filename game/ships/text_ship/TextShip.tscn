@@ -39,13 +39,13 @@ orbit_velocity_random = 0.0
 scale_curve = SubResource( 2 )
 color = Color( 0.839216, 0.960784, 0.0313726, 1 )
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="CircleShape2D" id=6]
+[sub_resource type="CircleShape2D" id=8]
 radius = 66.03
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=9]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:scale")
 tracks/0/interp = 2
@@ -95,7 +95,7 @@ tracks/3/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=10]
 length = 0.5
 step = 0.05
 tracks/0/type = "value"
@@ -137,7 +137,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=11]
 length = 1.5
 step = 0.05
 tracks/0/type = "value"
@@ -313,7 +313,7 @@ tracks/13/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=12]
 length = 0.45
 step = 0.05
 tracks/0/type = "value"
@@ -379,7 +379,7 @@ tracks/4/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=13]
 length = 0.45
 step = 0.05
 tracks/0/type = "value"
@@ -395,8 +395,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( -12.8323, -14.8655 ), Vector2( -9.43268, -31.9148 ), Vector2( 3.33854, -32.5816 ), Vector2( 17.2273, -20.7114 ), Vector2( 10.3533, -7.97244 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=12]
-resource_name = "reached_finish"
+[sub_resource type="Animation" id=14]
 length = 0.5
 step = 0.05
 tracks/0/type = "value"
@@ -438,7 +437,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Curve" id=13]
+[sub_resource type="Curve" id=15]
 max_value = 4.0
 _data = [ Vector2( 0, 4 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.389741 ), 0.0, 0.0, 0, 0 ]
 
@@ -521,7 +520,7 @@ margin_left = -109.783
 margin_top = -97.8866
 margin_right = -29.7828
 margin_bottom = -83.8866
-custom_styles/normal = SubResource( 5 )
+custom_styles/normal = SubResource( 7 )
 custom_colors/font_color = Color( 0.945098, 1, 0, 1 )
 custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
 text = ":)"
@@ -544,18 +543,18 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 6 )
+shape = SubResource( 8 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/appear = SubResource( 7 )
-anims/collide_ship = SubResource( 8 )
-anims/die = SubResource( 9 )
-anims/hit = SubResource( 10 )
-anims/miss = SubResource( 11 )
-anims/reached_finish = SubResource( 12 )
+anims/appear = SubResource( 9 )
+anims/collide_ship = SubResource( 10 )
+anims/die = SubResource( 11 )
+anims/hit = SubResource( 12 )
+anims/miss = SubResource( 13 )
+anims/reached_finish = SubResource( 14 )
 
 [node name="ExplosionsBattery" type="Node2D" parent="."]
 
@@ -576,7 +575,7 @@ initial_velocity_random = 0.5
 angular_velocity = 45.0
 angular_velocity_random = 0.5
 orbit_velocity_random = 0.5
-scale_amount_curve = SubResource( 13 )
+scale_amount_curve = SubResource( 15 )
 color = Color( 0.819608, 0.0666667, 0.0666667, 1 )
 __meta__ = {
 "_editor_description_": ""
@@ -600,7 +599,7 @@ initial_velocity_random = 0.5
 angular_velocity = 45.0
 angular_velocity_random = 0.5
 orbit_velocity_random = 0.5
-scale_amount_curve = SubResource( 13 )
+scale_amount_curve = SubResource( 15 )
 color = Color( 0.819608, 0.0666667, 0.0666667, 1 )
 __meta__ = {
 "_editor_description_": ""
@@ -624,7 +623,7 @@ initial_velocity_random = 0.5
 angular_velocity = 45.0
 angular_velocity_random = 0.5
 orbit_velocity_random = 0.5
-scale_amount_curve = SubResource( 13 )
+scale_amount_curve = SubResource( 15 )
 color = Color( 0.819608, 0.0666667, 0.0666667, 1 )
 __meta__ = {
 "_editor_description_": ""
@@ -648,7 +647,7 @@ initial_velocity_random = 0.5
 angular_velocity = 45.0
 angular_velocity_random = 0.5
 orbit_velocity_random = 0.5
-scale_amount_curve = SubResource( 13 )
+scale_amount_curve = SubResource( 15 )
 color = Color( 0.819608, 0.0666667, 0.0666667, 1 )
 __meta__ = {
 "_editor_description_": ""
