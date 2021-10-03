@@ -4,7 +4,7 @@
 [ext_resource path="res://ships/text_ship/fast/enemy_ship_fast.png" type="Texture" id=2]
 [ext_resource path="res://ships/text_ship/fast/FastDescendingState.gd" type="Script" id=3]
 
-[sub_resource type="ShaderMaterial" id=1]
+[sub_resource type="ShaderMaterial" id=3]
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0, 0, 0, 1 )
@@ -25,14 +25,15 @@ position = Vector2( -43.9795, -40.8879 )
 scale = Vector2( 0.66, 1 )
 
 [node name="Sprite" parent="." index="2"]
-material = SubResource( 1 )
+material = SubResource( 3 )
 texture = ExtResource( 2 )
 
 [node name="Label" parent="Sprite" index="0"]
-margin_left = -101.0
-margin_top = -72.0
-margin_right = -51.0
-margin_bottom = -57.0
+anchor_right = 0.503
+margin_left = -127.0
+margin_top = -74.0
+margin_right = -24.45
+margin_bottom = -55.0
 custom_styles/normal = SubResource( 2 )
 
 [node name="Target" parent="Sprite" index="1"]
