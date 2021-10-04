@@ -32,7 +32,8 @@ func tryFireAt(target):
 			target.lockTarget()
 	else:
 		missFire()
-	yield(entity.anim, "animation_finished")
+	if (entity.anim.is_playing()):
+		yield(entity.anim, "animation_finished")
 	shootingDone = true
 
 
