@@ -1,6 +1,6 @@
 {
-	"id": 1,
-	"name": "FASTTRACK",
+	"id": 3,
+	"name": "SHOOTOUT",
 	"type": "space",
 	"unlockPoints": 1000,
 	"bgColor": {
@@ -13,16 +13,16 @@
 	"maxShipsWave": 3,
 	"allowedShipsTypes": [
 		{
-			"speed": 567.0,
+			"speed": 412.0,
 			"shieldHP": 0,
-			"shotPriority": 0,
+			"shotPriority": 9,
 			"numShips": 3
 		},
 		{
-			"speed": 666.0,
+			"speed": 434.0,
 			"shieldHP": 0,
-			"shotPriority": 0,
-			"numShips": 2
+			"shotPriority": 9,
+			"numShips": 3
 		}
 	]
 }

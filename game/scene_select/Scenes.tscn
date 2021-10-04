@@ -19,7 +19,7 @@ tracks/0/keys = {
 
 [node name="Scenes" type="CanvasLayer"]
 script = ExtResource( 1 )
-sceneSpecPaths = [ "res://scene_select/json/scene_fast.json", "res://scene_select/json/scene_shield.json", "res://scene_select/json/scene_hyper.json" ]
+sceneSpecPaths = [ "res://scene_select/json/scene_fast.json", "res://scene_select/json/scene_shield.json", "res://scene_select/json/scene_shoot.json", "res://scene_select/json/scene_hyper.json" ]
 
 [node name="Control" type="Control" parent="."]
 anchor_right = 1.0
