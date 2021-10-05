@@ -3,7 +3,7 @@ extends CanvasLayer
 Global data related to loading scenes and tracking their progress
 """
 
-export(Array, String) var sceneSpecPaths: Array = []
+export(String) var sceneSpecsPath: String
 
 var loadedSceneSpecs: Array = []
 
@@ -34,10 +34,17 @@ func _loadSceneSpecs() -> Array:
 	var loadedScenes := [
 		Mock.sceneShipTypeQuantities(1, 1, 1)
 	]
-	for path in sceneSpecPaths:
+	var foundScenesPaths = _getScenesFiles()
+	print(foundScenesPaths)
+	for path in foundScenesPaths:
 		var sceneJSON = Utils.file2JSON(path)
 		loadedScenes.append(Utils.parseJSONSceneSpec(sceneJSON))
 	return loadedScenes
+	
+
+func _getScenesFiles() -> Array:
+	return Utils.getFilenamesInDirectory(sceneSpecsPath, ".json")
+
 	
 	
 func _setFirstActiveScene():

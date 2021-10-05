@@ -195,7 +195,7 @@ static func swapVector(input: Vector2) -> Vector2:
 
 	
 """
-Safely get first element from possible null or empty array
+Safely get first element from possibly null or empty array
 """
 static func getFirst(arr: Array):
 	if (arr == null or arr.empty()):
@@ -240,4 +240,38 @@ static func mapToProp(objectsArray: Array, propPath: String) -> Array:
 		propValues[idx] = propValue
 		
 	return propValues
-	
+
+
+
+"""
+Get list of filenames at supplied directory path. 
+Invalid directory path produces an empty list. 
+Subdirectories and unix navigation links are ignored.
+Filenames are returned in directory iteration order. Returned filenames
+can be further filtered by suppling optional suffix
+"""
+static func getFilenamesInDirectory(dirPath: String, requiredFileNameSuffix: String = "") -> Array:
+	var directoryHandle = Directory.new()
+	var directoryOpenStatusCode = directoryHandle.open(dirPath)
+	if directoryOpenStatusCode != OK:
+		print("ERROR: opening directory '%s', status code: %s" % [dirPath, directoryOpenStatusCode])
+		return []
+	var skipUnixNavigationalDirs = true
+	var skipHiddenFiles = true
+	var startDirectoryListingStatus = directoryHandle.list_dir_begin(
+		skipUnixNavigationalDirs, skipHiddenFiles
+	)
+	if startDirectoryListingStatus != OK:
+		print("ERROR: starting directory listing from dir handle %s, status: %s" % [directoryHandle, startDirectoryListingStatus])
+		return []
+	var foundMatchingFilenames := []
+	var nextDirectoryEntry: String = directoryHandle.get_next()
+	while not isEmptyString(nextDirectoryEntry):
+		if (
+			not directoryHandle.current_is_dir()
+			and nextDirectoryEntry.ends_with(requiredFileNameSuffix)
+			):
+				foundMatchingFilenames.append(nextDirectoryEntry)
+		nextDirectoryEntry = directoryHandle.get_next()
+		
+	return foundMatchingFilenames
