@@ -275,3 +275,28 @@ static func getFilenamesInDirectory(dirPath: String, requiredFileNameSuffix: Str
 		nextDirectoryEntry = directoryHandle.get_next()
 		
 	return foundMatchingFilenames
+	
+	
+
+"""
+Combine 2 path segments into a single path, deduplicating any potential 
+path markers
+"""
+static func combinePathParts(part1: String, part2: String) -> String:
+	if isEmptyString(part1):
+		return part2
+	if isEmptyString(part2):
+		return part1
+	
+	var pathDelimiter: String = "/"
+	var partsSupplyDelimiter: bool = part1.ends_with(pathDelimiter) != part2.begins_with(pathDelimiter)
+	
+	if partsSupplyDelimiter:
+		return part1 + part2
+	
+	#they both border on delimiter, need to deduplicate
+	if part2.begins_with(pathDelimiter):
+		return part1 + part2.substr(pathDelimiter.length())
+	#neither has delimiter, must add between
+	else:
+		return part1 + pathDelimiter + part2

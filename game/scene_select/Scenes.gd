@@ -31,19 +31,23 @@ func _ready():
 		
 		
 func _loadSceneSpecs() -> Array:
-	var loadedScenes := [
-		Mock.sceneShipTypeQuantities(1, 1, 1)
-	]
-	var foundScenesPaths = _getScenesFiles()
-	print(foundScenesPaths)
+	var loadedScenes := []
+	var foundScenesPaths = _getScenesFilePaths()
 	for path in foundScenesPaths:
 		var sceneJSON = Utils.file2JSON(path)
 		loadedScenes.append(Utils.parseJSONSceneSpec(sceneJSON))
+	loadedScenes.sort_custom(self, "_sortScenesById")
+	#starts with mock scene
+	loadedScenes.push_front(Mock.sceneShipTypeQuantities(1, 1, 1))
 	return loadedScenes
 	
 
-func _getScenesFiles() -> Array:
-	return Utils.getFilenamesInDirectory(sceneSpecsPath, ".json")
+func _getScenesFilePaths() -> Array:
+	var filenames := Utils.getFilenamesInDirectory(sceneSpecsPath, ".json")
+	var filePaths := []
+	for filename in filenames:
+		filePaths.append(Utils.combinePathParts(sceneSpecsPath, filename))
+	return filePaths
 
 	
 	
@@ -121,3 +125,7 @@ func _findLockedSceneSpecIds() -> Array:
 		if not sceneState.unlocked:
 			lockedSceneSpecIds.append(specId)
 	return lockedSceneSpecIds
+	
+
+func _sortScenesById(scene1, scene2) -> bool:
+	return scene1.id < scene2.id
