@@ -36,10 +36,14 @@ func _loadSceneSpecs() -> Array:
 	for path in foundScenesPaths:
 		var sceneJSON = Utils.file2JSON(path)
 		loadedScenes.append(Utils.parseJSONSceneSpec(sceneJSON))
-	loadedScenes.sort_custom(self, "_sortScenesById")
+	loadedScenes.sort_custom(self, "_sortScenesByIdAsc")
 	#starts with mock scene
-	loadedScenes.push_front(Mock.sceneShipTypeQuantities(1, 1, 1))
+	_addMockScenes(loadedScenes)
 	return loadedScenes
+	
+	
+func _addMockScenes(allScenes: Array):
+	allScenes.push_front(Mock.sceneShipTypeQuantities(1, 1, 1))
 	
 
 func _getScenesFilePaths() -> Array:
@@ -127,5 +131,5 @@ func _findLockedSceneSpecIds() -> Array:
 	return lockedSceneSpecIds
 	
 
-func _sortScenesById(scene1, scene2) -> bool:
+func _sortScenesByIdAsc(scene1, scene2) -> bool:
 	return scene1.id < scene2.id
