@@ -9,26 +9,26 @@
 		"g": 0.1,
 		"r": 0.1
 	},
-	"minShipsWave": 2,
+	"minShipsWave": 3,
 	"maxShipsWave": 4,
 	"allowedShipsTypes": [
 		{
-			"speed": 566.0,
+			"speed": 550.0,
 			"shieldHP": 0,
 			"shotPriority": 0,
-			"numShips": 5
+			"numShips": 6
 		},
 		{
 			"speed": 400.0,
 			"shieldHP": 5,
 			"shotPriority": 0,
-			"numShips": 2
+			"numShips": 3
 		},
 		{
-			"speed": 450.7,
+			"speed": 450.0,
 			"shieldHP": 0,
 			"shotPriority": 5,
-			"numShips": 3
+			"numShips": 4
 		}
 	]
 }

@@ -124,9 +124,9 @@ func _setAmountTravelAsDirectionVector(amount: float) -> Vector2:
 	
 	
 func _onShooterClearChamber():
-	for ship in textShipsContainer.get_children():
-		if ship.is_in_group("text_ship"):
-			ship.isTargeted = false
+	for node in textShipsContainer.get_children():
+		if is_instance_valid(node) and node.is_in_group("text_ship"):
+			node.isTargeted = false
 		
 		
 func _onTextShipHit(lettersRemaining: int):

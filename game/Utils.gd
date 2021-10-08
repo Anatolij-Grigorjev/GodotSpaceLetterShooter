@@ -52,13 +52,13 @@ static func tryConnect(
 		return false
 	var connectError = source.connect(sourceSignal, target, method, binds)
 	if (connectError != OK):
-		print("CONNECT_ERROR: %s emit '%s' -> %s handler '%s': %s" % [
+		print("CONNECT_ERROR: '%s' emit [%s] -> '%s' handler [%s]: %s" % [
 			source.name, sourceSignal,
 			target.name, method,
 			connectError
 		])
 	else:
-		print("CONNECT: %s emit '%s' -> %s handler '%s'" % [
+		print("CONNECT: '%s' emit [%s] -> '%s' handler [%s]" % [
 			source.name, sourceSignal, target.name, method
 		])
 	return connectError == OK
