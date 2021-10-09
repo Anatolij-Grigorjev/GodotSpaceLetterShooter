@@ -13,6 +13,8 @@ func enterState(prevState: String):
 	.enterState(prevState)
 	shootingDone = false
 	yield(tryFireAt(shotTarget), "completed")
+	print("Exit function enterState...")
+
 	
 	
 func exitState(nextState: String):
@@ -24,6 +26,7 @@ func exitState(nextState: String):
 	entity.shotPosition.get_node('ShotSprite').visible = false
 	shootingDone = true
 	shotTarget = null
+	print("Exit function exitState...")
 	
 	
 	
@@ -38,6 +41,7 @@ func tryFireAt(target):
 	if (entity.anim.is_playing()):
 		yield(entity.anim, "animation_finished")
 	shootingDone = true
+	print("Exit function tryFireAt...")
 
 
 func fireChambered(shootable):
@@ -50,12 +54,14 @@ func fireChambered(shootable):
 	projectile.get_node("Label").text = entity.chamber
 	entity.emit_signal("shotFired", projectile)
 	entity.emptyChamber()
+	print("Exit function fireChambered...")
 	
 	
 func missFire():
 	print("Enter function missFire...")
 	entity.anim.play("jam")
 	entity.emptyChamber()
+	print("Exit function missFire...")
 	
 	
 func _configureShooterShipProjectile(projectile: Node2D):
@@ -63,3 +69,4 @@ func _configureShooterShipProjectile(projectile: Node2D):
 	projectile.get_node("Sprite").modulate = Color.lightblue
 	projectile.get_node("Area2D").collision_mask = entity.projectileCollisionMask
 	projectile.get_node("Area2D").collision_layer = 0
+	print("Exit function _configureShooterShipProjectile...")

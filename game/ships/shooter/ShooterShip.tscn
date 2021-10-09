@@ -20,12 +20,9 @@
 [ext_resource path="res://components/StateLabel.tscn" type="PackedScene" id=18]
 [ext_resource path="res://ships/shooter/ShooterShipLeavingWaveState.gd" type="Script" id=19]
 
-
-
 [sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 11 )
-shader_param/modulate = Color( 0.819608, 0.0666667, 0.0666667, 1 )
-shader_param/mix_coef = 0.0
+shader = ExtResource( 9 )
+shader_param/radius = 0.0
 
 [sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0.514815, 1 )
@@ -257,24 +254,12 @@ tracks/5/keys = {
 "values": [ false, true ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/6/path = NodePath("Sprite:material:shader_param/modulate")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-tracks/7/type = "value"
-tracks/7/path = NodePath("Sprite:material:shader_param/modulate")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,

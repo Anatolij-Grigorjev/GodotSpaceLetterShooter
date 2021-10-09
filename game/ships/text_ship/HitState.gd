@@ -10,8 +10,14 @@ var hitChars: int = 1
 
 func enterState(prevState: String):
 	.enterState(prevState)
+	entity.bodyCollider().disabled = true
 	entity.hitCharacter(hitChars)
 	entity.emit_signal("shipHit", entity.currentText.length())
+	
+	
+func exitState(nextState: String):
+	.exitState(nextState)
+	entity.bodyCollider().disabled = false
 	
 	
 func scoreShipHitPoints():

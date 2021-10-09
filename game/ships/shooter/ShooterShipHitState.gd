@@ -10,8 +10,14 @@ var hitShot
 func enterState(prevState: String):
 	.enterState(prevState)
 	_hideShipShotFX()
+	entity.bodyCollider().disabled = true
 	entity.emptyChamber()
 	entity.emit_signal("shooterHitByShot", hitShot)
+	
+	
+func exitState(nextState: String):
+	.exitState(nextState)
+	entity.bodyCollider().disabled = false
 	
 	
 	

@@ -16,6 +16,7 @@ func processState(delta: float):
 	
 func enterState(prevState: String):
 	.enterState(prevState)
+	entity.bodyCollider().disabled = true
 	entity.emit_signal("shipHit", 0)
 	entityText = str(entity.currentText)
 	entity.currentText = ""

@@ -27,6 +27,7 @@ onready var anim: AnimationPlayer = $AnimationPlayer
 onready var thrusterLeft: Particles2D = $Thrusters/ThrusterLeft
 onready var thrusterRight: Particles2D = $Thrusters/ThrusterRight
 onready var thrustersAudio: AudioStreamPlayer = $Thrusters/AudioStreamPlayer2D
+onready var bodyArea: Area2D = $Area2D
 
 
 var shipHasShield: bool = false
@@ -115,6 +116,10 @@ func _pulseTarget(letter: String):
 func lockTarget():
 	$Sprite/Target.lockout()
 	isTargeted = false
+	
+	
+func bodyCollider() -> CollisionShape2D:
+	return bodyArea.get_node("CollisionShape2D") as CollisionShape2D
 	
 	
 func projectileHitText(projectile: Node2D) -> bool:

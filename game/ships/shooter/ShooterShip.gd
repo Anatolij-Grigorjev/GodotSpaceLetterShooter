@@ -22,6 +22,7 @@ onready var tween: Tween = $Tween
 onready var sprite: Sprite = $Sprite
 onready var fsm: StateMachine = $ShooterShipStateMachine
 onready var invincibilityTimer: Timer = $InvincibilityTimer
+onready var bodyArea: Area2D = $Area2D
 
 
 var chamber: String = ""
@@ -56,3 +57,7 @@ func faceShootable(shootable: Node2D) -> void:
 func emptyChamber():
 	chamber = ""
 	emit_signal("chamberEmptied")
+	
+	
+func bodyCollider() -> CollisionShape2D:
+	return bodyArea.get_node("CollisionShape2D") as CollisionShape2D
