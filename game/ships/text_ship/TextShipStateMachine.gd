@@ -20,7 +20,6 @@ var shipReachedFinishCell: SingleReadVar = SingleReadVar.new(false)
 var extensionNodes: Array
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	if (not idlingActionsWeights):
 		idlingActionsWeights = WeightedItems.new(initialIdlingActionsWeights)

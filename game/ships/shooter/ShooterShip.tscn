@@ -21,8 +21,9 @@
 [ext_resource path="res://ships/shooter/ShooterShipLeavingWaveState.gd" type="Script" id=19]
 
 [sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 9 )
-shader_param/radius = 0.0
+shader = ExtResource( 11 )
+shader_param/modulate = Color( 0.819608, 0.0666667, 0.0666667, 1 )
+shader_param/mix_coef = 0.0
 
 [sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0.514815, 1 )
