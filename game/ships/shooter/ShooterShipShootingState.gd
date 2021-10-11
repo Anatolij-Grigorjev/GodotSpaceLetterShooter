@@ -8,6 +8,11 @@ var shootingDone: bool = false
 var shotTarget
 
 
+func _ready():
+	yield(get_tree(), "idle_frame")
+	Utils.tryConnect(entity.anim, "animation_finished", self, "_entityFinishedShotAnimation")
+
+
 func enterState(prevState: String):
 	.enterState(prevState)
 	shootingDone = false
@@ -33,7 +38,6 @@ func tryFireAt(target):
 			target.lockTarget()
 	else:
 		missFire()
-	shootingDone = true
 
 
 func fireChambered(shootable):
@@ -50,6 +54,10 @@ func fireChambered(shootable):
 func missFire():
 	entity.anim.play("jam")
 	entity.emptyChamber()
+	
+	
+func _entityFinishedShotAnimation(animationName: String):
+	shootingDone = animationName in ["jam", "shoot"] or not isActive
 	
 	
 func _configureShooterShipProjectile(projectile: Node2D):
