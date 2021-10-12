@@ -242,6 +242,21 @@ static func mapToProp(objectsArray: Array, propPath: String) -> Array:
 	return propValues
 
 
+"""
+Get list of all child nodes of the given node that are part of the
+specified group
+"""
+static func getChildrenInGroup(parentNode: Node, group: String) -> Array:
+	if not is_instance_valid(parentNode):
+		return []
+	var childrenInGroup := []
+	for node in parentNode.get_children():
+		if is_instance_valid(node) and node.is_in_group(group):
+			childrenInGroup.append(node)
+	return childrenInGroup
+	
+	
+
 
 """
 Get list of filenames at supplied directory path. 

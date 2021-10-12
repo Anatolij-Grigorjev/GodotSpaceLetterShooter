@@ -566,8 +566,7 @@ __meta__ = {
 }
 
 [node name="Target" parent="Sprite" instance=ExtResource( 16 )]
-visible = false
-position = Vector2( -0.5, -15 )
+position = Vector2( 1, -15 )
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2( -1.13544, -12.2627 )

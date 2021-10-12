@@ -1,14 +1,15 @@
-extends Sprite
+extends Node2D
 
 const PULSE_REDUCE_PER_SECOND = 0.5
 
 
-onready var anim: AnimationPlayer = $AnimationPlayer
-onready var tween: Tween = $Tween
+onready var sprite: Sprite = $Sprite
+onready var anim: AnimationPlayer = $Sprite/AnimationPlayer
+onready var tween: Tween = $Sprite/Tween
 
 
 func _ready():
-	visible = false
+	sprite.visible = false
 
 	
 func lockin():
@@ -25,7 +26,7 @@ func pulse():
 	#ignore pulsing when not spin animation
 	if (anim.current_animation != "spin"):
 		return
-	scale *= 1.1
+	sprite.scale *= 1.1
 	if (tween.is_active()):
 		tween.stop_all()
 		tween.remove_all()
@@ -34,9 +35,9 @@ func pulse():
 	
 	
 func _buildCurrentPulseReduceTween():
-	var scaleDelta = scale.x - 1.0
+	var scaleDelta = sprite.scale.x - 1.0
 	tween.interpolate_property(
-		self, "scale", 
+		sprite, "scale", 
 		null, Vector2.ONE,
 		scaleDelta / PULSE_REDUCE_PER_SECOND, 
 		Tween.TRANS_EXPO, Tween.EASE_IN_OUT

@@ -7,6 +7,7 @@ signal projectileMissed
 
 export(float) var speed: float = 1050.77
 export(float) var angularVelocity: float = 6
+export(bool) var isTargeted: bool = false setget _setAsTarget
 
 var fireDirection: Vector2 = Vector2.ZERO
 
@@ -53,6 +54,11 @@ func getText() -> String:
 	return label.text if is_instance_valid(label) else ""
 	
 	
+func lockTarget():
+	$Sprite/Target.lockout()
+	isTargeted = false
+	
+	
 func _slowDown():
 	$Tween.interpolate_property(
 		self, 'speed', 
@@ -60,3 +66,26 @@ func _slowDown():
 		0.1, Tween.TRANS_EXPO, Tween.EASE_OUT
 	)
 	$Tween.start()
+	
+	
+func _setAsTarget(isTarget: bool):
+	var wasTarget = isTargeted
+	if (wasTarget == isTarget):
+		return
+	isTargeted = isTarget
+	if ($Sprite/Target and isTargeted):
+		$Sprite/Target.lockin()
+		_animateTargetIfInputTextExactMatch()
+	elif ($Sprite/Target):
+		$Sprite/Target.lockout()
+			
+			
+func _pulseTarget(letter: String):
+	$Sprite/Target.pulse()
+	_animateTargetIfInputTextExactMatch()
+		
+		
+func _animateTargetIfInputTextExactMatch():
+	var inputText: String = get_tree().get_nodes_in_group("input")[0].label.text
+	if (inputText == getText()):
+		$Sprite/Target.anim.play("exact_match")

@@ -13,8 +13,9 @@ func enterState(prevState: String):
 	waveOver = false
 	latestKeyInputEvent = null
 	var shipsContainer = entity.textShipsContainer
-	liveWaveShips = shipsContainer.get_child_count()
-	for ship in shipsContainer.get_children():
+	var shipdsNodes = Utils.getChildrenInGroup(shipsContainer, "text_ship")
+	liveWaveShips = shipdsNodes.size()
+	for ship in shipdsNodes:
 		_registerShipHandlers(ship)
 		
 		
@@ -117,3 +118,6 @@ func _checkSpecialCodes(keyCode: String) -> Dictionary:
 	return {
 		'fireChambered': keyCode == "Space"
 	}
+	
+	
+	
