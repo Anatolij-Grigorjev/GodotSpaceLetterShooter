@@ -40,7 +40,7 @@ func startNextWave():
 		fsm.state = "StartingNextWave"
 	
 	
-func faceShootable(shootable: Node2D) -> void:
+func faceShootable(shootable: Node2D):
 	var myPosition: Vector2 = global_position
 	var shootablePosition: Vector2 = shootable.global_position
 	

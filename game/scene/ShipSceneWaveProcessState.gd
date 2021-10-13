@@ -13,9 +13,9 @@ func enterState(prevState: String):
 	waveOver = false
 	latestKeyInputEvent = null
 	var shipsContainer = entity.textShipsContainer
-	var shipdsNodes = Utils.getChildrenInGroup(shipsContainer, "text_ship")
-	liveWaveShips = shipdsNodes.size()
-	for ship in shipdsNodes:
+	var shipsNodes = Utils.getNodeChildrenInGroup(shipsContainer, "text_ship")
+	liveWaveShips = shipsNodes.size()
+	for ship in shipsNodes:
 		_registerShipHandlers(ship)
 		
 		
@@ -94,13 +94,13 @@ func _findShootableWithNextText(text: String) -> Node2D:
 	
 func _clearTextShipsTargetedExcept(excludeShootable: Node2D):
 	for node in entity.textShipsContainer.get_children():
-		var ship: TextShip = node as TextShip
 		if (
-			is_instance_valid(ship) 
-			and ship.isTargeted
+			is_instance_valid(node)
+			and node.is_in_group("text_ship") 
+			and node.isTargeted
 		):
-			if (ship != excludeShootable):
-				ship.isTargeted = false
+			if (node != excludeShootable):
+				node.isTargeted = false
 
 
 func _findWithTextInGroup(text: String, group: String) -> Node2D:

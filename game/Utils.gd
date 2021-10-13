@@ -246,7 +246,7 @@ static func mapToProp(objectsArray: Array, propPath: String) -> Array:
 Get list of all child nodes of the given node that are part of the
 specified group
 """
-static func getChildrenInGroup(parentNode: Node, group: String) -> Array:
+static func getNodeChildrenInGroup(parentNode: Node, group: String) -> Array:
 	if not is_instance_valid(parentNode):
 		return []
 	var childrenInGroup := []
