@@ -574,13 +574,13 @@ script = ExtResource( 16 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 1 )
+position = Vector2( 0, 200 )
 texture = ExtResource( 1 )
 
 [node name="ShotPosition" type="Position2D" parent="Sprite"]
 position = Vector2( 0.0644836, -40.013 )
 
 [node name="ShotSprite" type="Sprite" parent="Sprite/ShotPosition"]
-visible = false
 position = Vector2( 0, -50 )
 texture = ExtResource( 4 )
 hframes = 4
@@ -627,6 +627,7 @@ __meta__ = {
 [node name="Thruster" type="Particles2D" parent="Sprite"]
 show_behind_parent = true
 position = Vector2( 0, 35 )
+emitting = false
 amount = 100
 process_material = SubResource( 12 )
 __meta__ = {
