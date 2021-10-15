@@ -102,7 +102,7 @@ __meta__ = {
 [node name="Area2D" type="Area2D" parent="Sprite"]
 rotation = -1.74846e-07
 collision_layer = 0
-collision_mask = 2
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Area2D"]
 shape = SubResource( 3 )

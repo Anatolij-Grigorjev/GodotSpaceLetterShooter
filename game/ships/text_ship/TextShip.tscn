@@ -570,7 +570,7 @@ position = Vector2( 1, -15 )
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2( -1.13544, -12.2627 )
-collision_layer = 2
+collision_layer = 10
 collision_mask = 4
 __meta__ = {
 "_edit_lock_": true

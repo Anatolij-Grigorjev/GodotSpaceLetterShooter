@@ -329,6 +329,7 @@ move_ship_right={
 
 2d_physics/layer_2="ships"
 2d_physics/layer_3="shooter"
+2d_physics/layer_4="floating"
 
 [network]
 
