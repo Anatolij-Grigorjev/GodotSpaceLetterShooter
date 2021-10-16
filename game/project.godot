@@ -99,10 +99,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scene/SceneWaveSpec.gd"
 }, {
-"base": "TextShipStateMachineExtension",
-"class": "ShieldedTextShipStateMachineExtension",
+"base": "TextShipStateMachine",
+"class": "ShieldedTextShipStateMachine",
 "language": "GDScript",
-"path": "res://ships/text_ship/shielded/ShieldedTextShipStateMachineExtension.gd"
+"path": "res://ships/text_ship/shielded/ShieldedTextShipStateMachine.gd"
 }, {
 "base": "State",
 "class": "ShipSceneEndState",
@@ -164,10 +164,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ships/shooter/ShooterShipStateMachine.gd"
 }, {
-"base": "TextShipStateMachineExtension",
-"class": "ShooterTextShipStateMachineExtension",
+"base": "TextShipStateMachine",
+"class": "ShooterTextShipStateMachine",
 "language": "GDScript",
-"path": "res://ships/text_ship/shooter/ShooterTextShipStateMachineExtension.gd"
+"path": "res://ships/text_ship/shooter/ShooterTextShipStateMachine.gd"
 }, {
 "base": "Reference",
 "class": "SingleReadVar",
@@ -238,7 +238,7 @@ _global_script_class_icons={
 "SceneSpec": "",
 "SceneStatsData": "",
 "SceneWaveSpec": "",
-"ShieldedTextShipStateMachineExtension": "",
+"ShieldedTextShipStateMachine": "",
 "ShipSceneEndState": "",
 "ShipSceneStartState": "",
 "ShipSceneStateMachine": "",
@@ -251,7 +251,7 @@ _global_script_class_icons={
 "ShooterShipPreparingState": "",
 "ShooterShipShootingState": "",
 "ShooterShipStateMachine": "",
-"ShooterTextShipStateMachineExtension": "",
+"ShooterTextShipStateMachine": "",
 "SingleReadVar": "",
 "State": "",
 "StateMachine": "",

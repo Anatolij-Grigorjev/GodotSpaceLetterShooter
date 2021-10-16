@@ -4,7 +4,7 @@
 [ext_resource path="res://ships/text_ship/shielded/ShipBubble.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ships/text_ship/shielded/enemy_ship_shielded.png" type="Texture" id=3]
 [ext_resource path="res://ships/text_ship/shielded/IdlingBubbleState.tscn" type="PackedScene" id=4]
-[ext_resource path="res://ships/text_ship/shielded/ShieldedTextShipStateMachineExtension.gd" type="Script" id=5]
+[ext_resource path="res://ships/text_ship/shielded/ShieldedTextShipStateMachine.gd" type="Script" id=5]
 
 [sub_resource type="ShaderMaterial" id=1]
 
@@ -15,11 +15,11 @@ corner_detail = 5
 
 [node name="ShieldedTextShip" instance=ExtResource( 1 )]
 
+[node name="TextShipStateMachine" parent="." index="0"]
+script = ExtResource( 5 )
+
 [node name="IdlingBubble" parent="TextShipStateMachine" index="3" instance=ExtResource( 4 )]
 idleTime = 1.6
-
-[node name="ShieldedTextShipStateMachineExtension" type="Node" parent="TextShipStateMachine" index="9"]
-script = ExtResource( 5 )
 
 [node name="ThrusterLeft" parent="Thrusters" index="0"]
 position = Vector2( -35.8594, 44.2787 )

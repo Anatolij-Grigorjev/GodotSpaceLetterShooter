@@ -4,7 +4,7 @@
 [ext_resource path="res://ships/text_ship/shooter/ShootingNose.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ships/text_ship/shooter/IdlingShootState.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ships/Projectile.tscn" type="PackedScene" id=5]
-[ext_resource path="res://ships/text_ship/shooter/ShooterTextShipStateMachineExtension.gd" type="Script" id=6]
+[ext_resource path="res://ships/text_ship/shooter/ShooterTextShipStateMachine.gd" type="Script" id=6]
 
 [sub_resource type="ShaderMaterial" id=1]
 
@@ -92,13 +92,13 @@ tracks/5/keys = {
 
 [node name="ShooterTextShip" instance=ExtResource( 1 )]
 
+[node name="TextShipStateMachine" parent="." index="0"]
+script = ExtResource( 6 )
+
 [node name="IdlingShoot" parent="TextShipStateMachine" index="3" instance=ExtResource( 4 )]
 projectileSpawnPositionNodePath = NodePath("../../Sprite/Nose/ProjectilePosition")
 projectileScn = ExtResource( 5 )
 projectileCollisionMask = 4
-
-[node name="ShooterTextShipStateMachineExtension" type="Node" parent="TextShipStateMachine" index="9"]
-script = ExtResource( 6 )
 
 [node name="Sprite" parent="." index="2"]
 material = SubResource( 1 )
