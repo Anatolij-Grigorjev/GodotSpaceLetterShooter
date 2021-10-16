@@ -25,7 +25,11 @@ func processState(delta: float):
 	
 func enterState(prevState: String):
 	.enterState(prevState)
-	entity.anim.play("shoot")
+	# might have been hit before this state began 
+	if _canShootAgain():
+		entity.anim.play("shoot")
+	else:
+		emit_signal("shotLettersDepleted", entity.currentText.length())
 	
 	
 func exitState(nextState: String):
@@ -34,24 +38,26 @@ func exitState(nextState: String):
 	
 func performShot():
 	var projectile = projectileScn.instance()
+	_configureTextShipProjectile(projectile)
+	
+	var useNumLetters = randi() % maxShotLettersLength + 1
+	projectile.get_node("Label").text = entity.currentText.substr(0, useNumLetters)
+	entity.currentText = entity.currentText.substr(useNumLetters)
+	
+	entity.emit_signal("shotFired", projectile)
+	if (not _canShootAgain()):
+		emit_signal("shotLettersDepleted", entity.currentText.length())
+	
+
+func _canShootAgain() -> bool:
+	return maxShotLettersLength < entity.currentText.length()
+
+
+func _configureTextShipProjectile(projectile: Node2D):
 	var shooterShip: Node2D = get_tree().get_nodes_in_group("shooter")[0]
 	projectile.global_position = projectileSpawnPositionNode.global_position
 	projectile.fireDirection = entity.global_position.direction_to(shooterShip.global_position)
 	projectile.speed = projectileSpeed
-	_configureTextShipProjectile(projectile)
-	var useNumLetters = randi() % maxShotLettersLength + 1
-	projectile.get_node("Label").text = entity.currentText.substr(0, useNumLetters)
-	entity.currentText = entity.currentText.substr(useNumLetters)
-	entity.emit_signal("shotFired", projectile)
-	_checkCanShootAgain()
-	
-
-func _checkCanShootAgain():
-	if (maxShotLettersLength >= entity.currentText.length()):
-		emit_signal("shotLettersDepleted", entity.currentText.length())
-
-
-func _configureTextShipProjectile(projectile: Node2D):
 	projectile.get_node("Sprite").modulate = Color.lightpink
 	projectile.get_node("Area2D").collision_mask = projectileCollisionMask
 	projectile.get_node("Area2D").collision_layer = entity.get_node("Area2D").collision_layer
