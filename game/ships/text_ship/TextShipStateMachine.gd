@@ -3,8 +3,6 @@ class_name TextShipStateMachine
 """
 FSM for actions of a descending ship with text
 """
-const NO_STATE_MATCHED = "<???>"
-
 export(Dictionary) var initialIdlingActionsWeights = {
 	"Idling": 1.0,
 	"IdlingBubble": 1.0,
@@ -57,7 +55,7 @@ func _getNextState(delta: float) -> String:
 		"Die":
 			return NO_STATE
 		_: 
-			return NO_STATE_MATCHED
+			return NO_STATE
 			
 
 func _ifAnimationFinishedGoToState(nextState: String) -> String:
@@ -122,8 +120,3 @@ func _getNextNonProjectileCollisionsState() -> String:
 
 func _getNextIdlingState() -> String:
 	return idlingActionsWeights.pickRandomWeighted()
-	
-	
-func _stateDecided(checkState: String) -> bool:
-	return checkState != NO_STATE_MATCHED
-

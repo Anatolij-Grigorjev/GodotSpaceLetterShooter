@@ -10,7 +10,7 @@ func _ready():
 
 func _getNextState(delta: float) -> String:
 	var baseNextState := ._getNextState(delta)
-	if _stateDecided(baseNextState):
+	if baseNextState != NO_STATE:
 		return baseNextState
 		
 	match(state):
@@ -25,7 +25,7 @@ func _getNextState(delta: float) -> String:
 			else:
 				return NO_STATE
 		_:
-			return NO_STATE_MATCHED
+			return NO_STATE
 
 
 func _onEntityBubbleBurst():

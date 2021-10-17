@@ -17,6 +17,13 @@ corner_detail = 5
 
 [node name="TextShipStateMachine" parent="." index="0"]
 script = ExtResource( 5 )
+state = "<NO_STATE>"
+entityPath = NodePath("..")
+initialIdlingActionsWeights = {
+"Idling": 1.0,
+"IdlingBubble": 1.0,
+"IdlingShoot": 1.0
+}
 
 [node name="IdlingBubble" parent="TextShipStateMachine" index="3" instance=ExtResource( 4 )]
 idleTime = 1.6
