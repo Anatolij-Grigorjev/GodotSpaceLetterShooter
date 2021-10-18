@@ -7,6 +7,10 @@ var liveWaveShips: int = 0
 var waveOver: bool = false
 var latestKeyInputEvent: InputEventKey
 
+var latestSpecialCodeToggles: Dictionary = {
+		'fireChambered': false
+}
+
 
 func enterState(prevState: String):
 	.enterState(prevState)
@@ -62,7 +66,7 @@ func _processLatestKey() -> void:
 		return
 	var keyCharCode: String = OS.get_scancode_string(keyEvent.scancode)
 	
-	var specialCodeToggles := _checkSpecialCodes(keyCharCode)
+	_updateSpecialCodeToggles(keyCharCode)
 	
 	if (keyCharCode.length() == 1):
 		entity.emit_signal("letterTyped", keyCharCode)
@@ -71,7 +75,7 @@ func _processLatestKey() -> void:
 	_clearTextShipsTargetedExcept(shootableWithLetter)
 	if (is_instance_valid(shootableWithLetter)):
 		entity.shooter.faceShootable(shootableWithLetter)
-	if (specialCodeToggles.fireChambered):
+	if (latestSpecialCodeToggles.fireChambered):
 		entity.emit_signal("fireCodeTyped", shootableWithLetter)
 	latestKeyInputEvent = null
 	
@@ -114,10 +118,5 @@ func _shootableIsShip(shootable: Node2D) -> bool:
 	return shootable.get_groups().find("text_ship") != -1
 	
 	
-func _checkSpecialCodes(keyCode: String) -> Dictionary:
-	return {
-		'fireChambered': keyCode == "Space"
-	}
-	
-	
-	
+func _updateSpecialCodeToggles(keyCode: String):
+	latestSpecialCodeToggles.fireChambered = keyCode == "Space"
