@@ -39,7 +39,7 @@ func _ready():
 		print("====================================================")
 		
 
-func generatePathSegments(startPoint: Vector2) -> Array:
+func generatePathSegments(startPoint: Vector2, minStepDrop: float = minHeightStep, maxStepDtop: float = maxHeightStep) -> Array:
 	
 	var position: Vector2 = startPoint
 	var path: Array = [position]
@@ -47,7 +47,7 @@ func generatePathSegments(startPoint: Vector2) -> Array:
 		var direction: int = _getNextSegmentDirection(position.x)
 		var moveAmount: Vector2 = Vector2(
 			direction * (minSegmentsBetweenPoints + rand_range(0, 1.0)) * segmentWidth,
-			rand_range(minHeightStep, maxHeightStep)
+			rand_range(minStepDrop, maxStepDtop)
 		)
 		var nextPosition = position + moveAmount
 		path.push_back(nextPosition)
