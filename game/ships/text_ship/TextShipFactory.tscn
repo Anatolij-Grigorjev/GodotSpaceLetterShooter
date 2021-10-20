@@ -19,10 +19,10 @@ script = ExtResource( 2 )
 __meta__ = {
 "_editor_description_": ""
 }
-widthSegmentsNum = 5
 minHeightStep = 10.5
 maxHeightStep = 15.0
-pathBoundsHorizMargins = Vector2( 150, 150 )
+pathHorizontalMarginLeft = 150.0
+pathHorizontalMarginRight = 150.0
 
 [node name="WordsProvider" type="Node" parent="."]
 script = ExtResource( 3 )
