@@ -55,7 +55,7 @@ func generatePathSegments(startPoint: Vector2) -> Array:
 			rand_range(minHeightStep, maxHeightStep)
 		)
 		var nextPosition = position + moveAmount
-		path.push_back(nextPosition)
+		path.append(nextPosition)
 		position = nextPosition
 		
 	return path
