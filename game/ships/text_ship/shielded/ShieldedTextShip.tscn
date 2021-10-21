@@ -6,7 +6,7 @@
 [ext_resource path="res://ships/text_ship/shielded/IdlingBubbleState.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ships/text_ship/shielded/ShieldedTextShipStateMachine.gd" type="Script" id=5]
 
-[sub_resource type="ShaderMaterial" id=1]
+[sub_resource type="ShaderMaterial" id=3]
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0, 0, 0, 1 )
@@ -37,7 +37,7 @@ position = Vector2( 39.9883, 43.9549 )
 rotation = -0.735395
 
 [node name="Sprite" parent="." index="2"]
-material = SubResource( 1 )
+material = SubResource( 3 )
 texture = ExtResource( 3 )
 
 [node name="Label" parent="Sprite" index="0"]

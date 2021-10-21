@@ -4,6 +4,8 @@ class_name ShooterTextShipStateMachine
 additional text ship FSM actions and logic for shooting useage
 """
 
+onready var shootingCooldownTimer: Timer = $ShootingCooldown
+
 
 func _ready():
 	Utils.tryConnect(getState("IdlingShoot"), "shotLettersDepleted", self, "_onEntityNotEnoughShotLetters")
@@ -41,3 +43,16 @@ func _onTextShipHit(lettersRemaining: int):
 		
 func _disableShootingBehavior():
 	idlingActionsWeights.disableItem("IdlingShoot")
+	
+	
+func _exitState(prevState: String, nextState: String):
+	if prevState == "IdlingShoot":
+		shootingCooldownTimer.start()
+	._exitState(prevState, nextState)
+	
+	
+func _getNextIdlingState() -> String:
+	if shootingCooldownTimer.is_stopped():
+		return ._getNextIdlingState()
+	else:
+		return "Idling"

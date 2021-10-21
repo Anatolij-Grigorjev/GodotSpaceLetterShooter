@@ -107,6 +107,10 @@ projectileSpawnPositionNodePath = NodePath("../../Sprite/Nose/ProjectilePosition
 projectileScn = ExtResource( 5 )
 projectileCollisionMask = 4
 
+[node name="ShootingCooldown" type="Timer" parent="TextShipStateMachine" index="9"]
+wait_time = 5.0
+one_shot = true
+
 [node name="Sprite" parent="." index="2"]
 material = SubResource( 4 )
 
