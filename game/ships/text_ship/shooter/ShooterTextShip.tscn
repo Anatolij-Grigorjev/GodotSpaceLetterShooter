@@ -77,18 +77,6 @@ tracks/4/keys = {
 "method": "performShot"
 } ]
 }
-tracks/5/type = "value"
-tracks/5/path = NodePath("Area2D/CollisionShape2D:disabled")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0.7, 1.4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
 
 [node name="ShooterTextShip" instance=ExtResource( 1 )]
 
@@ -113,16 +101,26 @@ one_shot = true
 
 [node name="Sprite" parent="." index="2"]
 material = SubResource( 4 )
+position = Vector2( 0, -22.4002 )
+scale = Vector2( 1e-05, 1e-05 )
 
 [node name="Label" parent="Sprite" index="0"]
 custom_styles/normal = SubResource( 2 )
 
 [node name="Nose" parent="Sprite" index="1" instance=ExtResource( 2 )]
 visible = true
+self_modulate = Color( 0.821326, 0.0755535, 0.0755535, 1 )
 position = Vector2( 5.42181, 30.9387 )
+
+[node name="ShotSprite" parent="Sprite/Nose" index="0"]
+visible = true
+frame = 2
 
 [node name="Area2D" parent="." index="3"]
 position = Vector2( 2.5, -12 )
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+disabled = true
 
 [node name="AnimationPlayer" parent="." index="4"]
 anims/shoot = SubResource( 3 )

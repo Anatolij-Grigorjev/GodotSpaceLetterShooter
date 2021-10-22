@@ -19,7 +19,7 @@ func _getNextState(delta: float) -> String:
 
 	match(state):
 		"IdlingShoot":
-			var collisionState = _getLatestAnyCollisionState()
+			var collisionState = _getNextNonProjectileCollisionsState()
 			if (collisionState != NO_STATE):
 				return collisionState
 				
