@@ -4,12 +4,15 @@ class_name ShooterTextShipStateMachine
 additional text ship FSM actions and logic for shooting useage
 """
 export(float) var shootingCooldown: float = 3.5
-onready var shootingCooldownTween: Tween = $ShootingCooldown
+onready var cooldownBar = get_node("../CooldownBar")
 
+var isShooterCooldown: bool = false
 
 func _ready():
 	Utils.tryConnect(getState("IdlingShoot"), "shotLettersDepleted", self, "_onEntityNotEnoughShotLetters")
 	Utils.tryConnect(entity, "shipHit", self, "_onTextShipHit")
+	cooldownBar.cooldownTime = shootingCooldown
+	Utils.tryConnect(cooldownBar, "cooldownFinished", self, "_onShooterCooldownFinished")
 	
 	
 func _getNextState(delta: float) -> String:
@@ -47,22 +50,17 @@ func _disableShootingBehavior():
 	
 func _exitState(prevState: String, nextState: String):
 	if prevState == "IdlingShoot":
-		_setNoseCooldownTween()
-		shootingCooldownTween.start()
+		cooldownBar.startCooldown()
+		isShooterCooldown = true
 	._exitState(prevState, nextState)
 	
 	
 func _getNextIdlingState() -> String:
-	if shootingCooldownTween.is_active():
+	if isShooterCooldown:
 		return "Idling"
 	else:
 		return ._getNextIdlingState()
 		
 		
-func _setNoseCooldownTween():
-	shootingCooldownTween.remove_all()
-	shootingCooldownTween.interpolate_property(
-		entity.sprite.get_node('Nose'), 'self_modulate', 
-		Color.red, Color.white, 
-		shootingCooldown, Tween.TRANS_EXPO, Tween.EASE_OUT
-	)
+func _onShooterCooldownFinished():
+	isShooterCooldown = false
