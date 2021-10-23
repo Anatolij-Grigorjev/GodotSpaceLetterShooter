@@ -3,8 +3,8 @@ class_name ShooterTextShipStateMachine
 """
 additional text ship FSM actions and logic for shooting useage
 """
-
-onready var shootingCooldownTimer: Timer = $ShootingCooldown
+export(float) var shootingCooldown: float = 3.5
+onready var shootingCooldownTween: Tween = $ShootingCooldown
 
 
 func _ready():
@@ -47,12 +47,22 @@ func _disableShootingBehavior():
 	
 func _exitState(prevState: String, nextState: String):
 	if prevState == "IdlingShoot":
-		shootingCooldownTimer.start()
+		_setNoseCooldownTween()
+		shootingCooldownTween.start()
 	._exitState(prevState, nextState)
 	
 	
 func _getNextIdlingState() -> String:
-	if shootingCooldownTimer.is_stopped():
-		return ._getNextIdlingState()
-	else:
+	if shootingCooldownTween.is_active():
 		return "Idling"
+	else:
+		return ._getNextIdlingState()
+		
+		
+func _setNoseCooldownTween():
+	shootingCooldownTween.remove_all()
+	shootingCooldownTween.interpolate_property(
+		entity.sprite.get_node('Nose'), 'self_modulate', 
+		Color.red, Color.white, 
+		shootingCooldown, Tween.TRANS_EXPO, Tween.EASE_OUT
+	)
