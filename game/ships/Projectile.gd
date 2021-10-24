@@ -73,11 +73,15 @@ func _setAsTarget(isTarget: bool):
 	if (
 		$Sprite/Target 
 		and isTargeted
-		and not $Sprite/Target.visible
+		and not $Sprite/Target.targetVisible()
 	):
 		$Sprite/Target.lockin()
 		_animateTargetIfInputTextExactMatch()
-	elif ($Sprite/Target and $Sprite/Target.visible):
+	elif (
+		$Sprite/Target 
+		and not isTargeted
+		and $Sprite/Target.targetVisible()
+	):
 		$Sprite/Target.lockout()
 			
 			

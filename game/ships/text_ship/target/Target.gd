@@ -10,6 +10,10 @@ onready var tween: Tween = $Sprite/Tween
 
 func _ready():
 	sprite.visible = false
+	
+	
+func targetVisible() -> bool:
+	return $Sprite.visible
 
 	
 func lockin():
