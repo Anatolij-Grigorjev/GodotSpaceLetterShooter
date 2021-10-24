@@ -124,12 +124,12 @@ func _setAmountTravelAsDirectionVector(amount: float) -> Vector2:
 	
 	
 func _onShooterClearChamber():
-	_clearAllTargetedShips()
+	_clearAllTargeted()
 	
 	
-func _clearAllTargetedShips():
+func _clearAllTargeted():
 	for node in textShipsContainer.get_children():
-		if is_instance_valid(node) and node.is_in_group("text_ship"):
+		if is_instance_valid(node) and "isTargeted" in node:
 			node.isTargeted = false
 
 		
@@ -146,7 +146,7 @@ func _onTextShipHit(lettersRemaining: int):
 func _onShooterHitByShot(projectile: Node2D):
 	freeze.startFreeze(0.1)
 	shaker.beginShake(0.75, 25, 25, 1)
-	_clearAllTargetedShips()
+	_clearAllTargeted()
 	
 	
 		

@@ -72,7 +72,7 @@ func _processLatestKey() -> void:
 		entity.emit_signal("letterTyped", keyCharCode)
 
 	var shootableWithLetter: Node2D = _findShootableWithNextText(entity.shooter.chamber)
-	_clearTextShipsTargetedExcept(shootableWithLetter)
+	_clearAllTargetedExcept(shootableWithLetter)
 	if (is_instance_valid(shootableWithLetter)):
 		entity.shooter.faceShootable(shootableWithLetter)
 	if (latestSpecialCodeToggles.fireChambered):
@@ -96,12 +96,11 @@ func _findShootableWithNextText(text: String) -> Node2D:
 	return null
 	
 	
-func _clearTextShipsTargetedExcept(excludeShootable: Node2D):
+func _clearAllTargetedExcept(excludeShootable: Node2D):
 	for node in entity.textShipsContainer.get_children():
 		if (
 			is_instance_valid(node)
-			and node.is_in_group("text_ship") 
-			and node.isTargeted
+			and "isTargeted" in node
 		):
 			if (node != excludeShootable):
 				node.isTargeted = false
