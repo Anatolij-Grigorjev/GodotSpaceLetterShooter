@@ -94,9 +94,6 @@ func collectFloatingText(text: String):
 		
 		
 func _setAsTarget(isTarget: bool):
-	var wasTarget = isTargeted
-	if (wasTarget == isTarget):
-		return
 	isTargeted = isTarget
 	if ($Sprite/Target and isTargeted):
 		$Sprite/Target.lockin()
