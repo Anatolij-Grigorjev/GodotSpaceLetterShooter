@@ -95,11 +95,15 @@ func collectFloatingText(text: String):
 		
 func _setAsTarget(isTarget: bool):
 	isTargeted = isTarget
-	if ($Sprite/Target and isTargeted):
+	if (
+		$Sprite/Target 
+		and isTargeted
+		and not $Sprite/Target.visible
+	):
 		$Sprite/Target.lockin()
 		if (not shipHasShield):
 			_animateTargetIfInputTextExactMatch()
-	elif ($Sprite/Target):
+	elif ($Sprite/Target and $Sprite/Target.visible):
 		$Sprite/Target.lockout()
 			
 			

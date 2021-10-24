@@ -69,14 +69,15 @@ func _slowDown():
 	
 	
 func _setAsTarget(isTarget: bool):
-	var wasTarget = isTargeted
-	if (wasTarget == isTarget):
-		return
 	isTargeted = isTarget
-	if ($Sprite/Target and isTargeted):
+	if (
+		$Sprite/Target 
+		and isTargeted
+		and not $Sprite/Target.visible
+	):
 		$Sprite/Target.lockin()
 		_animateTargetIfInputTextExactMatch()
-	elif ($Sprite/Target):
+	elif ($Sprite/Target and $Sprite/Target.visible):
 		$Sprite/Target.lockout()
 			
 			
