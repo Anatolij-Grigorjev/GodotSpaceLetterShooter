@@ -24,7 +24,7 @@ func _connectSceneStatsSignals():
 	#scene
 	_connectSceneNodeStatsSignals(currentScene)
 	#shooter
-	var shooter: Node2D = get_tree().get_nodes_in_group("shooter")[0]
+	var shooter: Node2D = Utils.getFirstTreeNodeInGroup(get_tree(), "shooter")
 	_connectShooterStatsSignals(shooter)
 	
 	

@@ -54,7 +54,7 @@ func _canShootAgain() -> bool:
 
 
 func _configureTextShipProjectile(projectile: Node2D):
-	var shooterShip: Node2D = get_tree().get_nodes_in_group("shooter")[0]
+	var shooterShip: Node2D = Utils.getFirstTreeNodeInGroup(get_tree(), "shooter")
 	projectile.global_position = projectileSpawnPositionNode.global_position
 	projectile.fireDirection = entity.global_position.direction_to(shooterShip.global_position)
 	projectile.speed = projectileSpeed

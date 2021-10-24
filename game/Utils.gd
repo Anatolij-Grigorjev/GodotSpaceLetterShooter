@@ -204,6 +204,14 @@ static func getFirst(arr: Array):
 	
 	
 """
+Find first node belonging to specified group in specified scene tree
+Returns null if no nodes in group found
+"""
+static func getFirstTreeNodeInGroup(treeRef: SceneTree, groupName: String):
+	return getFirst(treeRef.get_nodes_in_group(groupName))
+	
+	
+"""
 Check if a given string is null or empty
 """
 static func isEmptyString(string: String) -> bool:
@@ -212,7 +220,7 @@ static func isEmptyString(string: String) -> bool:
 	
 """
 Get array element at random index. Doesnt modify the input array
-Short circuit if array is of size 1
+Short circuit if array is of size 1 or less
 """
 static func getRandom(elems: Array):
 	if (elems == null or elems.empty()):

@@ -87,6 +87,6 @@ func _pulseTarget(letter: String):
 		
 		
 func _animateTargetIfInputTextExactMatch():
-	var inputText: String = get_tree().get_nodes_in_group("input")[0].label.text
+	var inputText: String = Utils.getFirstTreeNodeInGroup(get_tree(), "input").label.text
 	if (inputText == getText()):
 		$Sprite/Target.anim.play("exact_match")
