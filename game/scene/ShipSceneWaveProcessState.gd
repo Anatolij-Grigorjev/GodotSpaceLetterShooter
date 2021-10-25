@@ -97,7 +97,7 @@ func _findShootableWithNextText(text: String) -> Node2D:
 	
 	
 func _clearAllTargetedExcept(excludeShootable: Node2D):
-	for node in entity.textShipsContainer.get_children():
+	for node in (entity.textShipsContainer.get_children() + entity.get_children()):
 		if (
 			is_instance_valid(node)
 			and "isTargeted" in node
