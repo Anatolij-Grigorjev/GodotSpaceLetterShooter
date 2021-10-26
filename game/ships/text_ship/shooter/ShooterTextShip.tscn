@@ -84,8 +84,6 @@ tracks/4/keys = {
 
 [node name="TextShipStateMachine" parent="." index="0"]
 script = ExtResource( 6 )
-state = "<NO_STATE>"
-entityPath = NodePath("..")
 initialIdlingActionsWeights = {
 "Idling": 1.0,
 "IdlingBubble": 1.0,
@@ -114,12 +112,12 @@ position = Vector2( 2.5, -12 )
 anims/shoot = SubResource( 3 )
 
 [node name="CooldownBar" parent="." index="7" instance=ExtResource( 3 )]
-margin_left = -107.322
-margin_top = 61.2923
-margin_right = 142.678
-margin_bottom = 86.2923
-rect_rotation = -89.492
-rect_scale = Vector2( 0.600073, 1 )
+margin_left = -90.0
+margin_top = 60.0
+margin_right = 160.0
+margin_bottom = 85.0
+rect_rotation = -90.0
+rect_scale = Vector2( 0.6, 0.6 )
 
 [editable path="TextShipStateMachine/Descending"]
 

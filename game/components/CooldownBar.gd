@@ -24,6 +24,10 @@ func startCooldown():
 	value = max_value
 	
 	
+func cooldownInProgress() -> bool:
+	return not timer.is_stopped()
+	
+	
 func _process(delta):
 	if not timer.is_stopped():
 		value = timer.time_left * 100

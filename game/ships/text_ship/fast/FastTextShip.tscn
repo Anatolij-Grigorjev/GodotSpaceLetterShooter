@@ -1,15 +1,28 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://ships/text_ship/TextShip.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ships/text_ship/fast/enemy_ship_fast.png" type="Texture" id=2]
 [ext_resource path="res://ships/text_ship/fast/FastDescendingState.gd" type="Script" id=3]
+[ext_resource path="res://components/CooldownBar.tscn" type="PackedScene" id=4]
 
-[sub_resource type="ShaderMaterial" id=1]
+[sub_resource type="ShaderMaterial" id=4]
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0, 0, 0, 1 )
 border_color = Color( 0.839216, 0.960784, 0.0313726, 1 )
 corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.223529, 0.54902, 0.701961, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0.8, 0.8, 0.8, 0 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="FastTextShip" instance=ExtResource( 1 )]
 
@@ -25,7 +38,7 @@ position = Vector2( -43.9795, -40.8879 )
 scale = Vector2( 0.66, 1 )
 
 [node name="Sprite" parent="." index="2"]
-material = SubResource( 1 )
+material = SubResource( 4 )
 texture = ExtResource( 2 )
 
 [node name="Label" parent="Sprite" index="0"]
@@ -37,10 +50,18 @@ margin_bottom = -55.0
 custom_styles/normal = SubResource( 2 )
 
 [node name="Target" parent="Sprite" index="1"]
-visible = false
 position = Vector2( 0, 23 )
 
 [node name="Area2D" parent="." index="3"]
 position = Vector2( 0, 5 )
+
+[node name="CooldownBar" parent="." index="7" instance=ExtResource( 4 )]
+margin_left = -90.0
+margin_top = 70.0
+margin_right = 160.0
+margin_bottom = 95.0
+rect_rotation = -90.0
+rect_scale = Vector2( 0.6, 0.6 )
+custom_styles/fg = SubResource( 3 )
 
 [editable path="TextShipStateMachine/Descending"]

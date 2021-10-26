@@ -5,10 +5,12 @@ Descending state subtype that creates illusion of faster descend
 """
 const FloatingTextScn = preload("res://ships/text_ship/FloatingText.tscn")
 
-export(int) var numSwitchesLoseLetter = 2
-var lastTraverseDirection: float = 1.0
+export(float) var dropLetterCooldown: float = 3.5
+onready var cooldownBar = get_node("../../CooldownBar")
 
-var elapsedDirectionSwitches = 0
+
+func _ready():
+	cooldownBar.cooldownTime = dropLetterCooldown
 
 
 
@@ -18,8 +20,7 @@ func _startNextPathSegment():
 	var endPoint = descendPath[lastPathPointIdx]
 	
 	var traverseDirection = sign(endPoint.x - startPoint.x)
-	_checkShakeOffLetter(traverseDirection)
-	lastTraverseDirection = traverseDirection
+	_checkShakeOffLetter()
 	
 	pathMover.interpolate_property(
 		entity, "rotation_degrees", 
@@ -31,13 +32,11 @@ func _startNextPathSegment():
 	
 	
 
-func _checkShakeOffLetter(newTraverseDirection: float):
+func _checkShakeOffLetter():
 	if (entity.currentText.length() >= 2):
-		if lastTraverseDirection != newTraverseDirection:
-			elapsedDirectionSwitches += 1
-			if (elapsedDirectionSwitches == numSwitchesLoseLetter):
-				elapsedDirectionSwitches = 0
-				_shakeOffLetter()
+		if not cooldownBar.cooldownInProgress():
+			cooldownBar.startCooldown()
+			_shakeOffLetter()
 				
 
 func _shakeOffLetter():

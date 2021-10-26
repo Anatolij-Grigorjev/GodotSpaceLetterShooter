@@ -6,13 +6,11 @@ additional text ship FSM actions and logic for shooting useage
 export(float) var shootingCooldown: float = 3.5
 onready var cooldownBar = get_node("../CooldownBar")
 
-var isShooterCooldown: bool = false
 
 func _ready():
 	Utils.tryConnect(getState("IdlingShoot"), "shotLettersDepleted", self, "_onEntityNotEnoughShotLetters")
 	Utils.tryConnect(entity, "shipHit", self, "_onTextShipHit")
 	cooldownBar.cooldownTime = shootingCooldown
-	Utils.tryConnect(cooldownBar, "cooldownFinished", self, "_onShooterCooldownFinished")
 	
 	
 func _getNextState(delta: float) -> String:
@@ -51,16 +49,11 @@ func _disableShootingBehavior():
 func _exitState(prevState: String, nextState: String):
 	if prevState == "IdlingShoot":
 		cooldownBar.startCooldown()
-		isShooterCooldown = true
 	._exitState(prevState, nextState)
 	
 	
 func _getNextIdlingState() -> String:
-	if isShooterCooldown:
+	if cooldownBar.cooldownInProgress():
 		return "Idling"
 	else:
 		return ._getNextIdlingState()
-		
-		
-func _onShooterCooldownFinished():
-	isShooterCooldown = false
