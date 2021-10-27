@@ -42,6 +42,7 @@ __meta__ = {
 }
 
 [node name="Timer" type="Timer" parent="."]
+one_shot = true
 __meta__ = {
 "_editor_description_": ""
 }

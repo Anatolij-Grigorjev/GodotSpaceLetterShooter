@@ -40,5 +40,5 @@ func _onCooldownFinished():
 	
 	
 func _refreshVisible():
-	visible = visibleInactive
+	visible = cooldownInProgress() or visibleInactive
 	
