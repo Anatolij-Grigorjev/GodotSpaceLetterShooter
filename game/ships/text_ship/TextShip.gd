@@ -10,6 +10,7 @@ signal textShipReachedFinish
 signal textShipDestroyed(text)
 signal shipHit(lettersRemaining)
 signal shipHitEarnedPoints(points, shipPosition)
+signal shipPickedUpText(currentText)
 
 
 export(String) var currentText: String = "test" setget setCurrentText, getCurrentText
@@ -91,6 +92,7 @@ func getCurrentText() -> String:
 func collectFloatingText(text: String):
 	setCurrentText(currentText + text)
 	anim.play("pickup_text")
+	emit_signal("shipPickedUpText", currentText)
 		
 		
 func _setAsTarget(isTarget: bool):

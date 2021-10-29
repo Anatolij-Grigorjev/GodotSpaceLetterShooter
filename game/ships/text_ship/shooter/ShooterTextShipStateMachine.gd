@@ -4,12 +4,16 @@ class_name ShooterTextShipStateMachine
 additional text ship FSM actions and logic for shooting useage
 """
 export(float) var shootingCooldown: float = 3.5
+export(int) var maxShotLettersLength: int = 2
+
 onready var cooldownBar = get_node("../CooldownBar")
 
 
+
 func _ready():
-	Utils.tryConnect(getState("IdlingShoot"), "shotLettersDepleted", self, "_onEntityNotEnoughShotLetters")
-	Utils.tryConnect(entity, "shipHit", self, "_onTextShipHit")
+	Utils.tryConnect(getState("IdlingShoot"), "textShipLettersShot", self, "_checkShipAllowedKeepShooting")
+	Utils.tryConnect(entity, "shipHit", self, "_checkShipAllowedKeepShooting")
+	Utils.tryConnect(entity, "shipPickedUpText", self, "_checkHasShootableText")
 	cooldownBar.cooldownTime = shootingCooldown
 	
 	
@@ -17,6 +21,7 @@ func _getNextState(delta: float) -> String:
 	var baseNextState := ._getNextState(delta)
 	if baseNextState != NO_STATE:
 		return baseNextState
+
 
 	match(state):
 		"IdlingShoot":
@@ -33,17 +38,25 @@ func _getNextState(delta: float) -> String:
 			return NO_STATE
 			
 			
-func _onEntityNotEnoughShotLetters(lettersLeft: int):
-	_disableShootingBehavior()
-	
-
-func _onTextShipHit(lettersRemaining: int):
-	if lettersRemaining <= getState("IdlingShoot").maxShotLettersLength:
+func _checkShipAllowedKeepShooting(lettersLeft: int):
+	if lettersLeft <= maxShotLettersLength:
 		_disableShootingBehavior()
 		
 		
 func _disableShootingBehavior():
 	idlingActionsWeights.disableItem("IdlingShoot")
+	
+
+func _enableShootingBehavior():
+	idlingActionsWeights.setItemWeight("IdlingShoot", 1)
+	
+	
+func _checkHasShootableText(currentText: String):
+	if (
+		currentText.length() > maxShotLettersLength 
+		and idlingActionsWeights.isItemDisabled("IdlingShoot")
+	):
+		_enableShootingBehavior()
 	
 	
 func _exitState(prevState: String, nextState: String):
@@ -57,3 +70,7 @@ func _getNextIdlingState() -> String:
 		return "Idling"
 	else:
 		return ._getNextIdlingState()
+		
+		
+func _canShootAgain() -> bool:
+	return maxShotLettersLength < entity.currentText.length()

@@ -4,53 +4,31 @@ class_name IdlingShootState
 Hover state where the ship shoots part of its letters out towards
 the bottom ship as a projectile
 """
-signal shotLettersDepleted(lettersLeft)
+signal textShipLettersShot(lettersLeft)
 
 export(NodePath) var projectileSpawnPositionNodePath
 export(PackedScene) var projectileScn
 export(int, LAYERS_2D_PHYSICS) var projectileCollisionMask: int = 0
 export(float) var projectileSpeed: float = 150
-export(int) var maxShotLettersLength: int = 2
 
 onready var projectileSpawnPositionNode = get_node(projectileSpawnPositionNodePath)
-
-
-func _ready():
-	call_deferred("_checkCanShootAgain")
-
-
-func processState(delta: float):
-	.processState(delta)
 
 	
 func enterState(prevState: String):
 	.enterState(prevState)
-	# might have been hit before this state began 
-	if _canShootAgain():
-		entity.anim.play("shoot")
-	else:
-		emit_signal("shotLettersDepleted", entity.currentText.length())
-	
-	
-func exitState(nextState: String):
-	.exitState(nextState)
+	entity.anim.play("shoot")
 	
 	
 func performShot():
 	var projectile = projectileScn.instance()
 	_configureTextShipProjectile(projectile)
 	
-	var useNumLetters = randi() % maxShotLettersLength + 1
+	var useNumLetters = randi() % fsm.maxShotLettersLength + 1
 	projectile.get_node("Label").text = entity.currentText.substr(0, useNumLetters)
 	entity.currentText = entity.currentText.substr(useNumLetters)
 	
 	entity.emit_signal("shotFired", projectile)
-	if (not _canShootAgain()):
-		emit_signal("shotLettersDepleted", entity.currentText.length())
-	
-
-func _canShootAgain() -> bool:
-	return maxShotLettersLength < entity.currentText.length()
+	emit_signal("textShipLettersShot", entity.currentText.length())
 
 
 func _configureTextShipProjectile(projectile: Node2D):

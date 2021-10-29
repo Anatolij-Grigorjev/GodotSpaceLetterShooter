@@ -1,7 +1,7 @@
 {
 	"id": 9,
 	"name": "HYPERSPACE",
-	"unlockPoints": 2500,
+	"unlockPoints": 10000,
 	"type": "hyperspace",
 	"bgColor": {
 		"a": 1.0,
