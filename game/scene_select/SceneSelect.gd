@@ -45,7 +45,7 @@ func _clearRefSizeCells():
 
 
 func _onSceneCellSceneSelected(sceneSpec: SceneSpec):
-	Scenes.switchToShipScene(sceneTypeLoadPaths[sceneSpec.type], sceneSpec)
+	Scenes.switchToShipScene(sceneTypeLoadPaths[sceneSpec.bgType], sceneSpec)
 	
 	
 func _unlockNewSceneCells():

@@ -1,7 +1,7 @@
 {
 	"id": 2,
 	"name": "SHIELDED",
-	"type": "space",
+	"bgType": "space",
 	"wordsCorpusPath": "corpus_same_letter.txt",
 	"unlockPoints": 1000,
 	"bgColor": {

@@ -144,7 +144,7 @@ In an in-game SceneSpec object instance
 static func parseJSONSceneSpec(sceneSpecJSON: Dictionary) -> SceneSpec:
 	var spec = SceneSpec.new()
 	spec.id = sceneSpecJSON.id
-	spec.type = sceneSpecJSON.type
+	spec.bgType = sceneSpecJSON.bgType
 	spec.sceneName = sceneSpecJSON.name
 	spec.unlockPoints = sceneSpecJSON.unlockPoints
 	spec.wordsCorpusPath = sceneSpecJSON.get('wordsCorpusPath', "")

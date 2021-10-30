@@ -1,7 +1,7 @@
 {
 	"id": 1,
 	"name": "FASTTRACK",
-	"type": "space",
+	"bgType": "space",
 	"unlockPoints": 1000,
 	"bgColor": {
 		"a": 1.0,
