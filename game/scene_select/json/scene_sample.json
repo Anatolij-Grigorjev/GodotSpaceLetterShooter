@@ -1,9 +1,9 @@
 {
-	"id": 9,
-	"name": "MIXER",
-	"unlockPoints": 10000,
+	"id": 0,
+	"name": "SAMPLE",
+	"unlockPoints": 0,
 	"background": {
-		"type": "hyperspace",
+		"type": "space",
 		"tint": {
 			"a": 1.0,
 			"b": 0.1,
@@ -11,26 +11,26 @@
 			"r": 0.1
 		}
 	},
-	"minShipsWave": 3,
-	"maxShipsWave": 4,
+	"minShipsWave": 1,
+	"maxShipsWave": 1,
 	"allowedShipsTypes": [
 		{
 			"speed": 550.0,
 			"shieldHP": 0,
 			"shotPriority": 0,
-			"numShips": 6
+			"numShips": 1
 		},
 		{
 			"speed": 400.0,
 			"shieldHP": 5,
 			"shotPriority": 0,
-			"numShips": 3
+			"numShips": 1
 		},
 		{
 			"speed": 450.0,
 			"shieldHP": 0,
 			"shotPriority": 5,
-			"numShips": 4
+			"numShips": 1
 		}
 	]
 }
