@@ -1,14 +1,16 @@
 {
 	"id": 2,
 	"name": "SHIELDED",
-	"bgType": "space",
 	"wordsCorpusPath": "corpus_same_letter.txt",
 	"unlockPoints": 1000,
-	"bgColor": {
-		"a": 1.0,
-		"b": 0.99,
-		"g": 0.28,
-		"r": 0.19
+	"background": {
+		"type": "space",
+		"tint": {
+			"a": 1.0,
+			"b": 0.99,
+			"g": 0.28,
+			"r": 0.19
+		}
 	},
 	"minShipsWave": 2,
 	"maxShipsWave": 3,

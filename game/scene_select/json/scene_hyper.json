@@ -2,12 +2,14 @@
 	"id": 9,
 	"name": "HYPERSPACE",
 	"unlockPoints": 10000,
-	"bgType": "hyperspace",
-	"bgColor": {
-		"a": 1.0,
-		"b": 0.1,
-		"g": 0.1,
-		"r": 0.1
+	"background": {
+		"type": "hyperspace",
+		"tint": {
+			"a": 1.0,
+			"b": 0.1,
+			"g": 0.1,
+			"r": 0.1
+		}
 	},
 	"minShipsWave": 3,
 	"maxShipsWave": 4,

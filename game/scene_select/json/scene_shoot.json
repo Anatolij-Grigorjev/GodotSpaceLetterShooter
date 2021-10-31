@@ -1,13 +1,15 @@
 {
 	"id": 3,
 	"name": "SHOOTOUT",
-	"bgType": "space",
 	"unlockPoints": 1000,
-	"bgColor": {
-		"a": 1.0,
-		"b": 0.93,
-		"g": 0.58,
-		"r": 0.39
+	"background": {
+		"type": "space",
+		"tint": {
+			"a": 1.0,
+			"b": 0.93,
+			"g": 0.58,
+			"r": 0.39
+		}
 	},
 	"minShipsWave": 2,
 	"maxShipsWave": 3,
