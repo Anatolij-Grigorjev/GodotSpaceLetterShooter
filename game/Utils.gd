@@ -149,8 +149,9 @@ static func parseJSONSceneSpec(sceneSpecJSON: Dictionary) -> SceneSpec:
 	spec.sceneName = sceneSpecJSON.name
 	spec.unlockPoints = sceneSpecJSON.unlockPoints
 	spec.wordsCorpusPath = sceneSpecJSON.get('wordsCorpusPath', "")
-	spec.smallestShipsWave = sceneSpecJSON.minShipsWave
-	spec.largestShipsWave = sceneSpecJSON.maxShipsWave
+	spec.smallestShipsWave = sceneSpecJSON.wave.minShips
+	spec.largestShipsWave = sceneSpecJSON.wave.maxShips
+	spec.shipTurnsBetweenWaves = sceneSpecJSON.wave.get('turnShip', true)
 	for shipTypeBlock in sceneSpecJSON.allowedShipsTypes:
 		var shipType = parseJSONShipLimits(shipTypeBlock)
 		var numShips = shipTypeBlock.numShips

@@ -52,6 +52,7 @@ var screenShaker: Node2D
 func _ready():
 	_applyMoveDirection(starsMoveDirection)
 	_generateHyperSpeedAnimations()
+	_generateHyperNoTurnAnimations()
 	_generateHyperTurnAnimations()
 	runningStandalone = get_tree().get_nodes_in_group("shooter").empty()
 	screenShaker = Utils.getFirst(get_tree().get_nodes_in_group("screen_shake"))
@@ -88,10 +89,18 @@ func startHyperTurn():
 	anim.play(animName)
 	
 	
+func startHyperNoTurn():
+	var animName = _getHyperNoTurnAnimationName(starsMoveDirection)
+	var animation: Animation = anim.get_animation(animName)
+	screenShaker.beginShake(animation.length, 20, 25, 2)
+	anim.play(animName)
+	
+	
 func startHyper():
+	var extraShakeSeconds: float = 5.0
 	var animName = _getHyperAnimationName(starsMoveDirection)
 	var animation: Animation = anim.get_animation(animName)
-	screenShaker.beginShake(animation.length + 5.0, 20, 25, 2)
+	screenShaker.beginShake(animation.length + extraShakeSeconds, 20, 25, 2)
 	anim.play(animName)
 
 	
@@ -142,7 +151,10 @@ func _getTurnAnimationName(fromDirection: int, toDirection: int) -> String:
 		directionProps[fromDirection].name, 
 		directionProps[toDirection].name
 	]
-	
+
+func _getHyperNoTurnAnimationName(direction: int) -> String:
+	return "hyper_%s_noturn" % directionProps[direction].name
+
 
 func _getHyperAnimationName(direction: int) -> String:
 	return "hyper_%s" % directionProps[direction].name
@@ -179,6 +191,14 @@ func _generateHyperSpeedAnimations():
 		var hyperAnimation = _generateHyperAnimationDirection(directionIdx)
 		var animationName = _getHyperAnimationName(directionIdx)
 		anim.add_animation(animationName, hyperAnimation)
+		
+		
+func _generateHyperNoTurnAnimations():
+	for direction in Direction:
+		var directionIdx: int = Direction[direction]
+		var hyperNoTurnAnimation = _generateHyperNoTurnAnimation(directionIdx)
+		var animationName = _getHyperNoTurnAnimationName(directionIdx)
+		anim.add_animation(animationName, hyperNoTurnAnimation)
 		
 
 func _generateHyperTurnAnimations():
@@ -231,16 +251,36 @@ func _generateHyperTurnFromToDirectionAnimation(fromDirection: int, toDirection:
 		3.0, 1.0, 0.5
 	)
 	var smallStarsTrackIdx = animation.find_track(_getNodeMotionScaleKeyName($SmallStars))
-	var newDirectionSmallStarsCruisSpeed = directionProps[toDirection].smallStarCruiseSpeed
-	var prevDirectionSmallStarsCruisSpeed = directionProps[fromDirection].smallStarCruiseSpeed
+	var newDirectionSmallStarsCruiseSpeed = directionProps[toDirection].smallStarCruiseSpeed
+	var prevDirectionSmallStarsCruiseSpeed = directionProps[fromDirection].smallStarCruiseSpeed
 	Animations.addAnimationValueTrackInterpolation(
 		animation, smallStarsTrackIdx,
-		prevDirectionSmallStarsCruisSpeed * 3, prevDirectionSmallStarsCruisSpeed,
+		prevDirectionSmallStarsCruiseSpeed * 3, prevDirectionSmallStarsCruiseSpeed,
 		2.0, 1.0, 1.5
 	)
 	Animations.addAnimationValueTrackInterpolation(
 		animation, smallStarsTrackIdx,
-		prevDirectionSmallStarsCruisSpeed, newDirectionSmallStarsCruisSpeed,
+		prevDirectionSmallStarsCruiseSpeed, newDirectionSmallStarsCruiseSpeed,
 		3.0, 1.0, 0.5
+	)
+	return animation
+
+
+func _generateHyperNoTurnAnimation(forDirection: int) -> Animation:
+	var animation = _generateHyperAnimationDirection(forDirection)
+	animation.length = 2.0
+	var bigStarsTrackIdx = animation.find_track(_getNodeMotionScaleKeyName($BigStars))
+	var directionBigStarsCruiseSpeed = directionProps[forDirection].bigStarCruiseSpeed
+	Animations.addAnimationValueTrackInterpolation(
+		animation, bigStarsTrackIdx,
+		directionBigStarsCruiseSpeed * 3, directionBigStarsCruiseSpeed,
+		1.0, 1.0, 1.5
+	)
+	var smallStarsTrackIdx = animation.find_track(_getNodeMotionScaleKeyName($SmallStars))
+	var directionSmallStarsCruiseSpeed = directionProps[forDirection].smallStarCruiseSpeed
+	Animations.addAnimationValueTrackInterpolation(
+		animation, smallStarsTrackIdx,
+		directionSmallStarsCruiseSpeed * 3, directionSmallStarsCruiseSpeed,
+		1.0, 1.0, 1.5
 	)
 	return animation

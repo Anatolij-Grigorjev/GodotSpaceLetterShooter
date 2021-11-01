@@ -151,6 +151,11 @@ func _onShooterHitByShot(projectile: Node2D):
 	
 		
 func _onShooterToggleHyperspeed():
+	var shipTurnDisabled = not fsm.sceneSpecification.shipTurnsBetweenWaves
+	if shipTurnDisabled:
+		starsBG.startHyperNoTurn()
+		return
+	
 	var waveEnded = fsm.state == "WaveEnd"
 	var sceneEnded = waveEnded and fsm.remainingSceneShips <= 0
 	if (waveEnded and not sceneEnded):
