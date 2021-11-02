@@ -103,26 +103,11 @@ func startHyper():
 	screenShaker.beginShake(animation.length + extraShakeSeconds, 20, 25, 2)
 	anim.play(animName)
 
-	
-	
-func hide():
-	_toggleChildrenVisible(false)
-	
-	
-func show():
-	_toggleChildrenVisible(true)
-
-
-func _toggleChildrenVisible(makeVisible: bool):
-	for node in get_children():
-		if is_instance_valid(node):
-			node.visible = makeVisible
-
 
 func _applyMoveDirection(direction: int):
-	var previouslyHorizontal = _directionHorizontal()
+	var previouslyHorizontal = _isStartsMoveDirectionHorizontal()
 	starsMoveDirection = clamp(direction, Direction.UP, Direction.RIGHT)
-	var directionPlaneChanged = _directionHorizontal() != previouslyHorizontal
+	var directionPlaneChanged = _isStartsMoveDirectionHorizontal() != previouslyHorizontal
 	if ($BigStars):
 		$BigStars.motion_scale = directionProps[direction].bigStarCruiseSpeed
 		_setChildSpritesRotation($BigStars, directionProps[direction].spritesRotation)
@@ -135,7 +120,7 @@ func _applyMoveDirection(direction: int):
 			$SmallStars.motion_mirroring = Utils.swapVector($SmallStars.motion_mirroring)
 	
 	
-func _directionHorizontal() -> bool:
+func _isStartsMoveDirectionHorizontal() -> bool:
 	return starsMoveDirection in [Direction.LEFT, Direction.RIGHT]
 	
 
