@@ -64,7 +64,7 @@ func _ready():
 	Utils.tryConnect(shooter, "chamberEmptied", playerInput, "clearText")
 	Utils.tryConnect(shooter, "shotFired", playerInput, "flashInput")
 	Utils.tryConnect(shooter, "chamberEmptied", self, "_onShooterClearChamber")
-	Utils.tryConnect(shooter, "hyperspeedToggled", self, "_onShooterToggleHyperspeed")
+	Utils.tryConnect(shooter, "hyperSpeedToggled", self, "_onShooterToggleHyperspeed")
 	Utils.tryConnect(shooter, "shooterHitByShot", self, "_onShooterHitByShot")
 	Utils.tryConnect(starsBG, "bgWillHaveTurned", self, "_scheduleShooterTurning")
 	
@@ -150,9 +150,9 @@ func _onShooterHitByShot(projectile: Node2D):
 	
 	
 		
-func _onShooterToggleHyperspeed():
+func _onShooterToggleHyperspeed(speedUp: bool):
 	var shipTurnDisabled = not fsm.sceneSpecification.shipTurnsBetweenWaves
-	if shipTurnDisabled:
+	if shipTurnDisabled and speedUp:
 		starsBG.startHyperNoTurn()
 		return
 	

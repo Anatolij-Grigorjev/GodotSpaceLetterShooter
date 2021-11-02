@@ -11,7 +11,7 @@ enum Side {
 signal shotFired(projectile)
 signal chamberEmptied
 signal shooterHitByShot(projectile)
-signal hyperspeedToggled
+signal hyperSpeedToggled(speedUp)
 
 export(PackedScene) var projectileScene: PackedScene
 export(int, LAYERS_2D_PHYSICS) var projectileCollisionMask: int = 0
@@ -57,6 +57,10 @@ func faceShootable(shootable: Node2D):
 func emptyChamber():
 	chamber = ""
 	emit_signal("chamberEmptied")
+	
+	
+func _shipToggledHyperSpeed():
+	emit_signal("hyperSpeedToggled", fsm.state == "LeavingWave")
 	
 	
 func bodyCollider() -> CollisionShape2D:
