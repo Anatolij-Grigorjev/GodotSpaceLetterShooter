@@ -6,8 +6,8 @@ and bottom ship shoots the descenders based on text
 const FloatingPointsScn = preload("res://scene/gui/FloatingPoints.tscn")  
 
 enum Direction {
-	UP = 0,
-	DOWN = 1,
+	TOP = 0,
+	BOTTOM = 1,
 	LEFT = 2,
 	RIGHT = 3
 }
@@ -19,7 +19,7 @@ signal fireCodeTyped(lockedTarget)
 
 export(float) var screenScrollSpeed = 300
 export(float) var endWaveWaitTime = 2.5
-export(Direction) var shipDirection = Direction.DOWN setget setShipPosition
+export(Direction) var shipDirection = Direction.BOTTOM setget setShipPosition
 
 onready var shooter = $MovingElements/ShooterShip
 onready var textShipsContainer = $MovingElements/TextShips
@@ -40,14 +40,14 @@ var starsBG
 
 
 var directionShipAngles = {
-	Direction.UP: 180,
-	Direction.DOWN: 0,
+	Direction.TOP: 180,
+	Direction.BOTTOM: 0,
 	Direction.LEFT: 90,
 	Direction.RIGHT: 270
 }
 onready var directionPositions = {
-	Direction.UP: $MovingElements/ShooterPositions/Top,
-	Direction.DOWN: $MovingElements/ShooterPositions/Bottom,
+	Direction.TOP: $MovingElements/ShooterPositions/Top,
+	Direction.BOTTOM: $MovingElements/ShooterPositions/Bottom,
 	Direction.LEFT: $MovingElements/ShooterPositions/Left,
 	Direction.RIGHT: $MovingElements/ShooterPositions/Right
 }
@@ -75,7 +75,7 @@ func _ready():
 		var randomDirection: int = Utils.getRandom([
 			Direction.RIGHT, 
 			Direction.LEFT, 
-			Direction.DOWN
+			Direction.BOTTOM
 		])
 		setShipPosition(randomDirection)
 		starsBG.starsMoveDirection = randomDirection
@@ -99,7 +99,7 @@ func setSceneSpecificaion(spec: SceneSpec):
 	
 	
 func setShipPosition(newPosition: int):
-	shipDirection = clamp(newPosition, Direction.UP, Direction.RIGHT)
+	shipDirection = clamp(newPosition, Direction.TOP, Direction.RIGHT)
 	shooter.position = directionPositions[shipDirection].position
 	shooter.rotation_degrees = directionShipAngles[shipDirection]
 	
@@ -110,9 +110,9 @@ func _bindSceneStats():
 	
 func _setAmountTravelAsDirectionVector(amount: float) -> Vector2:
 	match(shipDirection):
-		Direction.UP:
+		Direction.TOP:
 			return Vector2(0, -amount)
-		Direction.DOWN:
+		Direction.BOTTOM:
 			return Vector2(0, -amount)
 		Direction.LEFT:
 			return Vector2(-amount, 0)
