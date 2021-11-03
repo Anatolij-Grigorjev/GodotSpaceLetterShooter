@@ -20,6 +20,7 @@ tracks/0/keys = {
 [node name="Scenes" type="CanvasLayer"]
 script = ExtResource( 1 )
 sceneSpecsPath = "res://scene_select/json"
+excludePaths = [ "res://scene_select/json/scene_sample_seq.json" ]
 
 [node name="Control" type="Control" parent="."]
 anchor_right = 1.0

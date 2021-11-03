@@ -184,6 +184,24 @@ static func rand_point(range_x: float, range_y: float) -> Vector2:
 
 
 """
+Returns an array that is the result of removing all excludeElems elements
+from the base array specified by allElems
+Creates new array. Doesnt modify any inputs. 
+If base array is null return empty. If remove array is empty/null returns base.
+"""
+static func removeAllFrom(baseElems: Array, excludeElems: Array) -> Array:
+	if baseElems == null:
+		return []
+	if excludeElems == null or excludeElems.empty():
+		return baseElems
+	var filteredElems = []
+	for elem in baseElems:
+		if not elem in excludeElems:
+			filteredElems.append(elem)
+	return filteredElems
+
+
+"""
 Returns a vector with coordinates swapped with respect to input vector
 So for a given passed Vector2(x,y) will return Vector2(y,x)
 Returns null for null input

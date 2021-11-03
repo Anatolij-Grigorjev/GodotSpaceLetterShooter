@@ -4,6 +4,7 @@ Global data related to loading scenes and tracking their progress
 """
 
 export(String) var sceneSpecsPath: String
+export(Array, String) var excludePaths: Array = []
 
 var loadedSceneSpecs: Array = []
 
@@ -32,7 +33,7 @@ func _ready():
 		
 func _loadSceneSpecs() -> Array:
 	var loadedScenes := []
-	var foundScenesPaths = _getScenesFilePaths()
+	var foundScenesPaths = Utils.removeAllFrom(_getScenesFilePaths(), excludePaths)
 	for path in foundScenesPaths:
 		var sceneJSON = Utils.file2JSON(path)
 		loadedScenes.append(Utils.parseJSONSceneSpec(sceneJSON))
