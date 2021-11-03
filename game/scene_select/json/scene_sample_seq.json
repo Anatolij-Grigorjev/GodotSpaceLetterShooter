@@ -1,0 +1,50 @@
+{
+	"id": 1,
+	"name": "SAMPLE SEQ",
+	"type": "seq",
+	"unlockPoints": 0,
+	"background": {
+		"type": "space",
+		"tint": {
+			"a": 1.0,
+			"b": 0.1,
+			"g": 0.1,
+			"r": 0.1
+		}
+	},
+	"allowedShipsTypes": [
+		{
+			"id": "fast",
+			"speed": 550.0,
+			"shieldHP": 0,
+			"shotPriority": 0
+		},
+		{
+			"id": "shield",
+			"speed": 400.0,
+			"shieldHP": 5,
+			"shotPriority": 0
+		},
+		{
+			"id": "shoot",
+			"speed": 450.0,
+			"shieldHP": 0,
+			"shotPriority": 5
+		}
+	],
+	"waves": [
+		{
+			"direction": "up",
+			"ships": [
+				{
+					"id": "fast",
+					"num": 2
+				},
+				{
+					"id": "shoot",
+					"num": 1
+				}
+			]
+		}
+	]
+}
