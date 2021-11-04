@@ -14,7 +14,7 @@ var sceneBgColor: Color
 var totalShips: int
 var smallestShipsWave: int
 var largestShipsWave: int
-var shipTurnsBetweenWaves: bool
+var shooterTurnsBetweenWaves: bool
 """
 SceneShipLimits mapped to how many of this kind of type is allowed
 """
@@ -31,5 +31,5 @@ func _init():
 	totalShips = 0
 	smallestShipsWave = 0
 	largestShipsWave = 0
-	shipTurnsBetweenWaves = true
+	shooterTurnsBetweenWaves = true
 	allowedShipsTypes = {}

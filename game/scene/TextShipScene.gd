@@ -151,7 +151,7 @@ func _onShooterHitByShot(projectile: Node2D):
 	
 		
 func _onShooterToggleHyperspeed(speedUp: bool):
-	var shipTurnDisabled = not fsm.sceneSpecification.shipTurnsBetweenWaves
+	var shipTurnDisabled = not fsm.sceneSpecification.shooterTurnsBetweenWaves
 	if shipTurnDisabled and speedUp:
 		starsBG.startHyperNoTurn()
 		return
