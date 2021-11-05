@@ -41,6 +41,7 @@ func _registerShipHandlers(ship: TextShip) -> void:
 	Utils.tryConnect(ship, "textShipReachedFinish", self, "_onShooterCollided")
 	Utils.tryConnect(ship, "textShipDestroyed", self, "_countDestroyedShip")
 	Utils.tryConnect(ship, "shotFired", fsm, "_onShipShotFired")
+	Utils.tryConnect(ship, "shipDroppedLetter", fsm, "_onShipDroppedLetter")
 	
 	
 func _onShooterCollided():

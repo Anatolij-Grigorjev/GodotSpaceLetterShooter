@@ -33,6 +33,8 @@ func connectTextShipStatsSignals(textShip: TextShip):
 	if is_instance_valid(textShip.get_node("Sprite/ShipBubble")):
 		Utils.tryConnect(textShip.get_node("Sprite/ShipBubble"), "bubbleBurst", self, "_onTextShipBubbleBurst")
 	Utils.tryConnect(textShip, "shotFired", self, "_onTextShipShotFired")
+	Utils.tryConnect(textShip, "shipDroppedLetter", self, "_onTextShipDroppedLetter")
+	Utils.tryConnect(textShip, "shipPickedUpText", self, "_onTextShipPickedUpText")
 	
 
 func connectProjectileStatsSignals(projectile: Node2D):
@@ -69,6 +71,12 @@ func _onTextShipShotDown(text: String):
 		
 func _onTextShipBubbleBurst():
 	currentSceneStats.shieldsBroken += 1
+	
+func _onTextShipDroppedLetter(letterNode):
+	currentSceneStats.totalProjectilesLetters += 1
+	
+func _onTextShipPickedUpText(currentText: String):
+	currentSceneStats.totalProjectilesLetters -= 1
 	
 func _onProjectileDestroyed(text: String):
 	currentSceneStats.projectilesShot += 1

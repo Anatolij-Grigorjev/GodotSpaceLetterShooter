@@ -87,6 +87,10 @@ func _calcNextWaveNumShips() -> int:
 		numShipsPickedForWave = numShipsWaveFrom + randi() % (numShipsWaveTo - numShipsWaveFrom + 1) 
 	return int(min(numShipsPickedForWave, remainingSceneShips))
 	
+
+func _onShipDroppedLetter(letterNode: Node2D):
+	entity.textShipsContainer.add_child(letterNode)
+
 	
 func _onShipShotFired(projectile: Node2D):
 	entity.add_child(projectile)

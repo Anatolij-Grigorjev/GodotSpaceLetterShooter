@@ -4,12 +4,13 @@ class_name TextShip
 """
 Controller for ship with a piece of text in a label in a sprite
 """
-signal shotFired(projectile)
+signal shotFired(projectileNode)
 signal textShipCollidedShooter
 signal textShipReachedFinish
 signal textShipDestroyed(text)
 signal shipHit(lettersRemaining)
 signal shipHitEarnedPoints(points, shipPosition)
+signal shipDroppedLetter(floatingLetterNode)
 signal shipPickedUpText(currentText)
 
 

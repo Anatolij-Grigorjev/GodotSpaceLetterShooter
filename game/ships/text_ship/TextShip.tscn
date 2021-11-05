@@ -579,7 +579,6 @@ stream = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 16 )
-scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="Sprite"]

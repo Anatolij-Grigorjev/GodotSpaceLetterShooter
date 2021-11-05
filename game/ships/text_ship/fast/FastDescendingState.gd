@@ -45,4 +45,4 @@ func _shakeOffLetter():
 	var floatingText = FloatingTextScn.instance()
 	floatingText.text = firstLetter
 	floatingText.position = entity.position
-	entity.get_parent().add_child(floatingText)
+	entity.emit_signal("shipDroppedLetter", floatingText)
