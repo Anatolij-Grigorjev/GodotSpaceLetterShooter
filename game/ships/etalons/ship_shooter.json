@@ -1,0 +1,7 @@
+{
+	"id": "shooter",
+	"model": "text_ship/shooter/ShooterTextShip",
+	"speed": 510.0,
+	"shieldHP": 0,
+	"shotPriority": 5
+}

@@ -1,0 +1,7 @@
+{
+	"id": "shielded",
+	"model": "text_ship/shielded/ShieldedTextShip",
+	"speed": 475.0,
+	"shieldHP": 5,
+	"shotPriority": 0
+}

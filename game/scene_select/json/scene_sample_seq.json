@@ -14,27 +14,24 @@
 	},
 	"waves": [
 		{
-			"direction": "bottom",
+			"shooterPos": "bottom",
 			"ships": [
 				{
 					"id": "fast",
-					"speed": 550,
 					"num": 2
 				},
 				{
 					"id": "shoot",
-					"shotAffinity": 5,
 					"num": 1
 				}
 			]
 		},
 		{
-			"direction": "left",
+			"shooterPos": "left",
 			"ships": [
 				{
 					"id": "shield",
-					"speed": 450,
-					"shieldHitPoints": 5
+					"speed": 450
 				}
 			]
 		}
