@@ -1,6 +1,6 @@
 {
 	"id": "fast",
-	"model": "text_ship/fast/FastTextShip",
+	"model": "fast/FastTextShip",
 	"speed": 580.0,
 	"shieldHP": 0,
 	"shotPriority": 0
