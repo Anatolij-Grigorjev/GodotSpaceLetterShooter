@@ -122,54 +122,6 @@ static func file2JSON(filePath: String):
 		])
 		breakpoint
 	return parseResult.result
-	
-	
-"""
-Turn standard JSON representation of a color 
-into an engine Color object
-"""
-static func parseJSONColor(json: Dictionary) -> Color:
-	return Color(
-		json.r,
-		json.g,
-		json.b,
-		json.a
-	)
-	
-
-"""
-Turn standard JSON representation of a complete ships scene specification
-In an in-game SceneSpec object instance
-"""
-static func parseJSONSceneSpec(sceneSpecJSON: Dictionary) -> SceneSpec:
-	var spec = SceneSpec.new()
-	spec.id = sceneSpecJSON.id
-	spec.bgType = sceneSpecJSON.background.type
-	spec.sceneBgColor = parseJSONColor(sceneSpecJSON.background.tint)
-	spec.sceneName = sceneSpecJSON.name
-	spec.unlockPoints = sceneSpecJSON.unlockPoints
-	spec.wordsCorpusPath = sceneSpecJSON.get('wordsCorpusPath', "")
-	spec.smallestShipsWave = sceneSpecJSON.wave.minShips
-	spec.largestShipsWave = sceneSpecJSON.wave.maxShips
-	spec.shooterTurnsBetweenWaves = sceneSpecJSON.wave.get('turnShip', true)
-	for shipTypeBlock in sceneSpecJSON.allowedShipsTypes:
-		var shipType = parseJSONShipLimits(shipTypeBlock)
-		var numShips = shipTypeBlock.numShips
-		spec.allowedShipsTypes[shipType] = numShips
-		spec.totalShips += numShips
-	return spec
-	
-
-"""
-Turn standard JSON representation of scene ship type parameters
-into an in-game SceneShipLimits instance
-"""
-static func parseJSONShipLimits(shipLimitsJSON: Dictionary) -> SceneShipLimits:
-	return SceneShipLimits.new(
-		shipLimitsJSON.speed,
-		shipLimitsJSON.shieldHP,
-		shipLimitsJSON.shotPriority
-	)
 
 
 """

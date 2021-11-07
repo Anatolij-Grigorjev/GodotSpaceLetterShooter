@@ -9,10 +9,11 @@
 
 [node name="TextShipFactory" type="Node"]
 script = ExtResource( 1 )
+shipsFilesBasePath = "res://ships/text_ship/"
+printDebug = true
 FastShipScn = ExtResource( 6 )
 ShiledShipScn = ExtResource( 4 )
 ShooterShipScn = ExtResource( 5 )
-printDebug = true
 
 [node name="PathGenerator" type="Node" parent="."]
 script = ExtResource( 2 )

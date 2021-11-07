@@ -36,7 +36,7 @@ func _loadSceneSpecs() -> Array:
 	var foundScenesPaths = Utils.removeAllFrom(_getScenesFilePaths(), excludePaths)
 	for path in foundScenesPaths:
 		var sceneJSON = Utils.file2JSON(path)
-		loadedScenes.append(Utils.parseJSONSceneSpec(sceneJSON))
+		loadedScenes.append(Mapper.parseJSONSceneSpec(sceneJSON))
 	loadedScenes.sort_custom(self, "_sortScenesByIdAsc")
 	return loadedScenes
 	
