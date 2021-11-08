@@ -86,6 +86,24 @@ specified name
 static func animIsPlayingAnimation(anim: AnimationPlayer, animationName: String) -> bool:
 	return anim.is_playing() and anim.current_animation == animationName
 	
+	
+
+"""
+Append value 'elem' into array 'arr' 'num' times. Appends linearly in a loop.
+Method mutates supplied array, so 'arr' cannot be null.
+if num <= 0 the input array is unchanged, 
+if num = 1 the method delegates to Array#append
+"""
+static func appendNTimes(arr: Array, elem, num: int = 1):
+	assertNotNull(arr)
+	if num <= 0:
+		return
+	if num == 1:
+		arr.append(elem)
+		return
+	for counter in range(num):
+		arr.append(elem)
+
 
 """
 Resolve a list of valid nodepaths into a list of nodes they point to
@@ -187,6 +205,13 @@ Check if a given string is null or empty
 """
 static func isEmptyString(string: String) -> bool:
 	return string == null or string.empty()
+	
+
+"""
+Assert that supplied value is not null
+"""
+static func assertNotNull(elem):
+	assert(elem != null)
 	
 	
 """

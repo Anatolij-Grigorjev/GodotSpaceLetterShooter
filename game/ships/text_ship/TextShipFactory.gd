@@ -6,10 +6,6 @@ background thread to make them ready for next wave participation
 export(String) var shipsFilesBasePath: String = ""
 export(bool) var printDebug: bool = false
 
-export(PackedScene) var FastShipScn: PackedScene
-export(PackedScene) var ShiledShipScn: PackedScene
-export(PackedScene) var ShooterShipScn: PackedScene
-
 var shipModelEtalons: Dictionary = {}
 
 
@@ -57,13 +53,14 @@ func generateShips(waveSpec: SceneWaveSpec) -> Array:
 	for idx in range(waveSpec.numShips):
 		var thisShipPosition: Vector2 = shipPositions[idx]
 		var shipPath = pathGenerator.generatePathSegments(thisShipPosition)
-		var waveShipLimits: SceneShipLimits = waveSpec.shipTypes[idx]
-		var textShip := _newShipInstanceAccordingToLimits(waveShipLimits)
+		var waveShipTypeId: String = waveSpec.shipTypes[idx]
+		var shipModel: TextShipModel = shipModelEtalons[waveShipTypeId]
+		var textShip: Node = shipModel.model.instance() 
 		textShip.prepare(
 			shipWords[idx], 
 			thisShipPosition, 
 			shipPath, 
-			waveSpec.shipTypes[idx]
+			shipModel.shipLimits
 		)
 		preparedShips.append(textShip)
 	if (printDebug):
@@ -82,15 +79,6 @@ func _printFleetStats(numShips: int, shipPositions: Array, shipWords: Array, shi
 	print(Utils.joinToString(shipWords, " ", "%10s"))
 	print(Utils.joinToString(shipTypes, " ", "%10s"))
 	print("\n")
-
-
-func _newShipInstanceAccordingToLimits(limits: SceneShipLimits) -> Node:
-	if limits.shootInclination > 0:
-		return ShooterShipScn.instance()
-	if limits.shieldHitPoints > 0:
-		return ShiledShipScn.instance()
-	
-	return FastShipScn.instance()
 	
 
 func _assertShipModelsLoaded():

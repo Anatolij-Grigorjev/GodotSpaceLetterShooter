@@ -35,23 +35,11 @@ static func parseJSONSceneSpec(sceneSpecJSON: Dictionary) -> SceneSpec:
 	spec.largestShipsWave = sceneSpecJSON.wave.maxShips
 	spec.shooterTurnsBetweenWaves = sceneSpecJSON.wave.get('turnShip', true)
 	for shipTypeBlock in sceneSpecJSON.allowedShipsTypes:
-		var shipType = parseJSONShipLimits(shipTypeBlock)
+		var shipType = shipTypeBlock.id
 		var numShips = shipTypeBlock.numShips
 		spec.allowedShipsTypes[shipType] = numShips
 		spec.totalShips += numShips
 	return spec
-	
-
-"""
-Turn standard JSON representation of scene ship type parameters
-into an in-game SceneShipLimits instance
-"""
-static func parseJSONShipLimits(shipLimitsJSON: Dictionary) -> SceneShipLimits:
-	return SceneShipLimits.new(
-		shipLimitsJSON.speed,
-		shipLimitsJSON.shieldHP,
-		shipLimitsJSON.shotPriority
-	)
 	
 
 """

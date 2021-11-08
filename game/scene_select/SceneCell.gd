@@ -94,10 +94,10 @@ func _categorizeAllowedShipTypes(allowedShipTypes: Dictionary) -> Dictionary:
 	var shootShips: int = 0
 	
 	for key in allowedShipTypes:
-		var shipType := key as SceneShipLimits
-		if shipType.shootInclination > 0:
+		var shipType := key as String
+		if shipType == "shooter":
 			shootShips += allowedShipTypes[shipType]
-		elif shipType.shieldHitPoints > 0:
+		elif shipType == "shielded":
 			shieldShips += allowedShipTypes[shipType]
 		else:
 			fastShips += allowedShipTypes[shipType]

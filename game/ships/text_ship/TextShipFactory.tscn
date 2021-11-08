@@ -1,19 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://ships/text_ship/TextShipFactory.gd" type="Script" id=1]
 [ext_resource path="res://ships/text_ship/PathGenerator.gd" type="Script" id=2]
 [ext_resource path="res://components/WordsProvider.gd" type="Script" id=3]
-[ext_resource path="res://ships/text_ship/shielded/ShieldedTextShip.tscn" type="PackedScene" id=4]
-[ext_resource path="res://ships/text_ship/shooter/ShooterTextShip.tscn" type="PackedScene" id=5]
-[ext_resource path="res://ships/text_ship/fast/FastTextShip.tscn" type="PackedScene" id=6]
 
 [node name="TextShipFactory" type="Node"]
 script = ExtResource( 1 )
 shipsFilesBasePath = "res://ships/text_ship/"
 printDebug = true
-FastShipScn = ExtResource( 6 )
-ShiledShipScn = ExtResource( 4 )
-ShooterShipScn = ExtResource( 5 )
 
 [node name="PathGenerator" type="Node" parent="."]
 script = ExtResource( 2 )

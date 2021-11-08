@@ -17,16 +17,8 @@
 	},
 	"allowedShipsTypes": [
 		{
-			"speed": 412.0,
-			"shieldHP": 0,
-			"shotPriority": 9,
-			"numShips": 3
-		},
-		{
-			"speed": 434.0,
-			"shieldHP": 0,
-			"shotPriority": 9,
-			"numShips": 3
+			"id": "shooter",
+			"numShips": 6
 		}
 	]
 }

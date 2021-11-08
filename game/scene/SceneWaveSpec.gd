@@ -7,20 +7,19 @@ of ships during a scene
 var numShips: int
 var firstShipStartPos: Vector2
 """
-Array of SceneShipLimits, exploded from allowed bins in
-main SceneSpec
+Array of String ids defining what kind of ship is required (with duplicates)
 """
 var shipTypes: Array
 
 
-func _init(totalWaveShips: int, shipsStartPos: Vector2, allowedCountedWaveShipTypes: Dictionary):
+func _init(totalWaveShips: int, shipsStartPos: Vector2, sceneShipTypeIdsToReserve: Dictionary):
 	numShips = totalWaveShips
 	firstShipStartPos = shipsStartPos
 	#flatten num of allowed each ship type to provide factory with array
 	shipTypes = []
-	for shipLimits in allowedCountedWaveShipTypes:
-		for idx in range(allowedCountedWaveShipTypes[shipLimits]):
-			shipTypes.append(shipLimits)
+	for shipTypeId in sceneShipTypeIdsToReserve:
+		var shipTypeReserves: int = sceneShipTypeIdsToReserve[shipTypeId]
+		Utils.appendNTimes(shipTypes, shipTypeId, shipTypeReserves)
 	shipTypes.shuffle()
 	if (totalWaveShips < shipTypes.size()):
 		shipTypes.resize(totalWaveShips)

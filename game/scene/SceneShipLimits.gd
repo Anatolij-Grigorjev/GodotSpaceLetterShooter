@@ -8,9 +8,9 @@ var shieldHitPoints: int = 3
 var shootInclination: int = 0
 
 func _init(speed: float, shieldHP: int, shootWeight: int):
-	shipSpeed = speed
-	shieldHitPoints = shieldHP
-	shootInclination = shootWeight
+	shipSpeed = max(1.0, speed)
+	shieldHitPoints = max(0, shieldHP)
+	shootInclination = max(0, shootWeight)
 
 
 func _to_string():
