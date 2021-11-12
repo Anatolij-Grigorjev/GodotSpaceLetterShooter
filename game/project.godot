@@ -55,6 +55,11 @@ _global_script_classes=[ {
 "path": "res://ships/text_ship/IdlingState.gd"
 }, {
 "base": "Reference",
+"class": "IntRange",
+"language": "GDScript",
+"path": "res://IntRange.gd"
+}, {
+"base": "Reference",
 "class": "Mapper",
 "language": "GDScript",
 "path": "res://Mapper.gd"
@@ -239,6 +244,7 @@ _global_script_class_icons={
 "IdlingBubbleState": "",
 "IdlingShootState": "",
 "IdlingState": "",
+"IntRange": "",
 "Mapper": "",
 "Mock": "",
 "ParticlesBattery": "",

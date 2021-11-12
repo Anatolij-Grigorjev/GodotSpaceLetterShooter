@@ -4,18 +4,18 @@ class_name ShooterTextShipStateMachine
 additional text ship FSM actions and logic for shooting useage
 """
 export(float) var shootingCooldown: float = 3.5
-export(int) var maxShotLettersLength: int = 2
+export(Vector2) var lettersPerShotFromTo: Vector2 = Vector2(2, 3)
 
 onready var cooldownBar = get_node("../CooldownBar")
 
-
+var lettersPerShotRange: IntRange
 
 func _ready():
 	Utils.tryConnect(getState("IdlingShoot"), "textShipLettersShot", self, "_checkShipAllowedKeepShooting")
 	Utils.tryConnect(entity, "shipHit", self, "_checkShipAllowedKeepShooting")
 	Utils.tryConnect(entity, "shipPickedUpText", self, "_checkHasShootableText")
 	cooldownBar.cooldownTime = shootingCooldown
-	
+	lettersPerShotRange = IntRange.new(lettersPerShotFromTo.x, lettersPerShotFromTo.y)
 	
 func _getNextState(delta: float) -> String:
 	var baseNextState := ._getNextState(delta)
@@ -39,7 +39,7 @@ func _getNextState(delta: float) -> String:
 			
 			
 func _checkShipAllowedKeepShooting(lettersLeft: int):
-	if lettersLeft <= maxShotLettersLength:
+	if lettersLeft <= lettersPerShotRange.minVal:
 		_disableShootingBehavior()
 		
 		
@@ -53,7 +53,7 @@ func _enableShootingBehavior():
 	
 func _checkHasShootableText(currentText: String):
 	if (
-		currentText.length() > maxShotLettersLength 
+		currentText.length() > lettersPerShotRange.minVal 
 		and idlingActionsWeights.isItemDisabled("IdlingShoot")
 	):
 		_enableShootingBehavior()
@@ -73,4 +73,4 @@ func _getNextIdlingState() -> String:
 		
 		
 func _canShootAgain() -> bool:
-	return maxShotLettersLength < entity.currentText.length()
+	return lettersPerShotRange.minVal < entity.currentText.length()

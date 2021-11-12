@@ -23,7 +23,7 @@ func performShot():
 	var projectile = projectileScn.instance()
 	_configureTextShipProjectile(projectile)
 	
-	var useNumLetters = randi() % fsm.maxShotLettersLength + 1
+	var useNumLetters = _getNumAllowedProjectileLetters()
 	projectile.get_node("Label").text = entity.currentText.substr(0, useNumLetters)
 	entity.currentText = entity.currentText.substr(useNumLetters)
 	
@@ -40,4 +40,11 @@ func _configureTextShipProjectile(projectile: Node2D):
 	projectile.get_node("Area2D").collision_mask = projectileCollisionMask
 	projectile.get_node("Area2D").collision_layer = entity.get_node("Area2D").collision_layer
 	projectile.add_to_group("shootable-projectile")
+	
+	
+func _getNumAllowedProjectileLetters() -> int:
+	var expectedRange: IntRange = fsm.lettersPerShotRange as IntRange
+	var expectedNum = round(rand_range(expectedRange.minVal, expectedRange.maxVal))
+	
+	return int(clamp(expectedNum, expectedRange.minVal, entity.currentText.length() - 1))
 	
