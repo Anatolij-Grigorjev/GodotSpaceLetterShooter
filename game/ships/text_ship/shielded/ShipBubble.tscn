@@ -323,6 +323,7 @@ script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0.45098 )
+position = Vector2( -1.52588e-05, 0.379089 )
 texture = ExtResource( 1 )
 vframes = 2
 hframes = 4
