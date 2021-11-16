@@ -1,10 +1,11 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://ships/text_ship/shielded/enemy_ship_bubble.png" type="Texture" id=1]
 [ext_resource path="res://ships/text_ship/shielded/hit_bubble.wav" type="AudioStream" id=2]
 [ext_resource path="res://ships/text_ship/shielded/ShipBubble.gd" type="Script" id=3]
 [ext_resource path="res://ships/text_ship/shielded/burst_bubble.wav" type="AudioStream" id=4]
 [ext_resource path="res://components/HitsBar.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ships/text_ship/shielded/bubble_burst_spark.png" type="Texture" id=6]
 
 [sub_resource type="Animation" id=1]
 length = 0.2
@@ -250,12 +251,12 @@ tracks/3/keys = {
 [sub_resource type="CanvasItemMaterial" id=16]
 particles_animation = true
 particles_anim_h_frames = 4
-particles_anim_v_frames = 2
+particles_anim_v_frames = 1
 particles_anim_loop = true
 
 [sub_resource type="Gradient" id=10]
-offsets = PoolRealArray( 0, 0.92963, 1 )
-colors = PoolColorArray( 0.819608, 0.0666667, 0.0666667, 1, 1, 1, 1, 0.518519, 1, 1, 1, 0 )
+offsets = PoolRealArray( 0, 0.725926, 0.985185, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.607547, 1, 1, 1, 0.518519, 1, 1, 1, 0 )
 
 [sub_resource type="GradientTexture" id=11]
 gradient = SubResource( 10 )
@@ -270,13 +271,13 @@ curve = SubResource( 21 )
 [sub_resource type="Curve" id=19]
 min_value = 1.0
 max_value = 35.0
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.286164, 34.8252 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 17.7226 ), 0.0, 0.0, 0, 0, Vector2( 0.286164, 34.8252 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=20]
 curve = SubResource( 19 )
 
 [sub_resource type="Curve" id=18]
-_data = [ Vector2( 0, 0.280481 ), 0.0, 0.0, 0, 0, Vector2( 0.801887, 0.830031 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0.512882 ), 0.0, 0.0, 0, 0, Vector2( 0.754717, 0.855225 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=9]
 curve = SubResource( 18 )
@@ -295,7 +296,7 @@ _data = [ Vector2( 0, 0.413093 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.147327 ), 0.0, 0
 curve = SubResource( 17 )
 
 [sub_resource type="ParticlesMaterial" id=7]
-trail_divisor = 5
+trail_divisor = 3
 trail_size_modifier = SubResource( 13 )
 trail_color_modifier = SubResource( 15 )
 emission_shape = 1
@@ -304,7 +305,7 @@ flag_disable_z = true
 direction = Vector3( 0, 0, 0 )
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 250.0
+initial_velocity = 450.0
 initial_velocity_random = 0.25
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
@@ -370,9 +371,10 @@ rect_rotation = -90.0
 material = SubResource( 16 )
 emitting = false
 amount = 45
+lifetime = 0.5
 one_shot = true
 explosiveness = 0.9
 fract_delta = false
 process_material = SubResource( 7 )
-texture = ExtResource( 1 )
+texture = ExtResource( 6 )
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
