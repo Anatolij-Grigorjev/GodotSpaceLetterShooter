@@ -136,11 +136,19 @@ func _clearAllTargeted():
 		
 func _onTextShipHit(lettersRemaining: int):
 	if lettersRemaining > 0:
-		shaker.beginShake(0.2, 15, 10, 1)
-		freeze.startFreeze(0.05)
+		_doMinorHitScreenFX()
 	else:
-		shaker.beginShake(0.2, 15, 20, 2)
-		freeze.startFreeze(0.06)
+		_doMajorHitScreenFX()
+		
+		
+func _doMinorHitScreenFX():
+	shaker.beginShake(0.2, 15, 10, 1)
+	freeze.startFreeze(0.05)
+	
+
+func _doMajorHitScreenFX():
+	shaker.beginShake(0.2, 15, 20, 2)
+	freeze.startFreeze(0.06)
 
 
 func _onShooterHitByShot(projectile: Node2D):

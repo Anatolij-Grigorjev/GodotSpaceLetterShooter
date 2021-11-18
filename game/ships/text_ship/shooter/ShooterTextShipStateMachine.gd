@@ -17,6 +17,7 @@ func _ready():
 	cooldownBar.cooldownTime = shootingCooldown
 	lettersPerShotRange = IntRange.new(lettersPerShotFromTo.x, lettersPerShotFromTo.y)
 	
+	
 func _getNextState(delta: float) -> String:
 	var baseNextState := ._getNextState(delta)
 	if baseNextState != NO_STATE:
