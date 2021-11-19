@@ -67,15 +67,10 @@ func _process(delta):
 		return
 	if (Input.is_action_just_pressed("ui_accept")):
 		_selectThisScene()
-	
-
-func isUnlockedWithPointsTotal(totalScore: int) -> bool:
-	return $SceneLock.pointsRequirementAmount <= totalScore
 
 
 func setData(sceneSpec: SceneSpec):
 	self.sceneSpec = sceneSpec
-	$SceneLock.pointsRequirementAmount = sceneSpec.unlockPoints
 	$OuterMargin/VBoxContainer/SceneTitle.text = "%s\nWaves: %s - %s ship(-s)" % [
 		sceneSpec.sceneName,
 		sceneSpec.smallestShipsWave,

@@ -1,8 +1,9 @@
 {
-	"id": 2,
+	"id": "shield",
+	"order": 3,
 	"name": "SHIELDED",
 	"wordsCorpusPath": "corpus_same_letter.txt",
-	"unlockPoints": 1000,
+	"unlocksAfter": ["sample"],
 	"background": {
 		"type": "space",
 		"tint": {

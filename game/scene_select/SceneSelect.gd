@@ -22,7 +22,8 @@ func _ready():
 	
 	_clearRefSizeCells()
 	
-	for spec in Scenes.loadedSceneSpecs:
+	for specId in Scenes.loadedSceneSpecs:
+		var spec: SceneSpec = Scenes.loadedSceneSpecs[specId]
 		var sceneCell = SceneCellScn.instance()
 		sceneCell.setData(spec)
 		sceneCell.sceneDone = Scenes.scenesStateTracking[spec.id].complete
@@ -57,7 +58,6 @@ func _unlockNewSceneCells():
 	var newScenesAnim = $ScenesUnlockedPanel/AnimationPlayer
 	newScenesAnim.play("new_scenes")
 	yield(newScenesAnim, "animation_finished")
-	cellsToUnlock.sort_custom(self, "_sceneCellsByPointsRequirementSort")
 	yield(get_tree().create_timer(0.25), "timeout")
 	for sceneCell in cellsToUnlock:
 		var cellLock = sceneCell.get_node("SceneLock")
@@ -73,11 +73,3 @@ func _findSceneCellsWithSpecIds(specIds: Array) -> Array:
 		if ("sceneSpec" in sceneCell and sceneCell.sceneSpec.id in specIds):
 			foundCells.append(sceneCell)
 	return foundCells
-	
-	
-func _sceneCellsByPointsRequirementSort(sceneCell1: Control, sceneCell2: Control) -> bool:
-	if sceneCell1.sceneSpec.unlockPoints < sceneCell2.sceneSpec.unlockPoints:
-		return true
-	else:
-		return false
-	

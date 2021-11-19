@@ -1,7 +1,8 @@
 {
-	"id": 9,
+	"id": "mix",
+	"order": 5,
 	"name": "MIXER",
-	"unlockPoints": 10000,
+	"unlocksAfter": ["fast", "shield", "shoot"],
 	"background": {
 		"type": "hyperspace",
 		"tint": {

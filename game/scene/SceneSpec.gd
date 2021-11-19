@@ -5,10 +5,11 @@ Parameters describing how to construct a scene:
 	- how many ships there are and how many per wave
 	- what kinds of ships are in this scene (shooting/passive, shield strength, etc)
 """
-var id: int
+var id: String
+var order: int
 var bgType: String
 var sceneName: String
-var unlockPoints: int
+var unlocksAfter: Array
 var wordsCorpusPath: String
 var sceneBgColor: Color
 var totalShips: int
@@ -22,10 +23,11 @@ var allowedShipsTypes: Dictionary
 
 
 func _init():
-	id = -1
+	id = "mock"
+	order = 0
 	bgType = "space"
 	sceneName = "<EMPTY>"
-	unlockPoints = 0
+	unlocksAfter = []
 	wordsCorpusPath = ""
 	sceneBgColor = Color.black
 	totalShips = 0

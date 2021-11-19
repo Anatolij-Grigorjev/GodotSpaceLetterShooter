@@ -1,7 +1,8 @@
 {
-	"id": 0,
+	"id": "sample",
+	"order": 1,
 	"name": "SAMPLE",
-	"unlockPoints": 0,
+	"unlocksAfter": [],
 	"background": {
 		"type": "space",
 		"tint": {

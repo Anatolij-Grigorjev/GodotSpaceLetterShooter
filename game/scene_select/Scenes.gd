@@ -6,7 +6,7 @@ Global data related to loading scenes and tracking their progress
 export(String) var sceneSpecsPath: String
 export(Array, String) var excludePaths: Array = []
 
-var loadedSceneSpecs: Array = []
+var loadedSceneSpecs: Dictionary = {}
 
 var scenesStateTracking: Dictionary = {}
 
@@ -21,24 +21,25 @@ var activeScene: Object
 func _ready():
 	loadedSceneSpecs = _loadSceneSpecs()
 	#mark all scenes unfinished
-	for spec in loadedSceneSpecs:
-		scenesStateTracking[spec.id] = {
+	for specId in loadedSceneSpecs:
+		var spec: SceneSpec = loadedSceneSpecs[specId]
+		scenesStateTracking[specId] = {
 			"spec": spec,
 			"complete": false,
-			"unlocked": GameConfig.totalShooterScore >= spec.unlockPoints
+			"unlocked": specId == "sample"
 		}
-	call_deferred("_unlockScenesIfEnoughPoints")
+	call_deferred("_unlockScenesIfPreReqComplete")
 	call_deferred("_setFirstActiveScene")
 		
 		
-func _loadSceneSpecs() -> Array:
+func _loadSceneSpecs() -> Dictionary:
 	var loadedScenes := []
 	var foundScenesPaths = Utils.removeAllFrom(_getScenesFilePaths(), excludePaths)
 	for path in foundScenesPaths:
 		var sceneJSON = Utils.file2JSON(path)
 		loadedScenes.append(Mapper.parseJSONSceneSpec(sceneJSON))
-	loadedScenes.sort_custom(self, "_sortScenesByIdAsc")
-	return loadedScenes
+	loadedScenes.sort_custom(self, "_sortScenesByOrderAsc")
+	return Utils.assocToProp(loadedScenes, "id")
 	
 
 func _getScenesFilePaths() -> Array:
@@ -59,15 +60,15 @@ func _setFirstActiveScene():
 			activeScene = activeNode
 	
 	
-func _onSceneCleared(sceneSpecId: int):
+func _onSceneCleared(sceneSpecId: String):
 	scenesStateTracking[sceneSpecId].complete = true
 	_switchToSceneSelect()
-	_unlockScenesIfEnoughPoints()
+	_unlockScenesIfPreReqComplete()
 	
 
-func _onSceneFailed(sceneSpecId: int):
+func _onSceneFailed(sceneSpecId: String):
 	_switchToSceneSelect()
-	_unlockScenesIfEnoughPoints()
+	_unlockScenesIfPreReqComplete()
 	
 	
 func _switchToSceneSelect():
@@ -108,10 +109,11 @@ func _unfadeBlack():
 	anim.play_backwards("fade")
 	
 	
-func _unlockScenesIfEnoughPoints():
+func _unlockScenesIfPreReqComplete():
 	var lockedSceneSpecIds: Array = _findLockedSceneSpecIds()
 	for specId in lockedSceneSpecIds:
-		if scenesStateTracking[specId].spec.unlockPoints <= GameConfig.totalShooterScore:
+		var spec: SceneSpec = scenesStateTracking[specId].spec
+		if _allScenesWithIdsCompleted(spec.unlocksAfter):
 			newlyUnlockedScenesIds.append(specId)
 	if not newlyUnlockedScenesIds.empty():
 		print("Unlocking %s more scenes!" % newlyUnlockedScenesIds.size())
@@ -126,5 +128,14 @@ func _findLockedSceneSpecIds() -> Array:
 	return lockedSceneSpecIds
 	
 
-func _sortScenesByIdAsc(scene1, scene2) -> bool:
-	return scene1.id < scene2.id
+func _allScenesWithIdsCompleted(sceneIds: Array) -> bool:
+	var allComplete := true
+	for id in sceneIds:
+		allComplete = allComplete and scenesStateTracking[id].complete
+		if not allComplete:
+			return false
+	return allComplete
+	
+
+func _sortScenesByOrderAsc(scene1, scene2) -> bool:
+	return scene1.order < scene2.order

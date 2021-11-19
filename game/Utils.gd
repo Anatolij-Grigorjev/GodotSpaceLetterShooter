@@ -244,6 +244,25 @@ static func mapToProp(objectsArray: Array, propPath: String) -> Array:
 		propValues[idx] = propValue
 		
 	return propValues
+	
+"""
+Attempt to associate provided list of objects into a dictionary 
+with key being object property value at provided property path
+if the path is invalid for any object in the input list, the method will 
+associate that object with the 'null' key
+In case of keys clash the latest object with this key value wins
+Always returns some kind of dict, never null
+"""
+static func assocToProp(objectsArray: Array, propPath: String) -> Dictionary:
+	if objectsArray == null or objectsArray.empty():
+		return {}
+	var associatedObjects := {}
+	for idx in range(objectsArray.size()):
+		var object = objectsArray[idx]
+		var propValue = object.get(propPath)
+		associatedObjects[propValue] = object
+		
+	return associatedObjects
 
 
 """

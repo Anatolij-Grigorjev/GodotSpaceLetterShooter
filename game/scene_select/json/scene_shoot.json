@@ -1,7 +1,8 @@
 {
-	"id": 3,
+	"id": "shoot",
+	"order": 4,
 	"name": "SHOOTOUT",
-	"unlockPoints": 1000,
+	"unlocksAfter": ["sample"],
 	"background": {
 		"type": "space",
 		"tint": {

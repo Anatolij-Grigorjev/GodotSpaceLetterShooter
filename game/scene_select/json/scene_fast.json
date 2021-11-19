@@ -1,7 +1,8 @@
 {
-	"id": 1,
+	"id": "fast",
+	"order": 2,
 	"name": "FASTTRACK",
-	"unlockPoints": 1000,
+	"unlocksAfter": ["sample"],
 	"background": {
 		"type": "space",
 		"tint": {

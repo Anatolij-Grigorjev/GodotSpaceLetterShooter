@@ -26,10 +26,11 @@ In an in-game SceneSpec object instance
 static func parseJSONSceneSpec(sceneSpecJSON: Dictionary) -> SceneSpec:
 	var spec = SceneSpec.new()
 	spec.id = sceneSpecJSON.id
+	spec.order = sceneSpecJSON.order
 	spec.bgType = sceneSpecJSON.background.type
 	spec.sceneBgColor = parseJSONColor(sceneSpecJSON.background.tint)
 	spec.sceneName = sceneSpecJSON.name
-	spec.unlockPoints = sceneSpecJSON.unlockPoints
+	spec.unlocksAfter = sceneSpecJSON.unlocksAfter
 	spec.wordsCorpusPath = sceneSpecJSON.get('wordsCorpusPath', "")
 	spec.smallestShipsWave = sceneSpecJSON.wave.minShips
 	spec.largestShipsWave = sceneSpecJSON.wave.maxShips

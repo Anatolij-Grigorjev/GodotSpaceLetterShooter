@@ -12,7 +12,8 @@ static func sceneShooterShips(numShips: int) -> SceneSpec:
 	
 static func sceneShipTypeQuantities(numFastShips: int = 0 , numShieldShips: int = 0, numShooterShips: int = 0) -> SceneSpec:
 	var spec := SceneSpec.new()
-	spec.id = 1000 + (1 * numFastShips) + (2 * numShieldShips) + (4 * numShooterShips)
+	spec.id = "mock"
+	spec.order = -1
 	spec.sceneName = "SPACE MOCK"
 	spec.wordsCorpusPath = "" #use default corpus
 	spec.sceneBgColor = Color.cornflower.lightened(rand_range(-0.5, 0.5))
