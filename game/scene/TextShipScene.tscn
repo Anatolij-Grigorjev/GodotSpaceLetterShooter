@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://space_music_bg.wav" type="AudioStream" id=1]
 [ext_resource path="res://scene/TextShipScene.gd" type="Script" id=2]
@@ -16,9 +16,10 @@
 [ext_resource path="res://FreezeFrame.tscn" type="PackedScene" id=14]
 [ext_resource path="res://components/StateLabel.tscn" type="PackedScene" id=15]
 [ext_resource path="res://scene/gui/TotalRunningScore.tscn" type="PackedScene" id=16]
+[ext_resource path="res://scene/CinematicBars.tscn" type="PackedScene" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 640, 45 )
+extents = Vector2( 640, 40 )
 
 [sub_resource type="Animation" id=2]
 length = 3.0
@@ -74,7 +75,6 @@ tracks/3/keys = {
 [node name="TextShipScene" type="Node2D" groups=[
 "scenes",
 ]]
-position = Vector2( 0, -17.8588 )
 script = ExtResource( 2 )
 
 [node name="ShipSceneStateMachine" type="Node" parent="."]
@@ -128,7 +128,7 @@ position = Vector2( 1215, 295 )
 [node name="TextShipFinishArea" type="Area2D" parent="MovingElements" groups=[
 "textShipFinish",
 ]]
-position = Vector2( 640, 665 )
+position = Vector2( 640, 680 )
 collision_layer = 4
 collision_mask = 2
 
@@ -186,6 +186,8 @@ showPrevStateTimeout = 2.0
 [node name="TotalRunningScore" parent="CanvasLayer" instance=ExtResource( 16 )]
 margin_left = 20.0
 margin_top = 20.0
+
+[node name="CinematicBars" parent="CanvasLayer" instance=ExtResource( 17 )]
 
 [node name="TextShipFactory" parent="." instance=ExtResource( 5 )]
 

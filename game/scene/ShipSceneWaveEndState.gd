@@ -49,6 +49,7 @@ func processState(delta: float):
 	if (not shipLeaving and not shipDestroyed):
 		shipLeaving = true
 		entity.shooter.fsm.state = "LeavingWave"
+		entity.cinematicBars.get_node("AnimationPlayer").play("fade_in")
 		yield(get_tree(), "idle_frame")
 		yield(entity.shooter.fsm, "stateChanged")
 		shipLeft = true

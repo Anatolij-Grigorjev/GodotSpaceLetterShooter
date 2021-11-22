@@ -7,7 +7,7 @@
 [ext_resource path="res://stars/particle.png" type="Texture" id=5]
 [ext_resource path="res://scene_select/SceneLock.tscn" type="PackedScene" id=6]
 
-[sub_resource type="StyleBoxFlat" id=1]
+[sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.419608, 0.419608, 0.415686, 1 )
 border_width_left = 5
 border_width_top = 5
@@ -176,7 +176,7 @@ margin_bottom = 350.0
 rect_pivot_offset = Vector2( 175, 175 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 1 )
+custom_styles/panel = SubResource( 8 )
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false

@@ -31,6 +31,7 @@ onready var animator = $AnimationPlayer
 onready var playerInput = $CanvasLayer/PlayerInput
 onready var musicControl = $CanvasLayer/MusicControl
 onready var totalScore = $CanvasLayer/TotalRunningScore
+onready var cinematicBars = $CanvasLayer/CinematicBars
 
 onready var shipsFactory = $TextShipFactory
 onready var fsm: ShipSceneStateMachine = $ShipSceneStateMachine
