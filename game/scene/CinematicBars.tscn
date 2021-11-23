@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://white_rect.png" type="Texture" id=1]
+[ext_resource path="res://scene/CinematicBars.gd" type="Script" id=2]
 
 [sub_resource type="Animation" id=1]
 resource_name = "fade_in"
@@ -32,6 +33,7 @@ tracks/1/keys = {
 [node name="CinematicBars" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -39,7 +41,7 @@ __meta__ = {
 [node name="TopBar" type="TextureRect" parent="."]
 modulate = Color( 0, 0, 0, 1 )
 anchor_right = 1.0
-margin_top = -50.0
+margin_bottom = 50.0
 texture = ExtResource( 1 )
 expand = true
 __meta__ = {
@@ -51,7 +53,8 @@ modulate = Color( 0, 0, 0, 1 )
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = 50.0
+margin_top = -49.9999
+margin_bottom = 6.10352e-05
 texture = ExtResource( 1 )
 expand = true
 __meta__ = {
