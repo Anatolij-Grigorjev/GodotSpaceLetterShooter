@@ -26,7 +26,7 @@ func enterState(prevState: String):
 	if (fsm.shooterFailed):
 		yield(_playShipAnimationAndWait("destroy", 0.75), "completed")
 		shipDestroyed = true
-	_removeFloatingText()
+	_removeFloatingElements()
 	
 	
 func processState(delta: float):
@@ -84,7 +84,14 @@ func _playShipAnimationAndWait(animName: String, postAnimWaitTime: float):
 		yield(get_tree().create_timer(postAnimWaitTime), "timeout")
 		
 		
-func _removeFloatingText():
+func _removeFloatingElements():
+	
+	#floating text
 	for node in entity.textShipsContainer.get_children():
 		if is_instance_valid(node):
 			node.queue_free()
+			
+	#projectiles
+	for projectileNode in get_tree().get_nodes_in_group("projectile"):
+		if is_instance_valid(projectileNode):
+			projectileNode.queue_free()
