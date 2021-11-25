@@ -31,6 +31,7 @@ func _newShake():
 
 func _reset():
 	priority = 0
+	camera.offset = Vector2.ZERO
 
 
 func _onFrequencyTimeout():
