@@ -31,7 +31,7 @@ func _newShake():
 
 func _reset():
 	priority = 0
-	camera.offset = Vector2.ZERO
+	call_deferred("_resetCamera")
 
 
 func _onFrequencyTimeout():
@@ -39,9 +39,9 @@ func _onFrequencyTimeout():
 
 
 func _onDurationTimeout():
-	_reset()
 	$Frequency.stop()
 	emit_signal("onShakeEnded")
+	_reset()
 	
 
 
@@ -57,3 +57,7 @@ func _onCameraShakeRequested(duration = 0.2, frequency = 15, amplitude = 10, pri
 	$Frequency.start()
 	
 	_newShake()
+	
+	
+func _resetCamera():
+	camera.offset = Vector2.ZERO

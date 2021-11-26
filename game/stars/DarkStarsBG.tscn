@@ -3,7 +3,7 @@
 [ext_resource path="res://white_rect.png" type="Texture" id=1]
 [ext_resource path="res://stars/particle.png" type="Texture" id=2]
 [ext_resource path="res://stars/ParallaxAutoScroll.gd" type="Script" id=3]
-[ext_resource path="res://stars/hillside_repeater.png" type="Texture" id=4]
+[ext_resource path="res://stars/hillside_repeater_bigger.png" type="Texture" id=5]
 
 [node name="DarkStarsBG" type="ParallaxBackground" groups=[
 "bg",
@@ -21,239 +21,302 @@ scale = Vector2( 80, 100 )
 texture = ExtResource( 1 )
 
 [node name="hillside" type="ParallaxLayer" parent="."]
-position = Vector2( 16, 16 )
 motion_mirroring = Vector2( 0, 768 )
 
 [node name="hillside" type="Sprite" parent="hillside"]
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
 
 [node name="hillside2" type="Sprite" parent="hillside"]
 position = Vector2( 0, 32 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
 
 [node name="hillside3" type="Sprite" parent="hillside"]
 position = Vector2( 0, 64 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
 
 [node name="hillside4" type="Sprite" parent="hillside"]
 position = Vector2( 0, 96 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
 
 [node name="hillside5" type="Sprite" parent="hillside"]
 position = Vector2( 0, 128 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
 
 [node name="hillside6" type="Sprite" parent="hillside"]
 position = Vector2( 0, 160 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
 
 [node name="hillside7" type="Sprite" parent="hillside"]
 position = Vector2( 0, 192 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
 
 [node name="hillside8" type="Sprite" parent="hillside"]
 position = Vector2( 0, 224 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
 
 [node name="hillside9" type="Sprite" parent="hillside"]
 position = Vector2( 0, 256 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
 
 [node name="hillside10" type="Sprite" parent="hillside"]
 position = Vector2( 0, 288 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
 
 [node name="hillside11" type="Sprite" parent="hillside"]
 position = Vector2( 0, 320 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
 
 [node name="hillside12" type="Sprite" parent="hillside"]
 position = Vector2( 0, 352 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
 
 [node name="hillside13" type="Sprite" parent="hillside"]
 position = Vector2( 0, 384 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
 
 [node name="hillside14" type="Sprite" parent="hillside"]
 position = Vector2( 0, 416 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
 
 [node name="hillside15" type="Sprite" parent="hillside"]
 position = Vector2( 0, 448 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
 
 [node name="hillside16" type="Sprite" parent="hillside"]
 position = Vector2( 0, 480 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
 
 [node name="hillside17" type="Sprite" parent="hillside"]
 position = Vector2( 0, 512 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
 
 [node name="hillside18" type="Sprite" parent="hillside"]
 position = Vector2( 0, 544 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
 
 [node name="hillside19" type="Sprite" parent="hillside"]
 position = Vector2( 0, 576 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
 
 [node name="hillside20" type="Sprite" parent="hillside"]
 position = Vector2( 0, 608 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
 
 [node name="hillside21" type="Sprite" parent="hillside"]
 position = Vector2( 0, 640 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
 
 [node name="hillside22" type="Sprite" parent="hillside"]
 position = Vector2( 0, 672 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
 
 [node name="hillside23" type="Sprite" parent="hillside"]
 position = Vector2( 0, 704 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
 
 [node name="hillside24" type="Sprite" parent="hillside"]
 position = Vector2( 0, 736 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
 
 [node name="hillside25" type="Sprite" parent="hillside"]
 position = Vector2( 0, 768 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
 
 [node name="hillside50" type="Sprite" parent="hillside"]
 position = Vector2( 1248, 0 )
-scale = Vector2( -1, 1 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
+flip_h = true
 
 [node name="hillside49" type="Sprite" parent="hillside"]
 position = Vector2( 1248, 32 )
-scale = Vector2( -1, 1 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
+flip_h = true
 
 [node name="hillside48" type="Sprite" parent="hillside"]
 position = Vector2( 1248, 64 )
-scale = Vector2( -1, 1 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
+flip_h = true
 
 [node name="hillside47" type="Sprite" parent="hillside"]
 position = Vector2( 1248, 96 )
-scale = Vector2( -1, 1 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
+flip_h = true
 
 [node name="hillside46" type="Sprite" parent="hillside"]
 position = Vector2( 1248, 128 )
-scale = Vector2( -1, 1 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
+flip_h = true
 
 [node name="hillside45" type="Sprite" parent="hillside"]
 position = Vector2( 1248, 160 )
-scale = Vector2( -1, 1 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
+flip_h = true
 
 [node name="hillside44" type="Sprite" parent="hillside"]
 position = Vector2( 1248, 192 )
-scale = Vector2( -1, 1 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
+flip_h = true
 
 [node name="hillside43" type="Sprite" parent="hillside"]
 position = Vector2( 1248, 224 )
-scale = Vector2( -1, 1 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
+flip_h = true
 
 [node name="hillside42" type="Sprite" parent="hillside"]
 position = Vector2( 1248, 256 )
-scale = Vector2( -1, 1 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
+flip_h = true
 
 [node name="hillside41" type="Sprite" parent="hillside"]
 position = Vector2( 1248, 288 )
-scale = Vector2( -1, 1 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
+flip_h = true
 
 [node name="hillside40" type="Sprite" parent="hillside"]
 position = Vector2( 1248, 320 )
-scale = Vector2( -1, 1 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
+flip_h = true
 
 [node name="hillside39" type="Sprite" parent="hillside"]
 position = Vector2( 1248, 352 )
-scale = Vector2( -1, 1 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
+flip_h = true
 
 [node name="hillside38" type="Sprite" parent="hillside"]
 position = Vector2( 1248, 384 )
-scale = Vector2( -1, 1 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
+flip_h = true
 
 [node name="hillside37" type="Sprite" parent="hillside"]
 position = Vector2( 1248, 416 )
-scale = Vector2( -1, 1 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
+flip_h = true
 
 [node name="hillside36" type="Sprite" parent="hillside"]
 position = Vector2( 1248, 448 )
-scale = Vector2( -1, 1 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
+flip_h = true
 
 [node name="hillside35" type="Sprite" parent="hillside"]
 position = Vector2( 1248, 480 )
-scale = Vector2( -1, 1 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
+flip_h = true
 
 [node name="hillside34" type="Sprite" parent="hillside"]
 position = Vector2( 1248, 512 )
-scale = Vector2( -1, 1 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
+flip_h = true
 
 [node name="hillside33" type="Sprite" parent="hillside"]
 position = Vector2( 1248, 544 )
-scale = Vector2( -1, 1 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
+flip_h = true
 
 [node name="hillside32" type="Sprite" parent="hillside"]
 position = Vector2( 1248, 576 )
-scale = Vector2( -1, 1 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
+flip_h = true
 
 [node name="hillside31" type="Sprite" parent="hillside"]
 position = Vector2( 1248, 608 )
-scale = Vector2( -1, 1 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
+flip_h = true
 
 [node name="hillside30" type="Sprite" parent="hillside"]
 position = Vector2( 1248, 640 )
-scale = Vector2( -1, 1 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
+flip_h = true
 
 [node name="hillside29" type="Sprite" parent="hillside"]
 position = Vector2( 1248, 672 )
-scale = Vector2( -1, 1 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
+flip_h = true
 
 [node name="hillside28" type="Sprite" parent="hillside"]
 position = Vector2( 1248, 704 )
-scale = Vector2( -1, 1 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
+flip_h = true
 
 [node name="hillside27" type="Sprite" parent="hillside"]
 position = Vector2( 1248, 736 )
-scale = Vector2( -1, 1 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
+flip_h = true
 
 [node name="hillside26" type="Sprite" parent="hillside"]
 position = Vector2( 1248, 768 )
-scale = Vector2( -1, 1 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
+centered = false
+flip_h = true
+
+[node name="left_back" type="Sprite" parent="hillside"]
+modulate = Color( 0.027451, 0.764706, 0.180392, 1 )
+position = Vector2( -105, 0 )
+scale = Vector2( 5, 35 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="right_back" type="Sprite" parent="hillside"]
+modulate = Color( 0.027451, 0.764706, 0.180392, 1 )
+position = Vector2( 1280, 0 )
+scale = Vector2( 5, 35 )
+texture = ExtResource( 1 )
+centered = false
 
 [node name="BigStars" type="ParallaxLayer" parent="."]
 motion_scale = Vector2( 0, 1 )
 motion_mirroring = Vector2( 720, 1280 )
 
 [node name="BigStar" type="Sprite" parent="BigStars"]
-position = Vector2( 196.024, 276.389 )
+position = Vector2( 196.689, 276.389 )
 rotation = 1.0472
 scale = Vector2( 3, 3 )
 texture = ExtResource( 2 )
