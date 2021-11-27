@@ -24,7 +24,7 @@ export(Direction) var shipDirection = Direction.BOTTOM setget setShipPosition
 onready var shooter = $MovingElements/ShooterShip
 onready var textShipsContainer = $MovingElements/TextShips
 onready var camera = $MovingElements/Camera2D
-onready var shaker = $MovingElements/Camera2D/ScreenShake
+onready var shaker = $MovingElements/Camera2D/CameraShake
 onready var freeze = $FreezeFrame
 onready var animator = $AnimationPlayer
 

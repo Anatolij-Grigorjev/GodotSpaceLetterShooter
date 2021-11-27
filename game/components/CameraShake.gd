@@ -19,14 +19,8 @@ func beginShake(duration = 0.2, frequency = 15, amplitude = 10, priority = 1):
 
 
 func _newShake():
-	var rand_offset = Utils.rand_point(amplitude, amplitude)
-	
-	$ShakeTween.interpolate_property(
-		camera, 'offset', 
-		camera.offset, rand_offset, 
-		$Frequency.wait_time, TRANSITION, EASING
-	)
-	$ShakeTween.start()
+	var randOffset = Utils.rand_point(amplitude, amplitude)
+	_startInterpolateCameraOffset(randOffset)
 
 
 func _reset():
@@ -60,4 +54,14 @@ func _onCameraShakeRequested(duration = 0.2, frequency = 15, amplitude = 10, pri
 	
 	
 func _resetCamera():
-	camera.offset = Vector2.ZERO
+	_startInterpolateCameraOffset(Vector2.ZERO)
+	
+	
+
+func _startInterpolateCameraOffset(targetOffset: Vector2):
+	$ShakeTween.interpolate_property(
+		camera, 'offset', 
+		camera.offset, targetOffset, 
+		$Frequency.wait_time, TRANSITION, EASING
+	)
+	$ShakeTween.start()

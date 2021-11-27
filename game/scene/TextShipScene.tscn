@@ -12,7 +12,7 @@
 [ext_resource path="res://scene/ShipSceneWaveStartState.gd" type="Script" id=10]
 [ext_resource path="res://scene/ShipSceneWaveProcessState.gd" type="Script" id=11]
 [ext_resource path="res://scene/ShipSceneEndState.gd" type="Script" id=12]
-[ext_resource path="res://components/ScreenShake.tscn" type="PackedScene" id=13]
+[ext_resource path="res://components/CameraShake.tscn" type="PackedScene" id=13]
 [ext_resource path="res://FreezeFrame.tscn" type="PackedScene" id=14]
 [ext_resource path="res://components/StateLabel.tscn" type="PackedScene" id=15]
 [ext_resource path="res://scene/gui/TotalRunningScore.tscn" type="PackedScene" id=16]
@@ -100,8 +100,9 @@ script = ExtResource( 12 )
 [node name="Camera2D" type="Camera2D" parent="MovingElements"]
 position = Vector2( 640, 360 )
 current = true
+editor_draw_drag_margin = true
 
-[node name="ScreenShake" parent="MovingElements/Camera2D" instance=ExtResource( 13 )]
+[node name="CameraShake" parent="MovingElements/Camera2D" instance=ExtResource( 13 )]
 
 [node name="TextShips" type="Node2D" parent="MovingElements"]
 

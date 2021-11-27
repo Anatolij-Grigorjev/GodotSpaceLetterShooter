@@ -32,7 +32,7 @@ func _playWaveIntroAnimations():
 	yield(get_tree(), "idle_frame")
 	yield(entity.shooter.fsm, "stateChanged")
 	entity.animator.play("show_title")
-	entity.camera.offset = Vector2.ZERO
+	entity.shaker._reset()
 	entity.cinematicBars.fadeOut()
 	yield(entity.animator, "animation_finished")
 	introsDone = true
