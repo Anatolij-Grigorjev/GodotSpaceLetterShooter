@@ -13,10 +13,15 @@ signal bgWillHaveTurned(newDirection, waitTime)
 
 
 export(float) var scroll_rate = 120.66
+export(NodePath) var bigObjectsLayerNodePath: NodePath
+export(NodePath) var smallObjectsLayerNodePath: NodePath
 export(Direction) var starsMoveDirection = Direction.DOWN setget _applyMoveDirection
 
 
 onready var anim: AnimationPlayer = $AnimationPlayer
+onready var bigObjectsLayer = get_node(bigObjectsLayerNodePath) as ParallaxLayer
+onready var smallObjectsLayer = get_node(smallObjectsLayerNodePath) as ParallaxLayer
+
 
 var directionProps = {
 	Direction.UP: {
@@ -108,16 +113,16 @@ func _applyMoveDirection(direction: int):
 	var previouslyHorizontal = _isStartsMoveDirectionHorizontal()
 	starsMoveDirection = clamp(direction, Direction.UP, Direction.RIGHT)
 	var directionPlaneChanged = _isStartsMoveDirectionHorizontal() != previouslyHorizontal
-	if ($BigStars):
-		$BigStars.motion_scale = directionProps[direction].bigStarCruiseSpeed
-		_setChildSpritesRotation($BigStars, directionProps[direction].spritesRotation)
+	if (bigObjectsLayer):
+		bigObjectsLayer.motion_scale = directionProps[direction].bigStarCruiseSpeed
+		_setChildSpritesRotation(bigObjectsLayer, directionProps[direction].spritesRotation)
 		if (directionPlaneChanged):
-			$BigStars.motion_mirroring = Utils.swapVector($BigStars.motion_mirroring)
-	if ($SmallStars):
-		$SmallStars.motion_scale = directionProps[direction].smallStarCruiseSpeed
-		_setChildSpritesRotation($SmallStars, directionProps[direction].spritesRotation)
+			bigObjectsLayer.motion_mirroring = Utils.swapVector(bigObjectsLayer.motion_mirroring)
+	if (smallObjectsLayer):
+		smallObjectsLayer.motion_scale = directionProps[direction].smallStarCruiseSpeed
+		_setChildSpritesRotation(smallObjectsLayer, directionProps[direction].spritesRotation)
 		if (directionPlaneChanged):
-			$SmallStars.motion_mirroring = Utils.swapVector($SmallStars.motion_mirroring)
+			smallObjectsLayer.motion_mirroring = Utils.swapVector(smallObjectsLayer.motion_mirroring)
 	
 	
 func _isStartsMoveDirectionHorizontal() -> bool:
@@ -201,12 +206,12 @@ func _generateHyperTurnAnimations():
 func _generateHyperAnimationDirection(direction: int) -> Animation:
 	var animation: Animation = Animations.createAnimationOfLength(1.0)
 	var starsDirectionProps = directionProps[direction]
-	var bigStarsMotionScaleTrackIdx := Animations.addAnimationValueTrack(animation, _getNodeMotionScaleKeyName($BigStars))
+	var bigStarsMotionScaleTrackIdx := Animations.addAnimationValueTrack(animation, _getNodeMotionScaleKeyName(bigObjectsLayer))
 	Animations.addAnimationValueTrackInterpolation(
 		animation, bigStarsMotionScaleTrackIdx, 
 		starsDirectionProps.bigStarCruiseSpeed, starsDirectionProps.bigStarCruiseSpeed * 4
 	)
-	var smallStarsMotionScaleTrackIdx := Animations.addAnimationValueTrack(animation, _getNodeMotionScaleKeyName($SmallStars))
+	var smallStarsMotionScaleTrackIdx := Animations.addAnimationValueTrack(animation, _getNodeMotionScaleKeyName(smallObjectsLayer))
 	Animations.addAnimationValueTrackInterpolation(
 		animation, smallStarsMotionScaleTrackIdx, 
 		starsDirectionProps.smallStarCruiseSpeed, starsDirectionProps.smallStarCruiseSpeed * 4
@@ -222,7 +227,7 @@ func _generateHyperTurnFromToDirectionAnimation(fromDirection: int, toDirection:
 			animation, changeDirMethodTrackIdx, animation.length,
 			"_applyMoveDirection", [toDirection]
 	)
-	var bigStarsTrackIdx = animation.find_track(_getNodeMotionScaleKeyName($BigStars))
+	var bigStarsTrackIdx = animation.find_track(_getNodeMotionScaleKeyName(bigObjectsLayer))
 	var newDirectionBigStarsCruiseSpeed = directionProps[toDirection].bigStarCruiseSpeed
 	var prevDirectionBigStarsCruiseSpeed = directionProps[fromDirection].bigStarCruiseSpeed
 	Animations.addAnimationValueTrackInterpolation(
@@ -235,7 +240,7 @@ func _generateHyperTurnFromToDirectionAnimation(fromDirection: int, toDirection:
 		prevDirectionBigStarsCruiseSpeed, newDirectionBigStarsCruiseSpeed,
 		3.0, 1.0, 0.5
 	)
-	var smallStarsTrackIdx = animation.find_track(_getNodeMotionScaleKeyName($SmallStars))
+	var smallStarsTrackIdx = animation.find_track(_getNodeMotionScaleKeyName(smallObjectsLayer))
 	var newDirectionSmallStarsCruiseSpeed = directionProps[toDirection].smallStarCruiseSpeed
 	var prevDirectionSmallStarsCruiseSpeed = directionProps[fromDirection].smallStarCruiseSpeed
 	Animations.addAnimationValueTrackInterpolation(
@@ -254,14 +259,14 @@ func _generateHyperTurnFromToDirectionAnimation(fromDirection: int, toDirection:
 func _generateHyperNoTurnAnimation(forDirection: int) -> Animation:
 	var animation = _generateHyperAnimationDirection(forDirection)
 	animation.length = 4.0
-	var bigStarsTrackIdx = animation.find_track(_getNodeMotionScaleKeyName($BigStars))
+	var bigStarsTrackIdx = animation.find_track(_getNodeMotionScaleKeyName(bigObjectsLayer))
 	var directionBigStarsCruiseSpeed = directionProps[forDirection].bigStarCruiseSpeed
 	Animations.addAnimationValueTrackInterpolation(
 		animation, bigStarsTrackIdx,
 		directionBigStarsCruiseSpeed * 4, directionBigStarsCruiseSpeed,
 		3.0, 1.0, 1.0
 	)
-	var smallStarsTrackIdx = animation.find_track(_getNodeMotionScaleKeyName($SmallStars))
+	var smallStarsTrackIdx = animation.find_track(_getNodeMotionScaleKeyName(smallObjectsLayer))
 	var directionSmallStarsCruiseSpeed = directionProps[forDirection].smallStarCruiseSpeed
 	Animations.addAnimationValueTrackInterpolation(
 		animation, smallStarsTrackIdx,

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/big_tree.png-86e55f2eebe7c85b3607a4c6a9632a84.stex"
+path="res://.import/hillside_repeater_bigger.png-5612bc80d91edd5e748bb709c7e7a8f7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://stars/big_tree.png"
-dest_files=[ "res://.import/big_tree.png-86e55f2eebe7c85b3607a4c6a9632a84.stex" ]
+source_file="res://stars/woods/hillside_repeater_bigger.png"
+dest_files=[ "res://.import/hillside_repeater_bigger.png-5612bc80d91edd5e748bb709c7e7a8f7.stex" ]
 
 [params]
 

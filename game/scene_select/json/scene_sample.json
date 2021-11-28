@@ -4,11 +4,11 @@
 	"name": "SAMPLE",
 	"unlocksAfter": [],
 	"background": {
-		"type": "space",
+		"type": "woods",
 		"tint": {
 			"a": 1.0,
 			"b": 0.1,
-			"g": 0.1,
+			"g": 0.5,
 			"r": 0.1
 		}
 	},

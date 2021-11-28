@@ -8,6 +8,8 @@
 "bg",
 ]]
 script = ExtResource( 1 )
+bigObjectsLayerNodePath = NodePath("BigStars")
+smallObjectsLayerNodePath = NodePath("SmallStars")
 
 [node name="space" type="ParallaxLayer" parent="."]
 scale = Vector2( 2, 2 )
