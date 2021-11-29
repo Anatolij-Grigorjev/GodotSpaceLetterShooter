@@ -4,8 +4,7 @@
 [ext_resource path="res://stars/woods/big_tree.png" type="Texture" id=2]
 [ext_resource path="res://white_rect.png" type="Texture" id=3]
 [ext_resource path="res://stars/ParallaxAutoScroll.gd" type="Script" id=4]
-[ext_resource path="res://stars/particle.png" type="Texture" id=5]
-
+[ext_resource path="res://stars/woods/small_birb.png" type="Texture" id=5]
 
 [node name="SandyForestBG" type="ParallaxBackground" groups=[
 "bg",
@@ -13,14 +12,14 @@
 script = ExtResource( 4 )
 scroll_rate = 300.0
 bigObjectsLayerNodePath = NodePath("BigTrees")
-smallObjectsLayerNodePath = NodePath("SmallStars")
+smallObjectsLayerNodePath = NodePath("SmallBirds")
 
 [node name="floor" type="ParallaxLayer" parent="."]
 motion_mirroring = Vector2( 600, 700 )
 
 [node name="Sprite" type="Sprite" parent="floor"]
 modulate = Color( 0.00392157, 0.152941, 0.0666667, 1 )
-position = Vector2( 640, 360 )
+position = Vector2( 418.831, 652.564 )
 scale = Vector2( 80, 100 )
 texture = ExtResource( 3 )
 
@@ -359,63 +358,59 @@ rotation = -1.57429
 scale = Vector2( 0.827499, 0.970012 )
 texture = ExtResource( 2 )
 
-[node name="SmallStars" type="ParallaxLayer" parent="."]
+[node name="SmallBirds" type="ParallaxLayer" parent="."]
 motion_scale = Vector2( 0, 2 )
-motion_mirroring = Vector2( 400, 1280 )
+motion_offset = Vector2( 50, 0 )
+motion_mirroring = Vector2( 550, 600 )
 
-[node name="star" type="Sprite" parent="SmallStars"]
-position = Vector2( 124.449, 198.874 )
-scale = Vector2( 1, 2 )
+[node name="birb1" type="Sprite" parent="SmallBirds"]
+position = Vector2( 131.587, 132.879 )
+scale = Vector2( 1, -1 )
 texture = ExtResource( 5 )
 
-[node name="star2" type="Sprite" parent="SmallStars"]
-position = Vector2( 561.24, 82.9658 )
-scale = Vector2( 1, 2 )
+[node name="birb8" type="Sprite" parent="SmallBirds"]
+position = Vector2( 716.943, 311.038 )
+scale = Vector2( 1, -1 )
 texture = ExtResource( 5 )
 
-[node name="star3" type="Sprite" parent="SmallStars"]
-position = Vector2( 852.84, 413.609 )
-scale = Vector2( 1, 2 )
+[node name="birb9" type="Sprite" parent="SmallBirds"]
+position = Vector2( 699.064, 174.99 )
+scale = Vector2( 1, -1 )
 texture = ExtResource( 5 )
 
-[node name="star4" type="Sprite" parent="SmallStars"]
-position = Vector2( 347.725, 563.68 )
-scale = Vector2( 1, 2 )
+[node name="birb10" type="Sprite" parent="SmallBirds"]
+position = Vector2( 479.064, 534.614 )
+scale = Vector2( 1, -1 )
 texture = ExtResource( 5 )
 
-[node name="star5" type="Sprite" parent="SmallStars"]
-position = Vector2( 1071.24, 123.229 )
-scale = Vector2( 1, 2 )
+[node name="birb6" type="Sprite" parent="SmallBirds"]
+position = Vector2( 307.013, 578.281 )
+scale = Vector2( 1, -1 )
 texture = ExtResource( 5 )
 
-[node name="star6" type="Sprite" parent="SmallStars"]
-position = Vector2( 1184.7, 574.661 )
-scale = Vector2( 1, 2 )
+[node name="birb7" type="Sprite" parent="SmallBirds"]
+position = Vector2( 232.734, 437.599 )
+scale = Vector2( 1.71501, -1.21227 )
 texture = ExtResource( 5 )
 
-[node name="star7" type="Sprite" parent="SmallStars"]
-position = Vector2( 1142.46, -95.7457 )
-scale = Vector2( 1, 2 )
+[node name="birb2" type="Sprite" parent="SmallBirds"]
+position = Vector2( 383.356, 384.889 )
+scale = Vector2( 1.27132, -1 )
 texture = ExtResource( 5 )
 
-[node name="star8" type="Sprite" parent="SmallStars"]
-position = Vector2( 971.101, -382.069 )
-scale = Vector2( 1, 2 )
+[node name="birb3" type="Sprite" parent="SmallBirds"]
+position = Vector2( 311.172, 111.307 )
+scale = Vector2( 1.41086, -1.41086 )
 texture = ExtResource( 5 )
 
-[node name="star9" type="Sprite" parent="SmallStars"]
-position = Vector2( 629.931, -91.253 )
-scale = Vector2( 1, 2 )
+[node name="birb4" type="Sprite" parent="SmallBirds"]
+position = Vector2( 120.524, 260.87 )
+scale = Vector2( 1, -1 )
 texture = ExtResource( 5 )
 
-[node name="star10" type="Sprite" parent="SmallStars"]
-position = Vector2( 206.552, -215.595 )
-scale = Vector2( 1, 2 )
-texture = ExtResource( 5 )
-
-[node name="star11" type="Sprite" parent="SmallStars"]
-position = Vector2( 347.336, -408.787 )
-scale = Vector2( 1, 2 )
+[node name="birb5" type="Sprite" parent="SmallBirds"]
+position = Vector2( 345.8, 241.472 )
+scale = Vector2( 1, -1 )
 texture = ExtResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
