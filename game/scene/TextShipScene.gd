@@ -81,6 +81,9 @@ func _ready():
 		setShipPosition(randomDirection)
 		starsBG.starsMoveDirection = randomDirection
 		setSceneSpecificaion(Mock.sceneShipTypeQuantities(1, 1, 1))
+	else:
+		#running in scene. small objects layer is offset by engine???
+		starsBG.smallObjectsLayer.motion_offset.x = 400
 	
 	
 	
