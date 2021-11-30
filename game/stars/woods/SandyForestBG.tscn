@@ -360,7 +360,6 @@ texture = ExtResource( 2 )
 
 [node name="SmallBirds" type="ParallaxLayer" parent="."]
 motion_scale = Vector2( 0, 2 )
-motion_offset = Vector2( 50, 0 )
 motion_mirroring = Vector2( 550, 600 )
 
 [node name="birb1" type="Sprite" parent="SmallBirds"]
