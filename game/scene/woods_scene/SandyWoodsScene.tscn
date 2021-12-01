@@ -8,7 +8,7 @@
 [node name="ShipSceneStateMachine" parent="." index="0"]
 entityPath = NodePath("../../WoodsScene")
 
-[node name="StateLabel" parent="CanvasLayer" index="3"]
+[node name="StateLabel" parent="CanvasLayer" index="4"]
 sourceFSM = NodePath("../../../WoodsScene/ShipSceneStateMachine")
 
 [node name="SandyForestBG" parent="." index="4" instance=ExtResource( 2 )]
