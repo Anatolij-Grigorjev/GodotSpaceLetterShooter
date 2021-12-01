@@ -37,7 +37,7 @@ onready var shipsFactory = $TextShipFactory
 onready var fsm: ShipSceneStateMachine = $ShipSceneStateMachine
 onready var tween: Tween = $ShipMovePositionsTween
 
-var starsBG
+var sceneBG
 
 
 var directionShipAngles = {
@@ -59,7 +59,7 @@ func _ready():
 	
 	totalScore.totalScore = GameConfig.totalShooterScore
 	
-	starsBG = Utils.getFirst(get_tree().get_nodes_in_group("bg"))
+	sceneBG = Utils.getFirst(get_tree().get_nodes_in_group("bg"))
 	
 	Utils.tryConnect(shooter, "shotFired", fsm, "_onShipShotFired")
 	Utils.tryConnect(shooter, "chamberEmptied", playerInput, "clearText")
@@ -67,7 +67,7 @@ func _ready():
 	Utils.tryConnect(shooter, "chamberEmptied", self, "_onShooterClearChamber")
 	Utils.tryConnect(shooter, "hyperSpeedToggled", self, "_onShooterToggleHyperspeed")
 	Utils.tryConnect(shooter, "shooterHitByShot", self, "_onShooterHitByShot")
-	Utils.tryConnect(starsBG, "bgWillHaveTurned", self, "_scheduleShooterTurning")
+	Utils.tryConnect(sceneBG, "bgWillHaveTurned", self, "_scheduleShooterTurning")
 	
 	call_deferred("_bindSceneStats")
 	
@@ -79,11 +79,11 @@ func _ready():
 			Direction.BOTTOM
 		])
 		setShipPosition(randomDirection)
-		starsBG.starsMoveDirection = randomDirection
+		sceneBG.starsMoveDirection = randomDirection
 		setSceneSpecificaion(Mock.sceneShipTypeQuantities(1, 1, 1))
 	else:
 		#running in scene. small objects layer is offset by engine???
-		starsBG.smallObjectsLayer.motion_offset.x = 400
+		sceneBG.smallObjectsLayer.motion_offset.x = 400
 	
 	
 	
@@ -165,15 +165,15 @@ func _onShooterHitByShot(projectile: Node2D):
 func _onShooterToggleHyperspeed(speedUp: bool):
 	var shipTurnDisabled = not fsm.sceneSpecification.shooterTurnsBetweenWaves
 	if shipTurnDisabled and speedUp:
-		starsBG.startHyperNoTurn()
+		sceneBG.startHyperNoTurn()
 		return
 	
 	var waveEnded = fsm.state == "WaveEnd"
 	var sceneEnded = waveEnded and fsm.remainingSceneShips <= 0
 	if (waveEnded and not sceneEnded):
-		starsBG.startHyperTurn()
+		sceneBG.startHyperTurn()
 	elif (sceneEnded):
-		starsBG.startHyper()
+		sceneBG.startHyper()
 		
 		
 func _onTextShipPointsEarned(numPoints: int, shipPosition: Vector2):
