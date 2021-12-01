@@ -73,13 +73,9 @@ func _ready():
 	
 	#running standalone, make mock scene spec
 	if Scenes.activeScene == null:
-		var randomDirection: int = Utils.getRandom([
-			Direction.RIGHT, 
-			Direction.LEFT, 
-			Direction.BOTTOM
-		])
-		setShipPosition(randomDirection)
-		sceneBG.starsMoveDirection = randomDirection
+		var shipPosition = Direction.BOTTOM
+		setShipPosition(shipDirection)
+		sceneBG.starsMoveDirection = shipDirection
 		setSceneSpecificaion(Mock.sceneShipTypeQuantities(1, 1, 1))
 	
 	#small objects layer is offset by engine???

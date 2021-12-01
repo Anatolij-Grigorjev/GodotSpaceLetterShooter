@@ -14,18 +14,15 @@ static func sceneShipTypeQuantities(numFastShips: int = 0 , numShieldShips: int 
 	var spec := SceneSpec.new()
 	spec.id = "mock"
 	spec.order = -1
-	spec.sceneName = "SPACE MOCK"
+	spec.sceneName = "MOCK SCENE"
 	spec.wordsCorpusPath = "" #use default corpus
 	spec.sceneBgColor = Color.cornflower.lightened(rand_range(-0.5, 0.5))
 	spec.totalShips = numFastShips + numShieldShips + numShooterShips
 	spec.smallestShipsWave = min(2, spec.totalShips)
 	spec.largestShipsWave = min(4, spec.totalShips)
 	spec.allowedShipsTypes = {
-		#speedster
-		SceneShipLimits.new(576, 0, 0): numFastShips,
-		#tank 
-		SceneShipLimits.new(350.56, 4, 0): numShieldShips,
-		#shooter
-		SceneShipLimits.new(460.0, 0, 3): numShooterShips
+		"fast": numFastShips,
+		"shielded": numShieldShips,
+		"shooter": numShooterShips
 	}
 	return spec
