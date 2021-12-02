@@ -22,6 +22,7 @@ func addTypedLetter(letter: String) -> void:
 func clearText():
 	label.text = ""
 	
-	
-func flashInput(ignored):
+
+#ignored parameter is projectile from shotFired(projectile) signal
+func flashInput(_ignored):
 	anim.play("flash_input")
