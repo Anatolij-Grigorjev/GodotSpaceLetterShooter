@@ -17,6 +17,7 @@ func processState(delta: float):
 func enterState(prevState: String):
 	.enterState(prevState)
 	entity.bodyCollider().disabled = true
+	_hideVisibleProgressBars()
 	entity.emit_signal("shipHit", 0)
 	entityText = str(entity.currentText)
 	entity.currentText = ""
@@ -30,3 +31,9 @@ func scoreShipKillPoints():
 	
 	entity.emit_signal("shipHitEarnedPoints", numPoints, entity.position)
 	
+	
+func _hideVisibleProgressBars():
+	var entityProgressBars = Utils.getNodeChildrenOfType(entity, ProgressBar)
+	for progressBar in entityProgressBars:
+		if progressBar.visible:
+			progressBar.visible = false

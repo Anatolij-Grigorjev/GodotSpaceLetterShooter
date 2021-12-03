@@ -506,15 +506,15 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Curve" id=16]
+[sub_resource type="Curve" id=15]
 max_value = 200.0
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.425714, 103.765 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Curve" id=17]
+[sub_resource type="Curve" id=16]
 max_value = 100.0
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.488571, 49.2041 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Curve" id=15]
+[sub_resource type="Curve" id=17]
 max_value = 4.0
 _data = [ Vector2( 0, 4 ), 0.0, 0.0, 0, 0, Vector2( 0.471429, 1.19352 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
@@ -663,9 +663,9 @@ initial_velocity = 250.0
 initial_velocity_random = 0.5
 angular_velocity = 45.0
 angular_velocity_random = 0.5
-linear_accel_curve = SubResource( 16 )
-damping_curve = SubResource( 17 )
-scale_amount_curve = SubResource( 15 )
+linear_accel_curve = SubResource( 15 )
+damping_curve = SubResource( 16 )
+scale_amount_curve = SubResource( 17 )
 color = Color( 0.819608, 0.0666667, 0.0666667, 1 )
 anim_speed = 1.0
 __meta__ = {
@@ -687,9 +687,9 @@ initial_velocity = 250.0
 initial_velocity_random = 0.5
 angular_velocity = 45.0
 angular_velocity_random = 0.5
-linear_accel_curve = SubResource( 16 )
-damping_curve = SubResource( 17 )
-scale_amount_curve = SubResource( 15 )
+linear_accel_curve = SubResource( 15 )
+damping_curve = SubResource( 16 )
+scale_amount_curve = SubResource( 17 )
 color = Color( 0.819608, 0.0666667, 0.0666667, 1 )
 anim_speed = 1.0
 __meta__ = {
@@ -711,9 +711,9 @@ initial_velocity = 250.0
 initial_velocity_random = 0.5
 angular_velocity = 45.0
 angular_velocity_random = 0.5
-linear_accel_curve = SubResource( 16 )
-damping_curve = SubResource( 17 )
-scale_amount_curve = SubResource( 15 )
+linear_accel_curve = SubResource( 15 )
+damping_curve = SubResource( 16 )
+scale_amount_curve = SubResource( 17 )
 color = Color( 0.819608, 0.0666667, 0.0666667, 1 )
 anim_speed = 1.0
 __meta__ = {
@@ -735,9 +735,9 @@ initial_velocity = 250.0
 initial_velocity_random = 0.5
 angular_velocity = 45.0
 angular_velocity_random = 0.5
-linear_accel_curve = SubResource( 16 )
-damping_curve = SubResource( 17 )
-scale_amount_curve = SubResource( 15 )
+linear_accel_curve = SubResource( 15 )
+damping_curve = SubResource( 16 )
+scale_amount_curve = SubResource( 17 )
 color = Color( 0.819608, 0.0666667, 0.0666667, 1 )
 anim_speed = 1.0
 __meta__ = {

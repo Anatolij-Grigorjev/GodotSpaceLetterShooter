@@ -229,7 +229,7 @@ static func getRandom(elems: Array):
 	
 """
 Attempt to map provided list of objects into a list of same ordering containing 
-the object property value at provided proerty path
+the object property value at provided property path
 if the path is invalid for any object in the input list, a 'null' is set for 
 that element
 Always returns some kind of list, never null
@@ -279,6 +279,19 @@ static func getNodeChildrenInGroup(parentNode: Node, group: String) -> Array:
 	return childrenInGroup
 	
 	
+	
+"""
+Get list of all immediate child nodes of the given node that are of 
+specific Node type, identified by "is" check
+"""
+static func getNodeChildrenOfType(parentNode: Node, Type) -> Array:
+	if not is_instance_valid(parentNode):
+		return []
+	var childrenOfType := []
+	for node in parentNode.get_children():
+		if is_instance_valid(node) and node is Type:
+			childrenOfType.append(node)
+	return childrenOfType
 
 
 """

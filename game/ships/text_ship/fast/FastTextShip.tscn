@@ -5,7 +5,7 @@
 [ext_resource path="res://ships/text_ship/fast/FastDescendingState.gd" type="Script" id=3]
 [ext_resource path="res://components/CooldownBar.tscn" type="PackedScene" id=4]
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=1]
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0, 0, 0, 1 )
@@ -38,7 +38,7 @@ position = Vector2( -43.9795, -40.8879 )
 scale = Vector2( 0.66, 1 )
 
 [node name="Sprite" parent="." index="2"]
-material = SubResource( 4 )
+material = SubResource( 1 )
 texture = ExtResource( 2 )
 
 [node name="Label" parent="Sprite" index="0"]
