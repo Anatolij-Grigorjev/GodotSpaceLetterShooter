@@ -50,6 +50,7 @@ func processState(delta: float):
 		shipLeaving = true
 		entity.shooter.fsm.state = "LeavingWave"
 		entity.cinematicBars.fadeIn()
+		entity.playerInput.fadeOut()
 		yield(get_tree(), "idle_frame")
 		yield(entity.shooter.fsm, "stateChanged")
 		shipLeft = true

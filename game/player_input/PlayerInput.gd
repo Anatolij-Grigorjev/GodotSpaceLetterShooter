@@ -26,3 +26,13 @@ func clearText():
 #ignored parameter is projectile from shotFired(projectile) signal
 func flashInput(_ignored):
 	anim.play("flash_input")
+	
+	
+func fadeOut():
+	anim.play("fade")
+	
+
+func fadeIn():
+	anim.play_backwards("fade")
+	yield(anim, "animation_finished")
+	flashInput(null)

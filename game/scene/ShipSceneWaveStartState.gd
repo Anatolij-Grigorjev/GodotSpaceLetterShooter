@@ -33,6 +33,7 @@ func _playWaveIntroAnimations():
 	yield(entity.shooter.fsm, "stateChanged")
 	entity.animator.play("show_title")
 	entity.shaker._reset()
+	entity.playerInput.fadeIn()
 	entity.cinematicBars.fadeOut()
 	yield(entity.animator, "animation_finished")
 	introsDone = true
