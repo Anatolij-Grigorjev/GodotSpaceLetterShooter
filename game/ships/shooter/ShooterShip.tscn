@@ -99,7 +99,7 @@ scale_curve = SubResource( 11 )
 color_ramp = SubResource( 9 )
 
 [sub_resource type="CapsuleShape2D" id=14]
-radius = 30.7267
+radius = 27.5736
 height = 23.2579
 
 [sub_resource type="Animation" id=15]
@@ -580,9 +580,11 @@ position = Vector2( 0.0644836, -40.013 )
 
 [node name="ShotSprite" type="Sprite" parent="Sprite/ShotPosition"]
 visible = false
-position = Vector2( 0, -50 )
+position = Vector2( -0.634163, -45.6707 )
+scale = Vector2( 0.399964, 1 )
 texture = ExtResource( 4 )
 hframes = 4
+frame = 3
 
 [node name="ShotHit" type="AudioStreamPlayer2D" parent="Sprite/ShotPosition"]
 position = Vector2( -0.0644836, 40.013 )
@@ -653,6 +655,7 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0, 5 )
 shape = SubResource( 14 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
