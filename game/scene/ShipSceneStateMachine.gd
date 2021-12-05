@@ -67,8 +67,8 @@ func _setNextWaveSpec(waveNumber: int):
 func _buildNextWaveSpec() -> SceneWaveSpec:
 	var numShips = _calcNextWaveNumShips()
 	var firstShipStart = Vector2(
-		rand_range(100, 175),
-		rand_range(50, 100)
+		rand_range(175, 200),
+		rand_range(100, 150)
 	)
 	var nextWaveSpec = SceneWaveSpec.new(numShips, firstShipStart, remainingSceneShipSpecs)
 	for nextWaveShipSpec in nextWaveSpec.shipTypes:
