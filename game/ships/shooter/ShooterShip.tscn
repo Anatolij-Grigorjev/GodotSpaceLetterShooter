@@ -1,6 +1,6 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=47 format=2]
 
-[ext_resource path="res://ships/shooter/shooting_ship.png" type="Texture" id=1]
+[ext_resource path="res://ships/shooter/shooting_ship_pipe.png" type="Texture" id=1]
 [ext_resource path="res://ships/shooter/ShooterShip.gd" type="Script" id=2]
 [ext_resource path="res://ships/Projectile.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ships/shooter/shot_spark.png" type="Texture" id=4]
@@ -19,6 +19,7 @@
 [ext_resource path="res://ships/shooter/ShooterShipHitState.gd" type="Script" id=17]
 [ext_resource path="res://components/StateLabel.tscn" type="PackedScene" id=18]
 [ext_resource path="res://ships/shooter/ShooterShipLeavingWaveState.gd" type="Script" id=19]
+[ext_resource path="res://ships/shooter/pulsing_shock.png" type="Texture" id=20]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 9 )
@@ -97,6 +98,34 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale_curve = SubResource( 11 )
 color_ramp = SubResource( 9 )
+
+[sub_resource type="AtlasTexture" id=22]
+flags = 4
+atlas = ExtResource( 20 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=23]
+flags = 4
+atlas = ExtResource( 20 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=24]
+flags = 4
+atlas = ExtResource( 20 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=25]
+flags = 4
+atlas = ExtResource( 20 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=26]
+animations = [ {
+"frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ) ],
+"loop": true,
+"name": "default",
+"speed": 15.0
+} ]
 
 [sub_resource type="CapsuleShape2D" id=14]
 radius = 27.5736
@@ -405,6 +434,18 @@ tracks/4/keys = {
 "method": "play"
 } ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite/Shock:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
 
 [sub_resource type="Animation" id=21]
 length = 3.0
@@ -627,7 +668,8 @@ __meta__ = {
 
 [node name="Thruster" type="Particles2D" parent="Sprite"]
 show_behind_parent = true
-position = Vector2( 0, 35 )
+position = Vector2( -0.244522, 35.489 )
+scale = Vector2( 0.519999, 1 )
 amount = 100
 process_material = SubResource( 12 )
 __meta__ = {
@@ -637,7 +679,8 @@ __meta__ = {
 [node name="ThrusterHyper" type="Particles2D" parent="Sprite"]
 visible = false
 show_behind_parent = true
-position = Vector2( 0, 35 )
+position = Vector2( 7.62939e-06, 35.428 )
+scale = Vector2( 0.480001, 1 )
 amount = 200
 process_material = SubResource( 13 )
 __meta__ = {
@@ -649,6 +692,13 @@ stream = ExtResource( 8 )
 
 [node name="TransitionThruster" type="AudioStreamPlayer2D" parent="Sprite"]
 stream = ExtResource( 10 )
+
+[node name="Shock" type="AnimatedSprite" parent="Sprite"]
+position = Vector2( -0.0437737, -37.1035 )
+scale = Vector2( 0.66, 0.66 )
+frames = SubResource( 26 )
+frame = 2
+playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
