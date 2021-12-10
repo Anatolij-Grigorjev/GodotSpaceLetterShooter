@@ -1,6 +1,6 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=52 format=2]
 
-[ext_resource path="res://ships/shooter/shooting_ship.png" type="Texture" id=1]
+[ext_resource path="res://ships/shooter/shooting_ship_pumping.png" type="Texture" id=1]
 [ext_resource path="res://ships/shooter/ShooterShip.gd" type="Script" id=2]
 [ext_resource path="res://ships/Projectile.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ships/shooter/shot_spark.png" type="Texture" id=4]
@@ -24,6 +24,34 @@
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 9 )
 shader_param/radius = 0.0
+
+[sub_resource type="AtlasTexture" id=27]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 150, 150 )
+
+[sub_resource type="AtlasTexture" id=28]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 150, 0, 150, 150 )
+
+[sub_resource type="AtlasTexture" id=29]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 300, 0, 150, 150 )
+
+[sub_resource type="AtlasTexture" id=30]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 450, 0, 150, 150 )
+
+[sub_resource type="SpriteFrames" id=31]
+animations = [ {
+"frames": [ SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ) ],
+"loop": true,
+"name": "pumping",
+"speed": 4.0
+} ]
 
 [sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0.514815, 1 )
@@ -612,9 +640,12 @@ animationName = "transition_wave"
 [node name="Leaving" type="Node" parent="ShooterShipStateMachine"]
 script = ExtResource( 16 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite" type="AnimatedSprite" parent="."]
 material = SubResource( 1 )
-texture = ExtResource( 1 )
+frames = SubResource( 31 )
+animation = "pumping"
+frame = 3
+playing = true
 
 [node name="ShotPosition" type="Position2D" parent="Sprite"]
 position = Vector2( 0.0644836, -40.013 )
@@ -668,7 +699,7 @@ __meta__ = {
 
 [node name="Thruster" type="Particles2D" parent="Sprite"]
 show_behind_parent = true
-position = Vector2( -0.244522, 35.489 )
+position = Vector2( -0.697292, 33.5874 )
 scale = Vector2( 0.519999, 1 )
 amount = 100
 process_material = SubResource( 12 )
@@ -697,7 +728,7 @@ stream = ExtResource( 10 )
 position = Vector2( -0.0437737, -37.1035 )
 scale = Vector2( 0.66, 0.66 )
 frames = SubResource( 26 )
-frame = 1
+frame = 3
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
