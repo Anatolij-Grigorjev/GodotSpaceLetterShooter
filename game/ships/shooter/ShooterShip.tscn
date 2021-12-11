@@ -50,7 +50,7 @@ animations = [ {
 "frames": [ SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ) ],
 "loop": true,
 "name": "pumping",
-"speed": 4.0
+"speed": 8.0
 } ]
 
 [sub_resource type="Gradient" id=2]
@@ -477,6 +477,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id=21]
 length = 3.0
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
 tracks/0/interp = 1
@@ -598,6 +599,30 @@ tracks/9/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Sprite:frame")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0.05 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Sprite:playing")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
 [node name="ShooterShip" type="Node2D" groups=[
@@ -728,7 +753,6 @@ stream = ExtResource( 10 )
 position = Vector2( -0.0437737, -37.1035 )
 scale = Vector2( 0.66, 0.66 )
 frames = SubResource( 26 )
-frame = 3
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
