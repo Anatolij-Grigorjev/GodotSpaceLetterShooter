@@ -3,19 +3,27 @@ class_name ShipSceneWaveProcessState
 """
 State to hold and use logic of ongoing wave in scene
 """
+const INPUT_BUFFER = 7
+
 var liveWaveShips: int = 0
 var waveOver: bool = false
-var latestKeyInputEvent: InputEventKey
+var numAddedInputEvents = 0
+var latestKeyInputEvents: Array
 
 var latestSpecialCodeToggles: Dictionary = {
 		'fireChambered': false
 }
 
 
+func _ready():
+	latestKeyInputEvents = []
+	latestKeyInputEvents.resize(INPUT_BUFFER)
+
+
 func enterState(prevState: String):
 	.enterState(prevState)
 	waveOver = false
-	latestKeyInputEvent = null
+	numAddedInputEvents = 0
 	var shipsContainer = entity.textShipsContainer
 	var shipsNodes = Utils.getNodeChildrenInGroup(shipsContainer, "text_ship")
 	liveWaveShips = shipsNodes.size()
@@ -25,8 +33,10 @@ func enterState(prevState: String):
 		
 func processState(delta: float):
 	.processState(delta)
-	if (latestKeyInputEvent):
-		_processLatestKey()
+	if (numAddedInputEvents > 0):
+		for idx in range(numAddedInputEvents):
+			_processLatestKey(latestKeyInputEvents[idx])
+		numAddedInputEvents = 0
 	
 		
 		
@@ -58,11 +68,13 @@ func _countDestroyedShip(shipText: String):
 func _input(event: InputEvent) -> void:
 	if (not event is InputEventKey):
 		return
-	latestKeyInputEvent = event as InputEventKey
+	if numAddedInputEvents < INPUT_BUFFER:
+		latestKeyInputEvents[numAddedInputEvents] = event as InputEventKey
+		numAddedInputEvents += 1
+		
 
 		
-func _processLatestKey() -> void:
-	var keyEvent: InputEventKey = latestKeyInputEvent
+func _processLatestKey(keyEvent: InputEventKey) -> void:
 	if (not _isKeyJustPressed(keyEvent)):
 		return
 	var keyCharCode: String = OS.get_scancode_string(keyEvent.scancode)
@@ -78,7 +90,6 @@ func _processLatestKey() -> void:
 		entity.shooter.faceShootable(shootableWithLetter)
 	if (latestSpecialCodeToggles.fireChambered):
 		entity.emit_signal("fireCodeTyped", shootableWithLetter)
-	latestKeyInputEvent = null
 	
 
 func _isKeyJustPressed(keyEvent: InputEventKey) -> bool:

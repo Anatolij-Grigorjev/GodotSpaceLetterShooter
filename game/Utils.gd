@@ -126,7 +126,7 @@ static func resolveNodePathsList(origin: Node, relativePaths: Array) -> Array:
 	
 """
 Parse the file at path 'filePath' as valid JSON and return the structure
-(list of object)
+(list or object)
 """
 static func file2JSON(filePath: String):
 	var fileText: String = getFileText(filePath)
