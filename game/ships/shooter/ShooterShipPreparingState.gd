@@ -6,13 +6,16 @@ chambers the letters
 """
 const SpokeScn = preload("res://ships/shooter/VisibleSpoke.tscn")
 
+export(int) var spokesPerLetter = 3
+
 var speed: float = 300
 
 
 
 func letterTyped(letter: String):
 	_chamberLetter(letter)
-	_addSpoke()
+	for idx in range(spokesPerLetter):
+		_addSpoke()
 	
 
 # used for debugging input effects when running without a scene

@@ -669,6 +669,7 @@ script = ExtResource( 16 )
 material = SubResource( 1 )
 frames = SubResource( 31 )
 animation = "pumping"
+frame = 2
 playing = true
 
 [node name="ShotPosition" type="Position2D" parent="Sprite"]

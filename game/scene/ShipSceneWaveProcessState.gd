@@ -30,6 +30,14 @@ func enterState(prevState: String):
 	for ship in shipsNodes:
 		_registerShipHandlers(ship)
 		
+
+func _input(event: InputEvent) -> void:
+	if (not event is InputEventKey):
+		return
+	if numAddedInputEvents < INPUT_BUFFER:
+		latestKeyInputEvents[numAddedInputEvents] = event as InputEventKey
+		numAddedInputEvents += 1
+		
 		
 func processState(delta: float):
 	.processState(delta)
@@ -63,21 +71,13 @@ func _countDestroyedShip(shipText: String):
 	liveWaveShips -= 1
 	waveOver = liveWaveShips <= 0
 	
-
-
-func _input(event: InputEvent) -> void:
-	if (not event is InputEventKey):
-		return
-	if numAddedInputEvents < INPUT_BUFFER:
-		latestKeyInputEvents[numAddedInputEvents] = event as InputEventKey
-		numAddedInputEvents += 1
 		
 
 		
 func _processLatestKey(keyEvent: InputEventKey) -> void:
 	if (not _isKeyJustPressed(keyEvent)):
 		return
-	var keyCharCode: String = OS.get_scancode_string(keyEvent.scancode)
+	var keyCharCode: String = _getInputEventKeyCode(keyEvent)
 	
 	_updateSpecialCodeToggles(keyCharCode)
 	
@@ -129,5 +129,13 @@ func _shootableIsShip(shootable: Node2D) -> bool:
 	return shootable.get_groups().find("text_ship") != -1
 	
 	
+func _keyCodeIsFireToggle(keyCode: String) -> bool:
+	return keyCode == "Space"
+	
+	
+func _getInputEventKeyCode(event: InputEventKey) -> String:
+	return OS.get_scancode_string(event.scancode)
+	
+	
 func _updateSpecialCodeToggles(keyCode: String):
-	latestSpecialCodeToggles.fireChambered = keyCode == "Space"
+	latestSpecialCodeToggles.fireChambered = _keyCodeIsFireToggle(keyCode) 
