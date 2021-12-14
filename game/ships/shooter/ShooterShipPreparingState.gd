@@ -6,16 +6,34 @@ chambers the letters
 """
 const SpokeScn = preload("res://ships/shooter/VisibleSpoke.tscn")
 
-export(int) var spokesPerLetter = 3
+export(float) var singleLettersSequenceTTLSeconds = 0.5
+export(int) var firstSequenceLetterSpokes = 5
 
 var speed: float = 300
 
+onready var lettersSequenceTimer: Timer = $Timer
+
+
+func _ready():
+	lettersSequenceTimer.wait_time = singleLettersSequenceTTLSeconds
+	lettersSequenceTimer.one_shot = true
 
 
 func letterTyped(letter: String):
 	_chamberLetter(letter)
-	for idx in range(spokesPerLetter):
+	
+	var numSpokesForLetter = _processSpokesSequenceGetNextSpokes()
+	for idx in range(numSpokesForLetter):
 		_addSpoke()
+		
+		
+func _processSpokesSequenceGetNextSpokes() -> int:
+	if lettersSequenceTimer.is_stopped():
+		lettersSequenceTimer.start()
+		return firstSequenceLetterSpokes
+	else:
+		lettersSequenceTimer.wait_time = singleLettersSequenceTTLSeconds
+		return 1
 	
 
 # used for debugging input effects when running without a scene

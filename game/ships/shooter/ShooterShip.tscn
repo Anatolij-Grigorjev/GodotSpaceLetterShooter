@@ -649,6 +649,9 @@ playBackwards = true
 [node name="Preparing" type="Node" parent="ShooterShipStateMachine"]
 script = ExtResource( 14 )
 
+[node name="Timer" type="Timer" parent="ShooterShipStateMachine/Preparing"]
+one_shot = true
+
 [node name="Shooting" type="Node" parent="ShooterShipStateMachine"]
 script = ExtResource( 15 )
 
@@ -753,7 +756,6 @@ stream = ExtResource( 10 )
 position = Vector2( -0.0437737, -37.1035 )
 scale = Vector2( 0.66, 0.66 )
 frames = SubResource( 26 )
-frame = 3
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
