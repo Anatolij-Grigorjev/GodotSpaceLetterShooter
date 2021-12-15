@@ -38,12 +38,12 @@ func _processSpokesSequenceGetNextSpokes() -> int:
 	
 
 # used for debugging input effects when running without a scene
-func _input(event: InputEvent) -> void:
-	if (not event is InputEventKey):
-		return
-	var keyCharCode: String = OS.get_scancode_string(event.scancode)
-	if (keyCharCode.length() == 1):
-		letterTyped(keyCharCode)
+#func _input(event: InputEvent) -> void:
+#	if (not event is InputEventKey):
+#		return
+#	var keyCharCode: String = OS.get_scancode_string(event.scancode)
+#	if (keyCharCode.length() == 1):
+#		letterTyped(keyCharCode)
 	
 	
 func _chamberLetter(letter: String):
