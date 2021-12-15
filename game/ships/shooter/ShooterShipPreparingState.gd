@@ -8,6 +8,7 @@ const SpokeScn = preload("res://ships/shooter/VisibleSpoke.tscn")
 
 export(float) var singleLettersSequenceTTLSeconds = 0.5
 export(int) var firstSequenceLetterSpokes = 5
+export(int) var ongoingSequenceLetterSpokes = 1
 
 var speed: float = 300
 
@@ -33,16 +34,16 @@ func _processSpokesSequenceGetNextSpokes() -> int:
 		return firstSequenceLetterSpokes
 	else:
 		lettersSequenceTimer.wait_time = singleLettersSequenceTTLSeconds
-		return 1
+		return ongoingSequenceLetterSpokes
 	
 
 # used for debugging input effects when running without a scene
-#func _input(event: InputEvent) -> void:
-#	if (not event is InputEventKey):
-#		return
-#	var keyCharCode: String = OS.get_scancode_string(event.scancode)
-#	if (keyCharCode.length() == 1):
-#		letterTyped(keyCharCode)
+func _input(event: InputEvent) -> void:
+	if (not event is InputEventKey):
+		return
+	var keyCharCode: String = OS.get_scancode_string(event.scancode)
+	if (keyCharCode.length() == 1):
+		letterTyped(keyCharCode)
 	
 	
 func _chamberLetter(letter: String):
@@ -52,9 +53,9 @@ func _chamberLetter(letter: String):
 	
 func _addSpoke():
 	var spoke = SpokeScn.instance()
-	spoke.allowedRotationRange = Vector2(150, 210)
-	spoke.scale = Vector2(1, rand_range(1.5, 3))
-	spoke.offset = Vector2(0, rand_range(20, 25))
+	spoke.allowedRotationRange = Vector2(-20, 20)
+	spoke.scale = Vector2.ONE * rand_range(1.5, 2.0)
+	spoke.offset = Vector2(0, -rand_range(20, 25))
 	spoke.visible = false
 	
 	entity.sprite.add_child(spoke)

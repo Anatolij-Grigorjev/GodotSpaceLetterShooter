@@ -628,6 +628,7 @@ tracks/11/keys = {
 [node name="ShooterShip" type="Node2D" groups=[
 "shooter",
 ]]
+position = Vector2( 164.959, 118.956 )
 script = ExtResource( 2 )
 projectileScene = ExtResource( 3 )
 projectileCollisionMask = 2
@@ -756,6 +757,7 @@ stream = ExtResource( 10 )
 position = Vector2( -0.0437737, -37.1035 )
 scale = Vector2( 0.66, 0.66 )
 frames = SubResource( 26 )
+frame = 2
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]

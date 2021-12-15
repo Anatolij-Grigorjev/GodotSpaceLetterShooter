@@ -1,4 +1,4 @@
-extends Sprite
+extends AnimatedSprite
 """
 Show spoke at random rotation and time it out
 """
