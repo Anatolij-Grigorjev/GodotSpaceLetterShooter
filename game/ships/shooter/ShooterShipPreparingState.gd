@@ -54,8 +54,8 @@ func _chamberLetter(letter: String):
 func _addSpoke():
 	var spoke = SpokeScn.instance()
 	spoke.allowedRotationRange = Vector2(-20, 20)
-	spoke.scale = Vector2.ONE * rand_range(1.5, 2.0)
-	spoke.offset = Vector2(0, -rand_range(20, 25))
+	spoke.scale *= rand_range(1.5, 2.0)
+	spoke.offset = Vector2(0, -rand_range(15, 20))
 	spoke.visible = false
 	
 	entity.sprite.add_child(spoke)
