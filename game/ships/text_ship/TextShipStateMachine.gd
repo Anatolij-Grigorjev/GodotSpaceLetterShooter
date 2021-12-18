@@ -47,7 +47,7 @@ func _getNextState(delta: float) -> String:
 		"Hit":
 			return _ifAnimationFinishedGoToState("Descending")
 		"Miss":
-			return _ifAnimationFinishedGoToState("Descending")
+			return _ifAnimationFinishedGoToState(previousState)
 		"CollideShip":
 			return NO_STATE
 		"ReachedFinish":
