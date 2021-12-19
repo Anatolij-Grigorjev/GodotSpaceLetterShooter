@@ -13,21 +13,22 @@ var fireDirection: Vector2 = Vector2.ZERO
 
 onready var sprite: Sprite = $Sprite
 onready var label: Label = $Label
-onready var area: Area2D = $Area2D
+onready var area: RigidBody2D = $RigidBody2D
 
 
 var hadCollision: bool = false
+var velocity: Vector2 = Vector2.ZERO
 	
 
 
 func _process(delta):
 	sprite.rotation_degrees += angularVelocity
-	var velocity = fireDirection * speed
+	velocity = fireDirection * speed
 	position += (velocity * delta)
 
 
 
-func _on_Area2D_area_entered(area: Area2D):
+func _onBodyEntered(otherBody: Node):
 	hadCollision = true
 	var areaOwner: Node2D = area.get_parent()
 	if (

@@ -396,6 +396,18 @@ tracks/5/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite/Nose:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=12]
 length = 0.45
@@ -452,7 +464,7 @@ tracks/2/keys = {
 "values": [ Color( 0.839216, 0.960784, 0.0313726, 1 ), Color( 0.819608, 0.0666667, 0.0666667, 1 ), Color( 0.839216, 0.960784, 0.0313726, 1 ), Color( 0.819608, 0.0666667, 0.0666667, 1 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Area2D/AudioStreamPlayer2D:playing")
+tracks/3/path = NodePath("RigidBody2D/AudioStreamPlayer2D:playing")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -612,21 +624,22 @@ __meta__ = {
 [node name="Target" parent="Sprite" instance=ExtResource( 16 )]
 position = Vector2( 1, -15 )
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
 position = Vector2( -1.13544, -12.2627 )
 collision_layer = 10
 collision_mask = 4
-__meta__ = {
-"_edit_lock_": true
-}
+mode = 1
+custom_integrator = true
+contacts_reported = 1
+contact_monitor = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 shape = SubResource( 7 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Area2D"]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="RigidBody2D"]
 stream = ExtResource( 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -752,6 +765,6 @@ stream = ExtResource( 1 )
 
 [node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="ExplosionsBattery"]
 stream = ExtResource( 1 )
-[connection signal="area_entered" from="Area2D" to="TextShipStateMachine" method="_on_Area2D_area_entered"]
+[connection signal="body_entered" from="RigidBody2D" to="TextShipStateMachine" method="_onBodyEntered"]
 
 [editable path="TextShipStateMachine/Descending"]

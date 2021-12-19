@@ -14,6 +14,7 @@ var idlingActionsWeights: WeightedItems
 var lastCollidedProjectileCell: SingleReadVar = SingleReadVar.new(null)
 var lastCollidedShipCell: SingleReadVar = SingleReadVar.new(null)
 var shipReachedFinishCell: SingleReadVar = SingleReadVar.new(false)
+var lastCollisionPositionCell: SingleReadVar = SingleReadVar.new(null)
 
 
 func _ready():
@@ -66,12 +67,15 @@ func _ifAnimationFinishedGoToState(nextState: String) -> String:
 		return NO_STATE
 
 
-func _on_Area2D_area_entered(area: Area2D):
+func _onBodyEntered(area: Node):
 	var areaOwner: Node2D = area.get_parent()
 	if (areaOwner.is_in_group("projectile")):
 		lastCollidedProjectileCell.write(areaOwner)
 	if (areaOwner.is_in_group("shooter")):
 		lastCollidedShipCell.write(areaOwner)
+	var collisionPoint = Utils.getRigidBodyCollisionPoint(entity.bodyArea)
+	lastCollisionPositionCell.write(collisionPoint)
+	#TODO: make this condition work with bodies
 	if(area.is_in_group("textShipFinish")):
 		shipReachedFinishCell.write(true)
 		
@@ -79,11 +83,14 @@ func _on_Area2D_area_entered(area: Area2D):
 func _getProjectileAttemptedHitState(projectile: Node2D) -> String:
 	if not is_instance_valid(projectile):
 		return NO_STATE
-	if not entity.projectileHitText(projectile):
-		return "Miss"
 	var payload: String = projectile.getText()
+	if not entity.projectileHitText(projectile):
+		getState("Miss").hitChars = payload.length()
+		getState("Miss").hitPosition = lastCollisionPositionCell.readAndReset()
+		return "Miss"
 	if (entity.currentText.length() > payload.length()):
 		getState("Hit").hitChars = payload.length()
+		getState("Hit").hitPosition = lastCollisionPositionCell.readAndReset()
 		return "Hit"
 	else: 
 		get_node("Die").finalShotLettersNum = entity.currentText.length()

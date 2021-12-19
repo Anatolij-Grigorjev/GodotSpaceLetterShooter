@@ -181,11 +181,14 @@ hframes = 4
 position = Vector2( -1, -1 )
 scale = Vector2( 0.25, 0.25 )
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
 collision_layer = 0
 collision_mask = 0
+mode = 1
+contacts_reported = 1
+contact_monitor = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 shape = SubResource( 2 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
@@ -223,5 +226,5 @@ __meta__ = {
 stream = ExtResource( 3 )
 
 [node name="Tween" type="Tween" parent="."]
-[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="body_entered" from="RigidBody2D" to="." method="_onBodyEntered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

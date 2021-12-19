@@ -351,3 +351,11 @@ static func combinePathParts(part1: String, part2: String) -> String:
 	#neither has delimiter, must add between
 	else:
 		return part1 + pathDelimiter + part2
+
+"""
+Extract last saved collision point for the given rigidbody on the physics server
+null if no collision was saved
+"""
+static func getRigidBodyCollisionPoint(body: RigidBody2D) -> Vector2:
+	var bodyState = Physics2DServer.body_get_direct_state(body.get_rid())
+	return bodyState.get_contact_collider_position(0)

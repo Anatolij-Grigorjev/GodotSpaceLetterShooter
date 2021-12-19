@@ -29,7 +29,7 @@ onready var anim: AnimationPlayer = $AnimationPlayer
 onready var thrusterLeft: Particles2D = $Thrusters/ThrusterLeft
 onready var thrusterRight: Particles2D = $Thrusters/ThrusterRight
 onready var thrustersAudio: AudioStreamPlayer = $Thrusters/AudioStreamPlayer2D
-onready var bodyArea: Area2D = $Area2D
+onready var bodyArea: RigidBody2D = $RigidBody2D
 
 
 var shipHasShield: bool = false
