@@ -67,8 +67,8 @@ func _entityFinishedShotAnimation(animationName: String):
 	
 func _configureShooterShipProjectile(projectile: Node2D):
 	projectile.get_node("Sprite").modulate = Color.lightblue
-	projectile.get_node("Area2D").collision_mask = entity.projectileCollisionMask
-	projectile.get_node("Area2D").collision_layer = 0
+	projectile.get_node("RigidBody2D").collision_mask = entity.projectileCollisionMask
+	projectile.get_node("RigidBody2D").collision_layer = 0
 
 
 func _attachTimeoutTimer():

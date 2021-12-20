@@ -6,10 +6,12 @@ Playes an animation and reduces label charactersby number of them hit
 """
 
 var hitChars: int = 1
+var hitPosition: Vector2
 
 
 func enterState(prevState: String):
 	.enterState(prevState)
+	print(hitPosition)
 	entity.bodyCollider().disabled = true
 	entity.hitCharacter(hitChars)
 	entity.emit_signal("shipHit", entity.currentText.length())

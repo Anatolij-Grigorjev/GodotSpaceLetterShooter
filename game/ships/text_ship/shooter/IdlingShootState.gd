@@ -37,8 +37,8 @@ func _configureTextShipProjectile(projectile: Node2D):
 	projectile.fireDirection = entity.global_position.direction_to(shooterShip.global_position)
 	projectile.speed = projectileSpeed
 	projectile.get_node("Sprite").modulate = Color.lightpink
-	projectile.get_node("Area2D").collision_mask = projectileCollisionMask
-	projectile.get_node("Area2D").collision_layer = entity.get_node("Area2D").collision_layer
+	projectile.get_node("RigidBody2D").collision_mask = projectileCollisionMask
+	projectile.get_node("RigidBody2D").collision_layer = entity.get_node("RigidBody2D").collision_layer
 	projectile.add_to_group("shootable-projectile")
 	
 	

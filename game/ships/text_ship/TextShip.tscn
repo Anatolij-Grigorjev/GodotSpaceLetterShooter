@@ -555,9 +555,7 @@ animatorPath = NodePath("../../AnimationPlayer")
 animationName = "hit"
 
 [node name="Miss" type="Node" parent="TextShipStateMachine"]
-script = ExtResource( 7 )
-animatorPath = NodePath("../../AnimationPlayer")
-animationName = "miss"
+script = ExtResource( 11 )
 
 [node name="Die" type="Node" parent="TextShipStateMachine"]
 script = ExtResource( 9 )
