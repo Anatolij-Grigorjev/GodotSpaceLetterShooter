@@ -7,6 +7,8 @@ last label character was hit
 
 var entityText := ""
 var finalShotLettersNum: int = 0
+var hitPosition: Vector2
+
 
 func processState(delta: float):
 	if (animationFinished):
@@ -17,6 +19,7 @@ func processState(delta: float):
 func enterState(prevState: String):
 	.enterState(prevState)
 	entity.bodyCollider().disabled = true
+	print("HIT_POSITION: %s" % hitPosition)
 	_hideVisibleProgressBars()
 	entity.emit_signal("shipHit", 0)
 	entityText = str(entity.currentText)

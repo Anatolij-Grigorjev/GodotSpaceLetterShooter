@@ -75,6 +75,7 @@ func _onBodyEntered(area: Node):
 		lastCollidedShipCell.write(areaOwner)
 	var collisionPoint = Utils.getRigidBodyCollisionPoint(entity.bodyArea)
 	lastCollisionPositionCell.write(collisionPoint)
+	print("COLLISION_POINT: %s" % collisionPoint)
 	#TODO: make this condition work with bodies
 	if(area.is_in_group("textShipFinish")):
 		shipReachedFinishCell.write(true)
@@ -86,14 +87,15 @@ func _getProjectileAttemptedHitState(projectile: Node2D) -> String:
 	var payload: String = projectile.getText()
 	if not entity.projectileHitText(projectile):
 		getState("Miss").hitChars = payload.length()
-		getState("Miss").hitPosition = lastCollisionPositionCell.readAndReset()
+		getState("Miss").hitPosition = entity.to_local(lastCollisionPositionCell.readAndReset())
 		return "Miss"
 	if (entity.currentText.length() > payload.length()):
 		getState("Hit").hitChars = payload.length()
-		getState("Hit").hitPosition = lastCollisionPositionCell.readAndReset()
+		getState("Hit").hitPosition = entity.to_local(lastCollisionPositionCell.readAndReset())
 		return "Hit"
 	else: 
 		get_node("Die").finalShotLettersNum = entity.currentText.length()
+		getState("Die").hitPosition = entity.to_local(lastCollisionPositionCell.readAndReset())
 		return "Die"
 		
 		

@@ -556,6 +556,8 @@ animationName = "hit"
 
 [node name="Miss" type="Node" parent="TextShipStateMachine"]
 script = ExtResource( 11 )
+animatorPath = NodePath("../../AnimationPlayer")
+animationName = "miss"
 
 [node name="Die" type="Node" parent="TextShipStateMachine"]
 script = ExtResource( 9 )
@@ -626,7 +628,7 @@ position = Vector2( 1, -15 )
 position = Vector2( -1.13544, -12.2627 )
 collision_layer = 10
 collision_mask = 4
-mode = 1
+mode = 3
 custom_integrator = true
 contacts_reported = 1
 contact_monitor = true
