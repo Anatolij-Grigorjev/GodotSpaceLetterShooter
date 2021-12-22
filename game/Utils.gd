@@ -30,6 +30,14 @@ static func dumpObjectScriptVars(object: Object) -> String:
 	
 	return joinToString(currentPropValues, "\n")
 	
+	
+static func dumpObjectAllProperties(object: Object) -> String:
+	var currentPropValues := ["<%s>" % object.get_class()]
+	for prop in object.get_property_list():
+		currentPropValues.append("\t%s=%s" % [prop.name, object.get(prop.name)])
+	currentPropValues.append("</%s>" % object.get_class())	
+	return joinToString(currentPropValues, "\n")
+	
 
 """
 Attempt to connect 'signal' from 'source' to 'method' on 'target', 
