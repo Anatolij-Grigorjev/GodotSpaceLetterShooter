@@ -11,6 +11,7 @@ turns off physics by default to get processed ONLY via FSM
 var fsm setget setFsm
 var entity: Node2D setget setEntity
 var isActive: bool = false
+var stateTime: float = 0.0
 
 
 func _ready():
@@ -20,16 +21,17 @@ func _ready():
 
 
 func processState(delta: float):
-	pass
+	stateTime += delta
 	
 	
 func enterState(prevState: String):
 	isActive = true
+	stateTime = 0.0
 	
 	
 func exitState(nextState: String):
 	isActive = false
-		
+	
 		
 func setFsm(newFsm):
 	fsm = newFsm

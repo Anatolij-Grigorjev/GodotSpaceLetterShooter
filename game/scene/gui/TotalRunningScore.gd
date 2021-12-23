@@ -32,7 +32,7 @@ func _process(delta: float):
 	
 	
 func addPoints(numPoints: int):
-	if (Utils.animIsPlayingAnimation(anim, "hide_add")):
+	if (Animations.animIsPlayingAnimation(anim, "hide_add")):
 		_flushAddedScore()
 	newAddedScore += numPoints
 	addedPointsLbl.text = ADD_SCORE_FORMAT % newAddedScore

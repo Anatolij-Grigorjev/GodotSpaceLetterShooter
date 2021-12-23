@@ -85,14 +85,6 @@ static func getFileText(filePath: String) -> String:
 	file.close()
 	return fileText
 	
-
-
-"""
-Check if a given animator instance is currently playing the animation with
-specified name
-"""
-static func animIsPlayingAnimation(anim: AnimationPlayer, animationName: String) -> bool:
-	return anim.is_playing() and anim.current_animation == animationName
 	
 	
 

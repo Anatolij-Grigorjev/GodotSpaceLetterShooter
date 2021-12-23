@@ -105,7 +105,7 @@ func _categorizeAllowedShipTypes(allowedShipTypes: Dictionary) -> Dictionary:
 	
 
 func _onMouseEnteredArea():
-	if (Utils.animIsPlayingAnimation(anim, "select")):
+	if (Animations.animIsPlayingAnimation(anim, "select")):
 		return
 	anim.play("hover")
 	sceneHovered = true
@@ -113,7 +113,7 @@ func _onMouseEnteredArea():
 	
 	
 func _onMouseExitedArea():
-	if (Utils.animIsPlayingAnimation(anim, "select")):
+	if (Animations.animIsPlayingAnimation(anim, "select")):
 		return
 	anim.play("leave")
 	sceneHovered = false

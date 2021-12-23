@@ -55,6 +55,27 @@ static func addAnimationMethodTrackInvocation(animation: Animation, methodTrackI
 	animation.track_insert_key(methodTrackIdx, invocationTime, { "method": methodName, "args": args })
 
 
+"""
+Check if a given animator instance is currently playing the animation with
+specified name
+"""
+static func animIsPlayingAnimation(anim: AnimationPlayer, animationName: String) -> bool:
+	return anim.is_playing() and anim.current_animation == animationName
+	
+	
+"""
+Start plaing the specified animation by the specified animation player
+at a speed required to fir the entire animation into the allotedTime number of seconds
+
+Animator node and animation name must be valid
+"""
+static func animPlayAnimationInTime(anim: AnimationPlayer, animationName: String, allotedTime: float):
+	assert(anim)
+	var animationToPlay: Animation = anim.get_animation(animationName)
+	assert(animationToPlay)
+	var animationActualLength: float = animationToPlay.length
+	var allotedTimePlaybackSpeed: float = animationActualLength / allotedTime
+	anim.play(animationName, -1, allotedTimePlaybackSpeed)
 
 
 

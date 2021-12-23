@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://ships/text_ship/explode_ship.wav" type="AudioStream" id=1]
 [ext_resource path="res://ships/text_ship/ship_fly.wav" type="AudioStream" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://ships/text_ship/HitState.gd" type="Script" id=11]
 [ext_resource path="res://ships/text_ship/DescendingState.tscn" type="PackedScene" id=12]
 [ext_resource path="res://components/StateLabel.tscn" type="PackedScene" id=13]
+[ext_resource path="res://ships/text_ship/AppearingState.gd" type="Script" id=14]
 [ext_resource path="res://ships/text_ship/target/Target.tscn" type="PackedScene" id=16]
 [ext_resource path="res://ships/text_ship/ReachedFinishState.gd" type="Script" id=18]
 
@@ -63,54 +64,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 0.307787, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite:rotation_degrees")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1.6245, 1 ),
-"update": 0,
-"values": [ 0.0, 0.0 ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Sprite:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Sprite:material:shader")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ null ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -539,11 +492,10 @@ currentText = ":)"
 
 [node name="TextShipStateMachine" type="Node" parent="."]
 script = ExtResource( 10 )
+shipAppearingTime = 0.5
 
 [node name="Appearing" type="Node" parent="TextShipStateMachine"]
-script = ExtResource( 7 )
-animatorPath = NodePath("../../AnimationPlayer")
-animationName = "appear"
+script = ExtResource( 14 )
 
 [node name="Descending" parent="TextShipStateMachine" instance=ExtResource( 12 )]
 
@@ -599,6 +551,7 @@ stream = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 5 )
+scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="Sprite"]

@@ -8,6 +8,7 @@ export(Dictionary) var initialIdlingActionsWeights = {
 	"IdlingBubble": 1.0,
 	"IdlingShoot": 1.0
 }
+export (float) var shipAppearingTime = 1.0
 
 var idlingActionsWeights: WeightedItems
 
@@ -27,7 +28,11 @@ func _ready():
 func _getNextState(delta: float) -> String:
 	match (state):
 		"Appearing":
-			return _ifAnimationFinishedGoToState("Descending")
+			var appearingState = getState(state)
+			if appearingState.stateTime >= shipAppearingTime:
+				return "Descending"
+			else:
+				return NO_STATE
 		"Descending":
 			var collisionState = _getLatestAnyCollisionState()
 			if (collisionState != NO_STATE):
