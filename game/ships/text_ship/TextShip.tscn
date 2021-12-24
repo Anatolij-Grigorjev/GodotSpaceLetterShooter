@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://ships/text_ship/explode_ship.wav" type="AudioStream" id=1]
 [ext_resource path="res://ships/text_ship/ship_fly.wav" type="AudioStream" id=2]
@@ -10,10 +10,10 @@
 [ext_resource path="res://ships/text_ship/ship_pickup_text.wav" type="AudioStream" id=8]
 [ext_resource path="res://ships/text_ship/DieState.gd" type="Script" id=9]
 [ext_resource path="res://ships/text_ship/TextShipStateMachine.gd" type="Script" id=10]
-[ext_resource path="res://ships/text_ship/HitState.gd" type="Script" id=11]
 [ext_resource path="res://ships/text_ship/DescendingState.tscn" type="PackedScene" id=12]
 [ext_resource path="res://components/StateLabel.tscn" type="PackedScene" id=13]
 [ext_resource path="res://ships/text_ship/AppearingState.gd" type="Script" id=14]
+[ext_resource path="res://ships/text_ship/HitByShotState.gd" type="Script" id=15]
 [ext_resource path="res://ships/text_ship/target/Target.tscn" type="PackedScene" id=16]
 [ext_resource path="res://ships/text_ship/ReachedFinishState.gd" type="Script" id=18]
 
@@ -44,7 +44,7 @@ orbit_velocity_random = 0.0
 scale_curve = SubResource( 2 )
 color = Color( 0.839216, 0.960784, 0.0313726, 1 )
 
-[sub_resource type="ShaderMaterial" id=5]
+[sub_resource type="ShaderMaterial" id=18]
 
 [sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0, 0, 0, 1 )
@@ -288,36 +288,24 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 0.819608, 0.0666667, 0.0666667, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:position")
+tracks/1/path = NodePath("ExplosionsBattery/AudioStreamPlayer:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( -9.1981, -6.78942 ), Vector2( -1.35657, -17.3778 ), Vector2( 10.2032, -24.5055 ), Vector2( 10.9683, -19.0962 ), Vector2( 8.3343, -5.34771 ), Vector2( 0, 0 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("ExplosionsBattery/AudioStreamPlayer:playing")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
 }
-tracks/3/type = "method"
-tracks/3/path = NodePath("TextShipStateMachine/Hit")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
+tracks/2/type = "method"
+tracks/2/path = NodePath("TextShipStateMachine/Hit")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
 "times": PoolRealArray( 0.2 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
@@ -325,8 +313,20 @@ tracks/3/keys = {
 "method": "scoreShipHitPoints"
 } ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:material:shader")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ null ]
+}
 tracks/4/type = "value"
-tracks/4/path = NodePath("Sprite:material:shader")
+tracks/4/path = NodePath("Sprite/Nose/ShotSprite:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -335,10 +335,10 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ null ]
+"values": [ false ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Sprite/Nose/ShotSprite:visible")
+tracks/5/path = NodePath("Sprite/Nose:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -348,34 +348,6 @@ tracks/5/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("Sprite/Nose:visible")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-
-[sub_resource type="Animation" id=12]
-length = 0.45
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( -12.8323, -14.8655 ), Vector2( -9.43268, -31.9148 ), Vector2( 3.33854, -32.5816 ), Vector2( 17.2273, -20.7114 ), Vector2( 10.3533, -7.97244 ), Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=13]
@@ -502,14 +474,7 @@ script = ExtResource( 14 )
 [node name="Idling" parent="TextShipStateMachine" instance=ExtResource( 6 )]
 
 [node name="Hit" type="Node" parent="TextShipStateMachine"]
-script = ExtResource( 11 )
-animatorPath = NodePath("../../AnimationPlayer")
-animationName = "hit"
-
-[node name="Miss" type="Node" parent="TextShipStateMachine"]
-script = ExtResource( 11 )
-animatorPath = NodePath("../../AnimationPlayer")
-animationName = "miss"
+script = ExtResource( 15 )
 
 [node name="Die" type="Node" parent="TextShipStateMachine"]
 script = ExtResource( 9 )
@@ -550,8 +515,7 @@ process_material = SubResource( 4 )
 stream = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-material = SubResource( 5 )
-scale = Vector2( 1e-05, 1e-05 )
+material = SubResource( 18 )
 texture = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="Sprite"]
@@ -600,7 +564,6 @@ anims/appear = SubResource( 8 )
 anims/collide_ship = SubResource( 9 )
 anims/die = SubResource( 10 )
 anims/hit = SubResource( 11 )
-anims/miss = SubResource( 12 )
 anims/pickup_text = SubResource( 13 )
 anims/reached_finish = SubResource( 14 )
 

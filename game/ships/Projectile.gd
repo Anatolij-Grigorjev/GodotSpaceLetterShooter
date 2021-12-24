@@ -13,7 +13,7 @@ var fireDirection: Vector2 = Vector2.ZERO
 
 onready var sprite: Sprite = $Sprite
 onready var label: Label = $Label
-onready var area: RigidBody2D = $RigidBody2D
+onready var ownBody: RigidBody2D = $RigidBody2D
 
 
 var hadCollision: bool = false
@@ -30,7 +30,7 @@ func _process(delta):
 
 func _onBodyEntered(otherBody: Node):
 	hadCollision = true
-	var areaOwner: Node2D = area.get_parent()
+	var areaOwner: Node2D = ownBody.get_parent()
 	if (
 		areaOwner.is_in_group("projectile")
 		or areaOwner.is_in_group("bubble")

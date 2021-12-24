@@ -33,6 +33,7 @@ onready var bodyArea: RigidBody2D = $RigidBody2D
 
 
 var shipHasShield: bool = false
+var bodySize: Vector2
 
 
 var actionWeights := {}
@@ -47,6 +48,9 @@ func _ready():
 	#set FSM idling weights
 	for action in actionWeights:
 		fsm.idlingActionsWeights.setItemWeight(action, actionWeights[action])
+		
+	var colliderRadius = bodyArea.get_node("CollisionShape2D").shape.radius
+	bodySize = Vector2(colliderRadius * 2, colliderRadius * 2)
 	
 	
 

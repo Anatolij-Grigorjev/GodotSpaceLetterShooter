@@ -15,7 +15,6 @@ var idlingActionsWeights: WeightedItems
 var lastCollidedProjectileCell: SingleReadVar = SingleReadVar.new(null)
 var lastCollidedShipCell: SingleReadVar = SingleReadVar.new(null)
 var shipReachedFinishCell: SingleReadVar = SingleReadVar.new(false)
-var lastCollisionPositionCell: SingleReadVar = SingleReadVar.new(null)
 
 
 func _ready():
@@ -51,9 +50,16 @@ func _getNextState(delta: float) -> String:
 			else:
 				return NO_STATE
 		"Hit":
-			return _ifAnimationFinishedGoToState("Descending")
-		"Miss":
-			return _ifAnimationFinishedGoToState(previousState)
+			var hitState = getState("Hit")
+			if hitState.stateTime < hitState.hitRecoveryTime:
+				return NO_STATE
+			if not hitState.shotPayloadWasMatch:
+				return "Idling"
+			else:
+				if entity.currentText.length() <= 0:
+					return "Die"
+				else:
+					return "Descending"
 		"CollideShip":
 			return NO_STATE
 		"ReachedFinish":
@@ -78,9 +84,7 @@ func _onBodyEntered(area: Node):
 		lastCollidedProjectileCell.write(areaOwner)
 	if (areaOwner.is_in_group("shooter")):
 		lastCollidedShipCell.write(areaOwner)
-	var collisionPoint = Utils.getRigidBodyCollisionPoint(entity.bodyArea)
-	lastCollisionPositionCell.write(collisionPoint)
-	print("COLLISION_POINT: %s" % collisionPoint)
+	getState("Hit").setCollisionShotProperties(areaOwner)
 	#TODO: make this condition work with bodies
 	if(area.is_in_group("textShipFinish")):
 		shipReachedFinishCell.write(true)
@@ -89,19 +93,7 @@ func _onBodyEntered(area: Node):
 func _getProjectileAttemptedHitState(projectile: Node2D) -> String:
 	if not is_instance_valid(projectile):
 		return NO_STATE
-	var payload: String = projectile.getText()
-	if not entity.projectileHitText(projectile):
-		getState("Miss").hitChars = payload.length()
-		getState("Miss").hitPosition = entity.to_local(lastCollisionPositionCell.readAndReset())
-		return "Miss"
-	if (entity.currentText.length() > payload.length()):
-		getState("Hit").hitChars = payload.length()
-		getState("Hit").hitPosition = entity.to_local(lastCollisionPositionCell.readAndReset())
-		return "Hit"
-	else: 
-		get_node("Die").finalShotLettersNum = entity.currentText.length()
-		getState("Die").hitPosition = entity.to_local(lastCollisionPositionCell.readAndReset())
-		return "Die"
+	return "Hit"
 		
 		
 func _getShipAttemptedCollisionState(ship: Node2D) -> String:
