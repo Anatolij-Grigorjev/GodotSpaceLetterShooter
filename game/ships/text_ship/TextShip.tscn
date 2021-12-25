@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://ships/text_ship/explode_ship.wav" type="AudioStream" id=1]
 [ext_resource path="res://ships/text_ship/ship_fly.wav" type="AudioStream" id=2]
@@ -44,7 +44,7 @@ orbit_velocity_random = 0.0
 scale_curve = SubResource( 2 )
 color = Color( 0.839216, 0.960784, 0.0313726, 1 )
 
-[sub_resource type="ShaderMaterial" id=18]
+[sub_resource type="ShaderMaterial" id=20]
 
 [sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0, 0, 0, 1 )
@@ -112,36 +112,24 @@ tracks/2/keys = {
 length = 1.5
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/path = NodePath("Sprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.35 ),
-"transitions": PoolRealArray( 0.203063, 0.406126 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 0.819608, 0.0666667, 0.0666667, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 12.8093, 8.15138 ), Vector2( 18.6318, -4.65794 ), Vector2( 2.32903, -8.15139 ), Vector2( -11.6448, 2.9112 ), Vector2( -6.40461, 17.4673 ), Vector2( 0, 0 ), Vector2( -12.944, -11.1273 ), Vector2( 12.4898, -24.9797 ), Vector2( -9.53768, -7.72099 ), Vector2( 17.0316, 17.4858 ), Vector2( -21.3463, 16.5774 ), Vector2( -21.8004, -20.4379 ), Vector2( 10.2189, -20.4379 ), Vector2( -2.27088, 1.36253 ), Vector2( 15.6691, 9.31061 ), Vector2( -17.4858, 7.26682 ), Vector2( -17.7129, -15.2149 ), Vector2( 7.72097, -15.442 ), Vector2( -5.67722, -2.04379 ), Vector2( 0, 0 ) ]
 }
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
 "times": PoolRealArray( 1.5 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
@@ -149,121 +137,121 @@ tracks/2/keys = {
 "method": "queue_free"
 } ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("ExplosionsBattery/CPUParticles2D:emitting")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
+tracks/2/type = "value"
+tracks/2/path = NodePath("ExplosionsBattery/CPUParticles2D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
 "times": PoolRealArray( 0.95 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
 }
-tracks/4/type = "value"
-tracks/4/path = NodePath("ExplosionsBattery/CPUParticles2D2:emitting")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
+tracks/3/type = "value"
+tracks/3/path = NodePath("ExplosionsBattery/CPUParticles2D2:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
 "times": PoolRealArray( 0.2 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
 }
-tracks/5/type = "value"
-tracks/5/path = NodePath("ExplosionsBattery/CPUParticles2D4:emitting")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
+tracks/4/type = "value"
+tracks/4/path = NodePath("ExplosionsBattery/CPUParticles2D4:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
 "times": PoolRealArray( 0.45 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
 }
-tracks/6/type = "value"
-tracks/6/path = NodePath("ExplosionsBattery/CPUParticles2D3:emitting")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
+tracks/5/type = "value"
+tracks/5/path = NodePath("ExplosionsBattery/CPUParticles2D3:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
 "times": PoolRealArray( 0.65 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0.8, 1 ),
+"transitions": PoolRealArray( 1, 0.164939 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0, 0 ) ]
+}
 tracks/7/type = "value"
-tracks/7/path = NodePath("Sprite:scale")
+tracks/7/path = NodePath("Sprite:rotation_degrees")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
 "times": PoolRealArray( 0.8, 1 ),
-"transitions": PoolRealArray( 1, 0.164939 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 0, 0 ) ]
+"values": [ 0.0, 360.0 ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("Sprite:rotation_degrees")
+tracks/8/path = NodePath("ExplosionsBattery/AudioStreamPlayer:playing")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"times": PoolRealArray( 0.8, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.0, 360.0 ]
-}
-tracks/9/type = "value"
-tracks/9/path = NodePath("ExplosionsBattery/AudioStreamPlayer:playing")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/keys = {
 "times": PoolRealArray( 0.15, 0.9 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, true ]
 }
-tracks/10/type = "value"
-tracks/10/path = NodePath("ExplosionsBattery/AudioStreamPlayer2:playing")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/keys = {
+tracks/9/type = "value"
+tracks/9/path = NodePath("ExplosionsBattery/AudioStreamPlayer2:playing")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
 "times": PoolRealArray( 0.4 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
 }
-tracks/11/type = "value"
-tracks/11/path = NodePath("ExplosionsBattery/AudioStreamPlayer3:playing")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/keys = {
+tracks/10/type = "value"
+tracks/10/path = NodePath("ExplosionsBattery/AudioStreamPlayer3:playing")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
 "times": PoolRealArray( 0.6 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
 }
-tracks/12/type = "method"
-tracks/12/path = NodePath("TextShipStateMachine/Die")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/keys = {
+tracks/11/type = "method"
+tracks/11/path = NodePath("TextShipStateMachine/Die")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
 "times": PoolRealArray( 0.9 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
@@ -282,10 +270,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15, 0.45 ),
-"transitions": PoolRealArray( 0.203063, 6.9644, 4.5948 ),
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 0.203063, 6.9644 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 0.819608, 0.0666667, 0.0666667, 1 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.819608, 0.0666667, 0.0666667, 1 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("ExplosionsBattery/AudioStreamPlayer:playing")
@@ -348,6 +336,23 @@ tracks/5/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
+}
+
+[sub_resource type="Animation" id=19]
+resource_name = "hit_recover"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 2.2974, 1 ),
+"update": 0,
+"values": [ Color( 0.819608, 0.0666667, 0.0666667, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=13]
@@ -515,7 +520,7 @@ process_material = SubResource( 4 )
 stream = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-material = SubResource( 18 )
+material = SubResource( 20 )
 texture = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="Sprite"]
@@ -564,6 +569,7 @@ anims/appear = SubResource( 8 )
 anims/collide_ship = SubResource( 9 )
 anims/die = SubResource( 10 )
 anims/hit = SubResource( 11 )
+anims/hit_recover = SubResource( 19 )
 anims/pickup_text = SubResource( 13 )
 anims/reached_finish = SubResource( 14 )
 

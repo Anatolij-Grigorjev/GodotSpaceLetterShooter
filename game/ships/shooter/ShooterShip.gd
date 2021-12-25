@@ -22,7 +22,7 @@ onready var tween: Tween = $Tween
 onready var sprite: AnimatedSprite = $Sprite
 onready var fsm: StateMachine = $ShooterShipStateMachine
 onready var invincibilityTimer: Timer = $InvincibilityTimer
-onready var bodyArea: Area2D = $Area2D
+onready var bodyArea: RigidBody2D = $RigidBody2D
 
 
 var chamber: String = ""

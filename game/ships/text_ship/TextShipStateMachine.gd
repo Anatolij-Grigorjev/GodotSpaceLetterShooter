@@ -84,6 +84,8 @@ func _onBodyEntered(area: Node):
 		lastCollidedProjectileCell.write(areaOwner)
 	if (areaOwner.is_in_group("shooter")):
 		lastCollidedShipCell.write(areaOwner)
+	#access to physics properties only exist during frame of collision
+	#so this is set immediately when handling signal
 	getState("Hit").setCollisionShotProperties(areaOwner)
 	#TODO: make this condition work with bodies
 	if(area.is_in_group("textShipFinish")):

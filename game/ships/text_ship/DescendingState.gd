@@ -36,6 +36,8 @@ func processState(delta: float):
 	
 func enterState(prevState: String):
 	.enterState(prevState)
+	if (prevState == "Hit"):
+		entity.anim.play("hit_recover")
 	if (segmentOver and not pathOver):
 		_startNextPathSegment()
 	else:
