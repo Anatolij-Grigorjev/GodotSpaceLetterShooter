@@ -4,6 +4,8 @@ class_name Appearing
 Define text ship behavior while it is first appearing onscreen
 """
 
+var shipAppearingTime: float = 1.0
+
 
 func processState(delta: float):
 	.processState(delta)

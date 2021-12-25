@@ -8,7 +8,6 @@ export(Dictionary) var initialIdlingActionsWeights = {
 	"IdlingBubble": 1.0,
 	"IdlingShoot": 1.0
 }
-export (float) var shipAppearingTime = 1.0
 
 var idlingActionsWeights: WeightedItems
 
@@ -28,7 +27,7 @@ func _getNextState(delta: float) -> String:
 	match (state):
 		"Appearing":
 			var appearingState = getState(state)
-			if appearingState.stateTime >= shipAppearingTime:
+			if appearingState.stateTime >= appearingState.shipAppearingTime:
 				return "Descending"
 			else:
 				return NO_STATE

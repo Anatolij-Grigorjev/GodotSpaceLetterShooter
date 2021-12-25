@@ -455,7 +455,6 @@ currentText = ":)"
 
 [node name="TextShipStateMachine" type="Node" parent="."]
 script = ExtResource( 10 )
-shipAppearingTime = 0.5
 
 [node name="Appearing" type="Node" parent="TextShipStateMachine"]
 script = ExtResource( 14 )
