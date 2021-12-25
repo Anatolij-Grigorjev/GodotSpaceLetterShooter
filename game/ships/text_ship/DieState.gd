@@ -1,4 +1,4 @@
-extends AnimationState
+extends State
 class_name DieState
 """
 State for text ship to dissapear because 
@@ -7,25 +7,31 @@ last label character was hit
 
 var entityText := ""
 var finalShotLettersNum: int = 0
-var hitPosition: Vector2
 
 
 func processState(delta: float):
-	if (animationFinished):
-		entity.emit_signal("textShipDestroyed", entityText)
-		entity.queue_free()
+	.processState(delta)
 	
 	
 func enterState(prevState: String):
 	.enterState(prevState)
+	entity.anim.play("die")
+	Utils.tryConnect(
+		entity.anim, "animation_finished", 
+		self, "_destroyShipObject"
+	)
+	
 	entity.bodyCollider().disabled = true
-	print("HIT_POSITION: %s" % hitPosition)
 	_hideVisibleProgressBars()
 	entity.emit_signal("shipHit", 0)
+	
+	#copy current ship text to later submit for points
 	entityText = str(entity.currentText)
+	
 	entity.currentText = ""
 	
-	
+
+#called by animation
 func scoreShipKillPoints():
 	var extraLettersNum := max(finalShotLettersNum - 1, 0)
 	var perLetterBonusPoints: int = entity.perLetterBonusPoints * extraLettersNum
@@ -40,3 +46,8 @@ func _hideVisibleProgressBars():
 	for progressBar in entityProgressBars:
 		if progressBar.visible:
 			progressBar.visible = false
+			
+			
+func _destroyShipObject(finishedAnimationName: String):
+	entity.emit_signal("textShipDestroyed", entityText)
+	entity.queue_free()

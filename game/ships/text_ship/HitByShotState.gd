@@ -6,7 +6,7 @@ If the shot payload matches the ship text this hit will reduce
 textship health. 
 """
 
-var hitRecoveryTime: float = 0.65
+var hitRecoveryTime: float = 0.45
 
 var hitPosition: Vector2
 var shotVelocity: Vector2
