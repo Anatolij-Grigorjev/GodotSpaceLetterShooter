@@ -45,10 +45,7 @@ orbit_velocity_random = 0.0
 scale_curve = SubResource( 2 )
 color = Color( 0.839216, 0.960784, 0.0313726, 1 )
 
-[sub_resource type="ShaderMaterial" id=20]
-shader = ExtResource( 11 )
-shader_param/modulate = Color( 0.819608, 0.0666667, 0.0666667, 1 )
-shader_param/mix_coef = 0.0
+[sub_resource type="ShaderMaterial" id=18]
 
 [sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0, 0, 0, 1 )
@@ -248,6 +245,42 @@ tracks/10/keys = {
 "args": [  ],
 "method": "scoreShipKillPoints"
 } ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Sprite:material:shader")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 11 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("Sprite:material:shader_param/modulate")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.819608, 0.0666667, 0.0666667, 1 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("Sprite:material:shader_param/mix_coef")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0.1, 0.2, 0.3, 0.35, 0.45, 0.55, 0.65 ),
+"transitions": PoolRealArray( 0.307786, 2.63902, 1, 0.378929, 2.2974, 0.287175, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0 ]
 }
 
 [sub_resource type="Animation" id=11]
@@ -502,8 +535,9 @@ process_material = SubResource( 4 )
 stream = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 0.875396, 0.35531, 0.35531, 1 )
-material = SubResource( 20 )
+material = SubResource( 18 )
+rotation = 6.28319
+scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="Sprite"]
