@@ -81,7 +81,7 @@ func _getHitSpinDirection() -> int:
 func _startHitSpinTween(spinDirection: int):
 	spriteTween.interpolate_property(
 		entity.sprite, "rotation_degrees", 
-		0, 360, 
+		0, spinDirection * 360, 
 		hitRecoveryTime, 
 		Tween.TRANS_EXPO, Tween.EASE_OUT
 	)

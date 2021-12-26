@@ -23,8 +23,6 @@ func processState(delta: float):
 	
 func enterState(prevState: String):
 	.enterState(prevState)
-	if (prevState == "Hit"):
-		entity.anim.play("hit_recover")
 	idlingOver = false
 	remainingIdleTime = idleTime
 	

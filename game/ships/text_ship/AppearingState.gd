@@ -14,7 +14,7 @@ func processState(delta: float):
 func enterState(prevState: String):
 	.enterState(prevState)
 	Animations.animPlayAnimationInTime(
-		entity.anim, "appear", fsm.shipAppearingTime)
+		entity.anim, "appear", shipAppearingTime)
 	_resetShipStartingValues()
 	
 	
