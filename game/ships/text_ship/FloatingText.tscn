@@ -3,7 +3,7 @@
 [ext_resource path="res://white_rect.png" type="Texture" id=1]
 [ext_resource path="res://ships/text_ship/FloatingText.gd" type="Script" id=2]
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 1 )
 border_width_left = 1
 border_width_top = 1
@@ -12,11 +12,10 @@ border_width_bottom = 1
 border_color = Color( 0.839216, 0.960784, 0.0313726, 1 )
 corner_detail = 5
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 11, 11 )
 
-[sub_resource type="Animation" id=2]
-resource_name = "appear"
+[sub_resource type="Animation" id=3]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite/Area2D/CollisionShape2D:disabled")
@@ -73,6 +72,7 @@ tracks/1/keys = {
 }
 
 [node name="FloatingText" type="Node2D"]
+position = Vector2( 0, 104.849 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -87,7 +87,7 @@ margin_left = -23.5
 margin_top = -24.0
 margin_right = 1.5
 margin_bottom = 2.0
-custom_styles/normal = SubResource( 5 )
+custom_styles/normal = SubResource( 1 )
 custom_colors/font_color = Color( 0.945098, 1, 0, 1 )
 custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
 text = "T"
@@ -105,13 +105,14 @@ collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Area2D"]
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "appear"
-anims/appear = SubResource( 2 )
+anims/appear = SubResource( 3 )
 anims/idling = SubResource( 4 )
 next/appear = "idling"
 
 [node name="Tween" type="Tween" parent="."]
-[connection signal="area_entered" from="Sprite/Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="area_entered" from="Sprite/Area2D" to="." method="_on_ship_body_entered"]
+[connection signal="body_entered" from="Sprite/Area2D" to="." method="_on_ship_body_entered"]

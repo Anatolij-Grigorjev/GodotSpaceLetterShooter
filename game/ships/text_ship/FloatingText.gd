@@ -26,7 +26,7 @@ func setText(newText: String):
 		$Sprite/Label.text = text
 
 
-func _on_Area2D_area_entered(area):
+func _on_ship_body_entered(area):
 	var areaOwner = area.owner
 	if areaOwner.is_in_group("text_ship"):
 		areaOwner.collectFloatingText(text)
