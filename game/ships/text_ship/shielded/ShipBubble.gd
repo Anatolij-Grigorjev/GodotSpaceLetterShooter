@@ -60,7 +60,7 @@ func _adjustHitsBarRemainingShieldHits(hitsRemaining: int):
 		$HitsBar.visible = false
 
 
-func _on_Area2D_area_entered(area: Area2D):
+func _onShipBodyAreaEnter(area):
 	var areaOwner: Node2D = area.get_parent()
 	if (areaOwner.is_in_group("projectile")):
 		var collideProjectile = areaOwner
