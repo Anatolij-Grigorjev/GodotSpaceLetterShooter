@@ -76,13 +76,12 @@ func onSceneLetterTyped(letter: String):
 		getState(state).letterTyped(letter)
 	
 		
-func _on_Area2D_area_entered(area: Area2D):
-	var areaOwner: Node2D = area.get_parent()
+func _onShapeEntered(shape):
 	if (
-		areaOwner.is_in_group('projectile') 
+		shape.is_in_group('projectile') 
 		and entity.invincibilityTimer.is_stopped()
 	):
-		lastHitShotCell.write(areaOwner)
+		lastHitShotCell.write(shape)
 	
 	
 func _startInvincibility():

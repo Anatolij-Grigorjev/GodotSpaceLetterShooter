@@ -30,13 +30,15 @@ func _process(delta):
 
 func _onBodyEntered(otherBody: Node):
 	hadCollision = true
-	var areaOwner: Node2D = ownBody.get_parent()
+	var areaOwner: Node2D = otherBody.get_parent()
 	if (
 		areaOwner.is_in_group("projectile")
 		or areaOwner.is_in_group("bubble")
 	):
 		speed = 0.0
 		emit_signal("projectileDestroyed", getText())
+	if (areaOwner.is_in_group("shooter")):
+		areaOwner.fsm._onShapeEntered(self)
 	$AnimationPlayer.play("collide")
 
 

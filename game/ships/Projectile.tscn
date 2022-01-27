@@ -197,7 +197,6 @@ shape = SubResource( 2 )
 anims/collide = SubResource( 3 )
 
 [node name="ExplosionBlueWhite" type="Particles2D" parent="."]
-emitting = false
 amount = 50
 lifetime = 0.4
 one_shot = true
@@ -210,7 +209,6 @@ __meta__ = {
 }
 
 [node name="ExplosionWhiteBlue" type="Particles2D" parent="."]
-emitting = false
 amount = 50
 lifetime = 0.4
 one_shot = true
