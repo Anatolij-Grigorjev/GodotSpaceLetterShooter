@@ -74,7 +74,6 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-sceneName = "<SCENE NAME>"
 
 [node name="Panel" type="Panel" parent="."]
 self_modulate = Color( 0, 0, 0, 0 )

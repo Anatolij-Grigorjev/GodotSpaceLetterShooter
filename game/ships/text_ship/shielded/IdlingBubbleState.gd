@@ -12,9 +12,11 @@ func processState(delta: float):
 	
 func enterState(prevState: String):
 	.enterState(prevState)
-	entity.bubble.anim.play("show")
+	if (entity.shipHasShield):
+		entity.bubble.anim.play("show")
 	
 	
 func exitState(nextState: String):
 	.exitState(nextState)
-	entity.bubble.anim.play("hide")
+	if (entity.shipHasShield):
+		entity.bubble.anim.play("hide")

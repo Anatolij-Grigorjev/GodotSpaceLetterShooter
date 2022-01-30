@@ -15,6 +15,7 @@ onready var hitsBar: ProgressBar = $HitsBar
 
 
 var bubbleHit: bool = false
+var hasBurst: bool = false
 
 var bubbleMaxHits: int
 # by default full shield is used
@@ -86,6 +87,7 @@ func _hitBubble(hitsReceived: int):
 		_updateBubbleColor()
 	else:
 		_bubbleHitForAnimation("burst")
+		hasBurst = true
 		emit_signal("bubbleBurst")
 	
 	

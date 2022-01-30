@@ -320,11 +320,11 @@ anim_speed = 1.0
 [node name="ShipBubble" type="Node2D" groups=[
 "bubble",
 ]]
+scale = Vector2( 1e-05, 1e-05 )
 script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0.45098 )
-position = Vector2( -1.52588e-05, 0.379089 )
 texture = ExtResource( 1 )
 vframes = 2
 hframes = 4
@@ -369,7 +369,6 @@ rect_rotation = -90.0
 
 [node name="Particles2D" type="Particles2D" parent="."]
 material = SubResource( 7 )
-emitting = false
 amount = 45
 lifetime = 0.5
 one_shot = true

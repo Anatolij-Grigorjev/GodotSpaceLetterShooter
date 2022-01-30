@@ -73,7 +73,7 @@ func prepare(text: String, startPosition: Vector2, shipPath: Array, limiters: Sc
 	shipHasShield = limiters.shieldHitPoints > 0
 	var shipWillShoot := limiters.shootInclination > 0
 	actionWeights = {
-		"Idling": 1,
+		"Idling": (0 if shipHasShield else 1),
 		"IdlingBubble": (1 if shipHasShield else 0),
 		"IdlingShoot": limiters.shootInclination
 	}

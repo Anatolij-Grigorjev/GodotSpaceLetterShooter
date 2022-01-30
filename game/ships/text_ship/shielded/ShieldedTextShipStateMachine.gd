@@ -3,13 +3,13 @@ class_name ShieldedTextShipStateMachine
 """
 additional text ship FSM actions and logic for shield useage
 """
-const POSITIVE_NUM = 5
+const ANY_POSITIVE_NUM = 5
 
 
 
 func _ready():
 	Utils.tryConnect(entity.get_node("Sprite/ShipBubble"), "bubbleBurst", self, "_onEntityBubbleBurst")
-	Utils.tryConnect(entity.get_node("Sprite/ShipBubble"), "bubbleBurst", Scenes.activeScene, "_onTextShipHit", [POSITIVE_NUM])
+	Utils.tryConnect(entity.get_node("Sprite/ShipBubble"), "bubbleBurst", Scenes.activeScene, "_onTextShipHit", [ANY_POSITIVE_NUM])
 
 
 func _getNextState(delta: float) -> String:
