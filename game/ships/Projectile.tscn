@@ -90,6 +90,18 @@ tracks/5/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 0.217638 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 2, 2 ) ]
+}
 
 [sub_resource type="Gradient" id=4]
 offsets = PoolRealArray( 0.0185185, 0.988889 )
@@ -197,6 +209,8 @@ shape = SubResource( 2 )
 anims/collide = SubResource( 3 )
 
 [node name="ExplosionBlueWhite" type="Particles2D" parent="."]
+scale = Vector2( 2, 2 )
+emitting = false
 amount = 50
 lifetime = 0.4
 one_shot = true
@@ -209,6 +223,8 @@ __meta__ = {
 }
 
 [node name="ExplosionWhiteBlue" type="Particles2D" parent="."]
+scale = Vector2( 2, 2 )
+emitting = false
 amount = 50
 lifetime = 0.4
 one_shot = true
