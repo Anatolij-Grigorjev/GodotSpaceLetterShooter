@@ -17,6 +17,8 @@ var spriteTween: Tween
 
 var shotPayloadWasMatch: bool = false
 
+var preHitText: String = ""
+
 
 func _ready():
 	spriteTween = Tween.new()
@@ -39,6 +41,10 @@ func processState(delta: float):
 func enterState(prevState: String):
 	.enterState(prevState)
 	_assertColliderValuesSet()
+	
+	#store how much text there was before hit for stats
+	preHitText = str(entity.currentText)
+	
 	if entity.currentText.begins_with(shotPayload):
 		shotPayloadWasMatch = true
 		Animations.animPlayAnimationInTime(entity.anim, "hit", hitRecoveryTime)

@@ -45,7 +45,7 @@ orbit_velocity_random = 0.0
 scale_curve = SubResource( 2 )
 color = Color( 0.839216, 0.960784, 0.0313726, 1 )
 
-[sub_resource type="ShaderMaterial" id=18]
+[sub_resource type="ShaderMaterial" id=5]
 
 [sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0, 0, 0, 1 )
@@ -373,7 +373,7 @@ tracks/6/keys = {
 "values": [ 0.0, 1.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=12]
 resource_name = "pickup_text"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:material:shader")
@@ -424,7 +424,7 @@ tracks/3/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=13]
 length = 0.5
 step = 0.05
 tracks/0/type = "value"
@@ -466,15 +466,15 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Curve" id=15]
+[sub_resource type="Curve" id=14]
 max_value = 200.0
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.425714, 103.765 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Curve" id=16]
+[sub_resource type="Curve" id=15]
 max_value = 100.0
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.488571, 49.2041 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Curve" id=17]
+[sub_resource type="Curve" id=16]
 max_value = 4.0
 _data = [ Vector2( 0, 4 ), 0.0, 0.0, 0, 0, Vector2( 0.471429, 1.19352 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
@@ -535,7 +535,7 @@ process_material = SubResource( 4 )
 stream = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-material = SubResource( 18 )
+material = SubResource( 5 )
 rotation = 6.28319
 scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 3 )
@@ -586,8 +586,8 @@ anims/appear = SubResource( 8 )
 anims/collide_ship = SubResource( 9 )
 anims/die = SubResource( 10 )
 anims/hit = SubResource( 11 )
-anims/pickup_text = SubResource( 13 )
-anims/reached_finish = SubResource( 14 )
+anims/pickup_text = SubResource( 12 )
+anims/reached_finish = SubResource( 13 )
 
 [node name="StateLabel" parent="." instance=ExtResource( 13 )]
 margin_left = -61.2032
@@ -614,9 +614,9 @@ initial_velocity = 250.0
 initial_velocity_random = 0.5
 angular_velocity = 45.0
 angular_velocity_random = 0.5
-linear_accel_curve = SubResource( 15 )
-damping_curve = SubResource( 16 )
-scale_amount_curve = SubResource( 17 )
+linear_accel_curve = SubResource( 14 )
+damping_curve = SubResource( 15 )
+scale_amount_curve = SubResource( 16 )
 color = Color( 0.819608, 0.0666667, 0.0666667, 1 )
 anim_speed = 1.0
 __meta__ = {
@@ -638,9 +638,9 @@ initial_velocity = 250.0
 initial_velocity_random = 0.5
 angular_velocity = 45.0
 angular_velocity_random = 0.5
-linear_accel_curve = SubResource( 15 )
-damping_curve = SubResource( 16 )
-scale_amount_curve = SubResource( 17 )
+linear_accel_curve = SubResource( 14 )
+damping_curve = SubResource( 15 )
+scale_amount_curve = SubResource( 16 )
 color = Color( 0.819608, 0.0666667, 0.0666667, 1 )
 anim_speed = 1.0
 __meta__ = {
@@ -662,9 +662,9 @@ initial_velocity = 250.0
 initial_velocity_random = 0.5
 angular_velocity = 45.0
 angular_velocity_random = 0.5
-linear_accel_curve = SubResource( 15 )
-damping_curve = SubResource( 16 )
-scale_amount_curve = SubResource( 17 )
+linear_accel_curve = SubResource( 14 )
+damping_curve = SubResource( 15 )
+scale_amount_curve = SubResource( 16 )
 color = Color( 0.819608, 0.0666667, 0.0666667, 1 )
 anim_speed = 1.0
 __meta__ = {
@@ -686,9 +686,9 @@ initial_velocity = 250.0
 initial_velocity_random = 0.5
 angular_velocity = 45.0
 angular_velocity_random = 0.5
-linear_accel_curve = SubResource( 15 )
-damping_curve = SubResource( 16 )
-scale_amount_curve = SubResource( 17 )
+linear_accel_curve = SubResource( 14 )
+damping_curve = SubResource( 15 )
+scale_amount_curve = SubResource( 16 )
 color = Color( 0.819608, 0.0666667, 0.0666667, 1 )
 anim_speed = 1.0
 __meta__ = {

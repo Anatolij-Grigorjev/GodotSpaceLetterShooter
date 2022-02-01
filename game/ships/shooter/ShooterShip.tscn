@@ -670,7 +670,7 @@ script = ExtResource( 16 )
 material = SubResource( 1 )
 frames = SubResource( 6 )
 animation = "pumping"
-frame = 2
+frame = 3
 playing = true
 
 [node name="ShotPosition" type="Position2D" parent="Sprite"]
@@ -754,7 +754,6 @@ stream = ExtResource( 10 )
 position = Vector2( -0.0437737, -37.1035 )
 scale = Vector2( 0.66, 0.66 )
 frames = SubResource( 23 )
-frame = 2
 playing = true
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]

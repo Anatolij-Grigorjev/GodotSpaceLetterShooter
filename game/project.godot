@@ -44,11 +44,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ships/text_ship/HitByShotState.gd"
 }, {
-"base": "AnimationState",
-"class": "HitState",
-"language": "GDScript",
-"path": "res://ships/text_ship/HitState.gd"
-}, {
 "base": "IdlingState",
 "class": "IdlingBubbleState",
 "language": "GDScript",
@@ -252,7 +247,6 @@ _global_script_class_icons={
 "DieState": "",
 "FastDescendingState": "",
 "HitByShotState": "",
-"HitState": "",
 "IdlingBubbleState": "",
 "IdlingShootState": "",
 "IdlingState": "",

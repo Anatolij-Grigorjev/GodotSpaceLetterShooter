@@ -25,8 +25,9 @@ func enterState(prevState: String):
 	_hideVisibleProgressBars()
 	entity.emit_signal("shipHit", 0)
 	
-	#copy current ship text to later submit for points
-	entityText = str(entity.currentText)
+	#restore text at last hit
+	if prevState == "Hit":
+		entityText = str(fsm.getState(prevState).preHitText)
 	
 	entity.currentText = ""
 	
