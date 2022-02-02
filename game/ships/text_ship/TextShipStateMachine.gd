@@ -53,7 +53,7 @@ func _getNextState(delta: float) -> String:
 			if hitState.stateTime < hitState.hitRecoveryTime:
 				return NO_STATE
 			if not hitState.shotPayloadWasMatch:
-				return "Idling"
+				return previousState
 			else:
 				if entity.currentText.length() <= 0:
 					return "Die"
