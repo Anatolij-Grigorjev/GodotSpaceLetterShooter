@@ -37,9 +37,9 @@ func exitState(nextState: String):
 	
 	
 func tryFireAt(target):
-	if (not entity.chamber.empty() and is_instance_valid(target)):
+	if (not entity.chamber.empty()):
 		fireChambered(target)
-		if "isTargeted" in target:
+		if is_instance_valid(target) and "isTargeted" in target:
 			target.lockTarget()
 	else:
 		missFire()
@@ -49,7 +49,11 @@ func fireChambered(shootable):
 	entity.anim.play("shoot")
 	var projectile = entity.projectileScene.instance()
 	projectile.global_position = entity.shotPosition.global_position
-	projectile.fireDirection = entity.global_position.direction_to(shootable.global_position)
+	if is_instance_valid(shootable):
+		projectile.fireDirection = entity.global_position.direction_to(shootable.global_position)
+	else:
+		#if no target shoot in current direction
+		projectile.fireDirection = entity.global_position.direction_to(entity.shotPosition.global_position)
 	_configureShooterShipProjectile(projectile)
 	projectile.get_node("Label").text = entity.chamber
 	entity.emit_signal("shotFired", projectile)
