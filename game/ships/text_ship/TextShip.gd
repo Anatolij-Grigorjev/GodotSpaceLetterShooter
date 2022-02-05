@@ -92,6 +92,10 @@ func getCurrentText() -> String:
 		return $Sprite/Label.text
 	else:
 		return currentText
+
+
+func getCurrentDescendPath() -> Array:
+	return $TextShipStateMachine/Descending.descendPath
 		
 		
 func collectFloatingText(text: String):

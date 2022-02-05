@@ -19,10 +19,6 @@ func _getNextState(delta: float) -> String:
 		
 	match(state):
 		"IdlingBubble":
-			var collisionState = _getNextNonProjectileCollisionsState()
-			if (collisionState != NO_STATE):
-				return collisionState
-				
 			var idlingBubbleState = getState(state)
 			if (idlingBubbleState.idlingOver):
 				return "Descending"
@@ -34,6 +30,8 @@ func _getNextState(delta: float) -> String:
 
 func _onEntityBubbleBurst():
 	entity.shipHasShield = false
+	entity.anim.play("noshield_spooked")
+	yield(entity.anim, "animation_finished")
 	idlingActionsWeights.disableItem("IdlingBubble")
 	if idlingActionsWeights.isItemDisabled("Idling"):
 		idlingActionsWeights.setItemWeight("Idling", 1)
