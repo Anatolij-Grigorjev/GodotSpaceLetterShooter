@@ -101,6 +101,6 @@ func _reduceShipTextByShotPayload():
 
 func _assertColliderValuesSet():
 	assert(not Utils.isEmptyString(shotPayload))
-	assert(not hitPosition == Vector2.ZERO)
-	assert(not shotVelocity == Vector2.ZERO)
+	assert(is_instance_valid(hitPosition))
+	assert(is_instance_valid(shotVelocity))
 	
