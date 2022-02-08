@@ -6,10 +6,12 @@ If the shot payload matches the ship text this hit will reduce
 textship health. 
 """
 
+const UNSET_VECTOR = Vector2(-99999, -99999)
+
 var hitRecoveryTime: float = 0.45
 
-var hitPosition: Vector2
-var shotVelocity: Vector2
+var hitPosition: Vector2 = UNSET_VECTOR
+var shotVelocity: Vector2 = UNSET_VECTOR
 var shotPayload: String
 
 
@@ -69,8 +71,8 @@ func _getShotRigidBodyDirectState(shot: Node2D) -> Physics2DDirectBodyState:
 	
 	
 func _clearShotValues():
-	hitPosition = Vector2.ZERO
-	shotVelocity = Vector2.ZERO
+	hitPosition = UNSET_VECTOR
+	shotVelocity = UNSET_VECTOR
 	shotPayload = ""
 	shotPayloadWasMatch = false
 	
@@ -101,6 +103,6 @@ func _reduceShipTextByShotPayload():
 
 func _assertColliderValuesSet():
 	assert(not Utils.isEmptyString(shotPayload))
-	assert(is_instance_valid(hitPosition))
-	assert(is_instance_valid(shotVelocity))
+	assert(hitPosition != UNSET_VECTOR)
+	assert(shotVelocity != UNSET_VECTOR)
 	
