@@ -8,14 +8,14 @@ export(Vector2) var lettersPerShotFromTo: Vector2 = Vector2(2, 3)
 
 onready var cooldownBar = get_node("../CooldownBar")
 
-var lettersPerShotRange: IntRange
+var lettersPerShotRange: NumRange
 
 func _ready():
 	Utils.tryConnect(getState("IdlingShoot"), "textShipLettersShot", self, "_checkShipAllowedKeepShooting")
 	Utils.tryConnect(entity, "shipHit", self, "_checkShipAllowedKeepShooting")
 	Utils.tryConnect(entity, "shipPickedUpText", self, "_checkHasShootableText")
 	cooldownBar.cooldownTime = shootingCooldown
-	lettersPerShotRange = IntRange.new(lettersPerShotFromTo.x, lettersPerShotFromTo.y)
+	lettersPerShotRange = NumRange.new(lettersPerShotFromTo.x, lettersPerShotFromTo.y)
 	
 	
 func _getNextState(delta: float) -> String:

@@ -43,8 +43,8 @@ func _configureTextShipProjectile(projectile: Node2D):
 	
 	
 func _getNumAllowedProjectileLetters() -> int:
-	var expectedRange: IntRange = fsm.lettersPerShotRange as IntRange
-	var expectedNum = round(rand_range(expectedRange.minVal, expectedRange.maxVal))
+	var expectedRange: NumRange = fsm.lettersPerShotRange
+	var expectedNum = expectedRange.random()
 	
 	return int(clamp(expectedNum, expectedRange.minVal, entity.currentText.length() - 1))
 	
