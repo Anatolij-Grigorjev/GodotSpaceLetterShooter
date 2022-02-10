@@ -19,7 +19,7 @@ func beginShake(duration = 0.2, frequency = 15, amplitude = 10, priority = 1):
 
 
 func _newShake():
-	var randOffset = Utils.rand_point(amplitude, amplitude)
+	var randOffset = Utils.randomPoint(amplitude, amplitude)
 	_startInterpolateCameraOffset(randOffset)
 
 

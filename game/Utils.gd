@@ -146,11 +146,10 @@ static func file2JSON(filePath: String):
 Generate random Vector2 with coordinates between
 (-range_x;-range_y) and (range_x;range_y)
 """
-static func rand_point(range_x: float, range_y: float) -> Vector2:
-	return Vector2(
-		rand_range(-range_x, range_x),
-		rand_range(-range_y, range_y)
-	)
+static func randomPoint(maxX: float, maxY: float) -> Vector2:
+	var rangeX = NumRange.new(-maxX, maxX)
+	var rangeyY = NumRange.new(-maxY, maxY)
+	return Vector2(rangeX.random(), rangeyY.random())
 
 
 """
