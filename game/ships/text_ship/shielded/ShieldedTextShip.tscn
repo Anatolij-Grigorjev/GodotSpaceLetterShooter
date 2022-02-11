@@ -1,12 +1,16 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://ships/text_ship/TextShip.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ships/text_ship/shielded/ShipBubble.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ships/text_ship/shielded/enemy_ship_shielded.png" type="Texture" id=3]
 [ext_resource path="res://ships/text_ship/shielded/IdlingBubbleState.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ships/text_ship/shielded/ShieldedTextShipStateMachine.gd" type="Script" id=5]
+[ext_resource path="res://shaders/sprite_color.shader" type="Shader" id=6]
 
 [sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 6 )
+shader_param/modulate = Color( 0.819608, 0.0666667, 0.0666667, 1 )
+shader_param/mix_coef = 0.0
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0, 0, 0, 1 )
@@ -15,39 +19,27 @@ corner_detail = 5
 
 [sub_resource type="Animation" id=3]
 resource_name = "noshield_spooked"
-length = 0.5
+length = 0.45
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("RigidBody2D/CollisionShape2D:disabled")
+tracks/0/path = NodePath("Sprite:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
+"times": PoolRealArray( 0, 0.15, 0.4, 0.45 ),
+"transitions": PoolRealArray( 0.217638, 0.287175, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.8, 1 ), Vector2( 0.8, 1 ), Vector2( 0.999772, 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:scale")
+tracks/1/path = NodePath("Sprite:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.15, 0.45, 0.5 ),
-"transitions": PoolRealArray( 0.217638, 0.287175, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 0.8, 1 ), Vector2( 0.8, 1 ), Vector2( 0.999772, 1 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1, 0.35, 0.4 ),
 "transitions": PoolRealArray( 0.406126, 3.73213, 3.03143, 1 ),
 "update": 0,
@@ -77,7 +69,7 @@ rotation = -0.735395
 
 [node name="Sprite" parent="." index="2"]
 material = SubResource( 1 )
-scale = Vector2( 0.999772, 1 )
+scale = Vector2( 1, 1 )
 texture = ExtResource( 3 )
 
 [node name="Label" parent="Sprite" index="0"]

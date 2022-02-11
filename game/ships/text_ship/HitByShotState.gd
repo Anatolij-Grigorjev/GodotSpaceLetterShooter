@@ -14,17 +14,12 @@ var hitPosition: Vector2 = UNSET_VECTOR
 var shotVelocity: Vector2 = UNSET_VECTOR
 var shotPayload: String
 
-
-var spriteTween: Tween
-
 var shotPayloadWasMatch: bool = false
 
 var preHitText: String = ""
 
 
 func _ready():
-	spriteTween = Tween.new()
-	add_child(spriteTween)
 	_clearShotValues()
 	
 
@@ -51,16 +46,12 @@ func enterState(prevState: String):
 		shotPayloadWasMatch = true
 		Animations.animPlayAnimationInTime(entity.anim, "hit", hitRecoveryTime)
 		_reduceShipTextByShotPayload()
-	var hitSpinDirection = _getHitSpinDirection()
-	_startHitSpinTween(hitSpinDirection)
 	
 	
 	
 func exitState(nextState: String):
 	.exitState(nextState)
 	_clearShotValues()
-	spriteTween.stop_all()
-	spriteTween.remove_all()
 	
 
 
@@ -75,25 +66,6 @@ func _clearShotValues():
 	shotVelocity = UNSET_VECTOR
 	shotPayload = ""
 	shotPayloadWasMatch = false
-	
-	
-func _getHitSpinDirection() -> int:
-	if (hitPosition.x <= entity.bodySize.x / 2):
-		#CW spin direction
-		return 1
-	else:
-		#CCW spin direction
-		return -1
-
-
-func _startHitSpinTween(spinDirection: int):
-	spriteTween.interpolate_property(
-		entity.sprite, "rotation_degrees", 
-		0, spinDirection * 360, 
-		hitRecoveryTime, 
-		Tween.TRANS_EXPO, Tween.EASE_OUT
-	)
-	spriteTween.start()
 
 
 func _reduceShipTextByShotPayload():
