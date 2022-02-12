@@ -299,6 +299,7 @@ config/icon="res://icon.png"
 GameConfig="*res://GameConfig.gd"
 Stats="*res://scene_stats/Stats.gd"
 Scenes="*res://scene_select/Scenes.tscn"
+Blinker="*res://ScreenBlink.tscn"
 
 [debug]
 

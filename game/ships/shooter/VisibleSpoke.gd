@@ -3,7 +3,7 @@ extends AnimatedSprite
 Show spoke at random rotation and time it out
 """
 
-export(Vector2) var allowedRotationFromTo = Vector2(70.0, 280.0)
+export(Vector2) var allowedRotationFromTo = Vector2(-67.5, 65.4)
 export(float) var spokeTimeout = 0.25
 
 
@@ -29,6 +29,7 @@ func showSpoke():
 	#autoresets if started
 	tween.start()
 	rotation_degrees = allowedRotationRange.random()
+	print(rotation_degrees)
 	flip_h = randi() % 2 == 0
 
 

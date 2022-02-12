@@ -144,6 +144,7 @@ func _onTextShipHit(lettersRemaining: int):
 func _doMinorHitScreenFX():
 	shaker.beginShake(0.2, 15, 10, 1)
 	freeze.startFreeze(0.05)
+	Blinker.blink(Color.darkred, 0.05)
 	
 
 func _doMajorHitScreenFX():
