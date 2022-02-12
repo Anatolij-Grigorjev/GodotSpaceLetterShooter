@@ -46,6 +46,9 @@ scale_curve = SubResource( 2 )
 color = Color( 0.839216, 0.960784, 0.0313726, 1 )
 
 [sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 11 )
+shader_param/modulate = Color( 0.819608, 0.0666667, 0.0666667, 1 )
+shader_param/mix_coef = 0.0
 
 [sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0, 0, 0, 1 )
@@ -561,7 +564,6 @@ stream = ExtResource( 2 )
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 5 )
 rotation = 6.28319
-scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="Sprite"]

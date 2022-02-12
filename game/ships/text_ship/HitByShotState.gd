@@ -39,6 +39,7 @@ func enterState(prevState: String):
 	.enterState(prevState)
 	_assertColliderValuesSet()
 	
+	entity.emit_signal("shipHit", entity.currentText.length())
 	#store how much text there was before hit for stats
 	preHitText = str(entity.currentText)
 	
