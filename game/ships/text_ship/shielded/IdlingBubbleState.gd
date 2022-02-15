@@ -18,5 +18,6 @@ func enterState(prevState: String):
 	
 func exitState(nextState: String):
 	.exitState(nextState)
-	if (entity.shipHasShield):
+	#dont hide shield if going to burst state
+	if (entity.shipHasShield and nextState == "Idling"):
 		entity.bubble.anim.play("hide")

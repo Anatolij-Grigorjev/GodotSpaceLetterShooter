@@ -25,6 +25,11 @@ _global_script_classes=[ {
 "path": "res://ships/text_ship/AppearingState.gd"
 }, {
 "base": "State",
+"class": "BubbleBurstState",
+"language": "GDScript",
+"path": "res://ships/text_ship/shielded/BubbleBurstState.gd"
+}, {
+"base": "State",
 "class": "DescendingState",
 "language": "GDScript",
 "path": "res://ships/text_ship/DescendingState.gd"
@@ -243,6 +248,7 @@ _global_script_class_icons={
 "AnimationState": "",
 "Animations": "",
 "Appearing": "",
+"BubbleBurstState": "",
 "DescendingState": "",
 "DieState": "",
 "FastDescendingState": "",

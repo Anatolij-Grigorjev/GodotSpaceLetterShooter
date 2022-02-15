@@ -66,13 +66,11 @@ func _onShipBodyAreaEnter(area):
 	if (areaOwner.is_in_group("projectile")):
 		var collideProjectile = areaOwner
 		var projectileText: String = collideProjectile.getText()
+		#hit bubble for half the received word length (at least 1)
+		var hitsReceived = max(1, projectileText.length() / 2)
 		#destroy bubble if projectile payload is exact word match
-		if (projectileText == ownerShip.currentText):
-			_hitBubble(bubbleMaxHits)
-		else:
-			#hit bubble for half the received word length (at least 1)
-			var hitsReceived = max(1, projectileText.length() / 2)
-			_hitBubble(hitsReceived)
+		hitsReceived = bubbleMaxHits if projectileText == ownerShip.currentText else hitsReceived
+		_hitBubble(hitsReceived)
 			
 			
 func _hitBubble(hitsReceived: int):
