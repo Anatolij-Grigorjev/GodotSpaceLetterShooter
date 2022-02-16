@@ -13,11 +13,12 @@ func processState(delta: float):
 func enterState(prevState: String):
 	.enterState(prevState)
 	if (entity.shipHasShield):
-		entity.bubble.anim.play("show")
+		entity.bubble.show()
 	
 	
 func exitState(nextState: String):
 	.exitState(nextState)
-	#dont hide shield if going to burst state
-	if (entity.shipHasShield and nextState == "Idling"):
-		entity.bubble.anim.play("hide")
+	#burst state explicitly waits for shield to play burst animation
+	#so we avoid hiding it
+	if (entity.shipHasShield and nextState != "BubbleBurst"):
+		entity.bubble.hide()

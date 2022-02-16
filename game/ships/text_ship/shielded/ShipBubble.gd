@@ -37,6 +37,14 @@ func _ready():
 func setInitialHitPoints(hitPoints: int):
 	_setMaxHitPoints(hitPoints)
 	
+
+func show():
+	anim.play("show")
+	
+
+func hide():
+	anim.play("hide")
+	
 	
 func _setMaxHitPoints(newMaxHitPoints: int):
 	bubbleMaxHits = newMaxHitPoints

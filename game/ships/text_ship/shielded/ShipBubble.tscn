@@ -369,6 +369,7 @@ rect_rotation = -90.0
 
 [node name="Particles2D" type="Particles2D" parent="."]
 material = SubResource( 7 )
+emitting = false
 amount = 45
 lifetime = 0.5
 one_shot = true
