@@ -28,7 +28,7 @@ onready var bubble = $Sprite/ShipBubble
 onready var anim: AnimationPlayer = $AnimationPlayer
 onready var thrusterLeft: Particles2D = $Thrusters/ThrusterLeft
 onready var thrusterRight: Particles2D = $Thrusters/ThrusterRight
-onready var thrustersAudio: AudioStreamPlayer = $Thrusters/AudioStreamPlayer2D
+onready var thrustersAudio: AudioStreamPlayer2D = $Thrusters/AudioStreamPlayer2D
 onready var bodyArea: RigidBody2D = $RigidBody2D
 
 
